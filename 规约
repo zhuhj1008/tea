@@ -1,0 +1,34 @@
+
+1.分层领域模型命名规范
+PO或POJO 	与数据库字段一一对应，DAO层向上传输数据用
+DTO	        传输对象，service层或者manager层使用
+QUERY 		查询参数对象，超过两个参数要封装对象
+VO		    页面展示对象，通过Web模板渲染的传输对象
+
+2.避免使用if elseif elseif else的格式，换checkList风格编码
+
+
+接口命名规约(api包)
+    该包主要是数据库持久化操作,主要分为用户(user包),权限(permission包),系统配置(system包)等模块。接口，PO，DAO，interface。规约如下：
+    接口命名规约：
+    1). 查询接口以 find 开头，返回是结果集接口名要包含List关键字.
+    2). 新增、更新、删除接口,没有特殊含义以add、modify、remove开头.
+    3). 宽接口命名最后加 Wide 关键字
+    4). xml中查询语句不要用 *
+    5). 查询参数不要用Map传,多个参数要封装QUERY对象;同理，返回结果也不要用Map。
+    6). 尽量不要使用左模糊或者全模糊,因为索引是左匹配的。
+    7). 硬性参数需要加非空判断，接口和调用之间不要传递null。
+
+
+
+数据库
+1.每个表必须包括的字段
+  字段          javaType        jdbcType
+  create_time   Date            datetime
+  modify_time   Date            datetime
+  enable        boolean         BIT
+  readonly      boolean         BIT
+
+日志规约
+    日志要包括三部分，模块名+白话文+上下文
+    例如：UserService-用户更新密码,userId为:{},123
