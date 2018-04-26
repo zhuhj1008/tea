@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.joe.api.dao.CouponMapper" >
+  <resultMap id="BaseResultMap" type="com.joe.api.po.Coupon" >
+    <id column="coupon_id" property="couponId" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="discount" property="discount" jdbcType="DECIMAL" />
+    <result column="money" property="money" jdbcType="DECIMAL" />
+    <result column="amount" property="amount" jdbcType="INTEGER" />
+    <result column="create_by" property="createBy" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="INTEGER" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="enable" property="enable" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    coupon_id, name, discount, money, amount, create_by, create_time, update_by, update_time, 
+    enable
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_coupon
+    where coupon_id = #{couponId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_coupon
+    where coupon_id = #{couponId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.joe.api.po.Coupon" >
+    insert into tb_coupon (coupon_id, name, discount, 
+      money, amount, create_by, 
+      create_time, update_by, update_time, 
+      enable)
+    values (#{couponId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{discount,jdbcType=DECIMAL}, 
+      #{money,jdbcType=DECIMAL}, #{amount,jdbcType=INTEGER}, #{createBy,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{enable,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.joe.api.po.Coupon" >
+    insert into tb_coupon
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="couponId != null" >
+        coupon_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="discount != null" >
+        discount,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="enable != null" >
+        enable,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="couponId != null" >
+        #{couponId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="discount != null" >
+        #{discount,jdbcType=DECIMAL},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enable != null" >
+        #{enable,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.joe.api.po.Coupon" >
+    update tb_coupon
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="discount != null" >
+        discount = #{discount,jdbcType=DECIMAL},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enable != null" >
+        enable = #{enable,jdbcType=BIT},
+      </if>
+    </set>
+    where coupon_id = #{couponId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.joe.api.po.Coupon" >
+    update tb_coupon
+    set name = #{name,jdbcType=VARCHAR},
+      discount = #{discount,jdbcType=DECIMAL},
+      money = #{money,jdbcType=DECIMAL},
+      amount = #{amount,jdbcType=INTEGER},
+      create_by = #{createBy,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      enable = #{enable,jdbcType=BIT}
+    where coupon_id = #{couponId,jdbcType=INTEGER}
+  </update>
+</mapper>

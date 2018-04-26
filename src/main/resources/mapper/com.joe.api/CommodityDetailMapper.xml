@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.joe.api.dao.CommodityDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.joe.api.po.CommodityDetail" >
+    <id column="detail_id" property="detailId" jdbcType="INTEGER" />
+    <result column="commodity_id" property="commodityId" jdbcType="INTEGER" />
+    <result column="unit" property="unit" jdbcType="VARCHAR" />
+    <result column="propertity" property="propertity" jdbcType="VARCHAR" />
+    <result column="freight" property="freight" jdbcType="DECIMAL" />
+    <result column="integral" property="integral" jdbcType="INTEGER" />
+    <result column="origin" property="origin" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    detail_id, commodity_id, unit, propertity, freight, integral, origin
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_commodity_detail
+    where detail_id = #{detailId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_commodity_detail
+    where detail_id = #{detailId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.joe.api.po.CommodityDetail" >
+    insert into tb_commodity_detail (detail_id, commodity_id, unit, 
+      propertity, freight, integral, 
+      origin)
+    values (#{detailId,jdbcType=INTEGER}, #{commodityId,jdbcType=INTEGER}, #{unit,jdbcType=VARCHAR}, 
+      #{propertity,jdbcType=VARCHAR}, #{freight,jdbcType=DECIMAL}, #{integral,jdbcType=INTEGER}, 
+      #{origin,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.joe.api.po.CommodityDetail" >
+    insert into tb_commodity_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="detailId != null" >
+        detail_id,
+      </if>
+      <if test="commodityId != null" >
+        commodity_id,
+      </if>
+      <if test="unit != null" >
+        unit,
+      </if>
+      <if test="propertity != null" >
+        propertity,
+      </if>
+      <if test="freight != null" >
+        freight,
+      </if>
+      <if test="integral != null" >
+        integral,
+      </if>
+      <if test="origin != null" >
+        origin,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="detailId != null" >
+        #{detailId,jdbcType=INTEGER},
+      </if>
+      <if test="commodityId != null" >
+        #{commodityId,jdbcType=INTEGER},
+      </if>
+      <if test="unit != null" >
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="propertity != null" >
+        #{propertity,jdbcType=VARCHAR},
+      </if>
+      <if test="freight != null" >
+        #{freight,jdbcType=DECIMAL},
+      </if>
+      <if test="integral != null" >
+        #{integral,jdbcType=INTEGER},
+      </if>
+      <if test="origin != null" >
+        #{origin,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.joe.api.po.CommodityDetail" >
+    update tb_commodity_detail
+    <set >
+      <if test="commodityId != null" >
+        commodity_id = #{commodityId,jdbcType=INTEGER},
+      </if>
+      <if test="unit != null" >
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="propertity != null" >
+        propertity = #{propertity,jdbcType=VARCHAR},
+      </if>
+      <if test="freight != null" >
+        freight = #{freight,jdbcType=DECIMAL},
+      </if>
+      <if test="integral != null" >
+        integral = #{integral,jdbcType=INTEGER},
+      </if>
+      <if test="origin != null" >
+        origin = #{origin,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where detail_id = #{detailId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.joe.api.po.CommodityDetail" >
+    update tb_commodity_detail
+    set commodity_id = #{commodityId,jdbcType=INTEGER},
+      unit = #{unit,jdbcType=VARCHAR},
+      propertity = #{propertity,jdbcType=VARCHAR},
+      freight = #{freight,jdbcType=DECIMAL},
+      integral = #{integral,jdbcType=INTEGER},
+      origin = #{origin,jdbcType=VARCHAR}
+    where detail_id = #{detailId,jdbcType=INTEGER}
+  </update>
+</mapper>

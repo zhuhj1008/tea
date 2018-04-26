@@ -1,4 +1,4 @@
-package com.joe.manager.app;
+package com.joe.app;
 
 import com.github.pagehelper.PageHelper;
 import org.mybatis.spring.annotation.MapperScan;
@@ -22,7 +22,7 @@ import java.util.Properties;
  **/
 @RestController
 @EnableAutoConfiguration
-@ComponentScan("com.joe.manager.*")//注解扫描路径
+@ComponentScan("com.joe.*")//注解扫描路径
 @MapperScan("com.joe.manager.api.*.dao")//mapper接口扫描路径
 public class Application extends WebMvcConfigurerAdapter implements CommandLineRunner {
 

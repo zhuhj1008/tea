@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.joe.api.dao.ShopCartMapper" >
+  <resultMap id="BaseResultMap" type="com.joe.api.po.ShopCart" >
+    <id column="shop_cart_id" property="shopCartId" jdbcType="INTEGER" />
+    <result column="customer_id" property="customerId" jdbcType="INTEGER" />
+    <result column="careta_time" property="caretaTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    shop_cart_id, customer_id, careta_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_shop_cart
+    where shop_cart_id = #{shopCartId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_shop_cart
+    where shop_cart_id = #{shopCartId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.joe.api.po.ShopCart" >
+    insert into tb_shop_cart (shop_cart_id, customer_id, careta_time
+      )
+    values (#{shopCartId,jdbcType=INTEGER}, #{customerId,jdbcType=INTEGER}, #{caretaTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.joe.api.po.ShopCart" >
+    insert into tb_shop_cart
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="shopCartId != null" >
+        shop_cart_id,
+      </if>
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="caretaTime != null" >
+        careta_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="shopCartId != null" >
+        #{shopCartId,jdbcType=INTEGER},
+      </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="caretaTime != null" >
+        #{caretaTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.joe.api.po.ShopCart" >
+    update tb_shop_cart
+    <set >
+      <if test="customerId != null" >
+        customer_id = #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="caretaTime != null" >
+        careta_time = #{caretaTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where shop_cart_id = #{shopCartId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.joe.api.po.ShopCart" >
+    update tb_shop_cart
+    set customer_id = #{customerId,jdbcType=INTEGER},
+      careta_time = #{caretaTime,jdbcType=TIMESTAMP}
+    where shop_cart_id = #{shopCartId,jdbcType=INTEGER}
+  </update>
+</mapper>

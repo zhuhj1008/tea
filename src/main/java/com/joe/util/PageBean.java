@@ -1,4 +1,4 @@
-package com.joe.manager.util;
+package com.joe.util;
 
 import java.util.List;
 

@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.joe.api.dao.OrderMapper" >
+  <resultMap id="BaseResultMap" type="com.joe.api.po.Order" >
+    <id column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="customer_id" property="customerId" jdbcType="INTEGER" />
+    <result column="order_money" property="orderMoney" jdbcType="DECIMAL" />
+    <result column="order_status" property="orderStatus" jdbcType="INTEGER" />
+    <result column="payment_time" property="paymentTime" jdbcType="TIMESTAMP" />
+    <result column="post_code" property="postCode" jdbcType="VARCHAR" />
+    <result column="express_id" property="expressId" jdbcType="INTEGER" />
+    <result column="express_code" property="expressCode" jdbcType="VARCHAR" />
+    <result column="express_money" property="expressMoney" jdbcType="VARCHAR" />
+    <result column="receive_address" property="receiveAddress" jdbcType="VARCHAR" />
+    <result column="remake" property="remake" jdbcType="VARCHAR" />
+    <result column="create_by" property="createBy" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="INTEGER" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="enable" property="enable" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    order_id, customer_id, order_money, order_status, payment_time, post_code, express_id, 
+    express_code, express_money, receive_address, remake, create_by, create_time, update_by, 
+    update_time, enable
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_order
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_order
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.joe.api.po.Order" >
+    insert into tb_order (order_id, customer_id, order_money, 
+      order_status, payment_time, post_code, 
+      express_id, express_code, express_money, 
+      receive_address, remake, create_by, 
+      create_time, update_by, update_time, 
+      enable)
+    values (#{orderId,jdbcType=INTEGER}, #{customerId,jdbcType=INTEGER}, #{orderMoney,jdbcType=DECIMAL}, 
+      #{orderStatus,jdbcType=INTEGER}, #{paymentTime,jdbcType=TIMESTAMP}, #{postCode,jdbcType=VARCHAR}, 
+      #{expressId,jdbcType=INTEGER}, #{expressCode,jdbcType=VARCHAR}, #{expressMoney,jdbcType=VARCHAR}, 
+      #{receiveAddress,jdbcType=VARCHAR}, #{remake,jdbcType=VARCHAR}, #{createBy,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{enable,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.joe.api.po.Order" >
+    insert into tb_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="orderMoney != null" >
+        order_money,
+      </if>
+      <if test="orderStatus != null" >
+        order_status,
+      </if>
+      <if test="paymentTime != null" >
+        payment_time,
+      </if>
+      <if test="postCode != null" >
+        post_code,
+      </if>
+      <if test="expressId != null" >
+        express_id,
+      </if>
+      <if test="expressCode != null" >
+        express_code,
+      </if>
+      <if test="expressMoney != null" >
+        express_money,
+      </if>
+      <if test="receiveAddress != null" >
+        receive_address,
+      </if>
+      <if test="remake != null" >
+        remake,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="enable != null" >
+        enable,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="orderMoney != null" >
+        #{orderMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="orderStatus != null" >
+        #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="paymentTime != null" >
+        #{paymentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="postCode != null" >
+        #{postCode,jdbcType=VARCHAR},
+      </if>
+      <if test="expressId != null" >
+        #{expressId,jdbcType=INTEGER},
+      </if>
+      <if test="expressCode != null" >
+        #{expressCode,jdbcType=VARCHAR},
+      </if>
+      <if test="expressMoney != null" >
+        #{expressMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveAddress != null" >
+        #{receiveAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="remake != null" >
+        #{remake,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enable != null" >
+        #{enable,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.joe.api.po.Order" >
+    update tb_order
+    <set >
+      <if test="customerId != null" >
+        customer_id = #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="orderMoney != null" >
+        order_money = #{orderMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="orderStatus != null" >
+        order_status = #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="paymentTime != null" >
+        payment_time = #{paymentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="postCode != null" >
+        post_code = #{postCode,jdbcType=VARCHAR},
+      </if>
+      <if test="expressId != null" >
+        express_id = #{expressId,jdbcType=INTEGER},
+      </if>
+      <if test="expressCode != null" >
+        express_code = #{expressCode,jdbcType=VARCHAR},
+      </if>
+      <if test="expressMoney != null" >
+        express_money = #{expressMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveAddress != null" >
+        receive_address = #{receiveAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="remake != null" >
+        remake = #{remake,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enable != null" >
+        enable = #{enable,jdbcType=BIT},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.joe.api.po.Order" >
+    update tb_order
+    set customer_id = #{customerId,jdbcType=INTEGER},
+      order_money = #{orderMoney,jdbcType=DECIMAL},
+      order_status = #{orderStatus,jdbcType=INTEGER},
+      payment_time = #{paymentTime,jdbcType=TIMESTAMP},
+      post_code = #{postCode,jdbcType=VARCHAR},
+      express_id = #{expressId,jdbcType=INTEGER},
+      express_code = #{expressCode,jdbcType=VARCHAR},
+      express_money = #{expressMoney,jdbcType=VARCHAR},
+      receive_address = #{receiveAddress,jdbcType=VARCHAR},
+      remake = #{remake,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      enable = #{enable,jdbcType=BIT}
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+</mapper>

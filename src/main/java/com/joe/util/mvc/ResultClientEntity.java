@@ -1,4 +1,4 @@
-package com.joe.manager.util.mvc;
+package com.joe.util.mvc;
 
 /**
  * @className: ReturnClientEntity

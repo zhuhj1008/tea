@@ -1,5 +1,5 @@
 
-package com.joe.manager.util.mvc;
+package com.joe.util.mvc;
 
 import com.alibaba.fastjson.JSONObject;
 
