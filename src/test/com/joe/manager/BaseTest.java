@@ -1,7 +1,7 @@
 package com.joe.manager;
 
 import com.alibaba.fastjson.JSON;
-import com.joe.manager.app.Application;
+import com.joe.app.Application;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
