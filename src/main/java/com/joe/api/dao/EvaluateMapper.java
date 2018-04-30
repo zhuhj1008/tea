@@ -3,6 +3,7 @@ package com.joe.api.dao;
 import com.joe.api.po.Evaluate;
 
 public interface EvaluateMapper {
+
     int deleteByPrimaryKey(Integer evaluateId);
 
     int insert(Evaluate record);

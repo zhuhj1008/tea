@@ -5,33 +5,21 @@
     <id column="detail_id" property="detailId" jdbcType="INTEGER" />
     <result column="commodity_id" property="commodityId" jdbcType="INTEGER" />
     <result column="unit" property="unit" jdbcType="VARCHAR" />
-    <result column="propertity" property="propertity" jdbcType="VARCHAR" />
+    <result column="property" property="property" jdbcType="VARCHAR" />
     <result column="freight" property="freight" jdbcType="DECIMAL" />
     <result column="integral" property="integral" jdbcType="INTEGER" />
     <result column="origin" property="origin" jdbcType="VARCHAR" />
+    <result column="enable" property="enable" jdbcType="BIT" />
+
   </resultMap>
   <sql id="Base_Column_List" >
-    detail_id, commodity_id, unit, propertity, freight, integral, origin
+    detail_id, commodity_id, unit, property, freight, integral, origin,enable
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from tb_commodity_detail
-    where detail_id = #{detailId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from tb_commodity_detail
-    where detail_id = #{detailId,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.joe.api.po.CommodityDetail" >
-    insert into tb_commodity_detail (detail_id, commodity_id, unit, 
-      propertity, freight, integral, 
-      origin)
-    values (#{detailId,jdbcType=INTEGER}, #{commodityId,jdbcType=INTEGER}, #{unit,jdbcType=VARCHAR}, 
-      #{propertity,jdbcType=VARCHAR}, #{freight,jdbcType=DECIMAL}, #{integral,jdbcType=INTEGER}, 
-      #{origin,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.joe.api.po.CommodityDetail" >
+
+
+
+  <!--insert区域-->
+  <insert id="insertSelective" parameterType="com.joe.api.po.CommodityDetail"  useGeneratedKeys="true" keyProperty="detailId">
     insert into tb_commodity_detail
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="detailId != null" >
@@ -43,8 +31,8 @@
       <if test="unit != null" >
         unit,
       </if>
-      <if test="propertity != null" >
-        propertity,
+      <if test="property != null" >
+        property,
       </if>
       <if test="freight != null" >
         freight,
@@ -54,6 +42,9 @@
       </if>
       <if test="origin != null" >
         origin,
+      </if>
+      <if test="enable != null" >
+        enable,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -66,8 +57,8 @@
       <if test="unit != null" >
         #{unit,jdbcType=VARCHAR},
       </if>
-      <if test="propertity != null" >
-        #{propertity,jdbcType=VARCHAR},
+      <if test="property != null" >
+        #{property,jdbcType=VARCHAR},
       </if>
       <if test="freight != null" >
         #{freight,jdbcType=DECIMAL},
@@ -78,8 +69,23 @@
       <if test="origin != null" >
         #{origin,jdbcType=VARCHAR},
       </if>
+      <if test="enable != null" >
+        #{enable,jdbcType=BIT},
+      </if>
     </trim>
   </insert>
+
+
+
+  <!--delete区域-->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_commodity_detail
+    where detail_id = #{detailId,jdbcType=INTEGER}
+  </delete>
+
+
+
+  <!-- update区域-->
   <update id="updateByPrimaryKeySelective" parameterType="com.joe.api.po.CommodityDetail" >
     update tb_commodity_detail
     <set >
@@ -89,8 +95,8 @@
       <if test="unit != null" >
         unit = #{unit,jdbcType=VARCHAR},
       </if>
-      <if test="propertity != null" >
-        propertity = #{propertity,jdbcType=VARCHAR},
+      <if test="property != null" >
+        property = #{property,jdbcType=VARCHAR},
       </if>
       <if test="freight != null" >
         freight = #{freight,jdbcType=DECIMAL},
@@ -101,17 +107,56 @@
       <if test="origin != null" >
         origin = #{origin,jdbcType=VARCHAR},
       </if>
+      <if test="enable != null" >
+        enable = #{enable,jdbcType=VARCHAR},
+      </if>
     </set>
     where detail_id = #{detailId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.joe.api.po.CommodityDetail" >
+
+  <update id="updateByCommodityIdSelective" parameterType="com.joe.api.po.CommodityDetail" >
     update tb_commodity_detail
-    set commodity_id = #{commodityId,jdbcType=INTEGER},
-      unit = #{unit,jdbcType=VARCHAR},
-      propertity = #{propertity,jdbcType=VARCHAR},
-      freight = #{freight,jdbcType=DECIMAL},
-      integral = #{integral,jdbcType=INTEGER},
-      origin = #{origin,jdbcType=VARCHAR}
-    where detail_id = #{detailId,jdbcType=INTEGER}
+    <set >
+      <if test="commodityId != null" >
+        commodity_id = #{commodityId,jdbcType=INTEGER},
+      </if>
+      <if test="unit != null" >
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="property != null" >
+        property = #{property,jdbcType=VARCHAR},
+      </if>
+      <if test="freight != null" >
+        freight = #{freight,jdbcType=DECIMAL},
+      </if>
+      <if test="integral != null" >
+        integral = #{integral,jdbcType=INTEGER},
+      </if>
+      <if test="origin != null" >
+        origin = #{origin,jdbcType=VARCHAR},
+      </if>
+      <if test="enable != null" >
+        enable = #{enable,jdbcType=BIT},
+      </if>
+    </set>
+    where commodity_id = #{commodityId,jdbcType=INTEGER}
   </update>
+
+
+
+  <!--select区域-->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from tb_commodity_detail
+    where detail_id = #{detailId,jdbcType=INTEGER}  and  enable = 1
+  </select>
+
+  <select id="selectByCommodityId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from tb_commodity_detail
+    where commodity_id = #{commodityId,jdbcType=INTEGER} and  enable = 1
+  </select>
+
 </mapper>

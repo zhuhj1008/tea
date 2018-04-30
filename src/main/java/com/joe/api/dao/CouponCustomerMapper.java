@@ -2,16 +2,22 @@ package com.joe.api.dao;
 
 import com.joe.api.po.CouponCustomer;
 
-public interface CouponCustomerMapper {
-    int deleteByPrimaryKey(Integer customerCouponId);
+import java.util.List;
 
-    int insert(CouponCustomer record);
+public interface CouponCustomerMapper {
 
     int insertSelective(CouponCustomer record);
 
-    CouponCustomer selectByPrimaryKey(Integer customerCouponId);
+    int deleteByPrimaryKey(Integer customerCouponId);
 
     int updateByPrimaryKeySelective(CouponCustomer record);
 
-    int updateByPrimaryKey(CouponCustomer record);
+    int updateByCustomerIdSelective(CouponCustomer record);
+
+    int updateByCouponIdSelective(CouponCustomer record);
+
+    CouponCustomer selectByPrimaryKey(Integer customerCouponId);
+
+    List<Integer> selectByCustomerId(Integer customerId);
+
 }

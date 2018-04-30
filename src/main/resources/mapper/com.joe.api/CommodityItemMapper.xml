@@ -140,5 +140,14 @@
     where name = #{name,jdbcType=VARCHAR}
   </select>
 
+  <select id="selectSubItemIdList" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+      select
+      item_id
+      FROM tb_commodity_item
+       where item_id = #{itemId,jdbcType=INTEGER}
+       or parent_id = #{itemId,jdbcType=INTEGER}
+       or parent_ids like CONCAT((select parent_ids from tb_commodity_item where item_id =  #{itemId,jdbcType=INTEGER} and `enable` = 1),',', #{itemId,jdbcType=INTEGER},',%' )
+  </select>
+
 
 </mapper>

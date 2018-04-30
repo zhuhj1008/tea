@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class CommodityItemService {
@@ -50,9 +51,26 @@ public class CommodityItemService {
 
     }
 
+    /**
+     * 根据商品类目名称查询（唯一，精准）
+     *
+     * @param name
+     * @return
+     */
     public CommodityItem queryCommodityItemByName(String name) {
 
         return commodityItemMapper.selectByItemName(name);
+
+    }
+
+    /**
+     * 查询自己和下级商品ID类目集合
+     * @param itemId
+     * @return
+     */
+    public List<Integer> selectSubItemIdList(Integer itemId) {
+
+        return commodityItemMapper.selectSubItemIdList(itemId);
 
     }
 

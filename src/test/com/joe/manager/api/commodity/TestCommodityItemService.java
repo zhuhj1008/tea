@@ -1,11 +1,14 @@
-package com.joe.manager.api.item;
+package com.joe.manager.api.commodity;
 
 
+import com.alibaba.fastjson.JSON;
 import com.joe.api.po.CommodityItem;
 import com.joe.api.service.CommodityItemService;
 import com.joe.manager.BaseTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 public class TestCommodityItemService extends BaseTest {
 
@@ -36,6 +39,15 @@ public class TestCommodityItemService extends BaseTest {
 
         CommodityItem commodityItem1 = commodityItemService.queryCommodityItemByName("茶叶");
         logger.info("名字为茶叶的类目：{}",commodityItem1);
+
+    }
+
+
+    @Test
+    public void testSelectItemIds(){
+
+        List<Integer> list = commodityItemService.selectSubItemIdList(4);
+        logger.info("id为4的下级类目集合：{}",JSON.toJSONString(list));
 
     }
 

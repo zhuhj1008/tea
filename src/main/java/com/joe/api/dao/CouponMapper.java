@@ -3,9 +3,8 @@ package com.joe.api.dao;
 import com.joe.api.po.Coupon;
 
 public interface CouponMapper {
-    int deleteByPrimaryKey(Integer couponId);
 
-    int insert(Coupon record);
+    int deleteByPrimaryKey(Integer couponId);
 
     int insertSelective(Coupon record);
 
@@ -13,5 +12,4 @@ public interface CouponMapper {
 
     int updateByPrimaryKeySelective(Coupon record);
 
-    int updateByPrimaryKey(Coupon record);
 }

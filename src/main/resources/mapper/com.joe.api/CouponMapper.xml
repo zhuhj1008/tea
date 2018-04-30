@@ -17,27 +17,11 @@
     coupon_id, name, discount, money, amount, create_by, create_time, update_by, update_time, 
     enable
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from tb_coupon
-    where coupon_id = #{couponId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from tb_coupon
-    where coupon_id = #{couponId,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.joe.api.po.Coupon" >
-    insert into tb_coupon (coupon_id, name, discount, 
-      money, amount, create_by, 
-      create_time, update_by, update_time, 
-      enable)
-    values (#{couponId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{discount,jdbcType=DECIMAL}, 
-      #{money,jdbcType=DECIMAL}, #{amount,jdbcType=INTEGER}, #{createBy,jdbcType=INTEGER}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{enable,jdbcType=BIT})
-  </insert>
-  <insert id="insertSelective" parameterType="com.joe.api.po.Coupon" >
+
+
+
+  <!--insert区域-->
+  <insert id="insertSelective" parameterType="com.joe.api.po.Coupon"  useGeneratedKeys="true" keyProperty="couponId">
     insert into tb_coupon
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="couponId != null" >
@@ -104,6 +88,18 @@
       </if>
     </trim>
   </insert>
+
+
+
+  <!--delete区域-->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_coupon
+    where coupon_id = #{couponId,jdbcType=INTEGER}
+  </delete>
+
+
+
+  <!--update区域-->
   <update id="updateByPrimaryKeySelective" parameterType="com.joe.api.po.Coupon" >
     update tb_coupon
     <set >
@@ -137,17 +133,14 @@
     </set>
     where coupon_id = #{couponId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.joe.api.po.Coupon" >
-    update tb_coupon
-    set name = #{name,jdbcType=VARCHAR},
-      discount = #{discount,jdbcType=DECIMAL},
-      money = #{money,jdbcType=DECIMAL},
-      amount = #{amount,jdbcType=INTEGER},
-      create_by = #{createBy,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_by = #{updateBy,jdbcType=INTEGER},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      enable = #{enable,jdbcType=BIT}
-    where coupon_id = #{couponId,jdbcType=INTEGER}
-  </update>
+
+
+
+  <!-- select区域-->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from tb_coupon
+    where coupon_id = #{couponId,jdbcType=INTEGER} and enable = 1
+  </select>
 </mapper>

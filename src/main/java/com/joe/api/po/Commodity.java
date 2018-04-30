@@ -1,29 +1,46 @@
 package com.joe.api.po;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
+/**
+ * 商品bean
+ */
 public class Commodity {
+
+    //商品ID
     private Integer commodityId;
 
+    //商品名称
     private String commodityName;
 
+    //商品价格
     private BigDecimal price;
 
+    //商品类目ID
     private Integer itemId;
 
+    //商品图片地址
     private String picture;
 
+    //品牌
     private Integer brand;
 
+    //创建者
     private Integer createBy;
 
+    //更新者
     private Integer updateBy;
 
+    //创建时间
     private Date createTime;
 
+    //更新时间
     private Date updateTime;
 
+    //可用
     private Boolean enable;
 
     public Integer getCommodityId() {
@@ -113,4 +130,10 @@ public class Commodity {
     public void setEnable(Boolean enable) {
         this.enable = enable;
     }
+
+    @Override
+    public String toString() {
+        return ReflectionToStringBuilder.toString(this);
+    }
+
 }

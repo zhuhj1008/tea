@@ -18,27 +18,11 @@
     commodity_id, commodity_name, price, item_id, picture, brand, create_by, update_by, 
     create_time, update_time, enable
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from tb_commodity
-    where commodity_id = #{commodityId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from tb_commodity
-    where commodity_id = #{commodityId,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.joe.api.po.Commodity" >
-    insert into tb_commodity (commodity_id, commodity_name, price, 
-      item_id, picture, brand, 
-      create_by, update_by, create_time, 
-      update_time, enable)
-    values (#{commodityId,jdbcType=INTEGER}, #{commodityName,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
-      #{itemId,jdbcType=INTEGER}, #{picture,jdbcType=VARCHAR}, #{brand,jdbcType=INTEGER}, 
-      #{createBy,jdbcType=INTEGER}, #{updateBy,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{enable,jdbcType=BIT})
-  </insert>
-  <insert id="insertSelective" parameterType="com.joe.api.po.Commodity" >
+
+
+
+  <!--insert区域-->
+  <insert id="insertSelective" parameterType="com.joe.api.po.Commodity"  useGeneratedKeys="true" keyProperty="commodityId">
     insert into tb_commodity
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="commodityId != null" >
@@ -111,6 +95,18 @@
       </if>
     </trim>
   </insert>
+
+
+
+  <!--delete区域-->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_commodity
+    where commodity_id = #{commodityId,jdbcType=INTEGER}
+  </delete>
+
+
+
+  <!--update区域-->
   <update id="updateByPrimaryKeySelective" parameterType="com.joe.api.po.Commodity" >
     update tb_commodity
     <set >
@@ -147,18 +143,25 @@
     </set>
     where commodity_id = #{commodityId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.joe.api.po.Commodity" >
-    update tb_commodity
-    set commodity_name = #{commodityName,jdbcType=VARCHAR},
-      price = #{price,jdbcType=DECIMAL},
-      item_id = #{itemId,jdbcType=INTEGER},
-      picture = #{picture,jdbcType=VARCHAR},
-      brand = #{brand,jdbcType=INTEGER},
-      create_by = #{createBy,jdbcType=INTEGER},
-      update_by = #{updateBy,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      enable = #{enable,jdbcType=BIT}
+
+
+
+  <!-- select区域-->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from tb_commodity
     where commodity_id = #{commodityId,jdbcType=INTEGER}
-  </update>
+  </select>
+
+  <select id="selectCommodityByItemId"  resultMap="BaseResultMap" parameterType="java.util.List">
+    select
+    <include refid="Base_Column_List" />
+    from tb_commodity
+    where item_id in
+    <foreach collection="itemList" item="item" index="index" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+
+  </select>
 </mapper>
