@@ -20,29 +20,11 @@
     customer_id, head_portrait, customer_name, mobile, email, user_type, integral, receiving_address_default, 
     create_by, create_time, update_by, update_time, enable
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from tb_user_customer
-    where customer_id = #{customerId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from tb_user_customer
-    where customer_id = #{customerId,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.joe.api.po.UserCustomer" >
-    insert into tb_user_customer (customer_id, head_portrait, customer_name, 
-      mobile, email, user_type, 
-      integral, receiving_address_default, create_by, 
-      create_time, update_by, update_time, 
-      enable)
-    values (#{customerId,jdbcType=INTEGER}, #{headPortrait,jdbcType=VARCHAR}, #{customerName,jdbcType=VARCHAR}, 
-      #{mobile,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{userType,jdbcType=INTEGER}, 
-      #{integral,jdbcType=INTEGER}, #{receivingAddressDefault,jdbcType=INTEGER}, #{createBy,jdbcType=INTEGER}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{enable,jdbcType=BIT})
-  </insert>
-  <insert id="insertSelective" parameterType="com.joe.api.po.UserCustomer" >
+
+
+
+  <!-- insert区域-->
+  <insert id="insertSelective" parameterType="com.joe.api.po.UserCustomer" useGeneratedKeys="true" keyProperty="customerId" >
     insert into tb_user_customer
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="customerId != null" >
@@ -127,6 +109,18 @@
       </if>
     </trim>
   </insert>
+
+
+
+  <!--delete区域-->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_user_customer
+    where customer_id = #{customerId,jdbcType=INTEGER}
+  </delete>
+
+
+
+  <!--update区域-->
   <update id="updateByPrimaryKeySelective" parameterType="com.joe.api.po.UserCustomer" >
     update tb_user_customer
     <set >
@@ -169,20 +163,15 @@
     </set>
     where customer_id = #{customerId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.joe.api.po.UserCustomer" >
-    update tb_user_customer
-    set head_portrait = #{headPortrait,jdbcType=VARCHAR},
-      customer_name = #{customerName,jdbcType=VARCHAR},
-      mobile = #{mobile,jdbcType=VARCHAR},
-      email = #{email,jdbcType=VARCHAR},
-      user_type = #{userType,jdbcType=INTEGER},
-      integral = #{integral,jdbcType=INTEGER},
-      receiving_address_default = #{receivingAddressDefault,jdbcType=INTEGER},
-      create_by = #{createBy,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_by = #{updateBy,jdbcType=INTEGER},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      enable = #{enable,jdbcType=BIT}
+
+
+
+
+  <!--select区域-->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from tb_user_customer
     where customer_id = #{customerId,jdbcType=INTEGER}
-  </update>
+  </select>
 </mapper>

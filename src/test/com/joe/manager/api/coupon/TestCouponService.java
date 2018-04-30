@@ -1,4 +1,4 @@
-package com.joe.manager.api.commodity;
+package com.joe.manager.api.coupon;
 
 import com.joe.api.po.Coupon;
 import com.joe.api.service.CouponCustomerService;

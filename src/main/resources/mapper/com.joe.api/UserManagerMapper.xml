@@ -21,29 +21,11 @@
     manager_id, head_portrait, manager_name, gender, mobile, email, salt, password, parent_id, 
     create_by, create_time, update_by, update_time, enable
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from tb_user_manager
-    where manager_id = #{managerId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from tb_user_manager
-    where manager_id = #{managerId,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.joe.api.po.UserManager" >
-    insert into tb_user_manager (manager_id, head_portrait, manager_name, 
-      gender, mobile, email, 
-      salt, password, parent_id, 
-      create_by, create_time, update_by, 
-      update_time, enable)
-    values (#{managerId,jdbcType=INTEGER}, #{headPortrait,jdbcType=VARCHAR}, #{managerName,jdbcType=VARCHAR}, 
-      #{gender,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
-      #{salt,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, 
-      #{createBy,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=INTEGER}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{enable,jdbcType=BIT})
-  </insert>
-  <insert id="insertSelective" parameterType="com.joe.api.po.UserManager" >
+
+
+
+  <!-- insert区域-->
+  <insert id="insertSelective" parameterType="com.joe.api.po.UserManager" useGeneratedKeys="true" keyProperty="managerId">
     insert into tb_user_manager
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="managerId != null" >
@@ -134,6 +116,18 @@
       </if>
     </trim>
   </insert>
+
+
+
+  <!--delete区域-->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_user_manager
+    where manager_id = #{managerId,jdbcType=INTEGER}
+  </delete>
+
+
+
+  <!--update区域-->
   <update id="updateByPrimaryKeySelective" parameterType="com.joe.api.po.UserManager" >
     update tb_user_manager
     <set >
@@ -196,4 +190,14 @@
       enable = #{enable,jdbcType=BIT}
     where manager_id = #{managerId,jdbcType=INTEGER}
   </update>
+
+
+
+  <!-- select区域-->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from tb_user_manager
+    where manager_id = #{managerId,jdbcType=INTEGER}
+  </select>
 </mapper>
