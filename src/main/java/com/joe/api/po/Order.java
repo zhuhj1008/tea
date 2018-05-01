@@ -1,39 +1,61 @@
 package com.joe.api.po;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
+/**
+ * 订单Bean
+ */
 public class Order {
+
+    //订单编号
     private Integer orderId;
 
+    //顾客编号
     private Integer customerId;
 
+    //订单金额
     private BigDecimal orderMoney;
 
+    //订单状态
     private Integer orderStatus;
 
+    //支付时间
     private Date paymentTime;
 
+    //邮编
     private String postCode;
 
+    //快递公司编号
     private Integer expressId;
 
+    //快递单号
     private String expressCode;
 
+    //邮费
     private String expressMoney;
 
+    //收货地址
     private String receiveAddress;
 
+    //备注
     private String remake;
 
+    //创建人
     private Integer createBy;
 
+    //创建时间
     private Date createTime;
 
+    //更新人
     private Integer updateBy;
 
+    //更新时间
     private Date updateTime;
 
+    //可用
     private Boolean enable;
 
     public Integer getOrderId() {
@@ -162,5 +184,10 @@ public class Order {
 
     public void setEnable(Boolean enable) {
         this.enable = enable;
+    }
+
+    @Override
+    public String toString() {
+        return ReflectionToStringBuilder.toString(this);
     }
 }

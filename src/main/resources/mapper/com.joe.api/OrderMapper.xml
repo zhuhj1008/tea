@@ -24,31 +24,11 @@
     express_code, express_money, receive_address, remake, create_by, create_time, update_by, 
     update_time, enable
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from tb_order
-    where order_id = #{orderId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from tb_order
-    where order_id = #{orderId,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.joe.api.po.Order" >
-    insert into tb_order (order_id, customer_id, order_money, 
-      order_status, payment_time, post_code, 
-      express_id, express_code, express_money, 
-      receive_address, remake, create_by, 
-      create_time, update_by, update_time, 
-      enable)
-    values (#{orderId,jdbcType=INTEGER}, #{customerId,jdbcType=INTEGER}, #{orderMoney,jdbcType=DECIMAL}, 
-      #{orderStatus,jdbcType=INTEGER}, #{paymentTime,jdbcType=TIMESTAMP}, #{postCode,jdbcType=VARCHAR}, 
-      #{expressId,jdbcType=INTEGER}, #{expressCode,jdbcType=VARCHAR}, #{expressMoney,jdbcType=VARCHAR}, 
-      #{receiveAddress,jdbcType=VARCHAR}, #{remake,jdbcType=VARCHAR}, #{createBy,jdbcType=INTEGER}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{enable,jdbcType=BIT})
-  </insert>
-  <insert id="insertSelective" parameterType="com.joe.api.po.Order" >
+
+
+
+  <!--insert区域-->
+  <insert id="insertSelective" parameterType="com.joe.api.po.Order"  useGeneratedKeys="true" keyProperty="orderId">
     insert into tb_order
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="orderId != null" >
@@ -151,6 +131,18 @@
       </if>
     </trim>
   </insert>
+
+
+
+  <!--delete区域-->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_order
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </delete>
+
+
+
+  <!--update区域-->
   <update id="updateByPrimaryKeySelective" parameterType="com.joe.api.po.Order" >
     update tb_order
     <set >
@@ -202,23 +194,14 @@
     </set>
     where order_id = #{orderId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.joe.api.po.Order" >
-    update tb_order
-    set customer_id = #{customerId,jdbcType=INTEGER},
-      order_money = #{orderMoney,jdbcType=DECIMAL},
-      order_status = #{orderStatus,jdbcType=INTEGER},
-      payment_time = #{paymentTime,jdbcType=TIMESTAMP},
-      post_code = #{postCode,jdbcType=VARCHAR},
-      express_id = #{expressId,jdbcType=INTEGER},
-      express_code = #{expressCode,jdbcType=VARCHAR},
-      express_money = #{expressMoney,jdbcType=VARCHAR},
-      receive_address = #{receiveAddress,jdbcType=VARCHAR},
-      remake = #{remake,jdbcType=VARCHAR},
-      create_by = #{createBy,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_by = #{updateBy,jdbcType=INTEGER},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      enable = #{enable,jdbcType=BIT}
+
+
+
+  <!--select区域-->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from tb_order
     where order_id = #{orderId,jdbcType=INTEGER}
-  </update>
+  </select>
 </mapper>
