@@ -124,7 +124,7 @@
     where detail_id = #{detailId,jdbcType=INTEGER}
   </update>
 
-  <update id="updateStatusByOrderId" parameterType="java.util.map" >
+  <update id="updateStatusByOrderId" parameterType="java.util.HashMap" >
       update
       tb_order_detail
       set status = #{status,jdbcType=INTEGER}
@@ -142,7 +142,7 @@
     where detail_id = #{detailId,jdbcType=INTEGER}
   </select>
 
-  <select id="selectByCustomerIdAndStatus" resultType="BaseResultMap" parameterType="java.util.map">
+  <select id="selectByCustomerIdAndStatus" resultMap="BaseResultMap" parameterType="java.util.HashMap">
     select
     <include refid="Base_Column_List" />
     from tb_order_detail

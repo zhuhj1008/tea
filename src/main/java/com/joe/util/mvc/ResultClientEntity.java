@@ -9,9 +9,9 @@ package com.joe.util.mvc;
  */
 public class ResultClientEntity {
 
-    public  Boolean code;
+    public Boolean code;
     public String message;
-    public  Object data;
+    public Object data;
 
     public ResultClientEntity(Boolean code) {
         this.code = code;
