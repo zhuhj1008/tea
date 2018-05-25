@@ -38,7 +38,7 @@ public class CommodityController {
      */
     public Object addCommodity(CommodityVo commodityVo){
 
-        commodityWebService.addCommodity(commodityVo);
+//        commodityWebService.addCommodity(commodityVo);
 
         return ResultClientEntity.getSuccessEntity();
 
