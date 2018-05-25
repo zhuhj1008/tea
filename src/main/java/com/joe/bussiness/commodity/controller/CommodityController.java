@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
+
 @Controller
 @RequestMapping("/commodity")
 public class CommodityController {
@@ -50,9 +52,10 @@ public class CommodityController {
      * @param commodityId
      * @return
      */
-    @RequestMapping("getCommodityDetail")
+    @RequestMapping("/getCommodityDetail")
+    @ResponseBody
     public Object getCommodityDetail(int commodityId){
-        return null;
+        return "abc";
     }
 
 
