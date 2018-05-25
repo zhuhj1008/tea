@@ -19,8 +19,8 @@ public class CommodityService {
     @Autowired
     CommodityDetailMapper commodityDetailMapper;
 
-    @Autowired
-    CommodityMapper commodityMapper;
+//    @Autowired
+//    CommodityMapper commodityMapper;
 
     @Autowired
     CommodityItemMapper commodityItemMapper;
@@ -37,7 +37,7 @@ public class CommodityService {
         commodity.setCreateTime(new Date());
         commodity.setUpdateTime(new Date());
         commodity.setEnable(true);
-        commodityMapper.insertSelective(commodity);
+//        commodityMapper.insertSelective(commodity);
 
         return commodity.getCommodityId();
 
@@ -56,8 +56,8 @@ public class CommodityService {
         commodity.setCommodityId(commodityId);
         commodity.setUpdateTime(new Date());
         commodity.setEnable(false);
-        int i = commodityMapper.updateByPrimaryKeySelective(commodity);
-
+//        int i = commodityMapper.updateByPrimaryKeySelective(commodity);
+        int i = 0;
         CommodityDetail commodityDetail = new CommodityDetail();
         commodityDetail.setCommodityId(commodityId);
         commodityDetail.setEnable(false);
@@ -74,7 +74,8 @@ public class CommodityService {
      */
     public int modifyCommodity(Commodity commodity) {
 
-        return commodityMapper.updateByPrimaryKeySelective(commodity);
+//        return commodityMapper.updateByPrimaryKeySelective(commodity);
+        return 0;
 
     }
 
@@ -86,8 +87,8 @@ public class CommodityService {
      */
     public Commodity queryCommodityById(int commodityId) {
 
-        return commodityMapper.selectByPrimaryKey(commodityId);
-
+//        return commodityMapper.selectByPrimaryKey(commodityId);
+        return null;
     }
 
     /**
@@ -101,7 +102,8 @@ public class CommodityService {
 
         List<Integer> itemList = commodityItemMapper.selectSubItemIdList(itemId);
 
-        return commodityMapper.selectCommodityByItemId(itemList);
+//        return commodityMapper.selectCommodityByItemId(itemList);
+        return null;
 
     }
 
