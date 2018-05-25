@@ -1,5 +1,6 @@
 package com.joe.bussiness.commodity.controller;
 
+import com.joe.api.po.CommodityItem;
 import com.joe.bussiness.commodity.service.CommodityWebService;
 import com.joe.bussiness.commodity.vo.CommodityVo;
 import com.joe.util.mvc.ResultClientEntity;
@@ -17,6 +18,21 @@ public class CommodityController {
 
     @Autowired
     private CommodityWebService commodityWebService;
+
+
+    /**
+     * 根据商品类目编号查找类目名称
+     * @param itemId
+     * @return
+     */
+    @RequestMapping("/getItemById")
+    @ResponseBody
+    public Object getCommodityItemById(int itemId){
+
+        CommodityItem item = commodityWebService.getItemById(itemId);
+
+        return ResultClientEntity.getSuccessEntity(item);
+    }
 
 
     /**
