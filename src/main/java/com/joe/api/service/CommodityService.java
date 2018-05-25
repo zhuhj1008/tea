@@ -17,13 +17,14 @@ import java.util.List;
 public class CommodityService {
 
     @Autowired
+    CommodityDetailMapper commodityDetailMapper;
+
+    @Autowired
     CommodityMapper commodityMapper;
 
     @Autowired
     CommodityItemMapper commodityItemMapper;
 
-    @Autowired
-    CommodityDetailMapper commodityDetailMapper;
 
     /**
      * 新增商品
