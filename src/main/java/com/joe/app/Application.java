@@ -23,7 +23,7 @@ import java.util.Properties;
 @RestController
 @EnableAutoConfiguration
 @ComponentScan("com.joe.*")//注解扫描路径
-@MapperScan("com.joe.api.dao.*")//mapper接口扫描路径
+@MapperScan("com.joe.api.dao")//mapper接口扫描路径
 public class Application extends WebMvcConfigurerAdapter implements CommandLineRunner {
 
     private Logger logger = LoggerFactory.getLogger(Application.class);
