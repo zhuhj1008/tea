@@ -3,7 +3,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>tea</artifactId>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>tea</name>
     <url>http://maven.apache.org</url>
 

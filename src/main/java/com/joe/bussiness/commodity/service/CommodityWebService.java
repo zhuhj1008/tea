@@ -20,6 +20,8 @@ public class CommodityWebService {
     @Autowired
     CommodityDetailService commodityDetailService;
 
+
+
     public void addCommodity(CommodityVo commodityVo){
         Commodity commodity = new Commodity();
         commodity.setCommodityName(commodityVo.getName());
