@@ -1,8 +1,10 @@
 package com.joe.bussiness.commodity.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.joe.api.po.CommodityItem;
 import com.joe.bussiness.commodity.service.CommodityWebService;
 import com.joe.bussiness.commodity.vo.CommodityVo;
+import com.joe.util.mvc.RequestEntity;
 import com.joe.util.mvc.ResultClientEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,6 +59,20 @@ public class CommodityController {
     public Object addCommodity(CommodityVo commodityVo){
 
         logger.info("新增商品，商品名称：{}",commodityVo.getpName());
+        commodityWebService.addCommodity(commodityVo);
+        logger.info("新增商品成功");
+
+        return ResultClientEntity.getSuccessEntity();
+
+    }
+
+    @RequestMapping("/addCommodity1")
+    @ResponseBody
+    public Object addCommodity1(RequestEntity requestEntity){
+
+        logger.info("param:{}",requestEntity);
+        String body = requestEntity.getBody();
+        CommodityVo commodityVo = JSON.parseObject(body, CommodityVo.class);
         commodityWebService.addCommodity(commodityVo);
         logger.info("新增商品成功");
 
