@@ -6,11 +6,8 @@ import com.joe.bussiness.commodity.vo.CommodityVo;
 import com.joe.util.mvc.ResultClientEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import javax.annotation.Resource;
 
 @Controller
 @RequestMapping("/commodity")
@@ -46,16 +43,16 @@ public class CommodityController {
         return null;
     }
 
-
     /**
      * 添加商品
      * @param commodityVo
      * @return
      */
+    @RequestMapping("/addCommodity")
+    @ResponseBody
     public Object addCommodity(CommodityVo commodityVo){
 
-//        commodityWebService.addCommodity(commodityVo);
-
+        commodityWebService.addCommodity(commodityVo);
         return ResultClientEntity.getSuccessEntity();
 
     }

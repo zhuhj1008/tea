@@ -18,8 +18,23 @@ public class CommodityDetail {
     //单位
     private String unit;
 
+    //成本
+    private BigDecimal cost;
+
+    //原价
+    private BigDecimal initPrice;
+
+    //库存
+    private Integer stock;
+
     //属性
     private String property;
+
+    //细节图
+    private String detailPicture;
+
+    //图信息
+    private String pictureInfo;
 
     //运费
     private BigDecimal freight;
@@ -57,12 +72,52 @@ public class CommodityDetail {
         this.unit = unit == null ? null : unit.trim();
     }
 
+    public BigDecimal getCost() {
+        return cost;
+    }
+
+    public void setCost(BigDecimal cost) {
+        this.cost = cost;
+    }
+
+    public BigDecimal getInitPrice() {
+        return initPrice;
+    }
+
+    public void setInitPrice(BigDecimal initPrice) {
+        this.initPrice = initPrice;
+    }
+
+    public Integer getStock() {
+        return stock;
+    }
+
+    public void setStock(Integer stock) {
+        this.stock = stock;
+    }
+
     public String getProperty() {
         return property;
     }
 
     public void setProperty(String property) {
         this.property = property;
+    }
+
+    public String getDetailPicture() {
+        return detailPicture;
+    }
+
+    public void setDetailPicture(String detailPicture) {
+        this.detailPicture = detailPicture;
+    }
+
+    public String getPictureInfo() {
+        return pictureInfo;
+    }
+
+    public void setPictureInfo(String pictureInfo) {
+        this.pictureInfo = pictureInfo;
     }
 
     public BigDecimal getFreight() {

@@ -20,7 +20,9 @@ public class TestCommodityService extends BaseTest {
     public void testAdd(){
         List<String>  nameList = new ArrayList<>();
 //        nameList.add("祁门红茶"); nameList.add("大吉岭红茶"); nameList.add("阿萨姆红茶");
-        nameList.add("吴裕泰"); nameList.add("天福茗茶"); nameList.add("张一元");
+        nameList.add("吴裕泰");
+//        nameList.add("天福茗茶");
+//        nameList.add("张一元");
 
         Commodity commodity = new Commodity();
         commodity.setItemId(5);

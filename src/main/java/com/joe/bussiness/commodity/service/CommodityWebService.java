@@ -29,21 +29,14 @@ public class CommodityWebService {
 
 
     public void addCommodity(CommodityVo commodityVo){
-        Commodity commodity = new Commodity();
-        commodity.setCommodityName(commodityVo.getName());
-        commodity.setItemId(commodityVo.getItem());
-        commodity.setPicture(commodityVo.getPhoto());
-        commodity.setCreateTime(new Date());
-        commodity.setCreateBy(1);
-        commodity.setEnable(true);
+
+        Commodity commodity = commodityVo.commodityVoToCommodity(commodityVo);
         int commodityId = commodityService.addCommodity(commodity);
 
-        CommodityDetail commodityDetail = new CommodityDetail();
+        CommodityDetail commodityDetail = commodityVo.commodityVoToCommodityDetail(commodityVo);
         commodityDetail.setCommodityId(commodityId);
-        commodityDetail.setIntegral(commodityVo.getStock());//库存
-        commodityDetail.setUnit("100g");
-        commodityDetail.setFreight(new BigDecimal(0.00));
         commodityDetailService.addCommodityDetail(commodityDetail);
+
     }
 
     public CommodityItem getItemById(int itemId){
