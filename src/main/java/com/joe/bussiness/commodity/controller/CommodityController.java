@@ -4,6 +4,8 @@ import com.joe.api.po.CommodityItem;
 import com.joe.bussiness.commodity.service.CommodityWebService;
 import com.joe.bussiness.commodity.vo.CommodityVo;
 import com.joe.util.mvc.ResultClientEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/commodity")
 public class CommodityController {
+
+    private static final Logger logger = LoggerFactory.getLogger(CommodityController.class);
 
     @Autowired
     private CommodityWebService commodityWebService;
@@ -52,7 +56,10 @@ public class CommodityController {
     @ResponseBody
     public Object addCommodity(CommodityVo commodityVo){
 
+        logger.info("新增商品，商品名称：{}",commodityVo.getpName());
         commodityWebService.addCommodity(commodityVo);
+        logger.info("新增商品成功");
+
         return ResultClientEntity.getSuccessEntity();
 
     }
