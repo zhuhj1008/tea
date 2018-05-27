@@ -9,39 +9,44 @@ package com.joe.util.mvc;
  */
 public class ResultClientEntity {
 
-    public Boolean code;
+    public int code;
     public String message;
     public Object data;
 
-    public ResultClientEntity(Boolean code) {
+    private static final int SUCCESS_CODE = 1;
+    private static final int FAIL_CODE = 0;
+
+
+    public ResultClientEntity(int code) {
         this.code = code;
     }
 
-    public ResultClientEntity(Boolean code, String message) {
+
+    public ResultClientEntity(int code, String message) {
         this.code = code;
         this.message = message;
     }
 
-    public ResultClientEntity(Boolean code, Object data) {
+    public ResultClientEntity(int code, Object data) {
         this.code = code;
         this.data = data;
     }
 
 
     public static ResultClientEntity getSuccessEntity(){
-        return new ResultClientEntity(true);
+        return new ResultClientEntity(SUCCESS_CODE);
     }
 
     public static ResultClientEntity getSuccessEntity(Object data){
-        return new ResultClientEntity(true,data);
+        return new ResultClientEntity(SUCCESS_CODE,data);
     }
 
     public static ResultClientEntity getFailEntity(Object data){
-        return new ResultClientEntity(false,data);
+        return new ResultClientEntity(FAIL_CODE,data);
     }
 
     public static ResultClientEntity getFailEntity(String message){
-        return new ResultClientEntity(false,message);
+        return new ResultClientEntity(FAIL_CODE,message);
     }
 
 }
