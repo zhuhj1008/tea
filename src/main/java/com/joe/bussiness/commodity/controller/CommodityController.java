@@ -13,6 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.Enumeration;
+
 @Controller
 @RequestMapping("/commodity")
 public class CommodityController {
@@ -79,6 +82,24 @@ public class CommodityController {
         return ResultClientEntity.getSuccessEntity();
 
     }
+
+
+    @RequestMapping("/addCommodity2")
+    @ResponseBody
+    public Object addCommodity2(HttpServletRequest requestEntity){
+
+        Enumeration<String> parameterNames = requestEntity.getParameterNames();
+        while (parameterNames.hasMoreElements()){
+            String paramName = parameterNames.nextElement();
+            String parameter = requestEntity.getParameter(paramName);
+            logger.info("请求key:{},请求value：{}",paramName,parameter);
+        }
+
+        return ResultClientEntity.getSuccessEntity();
+
+    }
+
+
 
 
 

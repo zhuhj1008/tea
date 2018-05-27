@@ -1,5 +1,7 @@
 package com.joe.util.mvc;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+
 /**
  * 请求体
  * create by Joe on 2018-05-27 14:45
@@ -32,5 +34,10 @@ public class RequestEntity {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    @Override
+    public String toString() {
+        return ReflectionToStringBuilder.toString(this);
     }
 }
