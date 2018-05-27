@@ -13,7 +13,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
+import java.io.BufferedInputStream;
+import java.io.IOException;
 import java.util.Enumeration;
 
 @Controller
@@ -93,6 +96,32 @@ public class CommodityController {
             String paramName = parameterNames.nextElement();
             String parameter = requestEntity.getParameter(paramName);
             logger.info("请求key:{},请求value：{}",paramName,parameter);
+        }
+
+        return ResultClientEntity.getSuccessEntity();
+
+    }
+
+    @RequestMapping("/addCommodity3")
+    @ResponseBody
+    public Object addCommodity3(HttpServletRequest request){
+
+        try {
+            ServletInputStream inputStream = request.getInputStream();
+            StringBuilder content = new StringBuilder();
+            byte[] b = new byte[1024];
+            int lens = -1;
+            while ((lens = inputStream.read(b)) > 0) {
+                content.append(new String(b, 0, lens));
+            }
+            String param = content.toString();// 内容
+            logger.info("param:{}",param);
+            CommodityVo commodityVo = JSON.parseObject(param, CommodityVo.class);
+            commodityWebService.addCommodity(commodityVo);
+            logger.info("新增商品成功");
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         return ResultClientEntity.getSuccessEntity();
