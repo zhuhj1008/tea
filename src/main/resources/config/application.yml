@@ -34,3 +34,12 @@ pagehelper:
     reasonable: true
     supportMethodsArguments: true
     params: count=countSql
+
+#七牛上传文件参数
+qiNiu:
+    accessKey: qFK5rkWh6ua5Z2WwXItC-bj1MAxklN284aZzGlpc
+    secretKey: IQSsg6tKgT4-3IV2U7G_FKFMtVXOA14M7tm2prMJ
+    bucketName: mywebt
+    macName: HmacSHA1
+    encoding: UTF-8
+    effective: 3

@@ -5,7 +5,7 @@ import com.joe.api.po.CommodityItem;
 import com.joe.bussiness.base.BaseController;
 import com.joe.bussiness.commodity.service.CommodityWebService;
 import com.joe.bussiness.commodity.vo.CommodityVo;
-import com.joe.util.mvc.ResultClientEntity;
+import com.joe.util.mvc.ResponseEntity;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,7 +37,7 @@ public class CommodityController extends BaseController{
 
         CommodityItem item = commodityWebService.getItemById(itemId);
 
-        return ResultClientEntity.getSuccessEntity(item);
+        return ResponseEntity.getSuccessEntity(item);
     }
 
 
@@ -58,16 +58,16 @@ public class CommodityController extends BaseController{
 
         String requestParam = getRequestParam(request);
         if(StringUtils.isBlank(requestParam)){
-            return ResultClientEntity.getFailEntity("参数错误");
+            return ResponseEntity.getFailEntity("参数错误");
         }
 
         CommodityVo commodityVo = JSON.parseObject(requestParam, CommodityVo.class);
 
         logger.info("新增商品，商品名称:{}",commodityVo.getpName());
-        commodityWebService.addCommodity(commodityVo);
-        logger.info("新增商品成功");
+        int commodityId = commodityWebService.addCommodity(commodityVo);
+        logger.info("新增商品成功,商品Id：{}",commodityId);
 
-        return ResultClientEntity.getSuccessEntity();
+        return ResponseEntity.getSuccessEntity(commodityId);
 
     }
 

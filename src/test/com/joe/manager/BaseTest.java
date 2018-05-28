@@ -2,12 +2,15 @@ package com.joe.manager;
 
 import com.alibaba.fastjson.JSON;
 import com.joe.app.Application;
+import com.joe.config.QiNiuConfig;
+import com.joe.bussiness.tools.QiNiuService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -23,6 +26,12 @@ import java.util.List;
 public class BaseTest {
 
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    QiNiuConfig qiNiuConfig;
+
+    @Autowired
+    QiNiuService qiNiuAuth;
 
     @Before
     public void before() {
@@ -49,7 +58,13 @@ public class BaseTest {
 
         String s = JSON.toJSONString(numbers);
         System.out.println(s);
+    }
 
-
+    @Test
+    public void testConfig(){
+//        String accessKey = qiNiuConfig.getAccessKey();
+//        System.out.println(accessKey);
+        String uploadToken = qiNiuAuth.getUploadToken();
+        System.out.println(uploadToken);
     }
 }

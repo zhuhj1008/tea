@@ -28,7 +28,7 @@ public class CommodityWebService {
 
 
 
-    public void addCommodity(CommodityVo commodityVo){
+    public int addCommodity(CommodityVo commodityVo){
 
         Commodity commodity = commodityVo.commodityVoToCommodity(commodityVo);
         int commodityId = commodityService.addCommodity(commodity);
@@ -36,6 +36,8 @@ public class CommodityWebService {
         CommodityDetail commodityDetail = commodityVo.commodityVoToCommodityDetail(commodityVo);
         commodityDetail.setCommodityId(commodityId);
         commodityDetailService.addCommodityDetail(commodityDetail);
+
+        return commodityId;
 
     }
 
