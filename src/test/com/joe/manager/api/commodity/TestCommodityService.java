@@ -57,7 +57,7 @@ public class TestCommodityService extends BaseTest {
         Commodity commodity = commodityService.queryCommodityById(1);
         logger.info("id为1的商品是：{}",commodity);
 
-        List<Commodity> commodities = commodityService.queryCommodityByItemId(4);
+        List<Commodity> commodities = commodityService.queryCommodityByItemIds(4);
         logger.info("所有的绿茶商品：{}",commodities);
     }
 
