@@ -2,6 +2,7 @@ package com.joe.bussiness.commodity.vo;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.joe.api.po.Commodity;
 import com.joe.api.po.CommodityDetail;
 import org.apache.commons.lang3.StringUtils;
 
@@ -13,6 +14,17 @@ import java.math.BigDecimal;
  **/
 public class CommodityDetailVO {
 
+    //商品名称
+    private String name;
+
+    //商品类目
+    private Integer itemId;
+
+    //小图地址
+    private String smallPicture;
+
+    //售价
+    private BigDecimal price;
 
     //明细编号
     private Integer detailId;
@@ -47,12 +59,27 @@ public class CommodityDetailVO {
     //保质期
     private String saveDate;
 
-    public static CommodityDetailVO commodityDetail2DetailVo(CommodityDetail commodityDetail){
+    public static CommodityDetailVO commodity2DetailVo(CommodityDetailVO vo,Commodity commodity){
+
+        if(commodity == null){
+            return vo;
+        }
+
+        vo.setName(commodity.getCommodityName());
+        vo.setSmallPicture(commodity.getPicture());
+        vo.setItemId(commodity.getItemId());
+        vo.setPrice(commodity.getPrice());
+
+        return vo;
+
+    }
+
+    public static CommodityDetailVO commodityDetail2DetailVo(CommodityDetailVO vo,CommodityDetail commodityDetail){
 
         if(commodityDetail == null){
-            return new CommodityDetailVO();
+            return vo;
         }
-        CommodityDetailVO vo = new CommodityDetailVO();
+
         vo.setDetailId(commodityDetail.getDetailId());
         vo.setCommodityId(commodityDetail.getCommodityId());
         vo.setCost(commodityDetail.getCost());
@@ -64,13 +91,46 @@ public class CommodityDetailVO {
 
         if(StringUtils.isNoneEmpty(commodityDetail.getProperty())){
             JSONObject property =(JSONObject) JSON.parse(commodityDetail.getProperty());
-            vo.setFlavor(property.getString("flavor"));
-            vo.setSaveMethod(property.getString("saveMethod"));
-            vo.setSaveDate(property.getString("saveDate"));
+            vo.setFlavor(property.getString("pTaste"));
+            vo.setSaveMethod(property.getString("pPreservation"));
+            vo.setSaveDate(property.getString("pExpirationDate"));
         }
 
         return vo;
 
+    }
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(Integer itemId) {
+        this.itemId = itemId;
+    }
+
+    public String getSmallPicture() {
+        return smallPicture;
+    }
+
+    public void setSmallPicture(String smallPicture) {
+        this.smallPicture = smallPicture;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
     public Integer getDetailId() {

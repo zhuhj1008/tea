@@ -45,6 +45,10 @@ public class CommodityDetailController extends BaseController {
 
         logger.info("query commodity detail by commodity id, id is {}", commodityId);
         CommodityDetailVO commodityDetailVO = commodityDetailWebService.queryCommodityDetailByCommodityId(commodityId);
+        if(commodityDetailVO == null){
+            logger.info("商品信息缺失，商品编号：{}",commodityId);
+            return ResponseEntity.getFailEntity("商品信息缺失");
+        }
 
         return ResponseEntity.getSuccessEntity(commodityDetailVO);
 
