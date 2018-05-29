@@ -51,5 +51,14 @@ public class CommodityDetailService {
         return commodityDetailMapper.updateByCommodityIdSelective(commodityDetail);
     }
 
+    /**
+     * 根据商品id查询商品明细
+     * @param commodityId
+     * @return
+     */
+    public CommodityDetail queryCommodityDetailByCommodityId(Integer commodityId){
+        return commodityDetailMapper.selectByCommodityId(commodityId);
+    }
+
 
 }

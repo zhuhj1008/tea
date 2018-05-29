@@ -6,6 +6,7 @@ import com.joe.api.po.CommodityItem;
 import com.joe.api.service.CommodityDetailService;
 import com.joe.api.service.CommodityItemService;
 import com.joe.api.service.CommodityService;
+import com.joe.bussiness.commodity.vo.CommodityDetailVO;
 import com.joe.bussiness.commodity.vo.CommodityVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,6 @@ public class CommodityWebService {
     CommodityItemService commodityItemService;
 
 
-
     public int addCommodity(CommodityVo commodityVo){
 
         Commodity commodity = commodityVo.commodityVoToCommodity(commodityVo);
@@ -40,6 +40,16 @@ public class CommodityWebService {
         return commodityId;
 
     }
+
+
+    public List<Commodity> queryCommodityByItemId(int itemId){
+
+        return commodityService.queryCommodityByItemId(itemId);
+    }
+
+
+
+
 
     public CommodityItem getItemById(int itemId){
 

@@ -39,11 +39,11 @@ public class CommodityVo {
     //小图地址
     private String pImgSmall;
 
-    //详情图地址
+    //滚动图地址
     private String[] pImgBanner;
 
-    //图片介绍
-    private String pImgPresentation;
+    //详情图地址
+    private String[] pImgPresentation;
 
     //口感，保存方法，保质期
     private String property;
@@ -68,7 +68,7 @@ public class CommodityVo {
         detail.setStock(commodityVo.getpInventory());
         detail.setProperty(commodityVo.getProperty());
         detail.setDetailPicture(JSON.toJSONString(commodityVo.getpImgBanner()));
-        detail.setPictureInfo(commodityVo.getpImgPresentation());
+        detail.setPictureInfo(JSON.toJSONString(commodityVo.getpImgPresentation()));
         detail.setOrigin(commodityVo.getpPlace());
 
         return detail;
@@ -155,11 +155,11 @@ public class CommodityVo {
         this.pImgBanner = pImgBanner;
     }
 
-    public String getpImgPresentation() {
+    public String[] getpImgPresentation() {
         return pImgPresentation;
     }
 
-    public void setpImgPresentation(String pImgPresentation) {
+    public void setpImgPresentation(String[] pImgPresentation) {
         this.pImgPresentation = pImgPresentation;
     }
 

@@ -1,9 +1,12 @@
 package com.joe.bussiness.commodity.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.joe.api.po.Commodity;
 import com.joe.api.po.CommodityItem;
 import com.joe.bussiness.base.BaseController;
 import com.joe.bussiness.commodity.service.CommodityWebService;
+import com.joe.bussiness.commodity.vo.CommodityDetailVO;
 import com.joe.bussiness.commodity.vo.CommodityVo;
 import com.joe.util.mvc.ResponseEntity;
 import org.apache.commons.lang3.StringUtils;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 @RequestMapping("/commodity")
@@ -24,21 +28,6 @@ public class CommodityController extends BaseController{
 
     @Autowired
     private CommodityWebService commodityWebService;
-
-
-    /**
-     * 根据商品类目编号查找类目名称
-     * @param itemId
-     * @return
-     */
-    @RequestMapping("/getItemById")
-    @ResponseBody
-    public Object getCommodityItemById(int itemId){
-
-        CommodityItem item = commodityWebService.getItemById(itemId);
-
-        return ResponseEntity.getSuccessEntity(item);
-    }
 
 
     /**
@@ -54,7 +43,7 @@ public class CommodityController extends BaseController{
 
     @RequestMapping("/addCommodity")
     @ResponseBody
-    public Object addCommodity3(HttpServletRequest request){
+    public Object addCommodity(HttpServletRequest request){
 
         String requestParam = getRequestParam(request);
         if(StringUtils.isBlank(requestParam)){
@@ -72,21 +61,44 @@ public class CommodityController extends BaseController{
     }
 
 
+    /**
+     * 根据类目id查询商品集合
+     * @param request
+     * @return
+     */
+    @RequestMapping("/getCommodityListByItemId")
+    @ResponseBody
+    public Object getCommodityListByItemId(HttpServletRequest request){
 
+        String requestParam = getRequestParam(request);
+        if(StringUtils.isBlank(requestParam)){
+            return ResponseEntity.getFailEntity("参数错误");
+        }
+
+        JSONObject jsonObject = JSON.parseObject(requestParam);
+        Integer itemId =(Integer) jsonObject.get("itemId");
+
+        List<Commodity> commodityList = commodityWebService.queryCommodityByItemId(itemId);
+
+        return ResponseEntity.getSuccessEntity(commodityList);
+
+    }
 
 
 
     /**
-     * 查询商品详情
-     * @param commodityId
+     * 根据商品类目编号查找类目名称
+     * @param itemId
      * @return
      */
-    @RequestMapping("/getCommodityDetail")
+    @RequestMapping("/getItemById")
     @ResponseBody
-    public Object getCommodityDetail(int commodityId){
-        return "abc";
-    }
+    public Object getCommodityItemById(int itemId){
 
+        CommodityItem item = commodityWebService.getItemById(itemId);
+
+        return ResponseEntity.getSuccessEntity(item);
+    }
 
 
 
