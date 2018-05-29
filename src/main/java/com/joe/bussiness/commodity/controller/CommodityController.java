@@ -22,7 +22,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/commodity")
-public class CommodityController extends BaseController{
+public class CommodityController extends BaseController {
 
     private static final Logger logger = LoggerFactory.getLogger(CommodityController.class);
 
@@ -30,31 +30,21 @@ public class CommodityController extends BaseController{
     private CommodityWebService commodityWebService;
 
 
-    /**
-     * 查询商品分类类表
-     * @return
-     */
-    @RequestMapping("/getAllItem")
-    @ResponseBody
-    public Object getAllCommodityItem() {
-
-        return null;
-    }
 
     @RequestMapping("/addCommodity")
     @ResponseBody
-    public Object addCommodity(HttpServletRequest request){
+    public Object addCommodity(HttpServletRequest request) {
 
         String requestParam = getRequestParam(request);
-        if(StringUtils.isBlank(requestParam)){
+        if (StringUtils.isBlank(requestParam)) {
             return ResponseEntity.getFailEntity("参数错误");
         }
 
         CommodityVo commodityVo = JSON.parseObject(requestParam, CommodityVo.class);
 
-        logger.info("新增商品，商品名称:{}",commodityVo.getpName());
+        logger.info("新增商品，商品名称:{}", commodityVo.getpName());
         int commodityId = commodityWebService.addCommodity(commodityVo);
-        logger.info("新增商品成功,商品Id：{}",commodityId);
+        logger.info("新增商品成功,商品Id：{}", commodityId);
 
         return ResponseEntity.getSuccessEntity(commodityId);
 
@@ -63,44 +53,46 @@ public class CommodityController extends BaseController{
 
     /**
      * 根据类目id查询商品集合
+     *
      * @param request
      * @return
      */
     @RequestMapping("/getCommodityListByItemId")
     @ResponseBody
-    public Object getCommodityListByItemId(HttpServletRequest request){
+    public Object getCommodityListByItemId(HttpServletRequest request) {
 
         String requestParam = getRequestParam(request);
-        if(StringUtils.isBlank(requestParam)){
-            return ResponseEntity.getFailEntity("参数错误");
+        if (StringUtils.isBlank(requestParam)) {
+            return ResponseEntity.getFailEntity("param error");
         }
 
         JSONObject jsonObject = JSON.parseObject(requestParam);
-        Integer itemId =Integer.valueOf(jsonObject.get("itemId").toString());
+        Integer itemId = Integer.valueOf(jsonObject.get("itemId").toString());
+        Integer pageNo = Integer.valueOf(jsonObject.get("pageNo").toString());
+        Integer pageSize = Integer.valueOf(jsonObject.get("pageSize").toString());
 
-        List<Commodity> commodityList = commodityWebService.queryCommodityByItemId(itemId);
+
+        List<Commodity> commodityList = commodityWebService.queryCommodityByItemId(itemId, pageNo, pageSize);
 
         return ResponseEntity.getSuccessEntity(commodityList);
 
     }
 
 
-
     /**
      * 根据商品类目编号查找类目名称
+     *
      * @param itemId
      * @return
      */
     @RequestMapping("/getItemById")
     @ResponseBody
-    public Object getCommodityItemById(int itemId){
+    public Object getCommodityItemById(int itemId) {
 
         CommodityItem item = commodityWebService.getItemById(itemId);
 
         return ResponseEntity.getSuccessEntity(item);
     }
-
-
 
 
 }

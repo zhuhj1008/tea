@@ -1,5 +1,6 @@
 package com.joe.manager.api.commodity;
 
+import com.alibaba.fastjson.JSON;
 import com.joe.api.po.Commodity;
 import com.joe.api.service.CommodityService;
 import com.joe.manager.BaseTest;
@@ -64,5 +65,11 @@ public class TestCommodityService extends BaseTest {
     public void testDrop(){
         int i = commodityService.dropCommodity(1);
         logger.info("删除记录数：{}",i);
+    }
+
+    @Test
+    public void testPageHelper(){
+        List<Commodity> commodities = commodityService.queryCommodityByItemId(1, 1, 3);
+        logger.info(JSON.toJSONString(commodities));
     }
 }

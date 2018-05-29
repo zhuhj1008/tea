@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/commodityDetail")
-public class CommodityDetailController extends BaseController{
+public class CommodityDetailController extends BaseController {
 
     private static final Logger logger = LoggerFactory.getLogger(CommodityController.class);
 
@@ -33,15 +33,15 @@ public class CommodityDetailController extends BaseController{
 
     @RequestMapping("/getCommodityDetailByCommodityId")
     @ResponseBody
-    public Object getCommodityDetailByCommodityId(HttpServletRequest request){
+    public Object getCommodityDetailByCommodityId(HttpServletRequest request) {
 
         String requestParam = getRequestParam(request);
-        if(StringUtils.isBlank(requestParam)){
+        if (StringUtils.isBlank(requestParam)) {
             return ResponseEntity.getFailEntity("param error");
         }
 
         JSONObject jsonObject = JSON.parseObject(requestParam);
-        Integer commodityId =(Integer) jsonObject.get("commodityId");
+        Integer commodityId = Integer.valueOf(jsonObject.get("commodityId").toString());
 
         logger.info("query commodity detail by commodity id, id is {}", commodityId);
         CommodityDetailVO commodityDetailVO = commodityDetailWebService.queryCommodityDetailByCommodityId(commodityId);

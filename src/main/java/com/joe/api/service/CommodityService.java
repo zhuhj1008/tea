@@ -1,5 +1,7 @@
 package com.joe.api.service;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.joe.api.dao.CommodityDetailMapper;
 import com.joe.api.dao.CommodityItemMapper;
 import com.joe.api.dao.CommodityMapper;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.beans.Transient;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -95,12 +98,28 @@ public class CommodityService {
      * @param itemId
      * @return
      */
-    public List<Commodity> queryCommodityByItemId(int itemId) {
+    public List<Commodity> queryCommodityByItemIds(int itemId) {
 
 
         List<Integer> itemList = commodityItemMapper.selectSubItemIdList(itemId);
 
-        return commodityMapper.selectCommodityByItemId(itemList);
+        return commodityMapper.selectCommodityByItemIds(itemList);
+
+    }
+
+    /**
+     * 查询商品集合By 类目Id
+     *
+     * @param itemId
+     * @param pageNo 页数
+     * @param pageSize 每页记录数
+     * @return
+     */
+    public List<Commodity> queryCommodityByItemId(int itemId, int pageNo, int pageSize) {
+
+        PageHelper.startPage(pageNo, pageSize);
+
+        return commodityMapper.selectByItemId(itemId);
 
     }
 

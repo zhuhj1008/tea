@@ -15,6 +15,8 @@ public interface CommodityMapper {
 
     Commodity selectByPrimaryKey(Integer commodityId);
 
-    List<Commodity> selectCommodityByItemId(@Param(value = "itemList") List<Integer> itemList);
+    List<Commodity> selectByItemId(Integer itemId);
+
+    List<Commodity> selectCommodityByItemIds(@Param(value = "itemList") List<Integer> itemList);
 
 }

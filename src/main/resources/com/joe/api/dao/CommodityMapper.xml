@@ -154,14 +154,21 @@
     where commodity_id = #{commodityId,jdbcType=INTEGER}
   </select>
 
-  <select id="selectCommodityByItemId"  resultMap="BaseResultMap" parameterType="java.util.List">
+  <select id="selectCommodityByItemIds"  resultMap="BaseResultMap" parameterType="java.util.List">
     select
     <include refid="Base_Column_List" />
     from tb_commodity
-    where item_id in
+    where enable = 1 and item_id in
     <foreach collection="itemList" item="item" index="index" open="(" separator="," close=")">
       #{item}
     </foreach>
 
+  </select>
+
+  <select id="selectByItemId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from tb_commodity
+    where enable = 1 and  item_id = #{itemId,jdbcType=INTEGER}
   </select>
 </mapper>

@@ -42,9 +42,10 @@ public class CommodityWebService {
     }
 
 
-    public List<Commodity> queryCommodityByItemId(int itemId){
+    public List<Commodity> queryCommodityByItemId(int itemId, int pageNo, int pageSize){
 
-        return commodityService.queryCommodityByItemId(itemId);
+        return commodityService.queryCommodityByItemId(itemId,pageNo,pageSize);
+
     }
 
 
