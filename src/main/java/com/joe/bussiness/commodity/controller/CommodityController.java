@@ -76,7 +76,7 @@ public class CommodityController extends BaseController{
         }
 
         JSONObject jsonObject = JSON.parseObject(requestParam);
-        Integer itemId =(Integer) jsonObject.get("itemId");
+        Integer itemId =Integer.valueOf(jsonObject.get("itemId").toString());
 
         List<Commodity> commodityList = commodityWebService.queryCommodityByItemId(itemId);
 
