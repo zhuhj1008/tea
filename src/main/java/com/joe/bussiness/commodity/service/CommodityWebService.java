@@ -28,7 +28,7 @@ public class CommodityWebService {
     CommodityItemService commodityItemService;
 
 
-    public int addCommodity(CommodityVo commodityVo){
+    public int addCommodity(CommodityVo commodityVo) {
 
         Commodity commodity = commodityVo.commodityVoToCommodity(commodityVo);
         int commodityId = commodityService.addCommodity(commodity);
@@ -42,18 +42,23 @@ public class CommodityWebService {
     }
 
 
-    public List<Commodity> queryCommodityByItemId(int itemId, int pageNo, int pageSize){
+    public List<Commodity> queryCommodityByItemId(int itemId, int pageNo, int pageSize) {
 
-        return commodityService.queryCommodityByItemId(itemId,pageNo,pageSize);
+        return commodityService.queryCommodityByItemId(itemId, pageNo, pageSize);
 
+    }
+
+    public int queryCommodityPageCountByItemId(int itemId, int pageSize) {
+
+        int count = commodityService.queryCommodityCountByItemId(itemId);
+
+        return count / pageSize + 1;
     }
 
 
 
+    public void removeCommodity(int commodityId) {
 
-
-    public CommodityItem getItemById(int itemId){
-
-        return  commodityItemService.queryCommodityItemById(itemId);
+        commodityService.dropCommodity(commodityId);
     }
 }

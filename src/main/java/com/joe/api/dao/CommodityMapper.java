@@ -17,6 +17,8 @@ public interface CommodityMapper {
 
     List<Commodity> selectByItemId(Integer itemId);
 
+    int selectCommodityCountByItemId(Integer itemId);
+
     List<Commodity> selectCommodityByItemIds(@Param(value = "itemList") List<Integer> itemList);
 
 }

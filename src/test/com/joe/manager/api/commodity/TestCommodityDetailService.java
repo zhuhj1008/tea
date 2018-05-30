@@ -32,4 +32,11 @@ public class TestCommodityDetailService extends BaseTest {
         commodityDetail.setEnable(true);
         commodityDetailService.modifyCommodityDetail(commodityDetail);
     }
+
+    @Test
+    public void queryCommodityDetailByCommodityIdTest(){
+        CommodityDetail commodityDetail = commodityDetailService.queryCommodityDetailByCommodityId(66);
+
+        System.out.println(commodityDetail);
+    }
 }

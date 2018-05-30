@@ -7,9 +7,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -24,6 +26,7 @@ import java.util.Properties;
 @EnableAutoConfiguration
 @ComponentScan("com.joe.*")//注解扫描路径
 @MapperScan("com.joe.api.dao")//mapper接口扫描路径
+@ServletComponentScan
 public class Application extends WebMvcConfigurerAdapter implements CommandLineRunner {
 
     private Logger logger = LoggerFactory.getLogger(Application.class);
@@ -36,7 +39,8 @@ public class Application extends WebMvcConfigurerAdapter implements CommandLineR
         logger.info("服务启动完成!");
     }
 
-    @RequestMapping("/")
+    @RequestMapping("/date")
+    @ResponseBody
     String home() {
         return "当前时间"+new Date();
     }

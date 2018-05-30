@@ -8,6 +8,7 @@ import com.joe.bussiness.base.BaseController;
 import com.joe.bussiness.commodity.service.CommodityWebService;
 import com.joe.bussiness.commodity.vo.CommodityDetailVO;
 import com.joe.bussiness.commodity.vo.CommodityVo;
+import com.joe.bussiness.exception.ParameterIllegalityException;
 import com.joe.util.mvc.ResponseEntity;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -18,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/commodity")
@@ -28,7 +31,6 @@ public class CommodityController extends BaseController {
 
     @Autowired
     private CommodityWebService commodityWebService;
-
 
 
     @RequestMapping("/addCommodity")
@@ -71,27 +73,35 @@ public class CommodityController extends BaseController {
         Integer pageNo = Integer.valueOf(jsonObject.get("pageNo").toString());
         Integer pageSize = Integer.valueOf(jsonObject.get("pageSize").toString());
 
-
+        int pageCount = commodityWebService.queryCommodityPageCountByItemId(itemId, pageSize);
         List<Commodity> commodityList = commodityWebService.queryCommodityByItemId(itemId, pageNo, pageSize);
 
-        return ResponseEntity.getSuccessEntity(commodityList);
+        Map<String, Object> data = new HashMap<>();
+        data.put("pageCount", pageCount);
+        data.put("contents", commodityList);
 
+        return ResponseEntity.getSuccessEntity(commodityList);
     }
 
-
     /**
-     * 根据商品类目编号查找类目名称
-     *
-     * @param itemId
+     * 删除商品
+     * @param request
      * @return
      */
-    @RequestMapping("/getItemById")
+    @RequestMapping("/removeCommodity")
     @ResponseBody
-    public Object getCommodityItemById(int itemId) {
+    public Object removeCommodity(HttpServletRequest request) {
 
-        CommodityItem item = commodityWebService.getItemById(itemId);
+        String requestParam = getRequestParam(request);
+        if (StringUtils.isBlank(requestParam)) {
+            return ResponseEntity.getFailEntity("param error");
+        }
 
-        return ResponseEntity.getSuccessEntity(item);
+        JSONObject jsonObject = JSON.parseObject(requestParam);
+        Integer commodityId = Integer.valueOf(jsonObject.get("commodityId").toString());
+
+        commodityWebService.removeCommodity(commodityId);
+        return ResponseEntity.getSuccessEntity("删除成功");
     }
 
 

@@ -123,5 +123,15 @@ public class CommodityService {
 
     }
 
+    /**
+     * 查询商品个数
+     * @param itemId
+     * @return
+     */
+    public int queryCommodityCountByItemId(int itemId){
+
+        return commodityMapper.selectCommodityCountByItemId(itemId);
+    }
+
 
 }

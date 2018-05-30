@@ -7,7 +7,7 @@
         <result column="unit" property="unit" jdbcType="VARCHAR"/>
         <result column="cost" property="cost" jdbcType="DECIMAL"/>
         <result column="init_price" property="initPrice" jdbcType="DECIMAL"/>
-        <result column="stock" property="integral" jdbcType="INTEGER"/>
+        <result column="stock" property="stock" jdbcType="INTEGER"/>
         <result column="property" property="property" jdbcType="VARCHAR"/>
         <result column="detail_picture" property="detailPicture" jdbcType="VARCHAR"/>
         <result column="picture_info" property="pictureInfo" jdbcType="VARCHAR"/>

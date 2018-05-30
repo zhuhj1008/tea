@@ -7,6 +7,7 @@ import com.joe.api.po.CommodityDetail;
 import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * 商品详情VO
@@ -42,10 +43,12 @@ public class CommodityDetailVO {
     private Integer stock;
 
     //细节图
-    private String detailPicture;
+//    private String detailPicture;
+    private List<String> detailPicture;
 
     //图信息
-    private String pictureInfo;
+//    private String pictureInfo;
+    private List<String> pictureInfo;
 
     //产地
     private String origin;
@@ -85,11 +88,19 @@ public class CommodityDetailVO {
         vo.setCost(commodityDetail.getCost());
         vo.setInitPrice(commodityDetail.getInitPrice());
         vo.setStock(commodityDetail.getStock());
-        vo.setDetailPicture(commodityDetail.getDetailPicture());
-        vo.setPictureInfo(commodityDetail.getPictureInfo());
+
+        String detailPicture = commodityDetail.getDetailPicture();
+        List<String> detailPictureList = JSON.parseArray(detailPicture, String.class);
+        vo.setDetailPicture(detailPictureList);
+
+        String pictureInfo = commodityDetail.getPictureInfo();
+        List<String> pictureInfoList = JSON.parseArray(pictureInfo, String.class);
+        vo.setDetailPicture(detailPictureList);
+
+        vo.setPictureInfo(pictureInfoList);
         vo.setOrigin(commodityDetail.getOrigin());
 
-        if(StringUtils.isNoneEmpty(commodityDetail.getProperty())){
+        if(StringUtils.isNotEmpty(commodityDetail.getProperty())){
             JSONObject property =(JSONObject) JSON.parse(commodityDetail.getProperty());
             vo.setFlavor(property.getString("pTaste"));
             vo.setSaveMethod(property.getString("pPreservation"));
@@ -173,19 +184,19 @@ public class CommodityDetailVO {
         this.stock = stock;
     }
 
-    public String getDetailPicture() {
+    public List<String> getDetailPicture() {
         return detailPicture;
     }
 
-    public void setDetailPicture(String detailPicture) {
+    public void setDetailPicture(List<String> detailPicture) {
         this.detailPicture = detailPicture;
     }
 
-    public String getPictureInfo() {
+    public List<String> getPictureInfo() {
         return pictureInfo;
     }
 
-    public void setPictureInfo(String pictureInfo) {
+    public void setPictureInfo(List<String> pictureInfo) {
         this.pictureInfo = pictureInfo;
     }
 

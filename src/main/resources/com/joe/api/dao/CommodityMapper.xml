@@ -171,4 +171,11 @@
     from tb_commodity
     where enable = 1 and  item_id = #{itemId,jdbcType=INTEGER}
   </select>
+
+  <select id="selectCommodityCountByItemId" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+    select
+    count(*)
+    from tb_commodity
+    where enable = 1 and  item_id = #{itemId,jdbcType=INTEGER}
+  </select>
 </mapper>
