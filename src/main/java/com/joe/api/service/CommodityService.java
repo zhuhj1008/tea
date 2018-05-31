@@ -134,4 +134,16 @@ public class CommodityService {
     }
 
 
+    /**
+     * 修改商品信息
+     * @param commodity
+     * @return
+     */
+    public int modifyCommodityById(Commodity commodity){
+
+        return 0;
+
+    }
+
+
 }

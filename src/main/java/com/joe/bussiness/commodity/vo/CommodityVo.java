@@ -12,6 +12,7 @@ import java.math.BigDecimal;
  **/
 public class CommodityVo {
 
+    //商品id
     private Integer pId;
 
     //名称
@@ -19,6 +20,9 @@ public class CommodityVo {
 
     //类目Id
     private Integer pItem;
+
+    //是否首页推荐
+    private Boolean pRecommend;
 
     //成本
     private BigDecimal pCOst;
@@ -56,6 +60,7 @@ public class CommodityVo {
         commodity.setCommodityName(commodityVo.getpName());
         commodity.setPrice(commodityVo.getpPrice());
         commodity.setItemId(commodityVo.getpItem());
+        commodity.setRecommend(commodityVo.getpRecommend());
         commodity.setPicture(commodityVo.getpImgSmall());
 
         return commodity;
@@ -131,6 +136,14 @@ public class CommodityVo {
 
     public void setpInventory(Integer pInventory) {
         this.pInventory = pInventory;
+    }
+
+    public Boolean getpRecommend() {
+        return pRecommend;
+    }
+
+    public void setpRecommend(Boolean pRecommend) {
+        this.pRecommend = pRecommend;
     }
 
     public String getpPlace() {

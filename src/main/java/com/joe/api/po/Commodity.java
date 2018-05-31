@@ -28,6 +28,15 @@ public class Commodity {
     //品牌
     private Integer brand;
 
+    //首页推荐
+    private Boolean recommend;
+
+    //预留字段
+    private String extends1;
+
+    //预留字段
+    private String extends2;
+
     //创建者
     private Integer createBy;
 
@@ -89,6 +98,30 @@ public class Commodity {
 
     public void setBrand(Integer brand) {
         this.brand = brand;
+    }
+
+    public Boolean getRecommend() {
+        return recommend;
+    }
+
+    public void setRecommend(Boolean recommend) {
+        this.recommend = recommend;
+    }
+
+    public String getExtends1() {
+        return extends1;
+    }
+
+    public void setExtends1(String extends1) {
+        this.extends1 = extends1;
+    }
+
+    public String getExtends2() {
+        return extends2;
+    }
+
+    public void setExtends2(String extends2) {
+        this.extends2 = extends2;
     }
 
     public Integer getCreateBy() {
