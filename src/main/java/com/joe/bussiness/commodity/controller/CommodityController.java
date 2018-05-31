@@ -49,7 +49,22 @@ public class CommodityController extends BaseController {
         logger.info("新增商品成功,商品Id：{}", commodityId);
 
         return ResponseEntity.getSuccessEntity(commodityId);
+    }
 
+    public Object modifyCommodity(HttpServletRequest request) {
+        String requestParam = getRequestParam(request);
+        if (StringUtils.isBlank(requestParam)) {
+            return ResponseEntity.getFailEntity("参数错误");
+        }
+
+        CommodityVo commodityVo = JSON.parseObject(requestParam, CommodityVo.class);
+
+        logger.info("修改商品，商品编号：{}", commodityVo.getpId());
+
+        logger.info("修改商品成功");
+
+
+        return ResponseEntity.getSuccessEntity(true);
     }
 
 
@@ -85,6 +100,7 @@ public class CommodityController extends BaseController {
 
     /**
      * 删除商品
+     *
      * @param request
      * @return
      */

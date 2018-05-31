@@ -12,6 +12,8 @@ import java.math.BigDecimal;
  **/
 public class CommodityVo {
 
+    private Integer pId;
+
     //名称
     private String pName;
 
@@ -73,6 +75,14 @@ public class CommodityVo {
 
         return detail;
 
+    }
+
+    public Integer getpId() {
+        return pId;
+    }
+
+    public void setpId(Integer pId) {
+        this.pId = pId;
     }
 
     public String getpName() {
