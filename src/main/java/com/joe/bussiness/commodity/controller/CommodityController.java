@@ -80,7 +80,7 @@ public class CommodityController extends BaseController {
         data.put("pageCount", pageCount);
         data.put("contents", commodityList);
 
-        return ResponseEntity.getSuccessEntity(commodityList);
+        return ResponseEntity.getSuccessEntity(data);
     }
 
     /**

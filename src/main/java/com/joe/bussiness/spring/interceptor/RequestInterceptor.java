@@ -25,7 +25,7 @@ public class RequestInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         logger.info("请求处理前拦截");
-        return false;
+        return true;
     }
 
 
