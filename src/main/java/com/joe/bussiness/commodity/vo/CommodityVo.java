@@ -54,9 +54,12 @@ public class CommodityVo {
     //口感，保存方法，保质期
     private String property;
 
-    public Commodity commodityVoToCommodity(CommodityVo commodityVo){
+    public Commodity commodityVoToCommodity(CommodityVo commodityVo) {
 
         Commodity commodity = new Commodity();
+        if (commodityVo.getpId() != null) {
+            commodity.setCommodityId(commodityVo.getpId());
+        }
         commodity.setCommodityName(commodityVo.getpName());
         commodity.setPrice(commodityVo.getpPrice());
         commodity.setItemId(commodityVo.getpItem());
@@ -67,9 +70,12 @@ public class CommodityVo {
         return commodity;
     }
 
-    public CommodityDetail commodityVoToCommodityDetail(CommodityVo commodityVo){
+    public CommodityDetail commodityVoToCommodityDetail(CommodityVo commodityVo) {
 
-        CommodityDetail detail =new CommodityDetail();
+        CommodityDetail detail = new CommodityDetail();
+        if (commodityVo.getpId() != null) {
+            detail.setCommodityId(commodityVo.getpId());
+        }
         detail.setUnit("100g");
         detail.setCost(commodityVo.getpCost());
         detail.setInitPrice(commodityVo.getpOriginalPrice());

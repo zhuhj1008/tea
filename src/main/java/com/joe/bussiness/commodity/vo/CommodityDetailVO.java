@@ -39,15 +39,19 @@ public class CommodityDetailVO {
     //原价
     private BigDecimal initPrice;
 
+    //描述
+    private String description;
+
+    //是否首页展示
+    private Boolean recommend;
+
     //库存
     private Integer stock;
 
     //细节图
-//    private String detailPicture;
     private List<String> detailPicture;
 
     //图信息
-//    private String pictureInfo;
     private List<String> pictureInfo;
 
     //产地
@@ -72,7 +76,8 @@ public class CommodityDetailVO {
         vo.setSmallPicture(commodity.getPicture());
         vo.setItemId(commodity.getItemId());
         vo.setPrice(commodity.getPrice());
-
+        vo.setDescription(commodity.getDescription());
+        vo.setRecommend(commodity.getRecommend());
         return vo;
 
     }
@@ -208,12 +213,28 @@ public class CommodityDetailVO {
         this.origin = origin;
     }
 
+    public Boolean getRecommend() {
+        return recommend;
+    }
+
+    public void setRecommend(Boolean recommend) {
+        this.recommend = recommend;
+    }
+
     public String getFlavor() {
         return flavor;
     }
 
     public void setFlavor(String flavor) {
         this.flavor = flavor;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getSaveMethod() {
