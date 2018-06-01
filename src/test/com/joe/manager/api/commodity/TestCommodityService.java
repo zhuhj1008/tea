@@ -6,7 +6,6 @@ import com.joe.api.service.CommodityService;
 import com.joe.manager.BaseTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -45,7 +44,7 @@ public class TestCommodityService extends BaseTest {
         Commodity commodity = new Commodity();
         commodity.setCommodityId(1);
         commodity.setPrice(new BigDecimal(100.2));
-        int i = commodityService.modifyCommodity(commodity);
+        int i = commodityService.modifyCommoditySelective(commodity);
         logger.info("修改条数：{}",i);
 
 

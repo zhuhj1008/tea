@@ -205,6 +205,15 @@
         where commodity_id = #{commodityId,jdbcType=INTEGER}
     </update>
 
+    <update id="updateByCommodityId" parameterType="com.joe.api.po.CommodityDetail">
+        update tb_commodity_detail
+        SET unit = #{unit,jdbcType=VARCHAR}, cost = #{cost,jdbcType=DECIMAL}, init_price = #{initPrice,jdbcType=DECIMAL},
+        stock = #{stock,jdbcType=INTEGER}, property = #{property,jdbcType=VARCHAR}, detail_picture = #{detailPicture,jdbcType=VARCHAR},
+        picture_info = #{pictureInfo,jdbcType=VARCHAR}, freight = #{freight,jdbcType=DECIMAL},
+        integral = #{integral,jdbcType=INTEGER}, origin = #{origin,jdbcType=VARCHAR}
+        where commodity_id = #{commodityId,jdbcType=INTEGER}
+    </update>
+
 
     <!--select区域-->
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">

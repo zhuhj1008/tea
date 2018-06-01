@@ -9,7 +9,7 @@
         <result column="picture" property="picture" jdbcType="VARCHAR"/>
         <result column="brand" property="brand" jdbcType="INTEGER"/>
         <result column="recommend" property="recommend" jdbcType="BIT"/>
-        <result column="extends1" property="extends1" jdbcType="VARCHAR"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
         <result column="extends2" property="extends2" jdbcType="VARCHAR"/>
         <result column="create_by" property="createBy" jdbcType="INTEGER"/>
         <result column="update_by" property="updateBy" jdbcType="INTEGER"/>
@@ -18,7 +18,7 @@
         <result column="enable" property="enable" jdbcType="BIT"/>
     </resultMap>
     <sql id="Base_Column_List">
-    commodity_id, commodity_name, price, item_id, picture, brand, recommend, extends1, extends2
+    commodity_id, commodity_name, price, item_id, picture, brand, recommend, description, extends2
     create_by, update_by, create_time, update_time, enable
   </sql>
 
@@ -49,8 +49,8 @@
             <if test="recommend != null">
                 recommend,
             </if>
-            <if test="extends1 != null">
-                extends1,
+            <if test="description != null">
+                description,
             </if>
             <if test="extends2 != null">
                 extends2,
@@ -93,8 +93,8 @@
             <if test="recommend != null">
                 #{recommend,jdbcType=BIT},
             </if>
-            <if test="extends1 != null">
-                #{extends1,jdbcType=VARCHAR},
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
             </if>
             <if test="extends2 != null">
                 #{extends2,jdbcType=VARCHAR},
@@ -147,8 +147,8 @@
             <if test="recommend != null">
                 recommend = #{recommend,jdbcType=BIT},
             </if>
-            <if test="extends1 != null">
-                extends1 = #{extends1,jdbcType=VARCHAR},
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
             </if>
             <if test="extends2 != null">
                 extends2 = #{extends2,jdbcType=VARCHAR},
@@ -177,7 +177,7 @@
       commodity_name = #{commodityName,jdbcType=VARCHAR},  price = #{price,jdbcType=DECIMAL},
       item_id =#{itemId,jdbcType=INTEGER},  picture =#{picture,jdbcType=VARCHAR},
       brand = #{brand,jdbcType=INTEGER}, recommend = #{recommend,jdbcType=BIT},
-      extends1 =#{extends1,jdbcType=VARCHAR}, extends2 =#{extends2,jdbcType=VARCHAR},
+      description =#{description,jdbcType=VARCHAR}, extends2 =#{extends2,jdbcType=VARCHAR},
       update_by =#{updateBy,jdbcType=INTEGER},  update_time = now()
       WHERE commodity_id = #{commodityId,jdbcType=INTEGER};
   </update>

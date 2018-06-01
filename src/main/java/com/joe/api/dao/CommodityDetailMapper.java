@@ -12,6 +12,8 @@ public interface CommodityDetailMapper {
 
     int updateByCommodityIdSelective(CommodityDetail commodityDetail);
 
+    int updateByCommodityId(CommodityDetail commodityDetail);
+
     CommodityDetail selectByPrimaryKey(Integer detailId);
 
     CommodityDetail selectByCommodityId(Integer commodityId);

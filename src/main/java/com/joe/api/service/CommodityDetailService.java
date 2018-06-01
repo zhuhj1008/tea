@@ -37,7 +37,6 @@ public class CommodityDetailService {
         commodityDetail.setEnable(false);
 
         return commodityDetailMapper.updateByPrimaryKeySelective(commodityDetail);
-
     }
 
     /**
@@ -46,17 +45,31 @@ public class CommodityDetailService {
      * @param commodityDetail
      * @return 修改记录数
      */
-    public int modifyCommodityDetail(CommodityDetail commodityDetail) {
+    public int modifyCommodityDetailSelective(CommodityDetail commodityDetail) {
 
         return commodityDetailMapper.updateByCommodityIdSelective(commodityDetail);
     }
 
+
+    /**
+     * 修改商品明细（全部修改）
+     *
+     * @param commodityDetail
+     * @return
+     */
+    public int modifyCommodityDetail(CommodityDetail commodityDetail) {
+
+        return commodityDetailMapper.updateByCommodityId(commodityDetail);
+    }
+
+
     /**
      * 根据商品id查询商品明细
+     *
      * @param commodityId
      * @return
      */
-    public CommodityDetail queryCommodityDetailByCommodityId(Integer commodityId){
+    public CommodityDetail queryCommodityDetailByCommodityId(Integer commodityId) {
         return commodityDetailMapper.selectByCommodityId(commodityId);
     }
 

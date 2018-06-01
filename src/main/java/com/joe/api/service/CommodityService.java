@@ -70,16 +70,29 @@ public class CommodityService {
 
 
     /**
-     * 修改商品信息
+     * 修改商品信息（选择更新）
      *
      * @param commodity
      * @return 修改的个数
      */
-    public int modifyCommodity(Commodity commodity) {
+    public int modifyCommoditySelective(Commodity commodity) {
 
         return commodityMapper.updateByPrimaryKeySelective(commodity);
-
     }
+
+    /**
+     * 修改商品信息 （全部更新）
+     * @param commodity
+     * @return
+     */
+    public int modifyCommodityById(Commodity commodity){
+
+        return commodityMapper.updateByPrimaryKey(commodity);
+    }
+
+
+
+
 
     /**
      * 查询单个商品By商品Id
@@ -90,21 +103,6 @@ public class CommodityService {
     public Commodity queryCommodityById(int commodityId) {
 
         return commodityMapper.selectByPrimaryKey(commodityId);
-    }
-
-    /**
-     * 查询商品集合By 类目Id
-     *
-     * @param itemId
-     * @return
-     */
-    public List<Commodity> queryCommodityByItemIds(int itemId) {
-
-
-        List<Integer> itemList = commodityItemMapper.selectSubItemIdList(itemId);
-
-        return commodityMapper.selectCommodityByItemIds(itemList);
-
     }
 
     /**
@@ -133,17 +131,6 @@ public class CommodityService {
         return commodityMapper.selectCommodityCountByItemId(itemId);
     }
 
-
-    /**
-     * 修改商品信息
-     * @param commodity
-     * @return
-     */
-    public int modifyCommodityById(Commodity commodity){
-
-        return 0;
-
-    }
 
 
 }

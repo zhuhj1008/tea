@@ -25,7 +25,7 @@ public class CommodityVo {
     private Boolean pRecommend;
 
     //成本
-    private BigDecimal pCOst;
+    private BigDecimal pCost;
 
     //售价
     private BigDecimal pPrice;
@@ -62,6 +62,7 @@ public class CommodityVo {
         commodity.setItemId(commodityVo.getpItem());
         commodity.setRecommend(commodityVo.getpRecommend());
         commodity.setPicture(commodityVo.getpImgSmall());
+        commodity.setDescription(commodityVo.getpDescribe());
 
         return commodity;
     }
@@ -70,7 +71,7 @@ public class CommodityVo {
 
         CommodityDetail detail =new CommodityDetail();
         detail.setUnit("100g");
-        detail.setCost(commodityVo.getpCOst());
+        detail.setCost(commodityVo.getpCost());
         detail.setInitPrice(commodityVo.getpOriginalPrice());
         detail.setStock(commodityVo.getpInventory());
         detail.setProperty(commodityVo.getProperty());
@@ -106,12 +107,12 @@ public class CommodityVo {
         this.pItem = pItem;
     }
 
-    public BigDecimal getpCOst() {
-        return pCOst;
+    public BigDecimal getpCost() {
+        return pCost;
     }
 
-    public void setpCOst(BigDecimal pCOst) {
-        this.pCOst = pCOst;
+    public void setpCost(BigDecimal pCost) {
+        this.pCost = pCost;
     }
 
     public BigDecimal getpPrice() {

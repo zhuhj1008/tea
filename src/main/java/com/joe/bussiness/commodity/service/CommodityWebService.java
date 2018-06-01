@@ -38,27 +38,28 @@ public class CommodityWebService {
         commodityDetailService.addCommodityDetail(commodityDetail);
 
         return commodityId;
-
     }
 
 
     public List<Commodity> queryCommodityByItemId(int itemId, int pageNo, int pageSize) {
 
         return commodityService.queryCommodityByItemId(itemId, pageNo, pageSize);
-
     }
 
-    public int queryCommodityPageCountByItemId(int itemId, int pageSize) {
+    public int queryCommodityCountByItemId(int itemId) {
 
-        int count = commodityService.queryCommodityCountByItemId(itemId);
-
-        return count / pageSize + 1;
+        return commodityService.queryCommodityCountByItemId(itemId);
     }
-
 
 
     public void removeCommodity(int commodityId) {
 
         commodityService.dropCommodity(commodityId);
+    }
+
+    public void updateCommodity(CommodityVo commodityVo) {
+
+        commodityService.modifyCommodityById(commodityVo.commodityVoToCommodity(commodityVo));
+        commodityDetailService.modifyCommodityDetail(commodityVo.commodityVoToCommodityDetail(commodityVo));
     }
 }

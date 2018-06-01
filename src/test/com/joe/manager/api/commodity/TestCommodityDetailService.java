@@ -30,7 +30,7 @@ public class TestCommodityDetailService extends BaseTest {
         CommodityDetail commodityDetail = new CommodityDetail();
         commodityDetail.setCommodityId(1);
         commodityDetail.setEnable(true);
-        commodityDetailService.modifyCommodityDetail(commodityDetail);
+        commodityDetailService.modifyCommodityDetailSelective(commodityDetail);
     }
 
     @Test

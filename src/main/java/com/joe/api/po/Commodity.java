@@ -31,8 +31,8 @@ public class Commodity {
     //首页推荐
     private Boolean recommend;
 
-    //预留字段
-    private String extends1;
+    //描述
+    private String description;
 
     //预留字段
     private String extends2;
@@ -108,12 +108,12 @@ public class Commodity {
         this.recommend = recommend;
     }
 
-    public String getExtends1() {
-        return extends1;
+    public String getDescription() {
+        return description;
     }
 
-    public void setExtends1(String extends1) {
-        this.extends1 = extends1;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getExtends2() {
