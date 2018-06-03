@@ -71,4 +71,16 @@ public class TestCommodityService extends BaseTest {
         List<Commodity> commodities = commodityService.queryCommodityByItemId(1, 1, 3);
         logger.info(JSON.toJSONString(commodities));
     }
+
+    @Test
+    public void updateRecommendStatusByIdTest(){
+        int i = commodityService.updateRecommendStatusById(1);
+        logger.info("{}",i);
+    }
+
+    @Test
+    public void queryRecommendCommodityTest(){
+        List<Commodity> commodities = commodityService.queryRecommendCommodity();
+        logger.info(JSON.toJSONString(commodities));
+    }
 }

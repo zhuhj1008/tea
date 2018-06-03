@@ -180,7 +180,13 @@
       description =#{description,jdbcType=VARCHAR}, extends2 =#{extends2,jdbcType=VARCHAR},
       update_by =#{updateBy,jdbcType=INTEGER},  update_time = now()
       WHERE commodity_id = #{commodityId,jdbcType=INTEGER};
-  </update>
+    </update>
+
+    <update id="updateRecommendStatusById" parameterType="java.lang.Integer">
+        update tb_commodity
+        set recommend = if(recommend = 0, 1, 0)
+        where commodity_id = #{commodityId,jdbcType=INTEGER}
+    </update>
 
 
     <!-- select区域-->
@@ -214,5 +220,14 @@
     count(*)
     from tb_commodity
     where enable = 1 and  item_id = #{itemId,jdbcType=INTEGER}
-  </select>
+    </select>
+
+    <select id="selectRecommendCommodity" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"></include>
+        from tb_commodity
+        where enable = 1 and recommend = 1;
+    </select>
+
+
 </mapper>

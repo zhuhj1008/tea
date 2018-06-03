@@ -90,6 +90,15 @@ public class CommodityService {
         return commodityMapper.updateByPrimaryKey(commodity);
     }
 
+    /**
+     * 修改商品推荐状态（0改成1 1改成0）
+     * @param commodityId
+     * @return
+     */
+    public int updateRecommendStatusById(int commodityId){
+
+        return commodityMapper.updateRecommendStatusById(commodityId);
+    }
 
 
 
@@ -130,6 +139,18 @@ public class CommodityService {
 
         return commodityMapper.selectCommodityCountByItemId(itemId);
     }
+
+
+    /**
+     * 查询推荐商品
+     * @return
+     */
+    public List<Commodity> queryRecommendCommodity(){
+
+        return commodityMapper.selectRecommendCommodity();
+    }
+
+
 
 
 

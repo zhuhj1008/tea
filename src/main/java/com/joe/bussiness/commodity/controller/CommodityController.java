@@ -71,16 +71,61 @@ public class CommodityController extends BaseController {
         Integer itemId = Integer.valueOf(jsonObject.get("itemId").toString());
         Integer pageNo = Integer.valueOf(jsonObject.get("pageNo").toString());
         Integer pageSize = Integer.valueOf(jsonObject.get("pageSize").toString());
+        logger.info("查询商品列表，查询条件：类目编号：{}，页码：{}，每页大小：{}。", itemId, pageNo, pageSize);
 
         int total = commodityWebService.queryCommodityCountByItemId(itemId);
         List<Commodity> commodityList = commodityWebService.queryCommodityByItemId(itemId, pageNo, pageSize);
 
+        logger.info("查询商品列表结束");
         Map<String, Object> data = new HashMap<>();
         data.put("total", total);
         data.put("contents", commodityList);
 
         return ResponseEntity.getSuccessEntity(data);
     }
+
+
+    /**
+     * 获取推荐商品
+     *
+     * @return
+     */
+    @RequestMapping("/getRecommendCommodity")
+    @ResponseBody
+    public Object getRecommendCommodity() {
+
+        logger.info("查询推荐商品");
+        List<Commodity> commodities = commodityWebService.queryRecommendCommodity();
+        logger.info("查询推荐商品，商品数量：{}", commodities.size());
+        return ResponseEntity.getSuccessEntity(commodities);
+    }
+
+
+    @RequestMapping("/switchCommodityRecommend")
+    @ResponseBody
+    public Object switchCommodityRecommend(HttpServletRequest request) {
+
+        String requestParam = getRequestParam(request);
+        if (StringUtils.isBlank(requestParam)) {
+            return ResponseEntity.getFailEntity("param error");
+        }
+
+        JSONObject jsonObject = JSON.parseObject(requestParam);
+        Integer commodityId = Integer.valueOf(jsonObject.get("commodityId").toString());
+        logger.info("修改商品状态，商品编号：{}", commodityId);
+
+        int i = commodityWebService.updateRecommendStatus(commodityId);
+
+        if (i > 0) {
+            logger.info("修改商品推荐状态成功");
+            return ResponseEntity.getSuccessEntity(i);
+        }
+
+        logger.info("修改商品推荐状态失败");
+        return ResponseEntity.getFailEntity("修改商品推荐状态失败");
+
+    }
+
 
     /**
      * 删除商品

@@ -28,6 +28,7 @@ public class CommodityWebService {
     CommodityItemService commodityItemService;
 
 
+    //新增商品
     public int addCommodity(CommodityVo commodityVo) {
 
         Commodity commodity = commodityVo.commodityVoToCommodity(commodityVo);
@@ -40,26 +41,40 @@ public class CommodityWebService {
         return commodityId;
     }
 
-
+    //查询某个类目下商品 分页
     public List<Commodity> queryCommodityByItemId(int itemId, int pageNo, int pageSize) {
 
         return commodityService.queryCommodityByItemId(itemId, pageNo, pageSize);
     }
 
+    //查询某个类目下商品数量
     public int queryCommodityCountByItemId(int itemId) {
 
         return commodityService.queryCommodityCountByItemId(itemId);
     }
 
-
+    //删除商品
     public void removeCommodity(int commodityId) {
 
         commodityService.dropCommodity(commodityId);
     }
 
+    //修改商品 全部字段
     public void updateCommodity(CommodityVo commodityVo) {
 
         commodityService.modifyCommodityById(commodityVo.commodityVoToCommodity(commodityVo));
         commodityDetailService.modifyCommodityDetail(commodityVo.commodityVoToCommodityDetail(commodityVo));
+    }
+
+    //获取推荐商品
+    public List<Commodity> queryRecommendCommodity() {
+
+        return commodityService.queryRecommendCommodity();
+    }
+
+    //切换商品推荐状态
+    public int updateRecommendStatus(int commodityId) {
+
+        return commodityService.updateRecommendStatusById(commodityId);
     }
 }

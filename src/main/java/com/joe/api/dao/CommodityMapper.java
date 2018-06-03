@@ -15,10 +15,14 @@ public interface CommodityMapper {
 
     int updateByPrimaryKey(Commodity record);
 
+    int updateRecommendStatusById(int commodityId);
+
     Commodity selectByPrimaryKey(Integer commodityId);
 
     List<Commodity> selectByItemId(Integer itemId);
 
     int selectCommodityCountByItemId(Integer itemId);
+
+    List<Commodity> selectRecommendCommodity();
 
 }
