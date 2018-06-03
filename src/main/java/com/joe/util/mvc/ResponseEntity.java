@@ -50,9 +50,18 @@ public class ResponseEntity {
         this.data = data;
     }
 
+    public ResponseEntity(int code, String message, Object data) {
+        this.code = code;
+        this.message = message;
+        this.data = data;
+    }
 
     public static ResponseEntity getSuccessEntity(Object data) {
         return new ResponseEntity(SUCCESS_CODE, data);
+    }
+
+    public static ResponseEntity getSuccessEntity(String message, Object data) {
+        return new ResponseEntity(SUCCESS_CODE, message, data);
     }
 
     public static ResponseEntity getFailEntity(Object data) {

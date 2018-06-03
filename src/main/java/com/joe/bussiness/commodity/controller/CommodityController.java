@@ -165,10 +165,14 @@ public class CommodityController extends BaseController {
         CommodityVo commodityVo = JSON.parseObject(requestParam, CommodityVo.class);
 
         logger.info("修改商品，商品编号：{}", commodityVo.getpId());
-        commodityWebService.updateCommodity(commodityVo);
-        logger.info("修改商品成功");
+        int i = commodityWebService.updateCommodity(commodityVo);
 
-        return ResponseEntity.getSuccessEntity("修改成功");
+        if(i>0){
+            logger.info("修改商品成功");
+            return ResponseEntity.getSuccessEntity("修改成功");
+        }
+        logger.info("修改商品失败");
+        return ResponseEntity.getFailEntity("修改商品失败");
     }
 
 

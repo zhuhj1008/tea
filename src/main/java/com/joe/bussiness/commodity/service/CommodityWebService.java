@@ -60,10 +60,11 @@ public class CommodityWebService {
     }
 
     //修改商品 全部字段
-    public void updateCommodity(CommodityVo commodityVo) {
+    public int updateCommodity(CommodityVo commodityVo) {
 
-        commodityService.modifyCommodityById(commodityVo.commodityVoToCommodity(commodityVo));
-        commodityDetailService.modifyCommodityDetail(commodityVo.commodityVoToCommodityDetail(commodityVo));
+        int i = commodityService.modifyCommodityById(commodityVo.commodityVoToCommodity(commodityVo));
+        int j = commodityDetailService.modifyCommodityDetail(commodityVo.commodityVoToCommodityDetail(commodityVo));
+        return i + j;
     }
 
     //获取推荐商品

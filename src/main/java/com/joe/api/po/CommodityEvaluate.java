@@ -3,6 +3,7 @@ package com.joe.api.po;
 import java.util.Date;
 
 public class CommodityEvaluate {
+
     private Integer evaluateId;
 
     private Integer commodityId;

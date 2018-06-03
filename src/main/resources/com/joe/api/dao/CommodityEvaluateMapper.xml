@@ -194,4 +194,18 @@
     from tb_commodity_evaluate
     where evaluate_id = #{evaluateId,jdbcType=INTEGER}
   </select>
+
+  <select id="selectEvaluateCountByCommodityId" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+    select
+    count(*)
+    from tb_commodity_evaluate
+    where commodity_id = #{commodityId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectEvaluateByCommodityId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from tb_commodity_evaluate
+    where commodity_id = #{commodityId,jdbcType=INTEGER}
+  </select>
 </mapper>
