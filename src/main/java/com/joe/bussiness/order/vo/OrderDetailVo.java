@@ -1,49 +1,27 @@
-package com.joe.api.po;
+package com.joe.bussiness.order.vo;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 /**
- * 订单详情bean
- */
-public class OrderDetail {
-
-    //详情编号
-    private Integer detailId;
+ * 页面订单详情信息
+ * create by Joe on 2018-06-04 19:14
+ **/
+public class OrderDetailVo {
 
     //订单编号
     private Integer orderId;
-
     //商品编号
     private Integer commodityId;
-
-    //商品图片
+    //图片
     private String picture;
-
-    //价格
+    //单价
     private BigDecimal price;
-
     //数量
     private Integer amount;
-
-    //状态
-    private Integer status;
-
-    //创建时间
-    private Date createTime;
-
-    //更新时间
-    private Date updateTime;
-
-    public Integer getDetailId() {
-        return detailId;
-    }
-
-    public void setDetailId(Integer detailId) {
-        this.detailId = detailId;
-    }
+    //规格
+    private Integer unit;
 
     public Integer getOrderId() {
         return orderId;
@@ -85,33 +63,16 @@ public class OrderDetail {
         this.amount = amount;
     }
 
-    public Integer getStatus() {
-        return status;
+    public Integer getUnit() {
+        return unit;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
+    public void setUnit(Integer unit) {
+        this.unit = unit;
     }
 
     @Override
-    public String
-    toString() {
+    public String toString() {
         return ReflectionToStringBuilder.toString(this);
     }
 }

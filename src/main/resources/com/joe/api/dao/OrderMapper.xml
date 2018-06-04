@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.joe.api.po.Order" >
     <id column="order_id" property="orderId" jdbcType="INTEGER" />
     <result column="customer_id" property="customerId" jdbcType="INTEGER" />
+    <result column="customer_name" property="customerName" jdbcType="VARCHAR" />
     <result column="order_money" property="orderMoney" jdbcType="DECIMAL" />
     <result column="order_status" property="orderStatus" jdbcType="INTEGER" />
     <result column="payment_time" property="paymentTime" jdbcType="TIMESTAMP" />
@@ -16,16 +17,15 @@
     <result column="create_by" property="createBy" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_by" property="updateBy" jdbcType="INTEGER" />
-    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="delivery_time" property="deliveryTime" jdbcType="TIMESTAMP" />
+    <result column="receive_time" property="receiveTime" jdbcType="TIMESTAMP" />
     <result column="enable" property="enable" jdbcType="BIT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    order_id, customer_id, order_money, order_status, payment_time, post_code, express_id, 
+    order_id, customer_id, customer_name, order_money, order_status, payment_time, post_code, express_id,
     express_code, express_money, receive_address, remake, create_by, create_time, update_by, 
-    update_time, enable
+    delivery_time, receive_time, enable
   </sql>
-
-
 
   <!--insert区域-->
   <insert id="insertSelective" parameterType="com.joe.api.po.Order"  useGeneratedKeys="true" keyProperty="orderId">
@@ -36,6 +36,9 @@
       </if>
       <if test="customerId != null" >
         customer_id,
+      </if>
+      <if test="customerName != null" >
+        customer_name,
       </if>
       <if test="orderMoney != null" >
         order_money,
@@ -73,8 +76,11 @@
       <if test="updateBy != null" >
         update_by,
       </if>
-      <if test="updateTime != null" >
-        update_time,
+      <if test="deliveryTime != null" >
+        delivery_time,
+      </if>
+      <if test="receiveTime != null" >
+        receive_time,
       </if>
       <if test="enable != null" >
         enable,
@@ -86,6 +92,9 @@
       </if>
       <if test="customerId != null" >
         #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="customerName != null" >
+        #{customerName,jdbcType=VARCHAR},
       </if>
       <if test="orderMoney != null" >
         #{orderMoney,jdbcType=DECIMAL},
@@ -123,8 +132,11 @@
       <if test="updateBy != null" >
         #{updateBy,jdbcType=INTEGER},
       </if>
-      <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
+      <if test="deliveryTime != null" >
+        #{deliveryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="receiveTime != null" >
+        #{receiveTime,jdbcType=TIMESTAMP},
       </if>
       <if test="enable != null" >
         #{enable,jdbcType=BIT},
@@ -148,6 +160,9 @@
     <set >
       <if test="customerId != null" >
         customer_id = #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="customerName != null" >
+        customer_name = #{customerName,jdbcType=VARCHAR},
       </if>
       <if test="orderMoney != null" >
         order_money = #{orderMoney,jdbcType=DECIMAL},
@@ -185,8 +200,11 @@
       <if test="updateBy != null" >
         update_by = #{updateBy,jdbcType=INTEGER},
       </if>
-      <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      <if test="deliveryTime != null" >
+        delivery_time = #{deliveryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="receiveTime != null" >
+        receive_time = #{receiveTime,jdbcType=TIMESTAMP},
       </if>
       <if test="enable != null" >
         enable = #{enable,jdbcType=BIT},

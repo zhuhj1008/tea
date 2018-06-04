@@ -48,7 +48,7 @@ public class CommodityEvaluateController extends BaseController {
         int primaryKey = commodityEvaluateWebService.addCommodityEvaluate(commodityEvaluate);
         logger.info("新增商品评价成功，评论编号：{}", primaryKey);
 
-        return ResponseEntity.getSuccessEntity(primaryKey);
+        return ResponseEntity.getSuccessEntity("新增商品成功",primaryKey);
     }
 
 
@@ -105,7 +105,7 @@ public class CommodityEvaluateController extends BaseController {
         data.put("total", total);
         data.put("contents", commodityEvaluates);
 
-        return ResponseEntity.getSuccessEntity(data);
+        return ResponseEntity.getSuccessEntity("查询商品成功",data);
     }
 
 

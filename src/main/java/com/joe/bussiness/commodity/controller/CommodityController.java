@@ -48,7 +48,7 @@ public class CommodityController extends BaseController {
         int commodityId = commodityWebService.addCommodity(commodityVo);
         logger.info("新增商品成功,商品Id：{}", commodityId);
 
-        return ResponseEntity.getSuccessEntity(commodityId);
+        return ResponseEntity.getSuccessEntity("新增商品成功",commodityId);
     }
 
 
@@ -81,7 +81,7 @@ public class CommodityController extends BaseController {
         data.put("total", total);
         data.put("contents", commodityList);
 
-        return ResponseEntity.getSuccessEntity(data);
+        return ResponseEntity.getSuccessEntity("请求成功",data);
     }
 
 
@@ -97,7 +97,7 @@ public class CommodityController extends BaseController {
         logger.info("查询推荐商品");
         List<Commodity> commodities = commodityWebService.queryRecommendCommodity();
         logger.info("查询推荐商品，商品数量：{}", commodities.size());
-        return ResponseEntity.getSuccessEntity(commodities);
+        return ResponseEntity.getSuccessEntity("请求成功",commodities);
     }
 
 
@@ -118,7 +118,7 @@ public class CommodityController extends BaseController {
 
         if (i > 0) {
             logger.info("修改商品推荐状态成功");
-            return ResponseEntity.getSuccessEntity(i);
+            return ResponseEntity.getSuccessEntity("请求成功",i);
         }
 
         logger.info("修改商品推荐状态失败");
@@ -146,7 +146,7 @@ public class CommodityController extends BaseController {
         Integer commodityId = Integer.valueOf(jsonObject.get("commodityId").toString());
 
         commodityWebService.removeCommodity(commodityId);
-        return ResponseEntity.getSuccessEntity("删除成功");
+        return ResponseEntity.getSuccessEntity("删除成功","");
     }
 
     /**
@@ -169,7 +169,7 @@ public class CommodityController extends BaseController {
 
         if(i>0){
             logger.info("修改商品成功");
-            return ResponseEntity.getSuccessEntity("修改成功");
+            return ResponseEntity.getSuccessEntity("修改成功",i);
         }
         logger.info("修改商品失败");
         return ResponseEntity.getFailEntity("修改商品失败");

@@ -4,8 +4,8 @@
   <resultMap id="BaseResultMap" type="com.joe.api.po.OrderDetail" >
     <id column="detail_id" property="detailId" jdbcType="INTEGER" />
     <result column="order_id" property="orderId" jdbcType="INTEGER" />
-    <result column="customer_id" property="customerId" jdbcType="INTEGER" />
     <result column="commodity_id" property="commodityId" jdbcType="INTEGER" />
+    <result column="picture" property="picture" jdbcType="VARCHAR" />
     <result column="price" property="price" jdbcType="DECIMAL" />
     <result column="amount" property="amount" jdbcType="INTEGER" />
     <result column="status" property="status" jdbcType="INTEGER" />
@@ -13,7 +13,7 @@
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    detail_id, order_id, customer_id, commodity_id, price, amount, status, create_time, 
+    detail_id, order_id, commodity_id, picture, price, amount, status, create_time,
     update_time
   </sql>
 
@@ -29,11 +29,11 @@
       <if test="orderId != null" >
         order_id,
       </if>
-      <if test="customerId != null" >
-        customer_id,
-      </if>
       <if test="commodityId != null" >
         commodity_id,
+      </if>
+      <if test="picture != null" >
+        picture,
       </if>
       <if test="price != null" >
         price,
@@ -58,11 +58,11 @@
       <if test="orderId != null" >
         #{orderId,jdbcType=INTEGER},
       </if>
-      <if test="customerId != null" >
-        #{customerId,jdbcType=INTEGER},
-      </if>
       <if test="commodityId != null" >
         #{commodityId,jdbcType=INTEGER},
+      </if>
+      <if test="picture != null" >
+        #{picture,jdbcType=VARCHAR},
       </if>
       <if test="price != null" >
         #{price,jdbcType=DECIMAL},
@@ -99,11 +99,11 @@
       <if test="orderId != null" >
         order_id = #{orderId,jdbcType=INTEGER},
       </if>
-      <if test="customerId != null" >
-        customer_id = #{customerId,jdbcType=INTEGER},
-      </if>
       <if test="commodityId != null" >
         commodity_id = #{commodityId,jdbcType=INTEGER},
+      </if>
+      <if test="picture != null" >
+        picture = #{picture,jdbcType=VARCHAR},
       </if>
       <if test="price != null" >
         price = #{price,jdbcType=DECIMAL},
@@ -133,7 +133,6 @@
   </update>
 
 
-
   <!--select区域-->
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
@@ -142,12 +141,5 @@
     where detail_id = #{detailId,jdbcType=INTEGER}
   </select>
 
-  <select id="selectByCustomerIdAndStatus" resultMap="BaseResultMap" parameterType="java.util.HashMap">
-    select
-    <include refid="Base_Column_List" />
-    from tb_order_detail
-    where
-    customer_id = #{customerId,jdbcType=INTEGER} and status = #{status,jdbcType=INTEGER}
-  </select>
 
 </mapper>

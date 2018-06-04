@@ -16,6 +16,9 @@ public class Order {
     //顾客编号
     private Integer customerId;
 
+    //顾客姓名
+    private String customerName;
+
     //订单金额
     private BigDecimal orderMoney;
 
@@ -52,8 +55,11 @@ public class Order {
     //更新人
     private Integer updateBy;
 
-    //更新时间
-    private Date updateTime;
+    //发货时间
+    private Date deliveryTime;
+
+    //收货时间
+    private Date receiveTime;
 
     //可用
     private Boolean enable;
@@ -72,6 +78,14 @@ public class Order {
 
     public void setCustomerId(Integer customerId) {
         this.customerId = customerId;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
     public BigDecimal getOrderMoney() {
@@ -170,12 +184,20 @@ public class Order {
         this.updateBy = updateBy;
     }
 
-    public Date getUpdateTime() {
-        return updateTime;
+    public Date getDeliveryTime() {
+        return deliveryTime;
     }
 
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
+    public void setDeliveryTime(Date deliveryTime) {
+        this.deliveryTime = deliveryTime;
+    }
+
+    public Date getReceiveTime() {
+        return receiveTime;
+    }
+
+    public void setReceiveTime(Date receiveTime) {
+        this.receiveTime = receiveTime;
     }
 
     public Boolean getEnable() {

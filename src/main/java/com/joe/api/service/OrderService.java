@@ -23,7 +23,6 @@ public class OrderService {
     public int addOrder(Order order) {
 
         order.setCreateTime(new Date());
-        order.setUpdateTime(new Date());
         order.setOrderStatus(OrderStatusEnum.NEW.getValue());
         orderMapper.insertSelective(order);
         return order.getOrderId();
@@ -37,7 +36,6 @@ public class OrderService {
      */
     public int modifyOrder(Order order) {
 
-        order.setUpdateTime(new Date());
         return orderMapper.updateByPrimaryKeySelective(order);
     }
 

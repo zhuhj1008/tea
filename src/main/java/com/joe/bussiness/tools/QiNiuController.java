@@ -40,6 +40,6 @@ public class QiNiuController {
         }
         logger.info("client request upload token, token is {}", uploadToken);
 
-        return ResponseEntity.getSuccessEntity(uploadToken);
+        return ResponseEntity.getSuccessEntity("请求成功",uploadToken);
     }
 }

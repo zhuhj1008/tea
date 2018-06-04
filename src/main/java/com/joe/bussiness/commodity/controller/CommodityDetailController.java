@@ -37,7 +37,7 @@ public class CommodityDetailController extends BaseController {
 
         String requestParam = getRequestParam(request);
         if (StringUtils.isBlank(requestParam)) {
-            return ResponseEntity.getFailEntity("param error");
+            return ResponseEntity.getFailEntity("参数有误");
         }
 
         JSONObject jsonObject = JSON.parseObject(requestParam);
@@ -50,7 +50,7 @@ public class CommodityDetailController extends BaseController {
             return ResponseEntity.getFailEntity("商品信息缺失");
         }
 
-        return ResponseEntity.getSuccessEntity(commodityDetailVO);
+        return ResponseEntity.getSuccessEntity("请求成功",commodityDetailVO);
 
     }
 }
