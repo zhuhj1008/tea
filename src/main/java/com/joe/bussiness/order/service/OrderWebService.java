@@ -4,6 +4,7 @@ import com.joe.api.po.Order;
 import com.joe.api.po.OrderDetail;
 import com.joe.api.service.OrderDetailService;
 import com.joe.api.service.OrderService;
+import com.joe.bussiness.order.dto.OrderQueryDTO;
 import com.joe.bussiness.order.vo.OrderDetailVo;
 import com.joe.bussiness.order.vo.OrderVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class OrderWebService {
     @Autowired
     private OrderDetailService orderDetailService;
 
-    private int addOrder(OrderVo orderVo) {
+    public int addOrder(OrderVo orderVo) {
 
         Order order = OrderVo.convert2Order(orderVo);
         int orderId = orderService.addOrder(order);
@@ -37,11 +38,18 @@ public class OrderWebService {
             orderDetailList.add(orderDetail);
         }
 
-
-//        orderDetailService.
+        orderDetailService.addOrderDetailBatch(orderDetailList);
 
         return orderId;
-
-
     }
+
+    public List<OrderVo> getOrderList(OrderQueryDTO dto) {
+
+
+
+
+        return null;
+    }
+
+
 }

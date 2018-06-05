@@ -1,12 +1,14 @@
 package com.joe.api.service;
 
 import com.joe.api.dao.OrderMapper;
+import com.joe.api.dto.OrderQueryDTO;
 import com.joe.api.enums.OrderStatusEnum;
 import com.joe.api.po.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class OrderService {
@@ -61,6 +63,11 @@ public class OrderService {
      */
     public Order queryOrder(int orderId) {
         return orderMapper.selectByPrimaryKey(orderId);
+    }
+
+
+    public List<Order> queryOrderByQUeryDto(OrderQueryDTO orderQueryDTO) {
+        return null;
     }
 
 
