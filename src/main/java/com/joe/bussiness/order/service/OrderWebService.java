@@ -1,6 +1,16 @@
 package com.joe.bussiness.order.service;
 
+import com.joe.api.po.Order;
+import com.joe.api.po.OrderDetail;
+import com.joe.api.service.OrderDetailService;
+import com.joe.api.service.OrderService;
+import com.joe.bussiness.order.vo.OrderDetailVo;
+import com.joe.bussiness.order.vo.OrderVo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 订单业务
@@ -8,4 +18,30 @@ import org.springframework.stereotype.Service;
  **/
 @Service
 public class OrderWebService {
+
+    @Autowired
+    private OrderService orderService;
+
+    @Autowired
+    private OrderDetailService orderDetailService;
+
+    private int addOrder(OrderVo orderVo) {
+
+        Order order = OrderVo.convert2Order(orderVo);
+        int orderId = orderService.addOrder(order);
+
+        List<OrderDetailVo> orderDetailVoList = OrderVo.convertToOrderDetailVo(orderVo);
+        List<OrderDetail> orderDetailList = new ArrayList<>();
+        for (OrderDetailVo orderDetailVo : orderDetailVoList) {
+            OrderDetail orderDetail = OrderDetailVo.convert2OrderDetail(orderDetailVo, orderId);
+            orderDetailList.add(orderDetail);
+        }
+
+
+//        orderDetailService.
+
+        return orderId;
+
+
+    }
 }

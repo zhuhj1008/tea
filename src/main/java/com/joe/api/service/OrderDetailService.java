@@ -27,6 +27,10 @@ public class OrderDetailService {
         return orderDetail.getDetailId();
     }
 
+    public void addOrderDetailBatch(List<OrderDetail> orderDetailList){
+
+    }
+
 
     /**
      * 修改订单明细By detailId

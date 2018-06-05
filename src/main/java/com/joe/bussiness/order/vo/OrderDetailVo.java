@@ -1,5 +1,6 @@
 package com.joe.bussiness.order.vo;
 
+import com.joe.api.po.OrderDetail;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 import java.math.BigDecimal;
@@ -22,6 +23,24 @@ public class OrderDetailVo {
     private Integer amount;
     //规格
     private Integer unit;
+
+
+    public static OrderDetail convert2OrderDetail(OrderDetailVo orderDetailVo,int orderId){
+
+        if(orderDetailVo == null){
+            return null;
+        }
+
+        OrderDetail orderDetail = new OrderDetail();
+        orderDetail.setOrderId(orderId);
+        orderDetail.setCommodityId(orderDetailVo.getCommodityId());
+        orderDetail.setPicture(orderDetailVo.getPicture());
+        orderDetail.setPrice(orderDetailVo.getPrice());
+        orderDetail.setAmount(orderDetailVo.getAmount());
+        orderDetail.setUnit(orderDetailVo.getUnit());
+
+        return orderDetail;
+    }
 
     public Integer getOrderId() {
         return orderId;

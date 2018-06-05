@@ -8,12 +8,12 @@
     <result column="picture" property="picture" jdbcType="VARCHAR" />
     <result column="price" property="price" jdbcType="DECIMAL" />
     <result column="amount" property="amount" jdbcType="INTEGER" />
-    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="unit" property="unit" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    detail_id, order_id, commodity_id, picture, price, amount, status, create_time,
+    detail_id, order_id, commodity_id, picture, price, amount, unit, create_time,
     update_time
   </sql>
 
@@ -41,8 +41,8 @@
       <if test="amount != null" >
         amount,
       </if>
-      <if test="status != null" >
-        status,
+      <if test="unit != null" >
+        unit,
       </if>
       <if test="createTime != null" >
         create_time,
@@ -70,8 +70,8 @@
       <if test="amount != null" >
         #{amount,jdbcType=INTEGER},
       </if>
-      <if test="status != null" >
-        #{status,jdbcType=INTEGER},
+      <if test="unit != null" >
+        #{unit,jdbcType=INTEGER},
       </if>
       <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},
@@ -80,6 +80,17 @@
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
+  </insert>
+
+  <insert id="insertBatch">
+    INSERT INTO tb_order_detail (`order_id`, `picture`, `commodity_id`, `price`, `amount`, `unit`, `create_time`) VALUES
+    <foreach collection="orderDetailList" separator="," item="orderDetail">
+      (
+      #{orderDetail.orderId,jdbcType=INTEGER},#{orderDetail.commodityId,jdbcType=INTEGER},
+      #{orderDetail.picture,jdbcType=VARCHAR},#{orderDetail.price,jdbcType=DECIMAL},
+      #{orderDetail.amount,jdbcType=INTEGER},#{orderDetail.unit,jdbcType=INTEGER},now()
+      )
+    </foreach>
   </insert>
 
 
@@ -111,8 +122,8 @@
       <if test="amount != null" >
         amount = #{amount,jdbcType=INTEGER},
       </if>
-      <if test="status != null" >
-        status = #{status,jdbcType=INTEGER},
+      <if test="unit != null" >
+        unit = #{unit,jdbcType=INTEGER},
       </if>
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -124,10 +135,10 @@
     where detail_id = #{detailId,jdbcType=INTEGER}
   </update>
 
-  <update id="updateStatusByOrderId" parameterType="java.util.HashMap" >
+  <update id="updateunitByOrderId" parameterType="java.util.HashMap" >
       update
       tb_order_detail
-      set status = #{status,jdbcType=INTEGER}
+      set unit = #{unit,jdbcType=INTEGER}
       where
       order_id = #{orderId,jdbcType=INTEGER}
   </update>

@@ -28,8 +28,8 @@ public class OrderDetail {
     //数量
     private Integer amount;
 
-    //状态
-    private Integer status;
+    //规格
+    private Integer unit;
 
     //创建时间
     private Date createTime;
@@ -85,12 +85,12 @@ public class OrderDetail {
         this.amount = amount;
     }
 
-    public Integer getStatus() {
-        return status;
+    public Integer getUnit() {
+        return unit;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setUnit(Integer unit) {
+        this.unit = unit;
     }
 
     public Date getCreateTime() {

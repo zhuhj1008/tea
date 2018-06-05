@@ -1,9 +1,15 @@
 package com.joe.bussiness.order.vo;
 
+import com.alibaba.fastjson.JSON;
+import com.joe.api.po.Order;
+import com.joe.api.po.OrderDetail;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 页面订单信息
@@ -30,7 +36,38 @@ public class OrderVo {
     //买家备注
     private String remake;
     //订单详情
-    private String [] orderDetailArr;
+    private String orderDetailArr;
+
+
+    public static Order convert2Order(OrderVo orderVo){
+
+        if(orderVo == null){
+            return null;
+        }
+
+        Order order = new Order();
+        order.setCustomerId(orderVo.getCustomerId());
+        order.setCustomerName(orderVo.getCustomerName());
+        order.setOrderMoney(orderVo.getExpressMoney());
+        order.setOrderStatus(orderVo.getOrderStatus());
+        order.setExpressId(orderVo.getExpressId());
+        order.setExpressCode(orderVo.getExpressCode());
+        order.setExpressMoney(orderVo.getExpressMoney().toPlainString());
+        order.setReceiveAddress(orderVo.getReceiveAddress());
+        order.setRemake(orderVo.getRemake());
+
+        return order;
+    }
+
+    public static List<OrderDetailVo> convertToOrderDetailVo(OrderVo orderVo){
+
+        if(orderVo == null || StringUtils.isBlank(orderVo.getOrderDetailArr())){
+            return null;
+        }
+
+        String orderDetailArr = orderVo.getOrderDetailArr();
+        return JSON.parseArray(orderDetailArr, OrderDetailVo.class);
+    }
 
     public Integer getCustomerId() {
         return customerId;
@@ -104,11 +141,11 @@ public class OrderVo {
         this.remake = remake;
     }
 
-    public String[] getOrderDetailArr() {
+    public String getOrderDetailArr() {
         return orderDetailArr;
     }
 
-    public void setOrderDetailArr(String[] orderDetailArr) {
+    public void setOrderDetailArr(String orderDetailArr) {
         this.orderDetailArr = orderDetailArr;
     }
 
