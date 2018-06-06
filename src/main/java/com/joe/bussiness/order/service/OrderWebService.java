@@ -1,12 +1,13 @@
 package com.joe.bussiness.order.service;
 
+import com.joe.api.dto.OrderQueryDTO;
 import com.joe.api.po.Order;
 import com.joe.api.po.OrderDetail;
 import com.joe.api.service.OrderDetailService;
 import com.joe.api.service.OrderService;
-import com.joe.bussiness.order.dto.OrderQueryDTO;
 import com.joe.bussiness.order.vo.OrderDetailVo;
 import com.joe.bussiness.order.vo.OrderVo;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,32 +24,37 @@ public class OrderWebService {
     @Autowired
     private OrderService orderService;
 
-    @Autowired
-    private OrderDetailService orderDetailService;
+
 
     public int addOrder(OrderVo orderVo) {
 
-        Order order = OrderVo.convert2Order(orderVo);
+        Order order = OrderVo.OrderVoConvert2Order(orderVo);
         int orderId = orderService.addOrder(order);
-
-        List<OrderDetailVo> orderDetailVoList = OrderVo.convertToOrderDetailVo(orderVo);
-        List<OrderDetail> orderDetailList = new ArrayList<>();
-        for (OrderDetailVo orderDetailVo : orderDetailVoList) {
-            OrderDetail orderDetail = OrderDetailVo.convert2OrderDetail(orderDetailVo, orderId);
-            orderDetailList.add(orderDetail);
-        }
-
-        orderDetailService.addOrderDetailBatch(orderDetailList);
 
         return orderId;
     }
 
-    public List<OrderVo> getOrderList(OrderQueryDTO dto) {
+
+    public List<OrderVo> getOrderList(OrderQueryDTO dto, int pageNo, int pageSize) {
+
+        List<Order> orders = orderService.queryOrderListByQueryDto(dto, pageNo, pageSize);
+        if (CollectionUtils.isEmpty(orders)) {
+            return new ArrayList<>();
+        }
+
+        List<OrderVo> orderVoList = new ArrayList<>();
+        for (Order order : orders) {
+            OrderVo orderVo = OrderVo.OrderConvert2OrderVo(order);
+            orderVoList.add(orderVo);
+        }
+
+        return orderVoList;
+    }
 
 
+    public int getOrderCount(OrderQueryDTO dto) {
 
-
-        return null;
+        return orderService.queryOrderCountByQueryDto(dto);
     }
 
 

@@ -27,8 +27,12 @@ public class OrderDetailService {
         return orderDetail.getDetailId();
     }
 
+    /**
+     * 批量新增订单详情
+     * @param orderDetailList
+     */
     public void addOrderDetailBatch(List<OrderDetail> orderDetailList){
-
+        orderDetailMapper.insertBatch(orderDetailList);
     }
 
 

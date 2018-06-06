@@ -1,5 +1,6 @@
 package com.joe.api.service;
 
+import com.github.pagehelper.PageHelper;
 import com.joe.api.dao.OrderMapper;
 import com.joe.api.dto.OrderQueryDTO;
 import com.joe.api.enums.OrderStatusEnum;
@@ -66,8 +67,28 @@ public class OrderService {
     }
 
 
-    public List<Order> queryOrderByQUeryDto(OrderQueryDTO orderQueryDTO) {
-        return null;
+    /**
+     * 根据条件查询订单个数
+     *
+     * @param orderQueryDTO
+     * @return
+     */
+    public int queryOrderCountByQueryDto(OrderQueryDTO orderQueryDTO) {
+
+        return orderMapper.selectCountByOrderQueryDtoSelective(orderQueryDTO);
+    }
+
+    /**
+     * 根据条件查询订单
+     *
+     * @param orderQueryDTO
+     * @return
+     */
+    public List<Order> queryOrderListByQueryDto(OrderQueryDTO orderQueryDTO, int pageNo, int pageSize) {
+
+        PageHelper.startPage(pageNo, pageSize);
+
+        return orderMapper.selectByOrderQueryDtoSelective(orderQueryDTO);
     }
 
 
