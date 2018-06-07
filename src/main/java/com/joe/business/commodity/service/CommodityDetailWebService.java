@@ -4,7 +4,7 @@ import com.joe.api.po.Commodity;
 import com.joe.api.po.CommodityDetail;
 import com.joe.api.service.CommodityDetailService;
 import com.joe.api.service.CommodityService;
-import com.joe.business.base.BaseService;
+import com.joe.business.common.base.BaseService;
 import com.joe.business.commodity.vo.CommodityDetailVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

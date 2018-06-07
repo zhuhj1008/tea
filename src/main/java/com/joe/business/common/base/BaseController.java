@@ -1,4 +1,4 @@
-package com.joe.business.base;
+package com.joe.business.common.base;
 
 import com.alibaba.fastjson.JSON;
 import com.joe.util.mvc.RequestEntity;

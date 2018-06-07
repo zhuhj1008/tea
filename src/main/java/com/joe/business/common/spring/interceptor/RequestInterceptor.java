@@ -1,4 +1,4 @@
-package com.joe.business.spring.interceptor;
+package com.joe.business.common.spring.interceptor;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -2,7 +2,7 @@ package com.joe.business.commodity.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.joe.business.base.BaseController;
+import com.joe.business.common.base.BaseController;
 import com.joe.business.commodity.service.CommodityDetailWebService;
 import com.joe.business.commodity.vo.CommodityDetailVO;
 import com.joe.util.mvc.ResponseEntity;

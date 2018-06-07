@@ -1,4 +1,4 @@
-package com.joe.business.tools;
+package com.joe.business.common.qiniu;
 
 import com.joe.business.commodity.controller.CommodityController;
 import com.joe.util.mvc.ResponseEntity;

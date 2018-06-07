@@ -1,4 +1,4 @@
-package com.joe.config;
+package com.joe.business.common.qiniu;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;

@@ -1,4 +1,4 @@
-package com.joe.business.exception;
+package com.joe.business.common.exception;
 
 /**
  * 参数不合法异常

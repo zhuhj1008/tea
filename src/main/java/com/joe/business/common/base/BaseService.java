@@ -1,4 +1,4 @@
-package com.joe.business.base;
+package com.joe.business.common.base;
 
 /**
  * base web service

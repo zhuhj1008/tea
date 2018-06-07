@@ -3,7 +3,7 @@ package com.joe.business.order.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.joe.api.dto.OrderQueryDTO;
-import com.joe.business.base.BaseController;
+import com.joe.business.common.base.BaseController;
 import com.joe.business.order.service.OrderDetailWebService;
 import com.joe.business.order.service.OrderWebService;
 import com.joe.business.order.vo.OrderVo;
