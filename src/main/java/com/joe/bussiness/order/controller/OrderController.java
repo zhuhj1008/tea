@@ -71,14 +71,14 @@ public class OrderController extends BaseController {
         Integer pageSize = Integer.valueOf(jsonObject.get("pageSize").toString());
 
         OrderQueryDTO dto = new OrderQueryDTO();
-        if(jsonObject.get("customer_name") != null){
-            dto.setExpressCode(jsonObject.get("customer_name").toString());
+        if(jsonObject.get("customerName") != null){
+            dto.setExpressCode(jsonObject.get("customerName").toString());
         }
-        if(jsonObject.get("express_code") != null){
-            dto.setCustomerName(jsonObject.get("express_code").toString());
+        if(jsonObject.get("expressCode") != null){
+            dto.setCustomerName(jsonObject.get("expressCode").toString());
         }
-        if(jsonObject.get("order_status") != null){
-            dto.setOrderStatus(Integer.valueOf(jsonObject.get("order_status").toString()));
+        if(jsonObject.get("orderStatus") != null){
+            dto.setOrderStatus(Integer.valueOf(jsonObject.get("orderStatus").toString()));
         }
 
         List<OrderVo> orderList = orderWebService.getOrderList(dto, pageNo, pageSize);
