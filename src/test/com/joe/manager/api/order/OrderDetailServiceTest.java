@@ -2,8 +2,6 @@ package com.joe.manager.api.order;
 
 import com.joe.api.po.OrderDetail;
 import com.joe.api.service.OrderDetailService;
-import com.joe.bussiness.order.service.OrderDetailWebService;
-import com.joe.bussiness.order.vo.OrderDetailVo;
 import com.joe.manager.BaseTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

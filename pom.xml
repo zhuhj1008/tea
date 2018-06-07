@@ -148,7 +148,7 @@
                     <archive>
                         <manifest>
                             <!-- 为依赖包添加路径, 这些路径会写在MANIFEST文件的Class-Path下 -->
-                            <mainClass>com.joe.app.Application</mainClass>
+                            <mainClass>com.joe.Application</mainClass>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
                             <!-- 打包时 MANIFEST.MF文件不记录的时间戳版本 -->

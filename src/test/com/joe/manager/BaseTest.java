@@ -1,9 +1,9 @@
 package com.joe.manager;
 
 import com.alibaba.fastjson.JSON;
-import com.joe.app.Application;
+import com.joe.Application;
 import com.joe.config.QiNiuConfig;
-import com.joe.bussiness.tools.QiNiuService;
+import com.joe.business.tools.QiNiuService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
