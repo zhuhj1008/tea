@@ -43,4 +43,12 @@ public class ReceiveAddressWebService {
         return receiveAddressService.queryReceiveAddressByCustomerId(customerId);
     }
 
+
+
+    public boolean getReceiveAddressCountByCustomerId(int customerId){
+
+
+        return true;
+    }
+
 }
