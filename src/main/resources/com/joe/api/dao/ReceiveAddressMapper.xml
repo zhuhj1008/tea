@@ -194,7 +194,7 @@
     select
     <include refid="Base_Column_List" />
     from tb_receive_address
-    where enable = 1 and address_id = #{addressId,jdbcType=INTEGER}
+    where enable = 1 and customer_id = #{customerId,jdbcType=INTEGER}
   </select>
 
 </mapper>
