@@ -5,7 +5,9 @@ import com.joe.api.po.ReceiveAddress;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 收货地址业务
@@ -44,6 +46,22 @@ public class ReceiveAddressService {
         }
         receiveAddress.setUpdateTime(new Date());
         return receiveAddressMapper.updateByPrimaryKeySelective(receiveAddress);
+    }
+
+
+    /**
+     * 根据客户编号查询收货地址列表
+     *
+     * @param customerId
+     * @return
+     */
+    public List<ReceiveAddress> queryReceiveAddressByCustomerId(Integer customerId) {
+
+        if (customerId == null || customerId == 0) {
+            return new ArrayList<>();
+        }
+
+        return receiveAddressMapper.selectByCustomerId(customerId);
     }
 
 

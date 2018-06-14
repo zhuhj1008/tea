@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * 收货地址请求
@@ -62,6 +63,8 @@ public class ReceiveAddressController extends BaseController{
         return ResponseEntity.getSuccessEntity("修改收货地址信息成功",addressId);
     }
 
+    @RequestMapping("/deleteReceiveAddress")
+    @ResponseBody
     public Object deleteReceiveAddress(HttpServletRequest request){
 
         String requestParam = getRequestParam(request);
@@ -81,6 +84,26 @@ public class ReceiveAddressController extends BaseController{
         }
         return ResponseEntity.getSuccessEntity("删除收货地址信息成功",i);
 
+    }
+
+    @RequestMapping("/queryReceiveAddress")
+    @ResponseBody
+    public Object queryReceiveAddress(HttpServletRequest request){
+
+        String requestParam = getRequestParam(request);
+        if (StringUtils.isBlank(requestParam)) {
+            return ResponseEntity.getFailEntity("参数错误");
+        }
+
+        JSONObject jsonObject = JSON.parseObject(requestParam);
+        if(jsonObject == null){
+            return ResponseEntity.getFailEntity("参数错误");
+        }
+        Integer customerId = Integer.valueOf(jsonObject.get("customerId").toString());
+
+        List<ReceiveAddress> receiveAddressByCustomerId = receiveAddressWebService.getReceiveAddressByCustomerId(customerId);
+
+        return ResponseEntity.getSuccessEntity("查询收货地址信息成功",receiveAddressByCustomerId);
     }
 
 

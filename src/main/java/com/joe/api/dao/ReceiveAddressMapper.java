@@ -2,6 +2,8 @@ package com.joe.api.dao;
 
 import com.joe.api.po.ReceiveAddress;
 
+import java.util.List;
+
 public interface ReceiveAddressMapper {
 
     int insertSelective(ReceiveAddress record);
@@ -13,4 +15,6 @@ public interface ReceiveAddressMapper {
     int updateByPrimaryKey(ReceiveAddress record);
 
     ReceiveAddress selectByPrimaryKey(Integer addressId);
+
+    List<ReceiveAddress> selectByCustomerId(Integer customerId);
 }

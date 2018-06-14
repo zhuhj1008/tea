@@ -187,6 +187,14 @@
     select
     <include refid="Base_Column_List" />
     from tb_receive_address
-    where address_id = #{addressId,jdbcType=INTEGER}
+    where enable = 1 and address_id = #{addressId,jdbcType=INTEGER}
   </select>
+
+  <select id="selectByCustomerId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from tb_receive_address
+    where enable = 1 and address_id = #{addressId,jdbcType=INTEGER}
+  </select>
+
 </mapper>
