@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.joe.api.dao.ReceivingAddressMapper" >
-  <resultMap id="BaseResultMap" type="com.joe.api.po.ReceivingAddress" >
+<mapper namespace="com.joe.api.dao.ReceiveAddressMapper" >
+  <resultMap id="BaseResultMap" type="com.joe.api.po.ReceiveAddress" >
     <id column="address_id" property="addressId" jdbcType="INTEGER" />
+    <result column="customer_id" property="customerId" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="mobile_phone" property="mobilePhone" jdbcType="VARCHAR" />
     <result column="province" property="province" jdbcType="VARCHAR" />
     <result column="city" property="city" jdbcType="VARCHAR" />
     <result column="area" property="area" jdbcType="VARCHAR" />
+    <result column="street" property="street" jdbcType="VARCHAR" />
     <result column="post_code" property="postCode" jdbcType="CHAR" />
     <result column="address_detail" property="addressDetail" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
@@ -13,34 +17,27 @@
     <result column="enable" property="enable" jdbcType="BIT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    address_id, province, city, area, post_code, address_detail, create_time, update_time, 
-    enable
+    address_id, customer_id, name, mobile_phone, province, city, area, street, post_code, 
+    address_detail, create_time, update_time, enable
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from tb_receiving_address
-    where address_id = #{addressId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from tb_receiving_address
-    where address_id = #{addressId,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.joe.api.po.ReceivingAddress" >
-    insert into tb_receiving_address (address_id, province, city, 
-      area, post_code, address_detail, 
-      create_time, update_time, enable
-      )
-    values (#{addressId,jdbcType=INTEGER}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
-      #{area,jdbcType=VARCHAR}, #{postCode,jdbcType=CHAR}, #{addressDetail,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{enable,jdbcType=BIT}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.joe.api.po.ReceivingAddress" >
-    insert into tb_receiving_address
+
+
+
+  <!--insert-->
+  <insert id="insertSelective" parameterType="com.joe.api.po.ReceiveAddress" useGeneratedKeys="true" keyProperty="addressId">
+    insert into tb_receive_address
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="addressId != null" >
         address_id,
+      </if>
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="mobilePhone != null" >
+        mobile_phone,
       </if>
       <if test="province != null" >
         province,
@@ -50,6 +47,9 @@
       </if>
       <if test="area != null" >
         area,
+      </if>
+      <if test="street != null" >
+        street,
       </if>
       <if test="postCode != null" >
         post_code,
@@ -71,6 +71,15 @@
       <if test="addressId != null" >
         #{addressId,jdbcType=INTEGER},
       </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilePhone != null" >
+        #{mobilePhone,jdbcType=VARCHAR},
+      </if>
       <if test="province != null" >
         #{province,jdbcType=VARCHAR},
       </if>
@@ -79,6 +88,9 @@
       </if>
       <if test="area != null" >
         #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="street != null" >
+        #{street,jdbcType=VARCHAR},
       </if>
       <if test="postCode != null" >
         #{postCode,jdbcType=CHAR},
@@ -97,9 +109,30 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.joe.api.po.ReceivingAddress" >
-    update tb_receiving_address
+
+
+
+  <!--delete-->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_receive_address
+    where address_id = #{addressId,jdbcType=INTEGER}
+  </delete>
+
+
+
+  <!--update-->
+  <update id="updateByPrimaryKeySelective" parameterType="com.joe.api.po.ReceiveAddress" >
+    update tb_receive_address
     <set >
+      <if test="customerId != null" >
+        customer_id = #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilePhone != null" >
+        mobile_phone = #{mobilePhone,jdbcType=VARCHAR},
+      </if>
       <if test="province != null" >
         province = #{province,jdbcType=VARCHAR},
       </if>
@@ -108,6 +141,9 @@
       </if>
       <if test="area != null" >
         area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="street != null" >
+        street = #{street,jdbcType=VARCHAR},
       </if>
       <if test="postCode != null" >
         post_code = #{postCode,jdbcType=CHAR},
@@ -127,11 +163,15 @@
     </set>
     where address_id = #{addressId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.joe.api.po.ReceivingAddress" >
-    update tb_receiving_address
-    set province = #{province,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.joe.api.po.ReceiveAddress" >
+    update tb_receive_address
+    set customer_id = #{customerId,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      mobile_phone = #{mobilePhone,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
       city = #{city,jdbcType=VARCHAR},
       area = #{area,jdbcType=VARCHAR},
+      street = #{street,jdbcType=VARCHAR},
       post_code = #{postCode,jdbcType=CHAR},
       address_detail = #{addressDetail,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -139,4 +179,14 @@
       enable = #{enable,jdbcType=BIT}
     where address_id = #{addressId,jdbcType=INTEGER}
   </update>
+
+
+
+  <!--select-->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from tb_receive_address
+    where address_id = #{addressId,jdbcType=INTEGER}
+  </select>
 </mapper>

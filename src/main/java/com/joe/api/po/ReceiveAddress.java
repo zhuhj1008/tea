@@ -2,23 +2,45 @@ package com.joe.api.po;
 
 import java.util.Date;
 
-public class ReceivingAddress {
+public class ReceiveAddress {
+
+    //主键
     private Integer addressId;
 
+    //顾客编号
+    private Integer customerId;
+
+    //收货姓名
+    private String name;
+
+    //手机号
+    private String mobilePhone;
+
+    //省份
     private String province;
 
+    //城市
     private String city;
 
+    //地区
     private String area;
 
+    //街道
+    private String street;
+
+    //邮编
     private String postCode;
 
+    //详细地址
     private String addressDetail;
 
+    //创建日期
     private Date createTime;
 
+    //更新日期
     private Date updateTime;
 
+    //可用
     private Boolean enable;
 
     public Integer getAddressId() {
@@ -27,6 +49,30 @@ public class ReceivingAddress {
 
     public void setAddressId(Integer addressId) {
         this.addressId = addressId;
+    }
+
+    public Integer getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
+    }
+
+    public String getMobilePhone() {
+        return mobilePhone;
+    }
+
+    public void setMobilePhone(String mobilePhone) {
+        this.mobilePhone = mobilePhone == null ? null : mobilePhone.trim();
     }
 
     public String getProvince() {
@@ -51,6 +97,14 @@ public class ReceivingAddress {
 
     public void setArea(String area) {
         this.area = area == null ? null : area.trim();
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street == null ? null : street.trim();
     }
 
     public String getPostCode() {

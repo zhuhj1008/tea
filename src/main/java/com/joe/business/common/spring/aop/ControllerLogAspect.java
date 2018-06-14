@@ -60,6 +60,7 @@ public class ControllerLogAspect extends BaseController {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         String requestURI = request.getRequestURI();
         logger.info("访问记录-请求资源路径：{}", requestURI);
+        logger.info("访问记录-请求参数：{}", request);
 
         Object result = joinPoint.proceed();//去执行业务代码
 
