@@ -17,4 +17,6 @@ public interface ReceiveAddressMapper {
     ReceiveAddress selectByPrimaryKey(Integer addressId);
 
     List<ReceiveAddress> selectByCustomerId(Integer customerId);
+
+    Integer selectCountByCustomerId(Integer customerId);
 }

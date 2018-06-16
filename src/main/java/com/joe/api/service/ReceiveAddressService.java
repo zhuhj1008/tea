@@ -2,6 +2,7 @@ package com.joe.api.service;
 
 import com.joe.api.dao.ReceiveAddressMapper;
 import com.joe.api.po.ReceiveAddress;
+import org.omg.CORBA.INTERNAL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,7 +49,32 @@ public class ReceiveAddressService {
         return receiveAddressMapper.updateByPrimaryKeySelective(receiveAddress);
     }
 
-    public int
+    /**
+     * 根据主键查询收货地址
+     * @param addressId
+     * @return
+     */
+    public ReceiveAddress queryReceiveAddressById(Integer addressId){
+
+        if(addressId == null || addressId == 0){
+            return null;
+        }
+        return receiveAddressMapper.selectByPrimaryKey(addressId);
+    }
+
+    /**
+     * 查询用户收货地址数量
+     *
+     * @param customerId
+     * @return
+     */
+    public Integer queryUserReceiveAddressCount(Integer customerId) {
+
+        if (customerId == null || customerId == 0) {
+            return null;
+        }
+        return receiveAddressMapper.selectCountByCustomerId(customerId);
+    }
 
 
     /**
@@ -60,6 +86,12 @@ public class ReceiveAddressService {
     public List<ReceiveAddress> queryReceiveAddressByCustomerId(Integer customerId) {
 
         if (customerId == null || customerId == 0) {
+            return new ArrayList<>();
+        }
+
+        Integer count = queryUserReceiveAddressCount(customerId);
+
+        if (count == null || count == 0) {
             return new ArrayList<>();
         }
 

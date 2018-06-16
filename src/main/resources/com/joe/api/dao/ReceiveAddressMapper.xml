@@ -197,4 +197,11 @@
     where enable = 1 and customer_id = #{customerId,jdbcType=INTEGER}
   </select>
 
+  <select id="selectCountByCustomerId" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+    select
+    count(*)
+    from tb_receive_address
+    where enable = 1 and customer_id = #{customerId,jdbcType=INTEGER}
+  </select>
+
 </mapper>
