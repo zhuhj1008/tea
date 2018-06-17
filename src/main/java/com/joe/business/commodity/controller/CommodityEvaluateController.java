@@ -6,6 +6,7 @@ import com.joe.api.po.CommodityEvaluate;
 import com.joe.business.common.base.BaseController;
 import com.joe.business.commodity.service.CommodityEvaluateWebService;
 import com.joe.util.mvc.ResponseEntity;
+import com.joe.util.mvc.ResponsePageEntity;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +33,9 @@ public class CommodityEvaluateController extends BaseController {
     @Autowired
     CommodityEvaluateWebService commodityEvaluateWebService;
 
-    //新增商品评价
+    /**
+     * 添加商品评价
+     */
     @RequestMapping("/addEvaluate")
     @ResponseBody
     public Object addEvaluate(HttpServletRequest request) {
@@ -43,15 +46,17 @@ public class CommodityEvaluateController extends BaseController {
         }
 
         CommodityEvaluate commodityEvaluate = JSON.parseObject(requestParam, CommodityEvaluate.class);
-        logger.info("新增商品评价，商品编号：{}", commodityEvaluate.getCommodityId());
-        int primaryKey = commodityEvaluateWebService.addCommodityEvaluate(commodityEvaluate);
-        logger.info("新增商品评价成功，评论编号：{}", primaryKey);
+        logger.info("request add commodity evaluate, commodity id is {}.", commodityEvaluate.getCommodityId());
+        int evaluateId = commodityEvaluateWebService.addCommodityEvaluate(commodityEvaluate);
+        logger.info("add commodity evaluate success, evaluate id is {}.", evaluateId);
 
-        return ResponseEntity.getSuccessEntity("新增商品成功",primaryKey);
+        return ResponseEntity.getSuccessEntity("新增商品评价成功", evaluateId);
     }
 
 
-    //商品追加评价
+    /**
+     * 追加商品评价
+     */
     @RequestMapping("/appendEvaluate")
     @ResponseBody
     public Object appendEvaluate(HttpServletRequest request) {
@@ -62,24 +67,23 @@ public class CommodityEvaluateController extends BaseController {
         }
 
         CommodityEvaluate commodityEvaluate = JSON.parseObject(requestParam, CommodityEvaluate.class);
+        logger.info("request append evaluate, evaluate id is {}", commodityEvaluate.getEvaluateId());
 
-        int count = commodityEvaluateWebService.appendCommodityEvaluate(commodityEvaluate);
+        int executeNum = commodityEvaluateWebService.appendCommodityEvaluate(commodityEvaluate);
 
-        if (count > 0) {
-            return ResponseEntity.getSuccessEntity("添加成功", count);
+        if (executeNum > 0) {
+            logger.info("append evaluate fail.");
+            return ResponseEntity.getFailEntity("追加评论失败");
         }
 
-        return ResponseEntity.getFailEntity("添加失败");
+        logger.info("append evaluate success.");
+        return ResponseEntity.getSuccessEntity("追加评论成功", executeNum);
 
     }
 
-    //查看商品评价
 
     /**
      * 查看商品评价（分页）
-     *
-     * @param request
-     * @return
      */
     @RequestMapping("/getEvaluate")
     @ResponseBody
@@ -87,24 +91,25 @@ public class CommodityEvaluateController extends BaseController {
 
         String requestParam = getRequestParam(request);
         if (StringUtils.isBlank(requestParam)) {
-            return ResponseEntity.getFailEntity("param error");
+            return ResponseEntity.getFailEntity("参数错误");
         }
 
         JSONObject jsonObject = JSON.parseObject(requestParam);
         Integer commodityId = Integer.valueOf(jsonObject.get("commodityId").toString());
         Integer pageNo = Integer.valueOf(jsonObject.get("pageNo").toString());
         Integer pageSize = Integer.valueOf(jsonObject.get("pageSize").toString());
-        logger.info("获取商品评价列表，商品编号：{}，页码：{}，每页大小：{}", commodityId, pageNo, pageSize);
+        logger.info("request commodity evaluate list , param : commodity id is {}, pageNo is {}, pageSize is {}.", commodityId, pageNo, pageSize);
 
         int total = commodityEvaluateWebService.queryEvaluateCountByCommodityId(commodityId);
         List<CommodityEvaluate> commodityEvaluates = commodityEvaluateWebService.queryEvaluateByCommodityId(commodityId, pageNo, pageSize);
 
-        logger.info("查询商品列表结束");
-        Map<String, Object> data = new HashMap<>();
-        data.put("total", total);
-        data.put("contents", commodityEvaluates);
+        logger.info("request commodity evaluate success.");
 
-        return ResponseEntity.getSuccessEntity("查询商品成功",data);
+        ResponsePageEntity pageEntity = new ResponsePageEntity();
+        pageEntity.setTotal(total);
+        pageEntity.setContents(commodityEvaluates);
+
+        return ResponseEntity.getSuccessEntity("查询商品评价成功", pageEntity);
     }
 
 

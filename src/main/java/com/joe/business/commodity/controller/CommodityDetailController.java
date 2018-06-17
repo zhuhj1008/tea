@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/commodityDetail")
 public class CommodityDetailController extends BaseController {
 
-    private static final Logger logger = LoggerFactory.getLogger(CommodityController.class);
+    private static final Logger logger = LoggerFactory.getLogger(CommodityDetailController.class);
 
     @Autowired
     CommodityDetailWebService commodityDetailWebService;
@@ -43,14 +43,13 @@ public class CommodityDetailController extends BaseController {
         JSONObject jsonObject = JSON.parseObject(requestParam);
         Integer commodityId = Integer.valueOf(jsonObject.get("commodityId").toString());
 
-        logger.info("query commodity detail by commodity id, id is {}", commodityId);
+        logger.info("query commodity detail, commodity id is {}", commodityId);
         CommodityDetailVO commodityDetailVO = commodityDetailWebService.queryCommodityDetailByCommodityId(commodityId);
-        if(commodityDetailVO == null){
-            logger.info("商品信息缺失，商品编号：{}",commodityId);
+        if (commodityDetailVO == null) {
+            logger.info("commodity detail  was not found {}.", commodityId);
             return ResponseEntity.getFailEntity("商品信息缺失");
         }
 
-        return ResponseEntity.getSuccessEntity("请求成功",commodityDetailVO);
-
+        return ResponseEntity.getSuccessEntity("查询商品详情成功", commodityDetailVO);
     }
 }

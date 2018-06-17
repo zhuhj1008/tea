@@ -167,7 +167,7 @@ public class ReceiveAddressController extends BaseController {
         Integer addressId = Integer.valueOf(jsonObject.get("addressId").toString());
 
 
-        int executeNum = receiveAddressWebService.modifytCustomerDefaultReceiveAddress(customerId, addressId);
+        int executeNum = receiveAddressWebService.modifyCustomerDefaultReceiveAddress(customerId, addressId);
 
         if (executeNum == 0) {
             return ResponseEntity.getFailEntity("修改默认收货地址失败");

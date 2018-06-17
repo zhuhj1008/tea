@@ -7,6 +7,7 @@ import com.joe.business.common.base.BaseController;
 import com.joe.business.commodity.service.CommodityWebService;
 import com.joe.business.commodity.vo.CommodityVo;
 import com.joe.util.mvc.ResponseEntity;
+import com.joe.util.mvc.ResponsePageEntity;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +21,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 商品管理
+ */
 @Controller
 @RequestMapping("/commodity")
 public class CommodityController extends BaseController {
@@ -41,11 +45,11 @@ public class CommodityController extends BaseController {
 
         CommodityVo commodityVo = JSON.parseObject(requestParam, CommodityVo.class);
 
-        logger.info("新增商品，商品名称:{}", commodityVo.getpName());
+        logger.info("request add commodity, commodity name is {}.", commodityVo.getpName());
         int commodityId = commodityWebService.addCommodity(commodityVo);
-        logger.info("新增商品成功,商品Id：{}", commodityId);
+        logger.info("add commodity success, commodity id is {}.", commodityId);
 
-        return ResponseEntity.getSuccessEntity("新增商品成功",commodityId);
+        return ResponseEntity.getSuccessEntity("新增商品成功", commodityId);
     }
 
 
@@ -61,24 +65,24 @@ public class CommodityController extends BaseController {
 
         String requestParam = getRequestParam(request);
         if (StringUtils.isBlank(requestParam)) {
-            return ResponseEntity.getFailEntity("param error");
+            return ResponseEntity.getFailEntity("参数有误");
         }
 
         JSONObject jsonObject = JSON.parseObject(requestParam);
         Integer itemId = Integer.valueOf(jsonObject.get("itemId").toString());
         Integer pageNo = Integer.valueOf(jsonObject.get("pageNo").toString());
         Integer pageSize = Integer.valueOf(jsonObject.get("pageSize").toString());
-        logger.info("查询商品列表，查询条件：类目编号：{}，页码：{}，每页大小：{}。", itemId, pageNo, pageSize);
+        logger.info("request commodity list, param  item {}, pageNo {}, pagesSize{}.", itemId, pageNo, pageSize);
 
         int total = commodityWebService.queryCommodityCountByItemId(itemId);
         List<Commodity> commodityList = commodityWebService.queryCommodityByItemId(itemId, pageNo, pageSize);
+        logger.info("request commodity list success.");
 
-        logger.info("查询商品列表结束");
-        Map<String, Object> data = new HashMap<>();
-        data.put("total", total);
-        data.put("contents", commodityList);
+        ResponsePageEntity pageEntity = new ResponsePageEntity();
+        pageEntity.setTotal(total);
+        pageEntity.setContents(commodityList);
 
-        return ResponseEntity.getSuccessEntity("请求成功",data);
+        return ResponseEntity.getSuccessEntity("查询商品列表成功", pageEntity);
     }
 
 
@@ -91,13 +95,20 @@ public class CommodityController extends BaseController {
     @ResponseBody
     public Object getRecommendCommodity() {
 
-        logger.info("查询推荐商品");
+        logger.info("request recommend commodity list");
         List<Commodity> commodities = commodityWebService.queryRecommendCommodity();
-        logger.info("查询推荐商品，商品数量：{}", commodities.size());
-        return ResponseEntity.getSuccessEntity("请求成功",commodities);
+        logger.info("request recommend commodity list success, total {}", commodities.size());
+
+        return ResponseEntity.getSuccessEntity("查询推荐商品成功", commodities);
     }
 
 
+    /**
+     * 切换商品推荐/不推荐
+     *
+     * @param request
+     * @return
+     */
     @RequestMapping("/switchCommodityRecommend")
     @ResponseBody
     public Object switchCommodityRecommend(HttpServletRequest request) {
@@ -109,17 +120,12 @@ public class CommodityController extends BaseController {
 
         JSONObject jsonObject = JSON.parseObject(requestParam);
         Integer commodityId = Integer.valueOf(jsonObject.get("commodityId").toString());
-        logger.info("修改商品状态，商品编号：{}", commodityId);
+        logger.info("request change commodity recommend status, commodity id is {}.", commodityId);
 
-        int i = commodityWebService.updateRecommendStatus(commodityId);
+        int executeNum = commodityWebService.updateRecommendStatus(commodityId);
 
-        if (i > 0) {
-            logger.info("修改商品推荐状态成功");
-            return ResponseEntity.getSuccessEntity("请求成功",i);
-        }
-
-        logger.info("修改商品推荐状态失败");
-        return ResponseEntity.getFailEntity("修改商品推荐状态失败");
+        logger.info("change commodity recommend status success.");
+        return ResponseEntity.getSuccessEntity("修改推荐状态成功", executeNum);
 
     }
 
@@ -136,15 +142,17 @@ public class CommodityController extends BaseController {
 
         String requestParam = getRequestParam(request);
         if (StringUtils.isBlank(requestParam)) {
-            return ResponseEntity.getFailEntity("param error");
+            return ResponseEntity.getFailEntity("参数错误");
         }
 
         JSONObject jsonObject = JSON.parseObject(requestParam);
         Integer commodityId = Integer.valueOf(jsonObject.get("commodityId").toString());
+        logger.info("request remove commodity, commodity id is {}.", commodityId);
 
-        commodityWebService.removeCommodity(commodityId);
-        return ResponseEntity.getSuccessEntity("删除成功","");
+        int executeNum = commodityWebService.removeCommodity(commodityId);
+        return ResponseEntity.getSuccessEntity("删除商品成功", executeNum);
     }
+
 
     /**
      * 修改商品
@@ -157,19 +165,21 @@ public class CommodityController extends BaseController {
     public Object updateCommodity(HttpServletRequest request) {
         String requestParam = getRequestParam(request);
         if (StringUtils.isBlank(requestParam)) {
-            return ResponseEntity.getFailEntity("param error");
+            return ResponseEntity.getFailEntity("参数错误");
         }
         CommodityVo commodityVo = JSON.parseObject(requestParam, CommodityVo.class);
 
-        logger.info("修改商品，商品编号：{}", commodityVo.getpId());
-        int i = commodityWebService.updateCommodity(commodityVo);
+        logger.info("request modify commodity, commodity id is {}", commodityVo.getpId());
+        int executeNum = commodityWebService.updateCommodity(commodityVo);
 
-        if(i>0){
-            logger.info("修改商品成功");
-            return ResponseEntity.getSuccessEntity("修改成功",i);
+        if (executeNum == 0) {
+            logger.info("modify commodity fail");
+            return ResponseEntity.getFailEntity("修改商品失败");
         }
-        logger.info("修改商品失败");
-        return ResponseEntity.getFailEntity("修改商品失败");
+
+        logger.info("modify commodity success");
+        return ResponseEntity.getSuccessEntity("商品修改成功", executeNum);
+
     }
 
 
