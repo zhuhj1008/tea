@@ -14,8 +14,8 @@ public class WeiXinRestService {
 
 
 
-    private final String APPID = "";
-    private final String SECRET = "";
+    private final String APPID = "wx7787aa5b85cd4a58";
+    private final String SECRET = "723f7eb41927cbd33106ac322be458c3";
 
     /**
      * 通过请求微信登录，跳转后进行处理
