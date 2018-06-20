@@ -5,10 +5,10 @@ import sun.net.www.http.HttpClient;
 
 public class AuthUtil {
 
-    public static JSONObject doGetJson(String url){
-        JSONObject jsonObject  = null;
-
-        HttpClient httpClient = new
-        return jsonObject;
-    }
+//    public static JSONObject doGetJson(String url){
+//        JSONObject jsonObject  = null;
+//
+//        HttpClient httpClient = new
+//        return jsonObject;
+//    }
 }
