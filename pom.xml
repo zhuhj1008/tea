@@ -155,38 +155,38 @@
                             <!-- 打包时 MANIFEST.MF文件不记录的时间戳版本 -->
                             <useUniqueVersions>false</useUniqueVersions>
                         </manifest>
-                        <!--<manifestEntries>-->
-                            <!--&lt;!&ndash; 在Class-Path下添加配置文件的路径 &ndash;&gt;-->
-                            <!--<Class-Path>config/</Class-Path>-->
-                        <!--</manifestEntries>-->
+                        <manifestEntries>
+                            <!-- 在Class-Path下添加配置文件的路径 -->
+                            <Class-Path>config/</Class-Path>
+                        </manifestEntries>
                     </archive>
                 </configuration>
             </plugin>
-            <!--<plugin>-->
-                <!--<artifactId>maven-resources-plugin</artifactId>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<id>copy-xmls</id>-->
-                        <!--<phase>process-sources</phase>-->
-                        <!--<goals>-->
-                            <!--<goal>copy-resources</goal>-->
-                        <!--</goals>-->
-                        <!--<configuration>-->
-                            <!--<outputDirectory>${basedir}/target/config</outputDirectory>-->
-                            <!--<resources>-->
-                                <!--<resource>-->
-                                    <!--<directory>${basedir}/src/main/resources</directory>-->
-                                    <!--<includes>-->
-                                        <!--<include>*.properties</include>-->
-                                        <!--<include>*.yml</include>-->
-                                        <!--<include>*.jks</include>-->
-                                    <!--</includes>-->
-                                <!--</resource>-->
-                            <!--</resources>-->
-                        <!--</configuration>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-            <!--</plugin>-->
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-xmls</id>
+                        <phase>process-sources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/target/config</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}/src/main/resources</directory>
+                                    <includes>
+                                        <include>*.properties</include>
+                                        <include>*.yml</include>
+                                        <include>*.jks</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
