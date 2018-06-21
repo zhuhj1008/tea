@@ -3,6 +3,8 @@
 <mapper namespace="com.joe.api.dao.UserCustomerMapper" >
   <resultMap id="BaseResultMap" type="com.joe.api.po.UserCustomer" >
     <id column="customer_id" property="customerId" jdbcType="INTEGER" />
+    <result column="open_id" property="openId" jdbcType="VARCHAR" />
+    <result column="union_id" property="unionId" jdbcType="VARCHAR" />
     <result column="head_portrait" property="headPortrait" jdbcType="VARCHAR" />
     <result column="customer_name" property="customerName" jdbcType="VARCHAR" />
     <result column="mobile" property="mobile" jdbcType="VARCHAR" />
@@ -17,7 +19,7 @@
     <result column="enable" property="enable" jdbcType="BIT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    customer_id, head_portrait, customer_name, mobile, email, user_type, integral, receiving_address_default, 
+    customer_id, open_id, union_id, head_portrait, customer_name, mobile, email, user_type, integral, receiving_address_default,
     create_by, create_time, update_by, update_time, enable
   </sql>
 
@@ -30,8 +32,14 @@
       <if test="customerId != null" >
         customer_id,
       </if>
-      <if test="headPortrait != null" >
-        head_portrait,
+      <if test="openId != null" >
+        open_id,
+      </if>
+      <if test="unionId != null" >
+        union_id,
+      </if>
+      <if test="customerName != null" >
+        customer_name,
       </if>
       <if test="customerName != null" >
         customer_name,
@@ -70,6 +78,12 @@
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="customerId != null" >
         #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="openId != null" >
+        #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="unionId != null" >
+        #{unionId,jdbcType=VARCHAR},
       </if>
       <if test="headPortrait != null" >
         #{headPortrait,jdbcType=VARCHAR},
@@ -124,6 +138,12 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.joe.api.po.UserCustomer" >
     update tb_user_customer
     <set >
+      <if test="openId != null" >
+        open_id = #{oenId,jdbcType=VARCHAR},
+      </if>
+      <if test="unionId != null" >
+        union_id = #{unionId,jdbcType=VARCHAR},
+      </if>
       <if test="headPortrait != null" >
         head_portrait = #{headPortrait,jdbcType=VARCHAR},
       </if>

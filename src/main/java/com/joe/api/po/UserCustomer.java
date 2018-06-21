@@ -12,6 +12,12 @@ public class UserCustomer {
     //客户编号
     private Integer customerId;
 
+    //微信唯一标识
+    private String openId;
+
+    //小程序唯一标识
+    private String unionId;
+
     //头像
     private String headPortrait;
 
