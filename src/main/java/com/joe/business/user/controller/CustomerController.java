@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.joe.api.po.UserCustomer;
 import com.joe.business.common.base.BaseController;
-import com.joe.business.common.wx.WeiXinAuthUtil;
 import com.joe.business.user.service.CustomerWebService;
 import com.joe.util.mvc.ResponseEntity;
 import org.apache.commons.lang3.StringUtils;
