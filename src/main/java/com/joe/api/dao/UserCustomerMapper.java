@@ -12,4 +12,8 @@ public interface UserCustomerMapper {
 
     UserCustomer selectByPrimaryKey(Integer customerId);
 
+    UserCustomer queryCustomerByOpenId(String openId);
+
+    UserCustomer queryCustomerByUnionId(String unionId);
+
 }

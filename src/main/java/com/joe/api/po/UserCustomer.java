@@ -62,6 +62,22 @@ public class UserCustomer {
         this.customerId = customerId;
     }
 
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
+    }
+
+    public String getUnionId() {
+        return unionId;
+    }
+
+    public void setUnionId(String unionId) {
+        this.unionId = unionId;
+    }
+
     public String getHeadPortrait() {
         return headPortrait;
     }

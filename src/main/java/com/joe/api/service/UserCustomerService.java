@@ -2,6 +2,7 @@ package com.joe.api.service;
 
 import com.joe.api.dao.UserCustomerMapper;
 import com.joe.api.po.UserCustomer;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -57,9 +58,35 @@ public class UserCustomerService {
      * @param customerId
      * @return
      */
-    public UserCustomer queryCustomerById(int customerId) {
+    public UserCustomer queryCustomerByCustomerId(int customerId) {
 
         return userCustomerMapper.selectByPrimaryKey(customerId);
+    }
+
+    /**
+     * 查询客户 by 微信唯一标识
+     * @param openId
+     * @return
+     */
+    public UserCustomer queryCustomerByOpenId(String openId){
+
+        if(StringUtils.isEmpty(openId)){
+            return null;
+        }
+        return userCustomerMapper.queryCustomerByOpenId(openId);
+    }
+
+    /**
+     * 查询客户 by 小程序唯一标识
+     * @param unionId
+     * @return
+     */
+    public UserCustomer queryCustomerByUnionId(String unionId){
+
+        if(StringUtils.isEmpty(unionId)){
+            return null;
+        }
+        return userCustomerMapper.queryCustomerByUnionId(unionId);
     }
 
 

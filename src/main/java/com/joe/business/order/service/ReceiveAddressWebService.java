@@ -54,7 +54,7 @@ public class ReceiveAddressWebService {
 
     public ReceiveAddress getCustomerDefaultReceiveAddress(Integer userId) {
 
-        UserCustomer userCustomer = userCustomerService.queryCustomerById(userId);
+        UserCustomer userCustomer = userCustomerService.queryCustomerByCustomerId(userId);
         if (userCustomer == null) {
             logger.info("query customer by id, no result was found, customerId is {}",userId);
             return null;
