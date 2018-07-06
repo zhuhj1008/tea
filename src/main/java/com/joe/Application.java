@@ -38,7 +38,9 @@ public class Application extends WebMvcConfigurerAdapter implements CommandLineR
     private Logger logger = LoggerFactory.getLogger(Application.class);
 
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication springApplication = new SpringApplication();
+//        springApplication.setAddCommandLineProperties(false); -- 设置启动命令参数不生效
+        springApplication.run(Application.class, args);
     }
 
     public void run(String... args) throws Exception {
@@ -62,6 +64,7 @@ public class Application extends WebMvcConfigurerAdapter implements CommandLineR
         pageHelper.setProperties(properties);
         return pageHelper;
     }
+
 
     @Bean
     public EmbeddedServletContainerFactory servletContainer() {
