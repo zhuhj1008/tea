@@ -29,8 +29,12 @@ public class OrderVo {
     private String expressCode;
     //快递费
     private String expressMoney;
+    //邮编
+    private String postCode;
     //收货地址
     private String receiveAddress;
+    //收件人电话
+    private String receivePhone;
     //买家备注
     private String remake;
     //订单详情
@@ -82,7 +86,9 @@ public class OrderVo {
         order.setExpressId(orderVo.getExpressId());
         order.setExpressCode(orderVo.getExpressCode());
         order.setExpressMoney(orderVo.getExpressMoney());
+        order.setPostCode(orderVo.getPostCode());
         order.setReceiveAddress(orderVo.getReceiveAddress());
+        order.setReceivePhone(orderVo.getReceivePhone());
         order.setRemake(orderVo.getRemake());
 
         return order;
@@ -100,7 +106,9 @@ public class OrderVo {
         orderVo.setExpressId(order.getExpressId());
         orderVo.setExpressCode(order.getExpressCode());
         orderVo.setExpressMoney(order.getExpressMoney());
+        orderVo.setPostCode(order.getPostCode());
         orderVo.setReceiveAddress(order.getReceiveAddress());
+        orderVo.setReceivePhone(order.getReceivePhone());
         orderVo.setRemake(order.getRemake());
 
         return orderVo;
@@ -174,12 +182,28 @@ public class OrderVo {
         this.expressMoney = expressMoney;
     }
 
+    public String getPostCode() {
+        return postCode;
+    }
+
+    public void setPostCode(String postCode) {
+        this.postCode = postCode;
+    }
+
     public String getReceiveAddress() {
         return receiveAddress;
     }
 
     public void setReceiveAddress(String receiveAddress) {
         this.receiveAddress = receiveAddress;
+    }
+
+    public String getReceivePhone() {
+        return receivePhone;
+    }
+
+    public void setReceivePhone(String receivePhone) {
+        this.receivePhone = receivePhone;
     }
 
     public String getRemake() {

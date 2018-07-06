@@ -1,6 +1,5 @@
 package com.joe.business.common.qiniu;
 
-import com.joe.business.commodity.controller.CommodityController;
 import com.joe.util.mvc.ResponseEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/qiNiu")
 public class QiNiuController {
 
-    private static final Logger logger = LoggerFactory.getLogger(CommodityController.class);
+    private static final Logger logger = LoggerFactory.getLogger(QiNiuController.class);
 
     @Autowired
     QiNiuService qiNiuService;

@@ -19,6 +19,9 @@ public class OrderDetail {
     //商品编号
     private Integer commodityId;
 
+    //商品名称
+    private String commodityName;
+
     //商品图片
     private String picture;
 
@@ -59,6 +62,14 @@ public class OrderDetail {
 
     public void setCommodityId(Integer commodityId) {
         this.commodityId = commodityId;
+    }
+
+    public String getCommodityName() {
+        return commodityName;
+    }
+
+    public void setCommodityName(String commodityName) {
+        this.commodityName = commodityName;
     }
 
     public String getPicture() {

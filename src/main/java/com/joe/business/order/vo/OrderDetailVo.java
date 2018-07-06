@@ -15,6 +15,8 @@ public class OrderDetailVo {
     private Integer orderId;
     //商品编号
     private Integer commodityId;
+    //商品名称
+    private String commodityName;
     //图片
     private String picture;
     //单价
@@ -34,6 +36,7 @@ public class OrderDetailVo {
         OrderDetail orderDetail = new OrderDetail();
         orderDetail.setOrderId(orderId);
         orderDetail.setCommodityId(orderDetailVo.getCommodityId());
+        orderDetail.setCommodityName(orderDetailVo.getCommodityName());
         orderDetail.setPicture(orderDetailVo.getPicture());
         orderDetail.setPrice(orderDetailVo.getPrice());
         orderDetail.setAmount(orderDetailVo.getAmount());
@@ -56,6 +59,14 @@ public class OrderDetailVo {
 
     public void setCommodityId(Integer commodityId) {
         this.commodityId = commodityId;
+    }
+
+    public String getCommodityName() {
+        return commodityName;
+    }
+
+    public void setCommodityName(String commodityName) {
+        this.commodityName = commodityName;
     }
 
     public String getPicture() {

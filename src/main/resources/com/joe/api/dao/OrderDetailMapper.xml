@@ -5,6 +5,7 @@
     <id column="detail_id" property="detailId" jdbcType="INTEGER" />
     <result column="order_id" property="orderId" jdbcType="INTEGER" />
     <result column="commodity_id" property="commodityId" jdbcType="INTEGER" />
+    <result column="commodity_name" property="commodityName" jdbcType="VARCHAR" />
     <result column="picture" property="picture" jdbcType="VARCHAR" />
     <result column="price" property="price" jdbcType="DECIMAL" />
     <result column="amount" property="amount" jdbcType="INTEGER" />
@@ -13,7 +14,7 @@
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    detail_id, order_id, commodity_id, picture, price, amount, unit, create_time,
+    detail_id, order_id, commodity_id, commodity_name, picture, price, amount, unit, create_time,
     update_time
   </sql>
 
@@ -31,6 +32,9 @@
       </if>
       <if test="commodityId != null" >
         commodity_id,
+      </if>
+      <if test="commodityName != null" >
+        commodityName,
       </if>
       <if test="picture != null" >
         picture,
@@ -61,6 +65,9 @@
       <if test="commodityId != null" >
         #{commodityId,jdbcType=INTEGER},
       </if>
+      <if test="commodityName != null" >
+        #{commodityName,jdbcType=VARCHAR},
+      </if>
       <if test="picture != null" >
         #{picture,jdbcType=VARCHAR},
       </if>
@@ -83,11 +90,12 @@
   </insert>
 
   <insert id="insertBatch">
-    INSERT INTO tb_order_detail (`order_id`, `picture`, `commodity_id`, `price`, `amount`, `unit`, `create_time`) VALUES
+    INSERT INTO tb_order_detail (`order_id`, `picture`, `commodity_id`,`commodity_name` `price`, `amount`, `unit`, `create_time`) VALUES
     <foreach collection="orderDetailList" separator="," item="orderDetail">
       (
       #{orderDetail.orderId,jdbcType=INTEGER},#{orderDetail.picture,jdbcType=VARCHAR},
-      #{orderDetail.commodityId,jdbcType=INTEGER},#{orderDetail.price,jdbcType=DECIMAL},
+      #{orderDetail.commodityId,jdbcType=INTEGER},#{orderDetail.commodityName,jdbcType=VARCHAR},
+      #{orderDetail.price,jdbcType=DECIMAL},
       #{orderDetail.amount,jdbcType=INTEGER},#{orderDetail.unit,jdbcType=INTEGER},now()
       )
     </foreach>
@@ -112,6 +120,9 @@
       </if>
       <if test="commodityId != null" >
         commodity_id = #{commodityId,jdbcType=INTEGER},
+      </if>
+      <if test="commodityName != null" >
+        commodity_name = #{commodityName,jdbcType=VARCHAR},
       </if>
       <if test="picture != null" >
         picture = #{picture,jdbcType=VARCHAR},

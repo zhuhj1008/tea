@@ -13,6 +13,7 @@
         <result column="express_code" property="expressCode" jdbcType="VARCHAR"/>
         <result column="express_money" property="expressMoney" jdbcType="VARCHAR"/>
         <result column="receive_address" property="receiveAddress" jdbcType="VARCHAR"/>
+        <result column="receive_phone" property="receivePhone" jdbcType="VARCHAR"/>
         <result column="remake" property="remake" jdbcType="VARCHAR"/>
         <result column="create_by" property="createBy" jdbcType="INTEGER"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
@@ -23,7 +24,7 @@
     </resultMap>
     <sql id="Base_Column_List">
     order_id, customer_id, customer_name, order_money, order_status, payment_time, post_code, express_id,
-    express_code, express_money, receive_address, remake, create_by, create_time, update_by, 
+    express_code, express_money, receive_address, receive_phone, remake, create_by, create_time, update_by,
     delivery_time, receive_time, enable
   </sql>
 
@@ -63,6 +64,9 @@
             </if>
             <if test="receiveAddress != null">
                 receive_address,
+            </if>
+            <if test="receivePhone != null">
+                receive_phone,
             </if>
             <if test="remake != null">
                 remake,
@@ -185,6 +189,9 @@
             </if>
             <if test="receiveAddress != null">
                 receive_address = #{receiveAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="receivePhone != null">
+                receive_phone = #{receivePhone,jdbcType=VARCHAR},
             </if>
             <if test="remake != null">
                 remake = #{remake,jdbcType=VARCHAR},

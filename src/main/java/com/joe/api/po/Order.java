@@ -43,6 +43,9 @@ public class Order {
     //收货地址
     private String receiveAddress;
 
+    //收件人电话
+    private String receivePhone;
+
     //备注
     private String remake;
 
@@ -150,6 +153,14 @@ public class Order {
 
     public void setReceiveAddress(String receiveAddress) {
         this.receiveAddress = receiveAddress == null ? null : receiveAddress.trim();
+    }
+
+    public String getReceivePhone() {
+        return receivePhone;
+    }
+
+    public void setReceivePhone(String receivePhone) {
+        this.receivePhone = receivePhone;
     }
 
     public String getRemake() {
