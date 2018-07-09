@@ -1,10 +1,11 @@
+# 端口和https协议
 server:
   port: 8080
   ssl:
     key-store: classpath:server.jks
     key-store-password: yvrvl08smap
 
-
+# 数据源连接
 spring:
     datasource:
         name: tea
@@ -39,21 +40,6 @@ spring:
       suffix: .ftl
       template-loader-path: /ftl
 
-#    多环境配置
-    profiles:
-      active: dev
-
-
-mybatis:
-  mapper-locations: classpath:/*/*.xml
-  type-aliases-package: com.joe.api.*.po
-
-#pagehelper分页插件
-pagehelper:
-    helperDialect: mysql
-    reasonable: true
-    supportMethodsArguments: true
-    params: count=countSql
 
 #七牛上传文件参数
 qiNiu:

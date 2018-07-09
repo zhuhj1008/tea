@@ -1,10 +1,26 @@
 
-@ServletComponentScan 注解作用
-当使用Spring-Boot时，嵌入式Servlet容器通过扫描注解的方式注册Servlet、Filter和Servlet规范的所有监听器（如HttpSessionListener监听器）。
-Spring boot 的主 Servlet 为 DispatcherServlet，其默认的url-pattern为“/”。也许我们在应用中还需要定义更多的Servlet，该如何使用SpringBoot来完成呢？
+一.@ServletComponentScan
+当使用Spring-Boot时,嵌入式Servlet容器通过扫描注解的方式注册Servlet、Filter和Servlet规范的所有监听器（如HttpSessionListener监听器）。
+SpringBoot的主Servlet为DispatcherServlet,其默认的url-pattern为"/".
+也许我们在应用中还需要定义更多的Servlet，该如何使用SpringBoot来完成呢？
+在spring boot中添加自己的Servlet有两种方法,代码注册Servlet和注解自动注册（Filter和Listener也是如此）。
 
-在spring boot中添加自己的Servlet有两种方法，代码注册Servlet和注解自动注册（Filter和Listener也是如此）。
-一、代码注册通过ServletRegistrationBean、 FilterRegistrationBean 和 ServletListenerRegistrationBean 获得控制。
+1).代码注册通过ServletRegistrationBean、 FilterRegistrationBean 和 ServletListenerRegistrationBean 获得控制。
 也可以通过实现 ServletContextInitializer 接口直接注册。
 
-二、在 SpringBootApplication 上使用@ServletComponentScan 注解后，Servlet、Filter、Listener 可以直接通过 @WebServlet、@WebFilter、@WebListener 注解自动注册，无需其他代码。
+2).在 SpringBootApplication 上使用@ServletComponentScan 注解后，Servlet、Filter、Listener 可以直接通过 @WebServlet、@WebFilter、@WebListener 注解自动注册，无需其他代码。
+
+二. 全局异常配置
+    1.步骤
+        1).自定义全局异常处理器,添加类注解@ControllerAdvice或者@RestControllerAdvice.
+        2).自定义异常方法,添加方法注解@ExceptionHandler,参数为该方法要处理的异常类型.
+        3).如果想返回http状态码,还需要添加方法注解@ResponseStatus.
+    2.示例
+        参见:GlobalExceptionHandler
+
+三.多数据源配置
+    1.步骤
+        1)新建application-xxx.yml 或者.properties 配置文件,必须 'application-'开头,例如application-dev.yml
+        2)系统默认配置文件application.yml 里添加属性 profiles: active: dev,表示默认打包application-dev.yml 配置。
+        3)打包运行时候可以通过--来修改配置文件参数,例如 java -jar tea.jar --profiles.active=test。
+
