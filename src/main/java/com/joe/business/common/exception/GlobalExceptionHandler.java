@@ -22,7 +22,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = Exception.class)
     public Object defaultExceptionHandler(Exception e) {
-        logger.info("系统异常：{}", e.getMessage());
+        logger.info("系统异常：{}", e);
         return ResponseEntity.getFailEntity("操作失败，请联系管理员。");
     }
 
