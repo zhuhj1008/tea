@@ -90,7 +90,7 @@
   </insert>
 
   <insert id="insertBatch">
-    INSERT INTO tb_order_detail (`order_id`, `picture`, `commodity_id`,`commodity_name` `price`, `amount`, `unit`, `create_time`) VALUES
+    INSERT INTO tb_order_detail (`order_id`, `picture`, `commodity_id`,`commodity_name` ,`price`, `amount`, `unit`, `create_time`) VALUES
     <foreach collection="orderDetailList" separator="," item="orderDetail">
       (
       #{orderDetail.orderId,jdbcType=INTEGER},#{orderDetail.picture,jdbcType=VARCHAR},

@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.joe.api.dto.OrderQueryDTO;
 import com.joe.business.common.base.BaseController;
+import com.joe.business.common.exception.ParameterIllegalityException;
 import com.joe.business.order.service.OrderDetailWebService;
 import com.joe.business.order.service.OrderWebService;
 import com.joe.business.order.vo.OrderVo;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.ws.Response;
@@ -25,7 +27,7 @@ import java.util.Map;
  * 订单请求
  * create by Joe on 2018-06-04 16:02
  **/
-@Controller
+@RestController
 @RequestMapping("/order")
 public class OrderController extends BaseController {
 
@@ -41,7 +43,6 @@ public class OrderController extends BaseController {
      * 新增订单
      */
     @RequestMapping("/addOrder")
-    @ResponseBody
     public Object addOrder(HttpServletRequest request) {
 
         String requestParam = getRequestParam(request);
@@ -61,7 +62,6 @@ public class OrderController extends BaseController {
      * 条件查询订单
      */
     @RequestMapping("/getOrder")
-    @ResponseBody
     public Object getOrderByParam(HttpServletRequest request) {
         String requestParam = getRequestParam(request);
         if (StringUtils.isBlank(requestParam)) {
@@ -94,6 +94,27 @@ public class OrderController extends BaseController {
         pageEntity.setTotal(total);
         pageEntity.setContents(orderList);
         return ResponseEntity.getSuccessEntity("查询订单列表成功", pageEntity);
+    }
+
+
+    @RequestMapping
+    public Object alterOrder(HttpServletRequest request) {
+
+        String requestParam = getRequestParam(request);
+        if (StringUtils.isBlank(requestParam)) {
+           throw new ParameterIllegalityException("参数格式不正确");
+        }
+        JSONObject jsonObject = JSON.parseObject(requestParam);
+        if (jsonObject == null) {
+            return ResponseEntity.getFailEntity("参数错误");
+        }
+
+        Integer orderId = Integer.valueOf(jsonObject.get("orderId").toString());
+
+
+
+
+        return ResponseEntity.getSuccessEntity("修改订单成功", 1);
     }
 
 
