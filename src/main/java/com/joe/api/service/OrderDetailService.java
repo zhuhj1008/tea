@@ -6,6 +6,7 @@ import com.joe.api.po.OrderDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -81,6 +82,20 @@ public class OrderDetailService {
      */
     public List<OrderDetail> queryShopCartDetail(int customerId) {
         return orderDetailMapper.selectByCustomerIdAndStatus(customerId,OrderDetailEnum.SHOP_CAR.getValue());
+    }
+
+    /**
+     * 根据订单号查询订单列表
+     * @param orderId
+     * @return
+     */
+    public List<OrderDetail> queryOrderDetailByOrderId(Integer orderId){
+
+        if(orderId == null || orderId == 0){
+            return new ArrayList<>();
+        }
+
+        return orderDetailMapper.queryOrderDetailByOrderId(orderId);
     }
 
 

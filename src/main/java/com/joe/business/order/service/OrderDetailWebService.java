@@ -21,7 +21,7 @@ public class OrderDetailWebService {
     private OrderDetailService orderDetailService;
 
 
-    public void addOrderDetail(OrderVo orderVo , int orderId) {
+    public void addOrderDetail(OrderVo orderVo, int orderId) {
 
         List<OrderDetailVo> orderDetailVoList = OrderVo.convertToOrderDetailVo(orderVo);
         List<OrderDetail> orderDetailList = new ArrayList<>();
@@ -31,5 +31,10 @@ public class OrderDetailWebService {
         }
 
         orderDetailService.addOrderDetailBatch(orderDetailList);
+    }
+
+    public List<OrderDetail> getOrderDetailByOrderId(Integer orderId) {
+
+        return orderDetailService.queryOrderDetailByOrderId(orderId);
     }
 }
