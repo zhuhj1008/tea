@@ -124,6 +124,9 @@
             <if test="receiveAddress != null">
                 #{receiveAddress,jdbcType=VARCHAR},
             </if>
+            <if test="receivePhone != null">
+                #{receivePhone,jdbcType=VARCHAR},
+            </if>
             <if test="remake != null">
                 #{remake,jdbcType=VARCHAR},
             </if>
