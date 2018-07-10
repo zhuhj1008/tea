@@ -278,7 +278,7 @@
         </if>
     </select>
 
-    <select id="selectCountByOrderSelective" resultMap="java.lang.Integer" parameterType="com.joe.api.po.Order">
+    <select id="selectCountByOrderSelective" resultType="java.lang.Integer" parameterType="com.joe.api.po.Order">
         select
         count(*)
         from tb_order
