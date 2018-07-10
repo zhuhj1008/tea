@@ -2,9 +2,9 @@ package com.joe.api.service;
 
 import com.github.pagehelper.PageHelper;
 import com.joe.api.dao.OrderMapper;
-import com.joe.api.dto.OrderQueryDTO;
 import com.joe.api.enums.OrderStatusEnum;
 import com.joe.api.po.Order;
+import com.joe.business.common.constant.GlobalConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -70,25 +70,33 @@ public class OrderService {
     /**
      * 根据条件查询订单个数
      *
-     * @param orderQueryDTO
+     * @param order
      * @return
      */
-    public int queryOrderCountByQueryDto(OrderQueryDTO orderQueryDTO) {
+    public int queryOrderCount(Order order) {
 
-        return orderMapper.selectCountByOrderQueryDtoSelective(orderQueryDTO);
+        return orderMapper.selectCountByOrderSelective(order);
     }
 
     /**
      * 根据条件查询订单
      *
-     * @param orderQueryDTO
+     * @param order
      * @return
      */
-    public List<Order> queryOrderListByQueryDto(OrderQueryDTO orderQueryDTO, int pageNo, int pageSize) {
+    public List<Order> queryOrderListByQueryDto(Order order, Integer pageNo, Integer pageSize) {
+
+        if(pageNo == null || pageNo == 0){
+            pageNo = GlobalConstant.PageCinstant.DEFAULT_PAGE_NO;
+        }
+
+        if(pageSize == null || pageSize == 0){
+            pageNo = GlobalConstant.PageCinstant.DEFAULT_PAAGE_SIZE;
+        }
 
         PageHelper.startPage(pageNo, pageSize);
 
-        return orderMapper.selectByOrderQueryDtoSelective(orderQueryDTO);
+        return orderMapper.selectByOrderSelective(order);
     }
 
 

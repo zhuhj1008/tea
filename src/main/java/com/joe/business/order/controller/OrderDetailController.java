@@ -27,13 +27,12 @@ public class OrderDetailController extends BaseController {
     @Autowired
     private OrderDetailWebService orderDetailWebService;
 
-
     @RequestMapping("/getOrderDetail")
     public Object getOrderDetail(HttpServletRequest request) {
 
         String requestParam = getRequestParam(request);
         if (StringUtils.isBlank(requestParam)) {
-            throw new ParameterIllegalityException("参数格式不正确");
+            throw new ParameterIllegalityException("参数为空");
         }
         JSONObject jsonObject = JSON.parseObject(requestParam);
         if (jsonObject == null) {

@@ -11,7 +11,7 @@
         <result column="post_code" property="postCode" jdbcType="VARCHAR"/>
         <result column="express_id" property="expressId" jdbcType="INTEGER"/>
         <result column="express_code" property="expressCode" jdbcType="VARCHAR"/>
-        <result column="express_money" property="expressMoney" jdbcType="VARCHAR"/>
+        <result column="express_money" property="expressMoney" jdbcType="DECIMAL"/>
         <result column="receive_address" property="receiveAddress" jdbcType="VARCHAR"/>
         <result column="receive_phone" property="receivePhone" jdbcType="VARCHAR"/>
         <result column="remake" property="remake" jdbcType="VARCHAR"/>
@@ -119,7 +119,7 @@
                 #{expressCode,jdbcType=VARCHAR},
             </if>
             <if test="expressMoney != null">
-                #{expressMoney,jdbcType=VARCHAR},
+                #{expressMoney,jdbcType=DECIMAL},
             </if>
             <if test="receiveAddress != null">
                 #{receiveAddress,jdbcType=VARCHAR},
@@ -188,7 +188,7 @@
                 express_code = #{expressCode,jdbcType=VARCHAR},
             </if>
             <if test="expressMoney != null">
-                express_money = #{expressMoney,jdbcType=VARCHAR},
+                express_money = #{expressMoney,jdbcType=DECIMAL},
             </if>
             <if test="receiveAddress != null">
                 receive_address = #{receiveAddress,jdbcType=VARCHAR},
@@ -258,7 +258,39 @@
             and order_status = #{orderStatus,jdbcType=INTEGER}
         </if>
         <if test="expressCode != null">
-            and express_code = CONCAT('%', #{expressCode,jdbcType=VARCHAR} , '%')
+            and express_code like CONCAT('%', #{expressCode,jdbcType=VARCHAR} , '%')
+        </if>
+    </select>
+
+    <select id="selectByOrderSelective" resultMap="BaseResultMap" parameterType="com.joe.api.po.Order">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_order
+        where enable = 1
+        <if test="customerName != null">
+            and customer_name like CONCAT('%', #{customerName,jdbcType=VARCHAR}, '%')
+        </if>
+        <if test="orderStatus != null">
+            and order_status = #{orderStatus,jdbcType=INTEGER},
+        </if>
+        <if test="expressCode != null">
+            and express_code like CONCAT('%', #{expressCode,jdbcType=VARCHAR} , '%')
+        </if>
+    </select>
+
+    <select id="selectCountByOrderSelective" resultMap="java.lang.Integer" parameterType="com.joe.api.po.Order">
+        select
+        count(*)
+        from tb_order
+        where enable = 1
+        <if test="customerName != null">
+            and customer_name like CONCAT('%', #{customerName,jdbcType=VARCHAR}, '%')
+        </if>
+        <if test="orderStatus != null">
+            and order_status = #{orderStatus,jdbcType=INTEGER},
+        </if>
+        <if test="expressCode != null">
+            and express_code like CONCAT('%', #{expressCode,jdbcType=VARCHAR} , '%')
         </if>
     </select>
 </mapper>

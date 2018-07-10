@@ -1,6 +1,5 @@
 package com.joe.api.dao;
 
-import com.joe.api.dto.OrderQueryDTO;
 import com.joe.api.po.Order;
 
 import java.util.List;
@@ -15,8 +14,12 @@ public interface OrderMapper {
 
     Order selectByPrimaryKey(Integer orderId);
 
-    List<Order> selectByOrderQueryDtoSelective(OrderQueryDTO orderQueryDTO);
+    Integer selectCountByOrderSelective(Order order);
 
-    int selectCountByOrderQueryDtoSelective(OrderQueryDTO orderQueryDTO);
+    List<Order> selectByOrderSelective(Order order);
+
+//    List<Order> selectByOrderQueryDtoSelective(OrderQueryDTO orderQueryDTO);
+
+//    int selectCountByOrderQueryDtoSelective(OrderQueryDTO orderQueryDTO);
 
 }

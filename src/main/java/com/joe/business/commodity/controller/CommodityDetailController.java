@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,18 +22,17 @@ import javax.servlet.http.HttpServletRequest;
  * create by Joe on 2018-05-29 12:03
  **/
 
-@Controller
+@RestController
 @RequestMapping("/commodityDetail")
 public class CommodityDetailController extends BaseController {
 
     private static final Logger logger = LoggerFactory.getLogger(CommodityDetailController.class);
 
     @Autowired
-    CommodityDetailWebService commodityDetailWebService;
+    private CommodityDetailWebService commodityDetailWebService;
 
 
     @RequestMapping("/getCommodityDetailByCommodityId")
-    @ResponseBody
     public Object getCommodityDetailByCommodityId(HttpServletRequest request) {
 
         String requestParam = getRequestParam(request);

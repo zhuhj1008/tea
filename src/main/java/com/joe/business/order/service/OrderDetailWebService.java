@@ -21,6 +21,9 @@ public class OrderDetailWebService {
     private OrderDetailService orderDetailService;
 
 
+    /**
+     *新增订单明细
+     */
     public void addOrderDetail(OrderVo orderVo, int orderId) {
 
         List<OrderDetailVo> orderDetailVoList = OrderVo.convertToOrderDetailVo(orderVo);
@@ -33,7 +36,14 @@ public class OrderDetailWebService {
         orderDetailService.addOrderDetailBatch(orderDetailList);
     }
 
+    /**
+     * 根据订单号查询订单明细
+     */
     public List<OrderDetail> getOrderDetailByOrderId(Integer orderId) {
+
+        if (orderId == null || orderId == 0) {
+            return new ArrayList<>();
+        }
 
         return orderDetailService.queryOrderDetailByOrderId(orderId);
     }

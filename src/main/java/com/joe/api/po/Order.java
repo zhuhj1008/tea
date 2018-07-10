@@ -38,7 +38,7 @@ public class Order {
     private String expressCode;
 
     //邮费
-    private String expressMoney;
+    private BigDecimal expressMoney;
 
     //收货地址
     private String receiveAddress;
@@ -139,12 +139,12 @@ public class Order {
         this.expressCode = expressCode == null ? null : expressCode.trim();
     }
 
-    public String getExpressMoney() {
+    public BigDecimal getExpressMoney() {
         return expressMoney;
     }
 
-    public void setExpressMoney(String expressMoney) {
-        this.expressMoney = expressMoney == null ? null : expressMoney.trim();
+    public void setExpressMoney(BigDecimal expressMoney) {
+        this.expressMoney = expressMoney;
     }
 
     public String getReceiveAddress() {

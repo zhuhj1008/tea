@@ -1,14 +1,20 @@
 package com.joe.business.order.service;
 
-import com.joe.api.dto.OrderQueryDTO;
+
+import com.alibaba.fastjson.JSON;
+import com.joe.api.enums.OrderStatusEnum;
 import com.joe.api.po.Order;
 import com.joe.api.service.OrderService;
+import com.joe.business.common.exception.BusinessException;
+import com.joe.business.order.vo.OrderDeliverDTO;
+import com.joe.business.order.vo.OrderQueryDTO;
 import com.joe.business.order.vo.OrderVo;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,7 +28,9 @@ public class OrderWebService {
     private OrderService orderService;
 
 
-
+    /**
+     * 新增订单
+     */
     public int addOrder(OrderVo orderVo) {
 
         Order order = OrderVo.OrderVoConvert2Order(orderVo);
@@ -31,17 +39,30 @@ public class OrderWebService {
         return orderId;
     }
 
+    /**
+     * 查询符合条件的订单数量
+     */
+    public int getOrderCount(OrderQueryDTO dto) {
 
-    public List<OrderVo> getOrderList(OrderQueryDTO dto, int pageNo, int pageSize) {
+        Order order = JSON.parseObject(JSON.toJSONString(dto), Order.class);
+        return orderService.queryOrderCount(order);
+    }
 
-        List<Order> orders = orderService.queryOrderListByQueryDto(dto, pageNo, pageSize);
+
+    /**
+     * 分页条件查询订单列表
+     */
+    public List<OrderVo> getOrderList(OrderQueryDTO orderQueryDTO) {
+
+        Order order = JSON.parseObject(JSON.toJSONString(orderQueryDTO), Order.class);
+        List<Order> orders = orderService.queryOrderListByQueryDto(order, orderQueryDTO.getPageNo(), orderQueryDTO.getPageSize());
         if (CollectionUtils.isEmpty(orders)) {
             return new ArrayList<>();
         }
 
         List<OrderVo> orderVoList = new ArrayList<>();
-        for (Order order : orders) {
-            OrderVo orderVo = OrderVo.OrderConvert2OrderVo(order);
+        for (Order tmpOrder : orders) {
+            OrderVo orderVo = OrderVo.OrderConvert2OrderVo(tmpOrder);
             orderVoList.add(orderVo);
         }
 
@@ -49,10 +70,38 @@ public class OrderWebService {
     }
 
 
-    public int getOrderCount(OrderQueryDTO dto) {
+    /**
+     *
+     * @param orderDeliverDTO 订单发货参数
+     * @return
+     */
+    public int orderDeliver(OrderDeliverDTO orderDeliverDTO){
 
-        return orderService.queryOrderCountByQueryDto(dto);
+        Integer orderId = orderDeliverDTO.getOrderId();
+
+        if(orderId == null || orderId == 0){
+            throw new BusinessException("此订单不存在");
+        }
+
+        Order order = orderService.queryOrder(orderId);
+        if(order == null){
+            throw new BusinessException("此订单不存在");
+        }
+
+        //如果订单状态不是已支付，不允许修改成发货状态
+        if(order.getOrderStatus() == null || order.getOrderStatus() != OrderStatusEnum.PAYMENT.getValue()){
+            throw new BusinessException("此订单未支付");
+        }
+
+        order.setExpressId(orderDeliverDTO.getExpressId());
+        order.setExpressCode(orderDeliverDTO.getExpressCode());
+        order.setExpressMoney(orderDeliverDTO.getExpressMoney());
+        order.setOrderStatus(OrderStatusEnum.DELIVER.getValue());
+        order.setDeliveryTime(new Date());
+
+        return orderService.modifyOrder(order);
     }
+
 
 
 }

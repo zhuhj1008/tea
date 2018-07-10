@@ -11,9 +11,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 /**
  * 全局异常处理
  * create by Joe on 2018-07-09 14:18
- * <p>
- * 1. @RestController = @Controller + @ResponseBody     @RestControllerAdvice同理
- * 2.
  **/
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -26,11 +23,23 @@ public class GlobalExceptionHandler {
         return ResponseEntity.getFailEntity("操作失败，请联系管理员。");
     }
 
-    @ExceptionHandler(value = ParameterIllegalityException.class)
-    @ResponseStatus(code = HttpStatus.BAD_REQUEST, value = HttpStatus.BAD_REQUEST, reason = "参数缺失")
-    public void paramIllegalityException() {
-
+    @ExceptionHandler(value = BusinessException.class)
+    public Object businessExceptionHandler(BusinessException e) {
+        logger.info("业务异常：{}", e);
+        return ResponseEntity.getFailEntity(e.getMessage());
     }
+
+    @ExceptionHandler(value = ParameterIllegalityException.class)
+    public Object paramException(ParameterIllegalityException e) {
+        logger.info("请求参数异常：{}", e);
+        return ResponseEntity.getFailEntity(e.getMessage());
+    }
+
+//    @ExceptionHandler(value = ParameterIllegalityException.class)
+//    @ResponseStatus(code = HttpStatus.BAD_REQUEST, value = HttpStatus.BAD_REQUEST, reason = "参数缺失")
+//    public void paramIllegalityException() {
+//
+//    }
 
 
 }

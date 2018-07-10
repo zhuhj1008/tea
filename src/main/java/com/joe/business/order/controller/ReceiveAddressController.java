@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -21,7 +22,7 @@ import java.util.List;
  * 收货地址请求
  * create by Joe on 2018-06-14 14:41
  **/
-@Controller
+@RestController
 @RequestMapping("/receive")
 public class ReceiveAddressController extends BaseController {
 
@@ -31,7 +32,6 @@ public class ReceiveAddressController extends BaseController {
     private ReceiveAddressWebService receiveAddressWebService;
 
     @RequestMapping("/addReceiveAddress")
-    @ResponseBody
     public Object addReceiveAddress(HttpServletRequest request) {
 
         String requestParam = getRequestParam(request);
@@ -53,7 +53,6 @@ public class ReceiveAddressController extends BaseController {
     }
 
     @RequestMapping("/updateReceiveAddress")
-    @ResponseBody
     public Object updateReceiveAddress(HttpServletRequest request) {
 
         String requestParam = getRequestParam(request);
@@ -73,7 +72,6 @@ public class ReceiveAddressController extends BaseController {
     }
 
     @RequestMapping("/deleteReceiveAddress")
-    @ResponseBody
     public Object deleteReceiveAddress(HttpServletRequest request) {
 
         String requestParam = getRequestParam(request);
@@ -96,7 +94,6 @@ public class ReceiveAddressController extends BaseController {
     }
 
     @RequestMapping("/queryReceiveAddress")
-    @ResponseBody
     public Object queryReceiveAddress(HttpServletRequest request) {
 
         String requestParam = getRequestParam(request);
@@ -122,7 +119,6 @@ public class ReceiveAddressController extends BaseController {
      * @return
      */
     @RequestMapping("/queryDefaultAddress")
-    @ResponseBody
     public Object queryCustomerDefaultReceiveAddress(HttpServletRequest request) {
 
         String requestParam = getRequestParam(request);
@@ -151,7 +147,6 @@ public class ReceiveAddressController extends BaseController {
      * @return
      */
     @RequestMapping("/modifyDefaultAddress")
-    @ResponseBody
     public Object modifyCustomerDefaultReceiveAddress(HttpServletRequest request) {
 
         String requestParam = getRequestParam(request);

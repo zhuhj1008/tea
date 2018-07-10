@@ -1,17 +1,27 @@
-package com.joe.api.dto;
+package com.joe.business.order.vo;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+
+import java.net.Inet4Address;
 
 /**
  * 订单查询参数
- */
+ * create by Joe on 2018-07-10 11:46
+ **/
 public class OrderQueryDTO {
-
 
     private String customerName;
 
     private Integer orderStatus;
 
     private String expressCode;
+
+    private Integer pageNo;
+
+    private Integer pageSize;
+
+    public OrderQueryDTO() {
+    }
 
     public String getCustomerName() {
         return customerName;
@@ -35,5 +45,26 @@ public class OrderQueryDTO {
 
     public void setExpressCode(String expressCode) {
         this.expressCode = expressCode;
+    }
+
+    public Integer getPageNo() {
+        return pageNo;
+    }
+
+    public void setPageNo(Integer pageNo) {
+        this.pageNo = pageNo;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    @Override
+    public String toString() {
+        return ReflectionToStringBuilder.toString(this);
     }
 }

@@ -28,7 +28,7 @@ public class OrderVo {
     //快递单号
     private String expressCode;
     //快递费
-    private String expressMoney;
+    private BigDecimal expressMoney;
     //邮编
     private String postCode;
     //收货地址
@@ -61,7 +61,7 @@ public class OrderVo {
         orderVo.setOrderStatus(1);
         orderVo.setExpressId(2);
         orderVo.setExpressCode("162358974126645");
-        orderVo.setExpressMoney("6");
+        orderVo.setExpressMoney(new BigDecimal(0.6));
         orderVo.setReceiveAddress("北京市海淀区上地三街");
         orderVo.setRemake("尽快发货");
         orderVo.setOrderDetailArr(orderDetails);
@@ -174,11 +174,11 @@ public class OrderVo {
         this.expressCode = expressCode;
     }
 
-    public String getExpressMoney() {
+    public BigDecimal getExpressMoney() {
         return expressMoney;
     }
 
-    public void setExpressMoney(String expressMoney) {
+    public void setExpressMoney(BigDecimal expressMoney) {
         this.expressMoney = expressMoney;
     }
 

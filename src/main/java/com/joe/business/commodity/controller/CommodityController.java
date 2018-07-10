@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -24,7 +25,7 @@ import java.util.Map;
 /**
  * 商品管理
  */
-@Controller
+@RestController
 @RequestMapping("/commodity")
 public class CommodityController extends BaseController {
 
@@ -35,7 +36,6 @@ public class CommodityController extends BaseController {
 
 
     @RequestMapping("/addCommodity")
-    @ResponseBody
     public Object addCommodity(HttpServletRequest request) {
 
         String requestParam = getRequestParam(request);
@@ -60,7 +60,6 @@ public class CommodityController extends BaseController {
      * @return
      */
     @RequestMapping("/getCommodityListByItemId")
-    @ResponseBody
     public Object getCommodityListByItemId(HttpServletRequest request) {
 
         String requestParam = getRequestParam(request);
@@ -92,7 +91,6 @@ public class CommodityController extends BaseController {
      * @return
      */
     @RequestMapping("/getRecommendCommodity")
-    @ResponseBody
     public Object getRecommendCommodity() {
 
         logger.info("request recommend commodity list");
@@ -110,7 +108,6 @@ public class CommodityController extends BaseController {
      * @return
      */
     @RequestMapping("/switchCommodityRecommend")
-    @ResponseBody
     public Object switchCommodityRecommend(HttpServletRequest request) {
 
         String requestParam = getRequestParam(request);
@@ -137,7 +134,6 @@ public class CommodityController extends BaseController {
      * @return
      */
     @RequestMapping("/removeCommodity")
-    @ResponseBody
     public Object removeCommodity(HttpServletRequest request) {
 
         String requestParam = getRequestParam(request);
@@ -161,7 +157,6 @@ public class CommodityController extends BaseController {
      * @return
      */
     @RequestMapping("/updateCommodity")
-    @ResponseBody
     public Object updateCommodity(HttpServletRequest request) {
         String requestParam = getRequestParam(request);
         if (StringUtils.isBlank(requestParam)) {

@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -24,7 +25,7 @@ import java.util.Map;
  * 商品评价请求
  * create by Joe on 2018-06-03 13:48
  **/
-@Controller
+@RestController
 @RequestMapping("/evaluate")
 public class CommodityEvaluateController extends BaseController {
 
@@ -37,7 +38,6 @@ public class CommodityEvaluateController extends BaseController {
      * 添加商品评价
      */
     @RequestMapping("/addEvaluate")
-    @ResponseBody
     public Object addEvaluate(HttpServletRequest request) {
 
         String requestParam = getRequestParam(request);
@@ -58,7 +58,6 @@ public class CommodityEvaluateController extends BaseController {
      * 追加商品评价
      */
     @RequestMapping("/appendEvaluate")
-    @ResponseBody
     public Object appendEvaluate(HttpServletRequest request) {
 
         String requestParam = getRequestParam(request);
@@ -86,7 +85,6 @@ public class CommodityEvaluateController extends BaseController {
      * 查看商品评价（分页）
      */
     @RequestMapping("/getEvaluate")
-    @ResponseBody
     public Object getEvaluateByCommodityId(HttpServletRequest request) {
 
         String requestParam = getRequestParam(request);
