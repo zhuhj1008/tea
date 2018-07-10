@@ -15,6 +15,8 @@ import java.util.List;
  **/
 public class OrderVo {
 
+    //订单编号
+    private Integer orderId;
     //客户编号
     private Integer customerId;
     //顾客姓名
@@ -79,6 +81,7 @@ public class OrderVo {
         }
 
         Order order = new Order();
+        order.setOrderId(orderVo.getOrderId());
         order.setCustomerId(orderVo.getCustomerId());
         order.setCustomerName(orderVo.getCustomerName());
         order.setOrderMoney(orderVo.getOrderMoney());
@@ -99,6 +102,7 @@ public class OrderVo {
             return null;
         }
         OrderVo orderVo = new OrderVo();
+        orderVo.setOrderId(order.getOrderId());
         orderVo.setCustomerId(order.getCustomerId());
         orderVo.setCustomerName(order.getCustomerName());
         orderVo.setOrderMoney(order.getOrderMoney());
@@ -125,6 +129,13 @@ public class OrderVo {
     }
 
 
+    public Integer getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
+    }
 
     public Integer getCustomerId() {
         return customerId;
