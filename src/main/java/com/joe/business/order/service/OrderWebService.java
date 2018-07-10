@@ -10,6 +10,7 @@ import com.joe.business.order.vo.OrderDeliverDTO;
 import com.joe.business.order.vo.OrderQueryDTO;
 import com.joe.business.order.vo.OrderVo;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -54,7 +55,17 @@ public class OrderWebService {
      */
     public List<OrderVo> getOrderList(OrderQueryDTO orderQueryDTO) {
 
-        Order order = JSON.parseObject(JSON.toJSONString(orderQueryDTO), Order.class);
+        Order order = new Order();
+        if (StringUtils.isNotEmpty(orderQueryDTO.getCustomerName())) {
+            order.setCustomerName(orderQueryDTO.getCustomerName());
+        }
+        if (StringUtils.isNotEmpty(orderQueryDTO.getExpressCode())) {
+            order.setExpressCode(orderQueryDTO.getExpressCode());
+        }
+        if (orderQueryDTO.getExpressCode() != null) {
+            order.setOrderStatus(orderQueryDTO.getOrderStatus());
+        }
+
         List<Order> orders = orderService.queryOrderListByQueryDto(order, orderQueryDTO.getPageNo(), orderQueryDTO.getPageSize());
         if (CollectionUtils.isEmpty(orders)) {
             return new ArrayList<>();
@@ -71,25 +82,24 @@ public class OrderWebService {
 
 
     /**
-     *
      * @param orderDeliverDTO 订单发货参数
      * @return
      */
-    public int orderDeliver(OrderDeliverDTO orderDeliverDTO){
+    public int orderDeliver(OrderDeliverDTO orderDeliverDTO) {
 
         Integer orderId = orderDeliverDTO.getOrderId();
 
-        if(orderId == null || orderId == 0){
+        if (orderId == null || orderId == 0) {
             throw new BusinessException("此订单不存在");
         }
 
         Order order = orderService.queryOrder(orderId);
-        if(order == null){
+        if (order == null) {
             throw new BusinessException("此订单不存在");
         }
 
         //如果订单状态不是已支付，不允许修改成发货状态
-        if(order.getOrderStatus() == null || order.getOrderStatus() != OrderStatusEnum.PAYMENT.getValue()){
+        if (order.getOrderStatus() == null || order.getOrderStatus() != OrderStatusEnum.PAYMENT.getValue()) {
             throw new BusinessException("此订单未支付");
         }
 
@@ -101,7 +111,6 @@ public class OrderWebService {
 
         return orderService.modifyOrder(order);
     }
-
 
 
 }
