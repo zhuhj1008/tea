@@ -8,6 +8,9 @@ spring:
 mybatis:
   mapper-locations: classpath:/*/*.xml
   type-aliases-package: com.joe.api.*.po
+#  开启mybatis日志打印
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 #分页插件
 pagehelper:
@@ -24,7 +27,6 @@ qiNiu:
     macName: HmacSHA1
     encoding: UTF-8
     effective: 3
-
 
 
 

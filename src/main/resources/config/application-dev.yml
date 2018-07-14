@@ -5,9 +5,9 @@ server:
 spring:
   datasource:
           name: tea
-          url: jdbc:mysql://140.143.242.80:3306/tea
-          username: joe
-          password: joejoejoe
+          url: jdbc:mysql://localhost:3306/tea
+          username: root
+          password: root
           type: com.alibaba.druid.pool.DruidDataSource
           driver-class-name: com.mysql.jdbc.Driver
           filters: stat
@@ -23,6 +23,9 @@ spring:
           testOnReturn: false
           poolPreparedStatements: true
           maxOpenPreparedStatements: 20
+#  cache:
+#      ehcache:
+#        config: classpath:learn/ehcache.xml
 
   #redis
   redis:
@@ -36,6 +39,8 @@ spring:
       max-wait: -1
       max-idle: 8
       min-idle: 0
+
+
 
 
 

@@ -14,6 +14,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
 import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
 import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +34,7 @@ import java.util.Properties;
 @ComponentScan("com.joe.*")//注解扫描路径
 @MapperScan("com.joe.api.dao")//mapper接口扫描路径
 @ServletComponentScan
+@EnableCaching
 public class Application extends WebMvcConfigurerAdapter implements CommandLineRunner {
 
     private Logger logger = LoggerFactory.getLogger(Application.class);

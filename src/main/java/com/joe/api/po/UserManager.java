@@ -2,12 +2,13 @@ package com.joe.api.po;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 管理员Bean
  */
-public class UserManager {
+public class UserManager  implements Serializable {
 
     //管理员编号
     private Integer managerId;

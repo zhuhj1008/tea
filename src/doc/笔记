@@ -24,3 +24,31 @@ SpringBoot的主Servlet为DispatcherServlet,其默认的url-pattern为"/".
         2)系统默认配置文件application.yml 里添加属性 profiles: active: dev,表示默认打包application-dev.yml 配置。
         3)打包运行时候可以通过--来修改配置文件参数,例如 java -jar tea.jar --profiles.active=test。
 
+四.事务管理
+     1.步骤
+        使用 jdbc 或者 druid数据源等数据路连接，添加依赖后，他都会自动默认分别注入DataSourceTransactionManager或JpaTransactionManager
+        不需要其他的配置，只需要在特定方法上加 @Transcation 注解就可以实现事务管理。
+      2.注意
+          Mysql表示有事务安全(比如 InnoDB)和非事务安全(比如 ISAM 和MyISAM)之分的，如果数据库表是非事务安全的，程序是没法实现异常回滚的。
+五.spring EhCache缓存
+      1.步骤
+            1).添加缓存依赖 spring-boot-starter-cache
+            2).主类Application 添加注解 @EnableCaching
+            3).添加EhCache配置文件,并加载到application.yml
+            4).在需要缓存的接口上添加 @Cacheable
+       2.缓存用的几个注解的作用
+            1).@CacheConfig(cacheNames = "XXX")  用在类上，统一定义缓存的名字，表示该类的方法都是支持缓存的，
+            2).@CachePut  用在方法上，根据请求参数添加到缓存，但是每次都会触发真实的方法调用，一般用在save方法上
+            3).@CacheEvict 用在方法上，会根据条件对缓存进行清空。一般用在delete update 方法上
+            4).@Cacheable 用在方法上，可以根据请求参数加到缓存，每次调用会取缓存数据，缓存中不存在，才去调用真实方法，一般用在 query方法上。
+
+      3.注意
+            1). @CacheEvict清除命名空间下所有缓存的用法是@CacheEvict(allEntries = true)
+                                        清除特定缓存的写法是@CacheEvict(key = "#userManager.managerId") 这里是只有#没有{}的
+            2).被缓存的实体必须序列化，另外 EhCache是进程内缓存框架，各服务器之间的缓存都是独立的。
+六. Ehcache集成Redis 缓存
+      1.步骤
+            1).添加Redis依赖 spring-boot-starter-data-redis
+            2).配置文件添加redis配置
+            3).
+            4).
