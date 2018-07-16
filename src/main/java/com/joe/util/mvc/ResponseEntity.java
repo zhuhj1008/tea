@@ -1,5 +1,6 @@
 package com.joe.util.mvc;
 
+import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -41,7 +42,6 @@ public class ResponseEntity {
     public ResponseEntity(int code, String message) {
         this.code = code;
         this.message = message;
-        this.data = DEFAULT_DATA;
     }
 
 
@@ -64,6 +64,12 @@ public class ResponseEntity {
 
     public static ResponseEntity getFailEntity(String message) {
         return new ResponseEntity(FAIL_CODE, message);
+    }
+
+
+    public static void main(String[] args) {
+        ResponseEntity aa = getFailEntity("aa");
+        System.out.println(JSON.toJSONString(aa));
     }
 
 }
