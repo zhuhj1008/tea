@@ -7,6 +7,7 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -39,6 +40,12 @@ public class OrderVo {
     private String receivePhone;
     //买家备注
     private String remake;
+    //订单创建时间
+    private Date crateTime;
+    //发货时间
+    private Date deliveryTime;
+    //收货时间
+    private Date receiveTime;
     //订单详情
     private String orderDetailArr;
 
@@ -93,6 +100,9 @@ public class OrderVo {
         order.setReceiveAddress(orderVo.getReceiveAddress());
         order.setReceivePhone(orderVo.getReceivePhone());
         order.setRemake(orderVo.getRemake());
+        order.setCreateTime(orderVo.getCrateTime());
+        order.setDeliveryTime(order.getDeliveryTime());
+        order.setReceiveAddress(order.getReceivePhone());
 
         return order;
     }
@@ -114,7 +124,9 @@ public class OrderVo {
         orderVo.setReceiveAddress(order.getReceiveAddress());
         orderVo.setReceivePhone(order.getReceivePhone());
         orderVo.setRemake(order.getRemake());
-
+        orderVo.setCrateTime(order.getCreateTime());
+        orderVo.setDeliveryTime(order.getDeliveryTime());
+        orderVo.setReceiveAddress(order.getReceivePhone());
         return orderVo;
     }
 
@@ -231,6 +243,30 @@ public class OrderVo {
 
     public void setOrderDetailArr(String orderDetailArr) {
         this.orderDetailArr = orderDetailArr;
+    }
+
+    public Date getCrateTime() {
+        return crateTime;
+    }
+
+    public void setCrateTime(Date crateTime) {
+        this.crateTime = crateTime;
+    }
+
+    public Date getDeliveryTime() {
+        return deliveryTime;
+    }
+
+    public void setDeliveryTime(Date deliveryTime) {
+        this.deliveryTime = deliveryTime;
+    }
+
+    public Date getReceiveTime() {
+        return receiveTime;
+    }
+
+    public void setReceiveTime(Date receiveTime) {
+        this.receiveTime = receiveTime;
     }
 
     @Override

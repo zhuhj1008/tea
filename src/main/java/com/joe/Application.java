@@ -17,6 +17,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,8 +34,9 @@ import java.util.Properties;
 @EnableAutoConfiguration
 @ComponentScan("com.joe.*")//注解扫描路径
 @MapperScan("com.joe.api.dao")//mapper接口扫描路径
-@ServletComponentScan
-@EnableCaching
+@ServletComponentScan//拦截器过滤器支持
+@EnableCaching//缓存支持
+@EnableScheduling//定时任务
 public class Application extends WebMvcConfigurerAdapter implements CommandLineRunner {
 
     private Logger logger = LoggerFactory.getLogger(Application.class);
@@ -50,7 +52,6 @@ public class Application extends WebMvcConfigurerAdapter implements CommandLineR
     }
 
     @RequestMapping("/date")
-    @ResponseBody
     String home() {
         return "当前时间"+new Date();
     }
