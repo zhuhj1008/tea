@@ -53,7 +53,7 @@ public class OrderVo {
 
     public static void main(String[] args) throws ParseException {
 
-        Date date  = new Date();
+        Date date = new Date();
         String sDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
         System.out.println(sDate);
 
@@ -86,10 +86,9 @@ public class OrderVo {
     }
 
 
+    public static Order OrderVoConvert2Order(OrderVo orderVo) {
 
-    public static Order OrderVoConvert2Order(OrderVo orderVo){
-
-        if(orderVo == null){
+        if (orderVo == null) {
             return null;
         }
 
@@ -114,8 +113,8 @@ public class OrderVo {
         return order;
     }
 
-    public static OrderVo OrderConvert2OrderVo(Order order){
-        if(order == null){
+    public static OrderVo OrderConvert2OrderVo(Order order) {
+        if (order == null) {
             return null;
         }
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -132,16 +131,24 @@ public class OrderVo {
         orderVo.setReceiveAddress(order.getReceiveAddress());
         orderVo.setReceivePhone(order.getReceivePhone());
         orderVo.setRemake(order.getRemake());
-        orderVo.setCrateTime(sdf.format(order.getCreateTime()));
-        orderVo.setDeliveryTime(sdf.format(order.getDeliveryTime()));
-        orderVo.setReceiveTime(sdf.format(order.getReceiveTime()));
+
+        if (order.getCreateTime() != null) {
+            orderVo.setCrateTime(sdf.format(order.getCreateTime()));
+        }
+        if (order.getDeliveryTime() != null) {
+            orderVo.setDeliveryTime(sdf.format(order.getDeliveryTime()));
+        }
+        if (order.getReceiveTime() != null) {
+            orderVo.setReceiveTime(sdf.format(order.getReceiveTime()));
+
+        }
         return orderVo;
     }
 
 
-    public static List<OrderDetailVo> convertToOrderDetailVo(OrderVo orderVo){
+    public static List<OrderDetailVo> convertToOrderDetailVo(OrderVo orderVo) {
 
-        if(orderVo == null || StringUtils.isBlank(orderVo.getOrderDetailArr())){
+        if (orderVo == null || StringUtils.isBlank(orderVo.getOrderDetailArr())) {
             return null;
         }
 
