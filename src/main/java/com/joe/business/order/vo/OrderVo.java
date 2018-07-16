@@ -6,6 +6,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -41,41 +43,45 @@ public class OrderVo {
     //买家备注
     private String remake;
     //订单创建时间
-    private Date crateTime;
+    private String crateTime;
     //发货时间
-    private Date deliveryTime;
+    private String deliveryTime;
     //收货时间
-    private Date receiveTime;
+    private String receiveTime;
     //订单详情
     private String orderDetailArr;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
+
+        Date date  = new Date();
+        String sDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
+        System.out.println(sDate);
 
 
-        List<OrderDetailVo> orderDetailVos = new ArrayList<>();
-        OrderDetailVo orderDetailVo = new OrderDetailVo();
-        orderDetailVo.setCommodityId(61);
-        orderDetailVo.setPrice(new BigDecimal(12));
-        orderDetailVo.setAmount(2);
-        orderDetailVo.setPicture("www.adaasdada.com");
-        orderDetailVo.setUnit(150);
-        orderDetailVos.add(orderDetailVo);
-        String orderDetails = JSON.toJSONString(orderDetailVos);
-        System.out.println(JSON.toJSONString(orderDetailVos));
-
-        OrderVo orderVo = new OrderVo();
-        orderVo.setCustomerId(1);
-        orderVo.setCustomerName("joe");
-        orderVo.setOrderMoney(new BigDecimal(10));
-        orderVo.setOrderStatus(1);
-        orderVo.setExpressId(2);
-        orderVo.setExpressCode("162358974126645");
-        orderVo.setExpressMoney(new BigDecimal(0.6));
-        orderVo.setReceiveAddress("北京市海淀区上地三街");
-        orderVo.setRemake("尽快发货");
-        orderVo.setOrderDetailArr(orderDetails);
-
-        System.out.println(JSON.toJSONString(orderVo));
+//        List<OrderDetailVo> orderDetailVos = new ArrayList<>();
+//        OrderDetailVo orderDetailVo = new OrderDetailVo();
+//        orderDetailVo.setCommodityId(61);
+//        orderDetailVo.setPrice(new BigDecimal(12));
+//        orderDetailVo.setAmount(2);
+//        orderDetailVo.setPicture("www.adaasdada.com");
+//        orderDetailVo.setUnit(150);
+//        orderDetailVos.add(orderDetailVo);
+//        String orderDetails = JSON.toJSONString(orderDetailVos);
+//        System.out.println(JSON.toJSONString(orderDetailVos));
+//
+//        OrderVo orderVo = new OrderVo();
+//        orderVo.setCustomerId(1);
+//        orderVo.setCustomerName("joe");
+//        orderVo.setOrderMoney(new BigDecimal(10));
+//        orderVo.setOrderStatus(1);
+//        orderVo.setExpressId(2);
+//        orderVo.setExpressCode("162358974126645");
+//        orderVo.setExpressMoney(new BigDecimal(0.6));
+//        orderVo.setReceiveAddress("北京市海淀区上地三街");
+//        orderVo.setRemake("尽快发货");
+//        orderVo.setOrderDetailArr(orderDetails);
+//
+//        System.out.println(JSON.toJSONString(orderVo));
 
     }
 
@@ -86,6 +92,8 @@ public class OrderVo {
         if(orderVo == null){
             return null;
         }
+
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         Order order = new Order();
         order.setOrderId(orderVo.getOrderId());
@@ -100,10 +108,9 @@ public class OrderVo {
         order.setReceiveAddress(orderVo.getReceiveAddress());
         order.setReceivePhone(orderVo.getReceivePhone());
         order.setRemake(orderVo.getRemake());
-        order.setCreateTime(orderVo.getCrateTime());
-        order.setDeliveryTime(order.getDeliveryTime());
-        order.setReceiveAddress(order.getReceivePhone());
-
+//        order.setCreateTime(sdf.parse(orderVo.getCrateTime()));
+//        order.setDeliveryTime(sdf.parse(orderVo.getDeliveryTime()));
+//        order.setReceiveTime(sdf.parse(orderVo.getReceiveTime()));
         return order;
     }
 
@@ -111,6 +118,7 @@ public class OrderVo {
         if(order == null){
             return null;
         }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         OrderVo orderVo = new OrderVo();
         orderVo.setOrderId(order.getOrderId());
         orderVo.setCustomerId(order.getCustomerId());
@@ -124,10 +132,12 @@ public class OrderVo {
         orderVo.setReceiveAddress(order.getReceiveAddress());
         orderVo.setReceivePhone(order.getReceivePhone());
         orderVo.setRemake(order.getRemake());
-        orderVo.setCrateTime(order.getCreateTime());
-        orderVo.setDeliveryTime(order.getDeliveryTime());
+        orderVo.setCrateTime(sdf.format(order.getCreateTime()));
+        orderVo.setDeliveryTime(sdf.format(order.getDeliveryTime()));
+        orderVo.setReceiveTime(sdf.format(order.getReceiveTime()));
         return orderVo;
     }
+
 
     public static List<OrderDetailVo> convertToOrderDetailVo(OrderVo orderVo){
 
@@ -244,27 +254,27 @@ public class OrderVo {
         this.orderDetailArr = orderDetailArr;
     }
 
-    public Date getCrateTime() {
+    public String getCrateTime() {
         return crateTime;
     }
 
-    public void setCrateTime(Date crateTime) {
+    public void setCrateTime(String crateTime) {
         this.crateTime = crateTime;
     }
 
-    public Date getDeliveryTime() {
+    public String getDeliveryTime() {
         return deliveryTime;
     }
 
-    public void setDeliveryTime(Date deliveryTime) {
+    public void setDeliveryTime(String deliveryTime) {
         this.deliveryTime = deliveryTime;
     }
 
-    public Date getReceiveTime() {
+    public String getReceiveTime() {
         return receiveTime;
     }
 
-    public void setReceiveTime(Date receiveTime) {
+    public void setReceiveTime(String receiveTime) {
         this.receiveTime = receiveTime;
     }
 
