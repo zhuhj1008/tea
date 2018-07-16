@@ -126,7 +126,6 @@ public class OrderVo {
         orderVo.setRemake(order.getRemake());
         orderVo.setCrateTime(order.getCreateTime());
         orderVo.setDeliveryTime(order.getDeliveryTime());
-        orderVo.setReceiveAddress(order.getReceivePhone());
         return orderVo;
     }
 
