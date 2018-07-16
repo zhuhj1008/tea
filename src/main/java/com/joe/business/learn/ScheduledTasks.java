@@ -8,10 +8,10 @@ import java.util.Date;
 @Component
 public class ScheduledTasks  {
 
-    @Scheduled(fixedRate = 5000)
-    public void testAAA(){
-
-        System.out.println(new Date());
-
-    }
+//    @Scheduled(fixedRate = 5000)
+//    public void testAAA(){
+//
+//        System.out.println(new Date());
+//
+//    }
 }
