@@ -52,3 +52,16 @@ SpringBoot的主Servlet为DispatcherServlet,其默认的url-pattern为"/".
             2).配置文件添加redis配置
             3).
             4).
+七. 定时任务
+      1.步骤
+            1).主类Application 添加@EnableScheduling 支持定时任务
+            2).新加定时任务类，添加@Component类注解
+            3).新加定时方法，添加注解@Scheduled(cron = "XXX")
+八. 异步任务
+      1.步骤
+            1).主类Application 添加@EnableAsync 支持异步任务
+            2).新加异步任务类，添加@Component类注解
+            3).新加异步方法，添加@Async 注解
+      2.注意
+            1). 异步方法不要写成static，注解会不生效
+            2). 异步执行结果可以返回AsyncResult<>()对象来通知调用方。

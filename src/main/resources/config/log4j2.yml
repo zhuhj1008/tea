@@ -21,31 +21,5 @@ Configuration:
         onMatch: ACCEPT
         onMismatch: DENY
       PatternLayout:
-        pattern: "%highlight{%d{yyyy-MM-dd HH:mm:ss,SSS}:%4p %t (%F:%L) - %m%n}{STYLE=Logback}"
-    RollingFile: # 输出到文件，超过128MB归档
-      - name: ROLLING_FILE
-        ignoreExceptions: false
-        #fileName: ${log.path}/${project.name}.log
-        fileName: ${log.path}/${project.name}.log
-        filePattern: "${log.path}/$${date:yyyy-MM}/${project.name}-%d{yyyy-MM-dd}-%i.log.gz"
-        PatternLayout:
-          pattern: "%d{yyyy-MM-dd HH:mm:ss,SSS}:%4p %t (%F:%L) - %m%n"
-        Policies:
-          SizeBasedTriggeringPolicy:
-            size: "128 MB"
-        DefaultRolloverStrategy:
-          max: 1000
+        pattern: "%highlight{%d{yyyy-**MM-dd HH:mm:ss,SSS}:%4p %t (%F:%L) - %m%n}{STYLE=Logback}"
 
-  Loggers:
-    Root:
-      level: debug
-      AppenderRef:
-        - ref: CONSOLE
-        - ref: ROLLING_FILE
-    Logger: # 为com.xjj包配置特殊的Log级别，方便调试
-      - name: com.ibatis
-        additivity: false
-        level: ${sys:log.level.xjj}
-        AppenderRef:
-          - ref: CONSOLE
-          - ref: ROLLING_FILE

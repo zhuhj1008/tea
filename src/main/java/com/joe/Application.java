@@ -17,6 +17,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -37,6 +38,7 @@ import java.util.Properties;
 @ServletComponentScan//拦截器过滤器支持
 @EnableCaching//缓存支持
 @EnableScheduling//定时任务
+@EnableAsync//支持异步任务
 public class Application extends WebMvcConfigurerAdapter implements CommandLineRunner {
 
     private Logger logger = LoggerFactory.getLogger(Application.class);
