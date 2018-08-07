@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.joe.business.common.base.BaseController;
 import com.joe.business.common.exception.ParameterIllegalityException;
+import com.joe.business.common.wx.dto.UnifiedParamDto;
 import com.joe.business.order.service.OrderDetailWebService;
 import com.joe.business.order.service.OrderWebService;
 import com.joe.business.order.vo.OrderDeliverDTO;
@@ -101,8 +102,8 @@ public class OrderController extends BaseController {
      * 订单微信支付
      * @return
      */
-    @RequestMapping("/wePay")
-    public Object orderApplyWePay(HttpServletRequest request){
+    @RequestMapping("/wePayUnifiedOrder")
+    public Object wePayUnifiedOrder(HttpServletRequest request){
 
         String requestParam = getRequestParam(request);
         if (StringUtils.isBlank(requestParam)) {
@@ -113,10 +114,9 @@ public class OrderController extends BaseController {
             return ResponseEntity.getFailEntity("参数错误");
         }
 
-        Integer code = Integer.valueOf(jsonObject.get("code").toString());
+        UnifiedParamDto unifiedParamDto = JSON.parseObject(requestParam, UnifiedParamDto.class);
 
-
-        return null;
+        return orderWebService.wePayUnifiedOrder(unifiedParamDto);
     }
 
     @RequestMapping("/wxResend")

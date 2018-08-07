@@ -3,6 +3,7 @@ package com.joe.business.user.service;
 import com.alibaba.fastjson.JSON;
 import com.joe.api.po.UserCustomer;
 import com.joe.api.service.UserCustomerService;
+import com.joe.business.common.wx.dto.AuthParamDto;
 import com.joe.business.common.wx.service.WxService;
 import com.joe.business.user.dto.WxLoginDto;
 import org.apache.commons.lang3.StringUtils;
@@ -26,7 +27,10 @@ public class CustomerWebService {
     //根据用户请求code获取用户信息
     public UserCustomer getUserCustomer(String code) {
 
-        String response = wxService.getOpenIdAndSessionKey(code);
+        AuthParamDto param = new AuthParamDto();
+
+
+        String response = wxService.getOpenIdAndSessionKey("", param);
 
         WxLoginDto wxLoginDto = JSON.parseObject(response, WxLoginDto.class);
 

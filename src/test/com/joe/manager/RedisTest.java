@@ -17,7 +17,7 @@ public class RedisTest extends BaseTest{
 
     @Test
     public void testA(){
-//        stringRedisTemplate.opsForValue().set("name","joaaae");
+        stringRedisTemplate.opsForValue().set("name","joaaae");
 
         String name = stringRedisTemplate.opsForValue().get("name");
         System.out.println(name);

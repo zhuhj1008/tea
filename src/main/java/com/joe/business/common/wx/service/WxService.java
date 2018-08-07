@@ -1,22 +1,16 @@
 package com.joe.business.common.wx.service;
 
-import com.alibaba.fastjson.JSON;
-import com.joe.business.common.wx.dto.UnifiedParamDto;
-import com.joe.business.common.wx.dto.UnifiedSuccessDto;
-import com.joe.business.common.wx.dto.WxConfig;
+import com.joe.business.common.wx.dto.*;
 import com.joe.business.common.wx.enums.WxTradeTypeEnum;
-import com.joe.business.common.wx.util.WxUtil;
-import com.joe.business.common.wx.dto.WxApiUrl;
 import com.joe.business.common.wx.util.AuthX509TrustManager;
+import com.joe.business.common.wx.util.WxUtil;
 import com.joe.util.JaxbUtil;
 import com.joe.util.http.HttpClientUtil;
-import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -41,27 +35,28 @@ public class WxService {
         unifiedParam.setSignType("MD5");
         unifiedParam.setNotifyUrl(WxApiUrl.NOTIFY_URL);
         unifiedParam.setTradeType(WxTradeTypeEnum.NATIVE.getType());
-        wePayUnifiedOrder(unifiedParam);
+//        wePayUnifiedOrder("https://api.mch.weixin.qq.com/pay/unifiedorder", unifiedParam);
     }
 
     /**
      * 获取用户微信唯一标识open id 和当前会话session key
      *
-     * @param code 用户点击微信登录传过来的code
+     * @param authParam 用户点击微信登录传过来的code
      * @return
      */
-    public String getOpenIdAndSessionKey(String code) {
+    public String getOpenIdAndSessionKey(String url, AuthParamDto authParam) {
 
-        logger.info("wxService-getOpenIdAndSessionKey, apply wx grant, code is {}.", code);
+        logger.info("wxService-getOpenIdAndSessionKey, apply wx grant, param is {}.", authParam);
 
-        Map<String, String> param = new HashedMap();
-        param.put("appid", WxConfig.APP_ID);
-        param.put("secret", WxConfig.SECRET);
-        param.put("js_code", code);
-        param.put("grant_type", WxConfig.GRANT_TYPE);
-        String url = WxApiUrl.GRANT_URL;
+        //todo 校验参数
 
-        String result = HttpClientUtil.doPost(url, param, WxConfig.CHAR_SET);
+        SortedMap<String, String> param = new TreeMap<>();
+        param.put("appid", authParam.getAppId());
+        param.put("secret", authParam.getSecret());
+        param.put("js_code", authParam.getCode());
+        param.put("grant_type", authParam.getGrantType());
+
+        String result = HttpClientUtil.doPost(url, param, authParam.getCharSet());
 
         logger.info("wxService-getOpenIdAndSessionKey, apply wx grant, result is {}.", result);
 
@@ -73,7 +68,7 @@ public class WxService {
      *
      * @param unifiedParam 统一支付参数Bean
      */
-    public static UnifiedSuccessDto wePayUnifiedOrder(UnifiedParamDto unifiedParam) {
+    public UnifiedSuccessDto wePayUnifiedOrder(String url, UnifiedParamDto unifiedParam) {
 
         logger.info("wxService-wePayUnifiedOrder, apply unified order, param is {}", unifiedParam);
 
@@ -135,7 +130,7 @@ public class WxService {
         String requestXml = WxUtil.getRequestXml(param);
 
         //请求API
-        String result = AuthX509TrustManager.httpsRequest(WxApiUrl.UNIFIED_ORDER__API, "POST", requestXml);
+        String result = AuthX509TrustManager.httpsRequest(url, "POST", requestXml);
 
         //解析响应体
         logger.info("wxService-wePayUnifiedOrder, apply unified order success, result is {}", result);
