@@ -9,6 +9,7 @@ import com.joe.business.common.exception.BusinessException;
 import com.joe.business.order.vo.OrderDeliverDTO;
 import com.joe.business.order.vo.OrderQueryDTO;
 import com.joe.business.order.vo.OrderVo;
+import com.joe.payment.wx.util.WeiXinAuthUtil;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,6 +111,19 @@ public class OrderWebService {
         order.setDeliveryTime(new Date());
 
         return orderService.modifyOrder(order);
+    }
+
+
+    /**
+     * 订单申请微信支付
+     */
+    public void orderApplyWePay(String code){
+
+
+        String openIdAndSessionKey = WeiXinAuthUtil.getOpenIdAndSessionKey(code);
+
+
+
     }
 
 

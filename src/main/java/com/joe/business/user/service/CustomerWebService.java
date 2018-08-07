@@ -1,17 +1,13 @@
 package com.joe.business.user.service;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.joe.api.po.UserCustomer;
 import com.joe.api.service.UserCustomerService;
-import com.joe.business.common.wx.WeiXinAuthUtil;
 import com.joe.business.user.dto.WxLoginDto;
+import com.joe.payment.wx.util.WeiXinAuthUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * 客户服务

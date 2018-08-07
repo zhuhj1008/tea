@@ -97,4 +97,27 @@ public class OrderController extends BaseController {
     }
 
 
+    /**
+     * 订单微信支付
+     * @return
+     */
+    @RequestMapping("/wePay")
+    public Object orderApplyWePay(HttpServletRequest request){
+
+        String requestParam = getRequestParam(request);
+        if (StringUtils.isBlank(requestParam)) {
+            throw new ParameterIllegalityException("参数为空");
+        }
+        JSONObject jsonObject = JSON.parseObject(requestParam);
+        if (jsonObject == null) {
+            return ResponseEntity.getFailEntity("参数错误");
+        }
+
+        Integer code = Integer.valueOf(jsonObject.get("code").toString());
+
+
+
+        return null;
+    }
+
 }
