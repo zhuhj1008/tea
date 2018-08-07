@@ -4,9 +4,9 @@ package com.joe.common.wx.dto;
  * 统一下单错误码
  * create by Joe on 2018-08-06 17:25
  **/
-public enum UnifiedErrorCode {
+public enum UnifiedResultCode {
 
-
+    SUCCESS("SUCCESS", "成功"),
     NOAUTH("NOAUTH", "商户无此接口权限"),
     NOTENOUGH("NOTENOUGH", "余额不足"),
     ORDERPAID("ORDERPAID", "商品订单已支付"),
@@ -26,7 +26,7 @@ public enum UnifiedErrorCode {
     private String code;
     private String text;
 
-    UnifiedErrorCode(String code, String text) {
+    UnifiedResultCode(String code, String text) {
         this.code = code;
         this.text = text;
     }
