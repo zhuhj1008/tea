@@ -1,6 +1,6 @@
 # 端口和https协议
 server:
-  port: 8080
+  port: 443
   ssl:
     key-store: classpath:server.jks
     key-store-password: yvrvl08smap
