@@ -1,4 +1,4 @@
-package com.joe.payment.wx.dto;
+package com.joe.business.common.wx.dto;
 
 public class WxConfig {
 
@@ -10,7 +10,8 @@ public class WxConfig {
     /**
      * 应用唯一表示 app_id
      */
-    public static final String APP_ID = "wx7787aa5b85cd4a58";
+//    public static final String APP_ID = "wx7787aa5b85cd4a58";
+    public static final String APP_ID = "wx163389ac6f473216";
 
     /**
      * 应用秘钥 secret_key
@@ -25,13 +26,12 @@ public class WxConfig {
     /**
      * 微信支付商户号
      */
-    public static final String BUSSINESS_CODE = "1509984411";
+    public static final String BUSSINESS_CODE = "";
 
     /**
      * 支付延签的key
      */
     public static final String WE_PAY_KEY = "";
-
 
 
 }

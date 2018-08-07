@@ -116,8 +116,14 @@ public class OrderController extends BaseController {
         Integer code = Integer.valueOf(jsonObject.get("code").toString());
 
 
-
         return null;
+    }
+
+    @RequestMapping("/wxResend")
+    public void wxResend(HttpServletRequest request){
+        System.out.println(1234);
+        String requestParam = getRequestParam(request);
+        System.out.println(requestParam);
     }
 
 }

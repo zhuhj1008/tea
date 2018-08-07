@@ -3,8 +3,8 @@ package com.joe.business.user.service;
 import com.alibaba.fastjson.JSON;
 import com.joe.api.po.UserCustomer;
 import com.joe.api.service.UserCustomerService;
+import com.joe.business.common.wx.service.WxService;
 import com.joe.business.user.dto.WxLoginDto;
-import com.joe.payment.wx.util.WeiXinAuthUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,11 +19,14 @@ public class CustomerWebService {
     @Autowired
     private UserCustomerService userCustomerService;
 
+    @Autowired
+    private WxService wxService;
+
 
     //根据用户请求code获取用户信息
     public UserCustomer getUserCustomer(String code) {
 
-        String response = WeiXinAuthUtil.getOpenIdAndSessionKey(code);
+        String response = wxService.getOpenIdAndSessionKey(code);
 
         WxLoginDto wxLoginDto = JSON.parseObject(response, WxLoginDto.class);
 

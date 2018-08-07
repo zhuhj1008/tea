@@ -1,4 +1,4 @@
-package com.joe.business.common.wx;
+package com.joe.business.common.wx.dto;
 
 /**
  * 统一下单错误码

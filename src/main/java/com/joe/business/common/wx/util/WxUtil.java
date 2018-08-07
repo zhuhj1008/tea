@@ -1,30 +1,13 @@
-package com.joe.payment.wx.util;
+package com.joe.business.common.wx.util;
 
-import com.joe.payment.wx.dto.WxConfig;
+import com.joe.business.common.wx.dto.WxConfig;
 import com.joe.util.encryption.MD5Util;
 import com.joe.util.http.HttpClientUtil;
 import org.apache.commons.collections.map.HashedMap;
 
 import java.util.*;
 
-public class WeiXinAuthUtil {
-
-
-    /**
-     * 获取用户微信唯一标识open id 和当前会话session key
-     *
-     * @param code 用户点击微信登录传过来的code
-     * @return
-     */
-    public static String getOpenIdAndSessionKey(String code) {
-        Map<String, String> param = new HashedMap();
-        param.put("appid", WxConfig.APP_ID);
-        param.put("secret", WxConfig.SECRET);
-        param.put("js_code", code);
-        param.put("grant_type", WxConfig.GRANT_TYPE);
-        String url = "https://api.weixin.qq.com/sns/jscode2session";
-        return HttpClientUtil.doPost(url, param, WxConfig.CHAR_SET);
-    }
+public class WxUtil {
 
     /**
      * 获取微信签名sign

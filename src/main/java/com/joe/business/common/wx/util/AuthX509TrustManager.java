@@ -1,4 +1,4 @@
-package com.joe.payment.wx.util;
+package com.joe.business.common.wx.util;
 
 import javax.net.ssl.*;
 import java.io.BufferedReader;
@@ -8,8 +8,6 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
-import java.util.SortedMap;
-import java.util.TreeMap;
 
 public class AuthX509TrustManager implements X509TrustManager {
     @Override
