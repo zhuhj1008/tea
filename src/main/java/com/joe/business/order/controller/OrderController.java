@@ -2,9 +2,9 @@ package com.joe.business.order.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.joe.business.common.base.BaseController;
-import com.joe.business.common.exception.ParameterIllegalityException;
-import com.joe.business.common.wx.dto.UnifiedParamDto;
+import com.joe.common.base.BaseController;
+import com.joe.common.exception.ParameterIllegalityException;
+import com.joe.common.wx.dto.UnifiedParamDto;
 import com.joe.business.order.service.OrderDetailWebService;
 import com.joe.business.order.service.OrderWebService;
 import com.joe.business.order.vo.OrderDeliverDTO;
@@ -105,6 +105,7 @@ public class OrderController extends BaseController {
     @RequestMapping("/wePayUnifiedOrder")
     public Object wePayUnifiedOrder(HttpServletRequest request){
 
+        String ipAddress = request.getRemoteAddr();
         String requestParam = getRequestParam(request);
         if (StringUtils.isBlank(requestParam)) {
             throw new ParameterIllegalityException("参数为空");
@@ -115,13 +116,15 @@ public class OrderController extends BaseController {
         }
 
         UnifiedParamDto unifiedParamDto = JSON.parseObject(requestParam, UnifiedParamDto.class);
+        unifiedParamDto.setSpbillCreateIp(ipAddress);
 
         return orderWebService.wePayUnifiedOrder(unifiedParamDto);
     }
 
+
     @RequestMapping("/wxResend")
     public void wxResend(HttpServletRequest request){
-        System.out.println(1234);
+        System.out.println("微信回调成功");
         String requestParam = getRequestParam(request);
         System.out.println(requestParam);
     }

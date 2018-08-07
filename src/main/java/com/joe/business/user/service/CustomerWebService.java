@@ -3,8 +3,8 @@ package com.joe.business.user.service;
 import com.alibaba.fastjson.JSON;
 import com.joe.api.po.UserCustomer;
 import com.joe.api.service.UserCustomerService;
-import com.joe.business.common.wx.dto.AuthParamDto;
-import com.joe.business.common.wx.service.WxService;
+import com.joe.common.wx.dto.AuthParamDto;
+import com.joe.common.wx.service.WxService;
 import com.joe.business.user.dto.WxLoginDto;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +30,7 @@ public class CustomerWebService {
         AuthParamDto param = new AuthParamDto();
 
 
-        String response = wxService.getOpenIdAndSessionKey("", param);
+        String response = wxService.getOpenIdAndSessionKey(code);
 
         WxLoginDto wxLoginDto = JSON.parseObject(response, WxLoginDto.class);
 

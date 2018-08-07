@@ -5,15 +5,13 @@ import com.alibaba.fastjson.JSON;
 import com.joe.api.enums.OrderStatusEnum;
 import com.joe.api.po.Order;
 import com.joe.api.service.OrderService;
-import com.joe.business.common.exception.BusinessException;
-import com.joe.business.common.redis.RedisService;
-import com.joe.business.common.wx.dto.UnifiedParamDto;
-import com.joe.business.common.wx.dto.UnifiedSuccessDto;
-import com.joe.business.common.wx.dto.WxApiUrl;
-import com.joe.business.common.wx.dto.WxConfig;
-import com.joe.business.common.wx.enums.WxTradeTypeEnum;
-import com.joe.business.common.wx.service.WxService;
-import com.joe.business.common.wx.util.WxUtil;
+import com.joe.common.exception.BusinessException;
+import com.joe.common.redis.RedisService;
+import com.joe.common.wx.dto.UnifiedParamDto;
+import com.joe.common.wx.dto.UnifiedSuccessDto;
+import com.joe.common.wx.enums.WxTradeTypeEnum;
+import com.joe.common.wx.service.WxService;
+import com.joe.common.wx.util.WxUtil;
 import com.joe.business.order.vo.OrderDeliverDTO;
 import com.joe.business.order.vo.OrderQueryDTO;
 import com.joe.business.order.vo.OrderVo;
@@ -131,27 +129,25 @@ public class OrderWebService {
      */
     public Object wePayUnifiedOrder(UnifiedParamDto unifiedParamDto) {
 
-        Object URL = redisService.getCache("WX_UNIFIED_ORDER_API");
+//        unifiedParamDto.setBody("商品支付-促销商品");
+//        unifiedParamDto.setOutTradeNo("20");
+//        unifiedParamDto.setSpbillCreateIp("123.12.12.123");
+//        unifiedParamDto.setTotalFee(8880);
+//        unifiedParamDto.setDeviceInfo("WEB");
+//        unifiedParamDto.setSignType("MD5");
+//        unifiedParamDto.setTradeType(WxTradeTypeEnum.JSAPI.getType());
+//        unifiedParamDto.setOpenId("openId");
 
-        String appId = redisService.getCache("WX_APP_ID").toString();
-        String businessCode = redisService.getCache("WEPAY_BUSINESS_CODE").toString();
-        String wepay_unified_key = redisService.getCache("WEPAY_UNIFIED_KEY").toString();
-        String notifyUrl = redisService.getCache("WX_NOTIFY_URL").toString();
-
-
-        unifiedParamDto.setAppId(appId);
-        unifiedParamDto.setMchId(businessCode);
-        unifiedParamDto.setNonceStr(WxUtil.CreateNonceString());
-        unifiedParamDto.setBody("商品支付-促销商品");
-        unifiedParamDto.setOutTradeNo("20");
-        unifiedParamDto.setSpbillCreateIp("123.12.12.123");
-        unifiedParamDto.setTotalFee(8880);
+        unifiedParamDto.setBody(unifiedParamDto.getBody());
+        unifiedParamDto.setOutTradeNo(unifiedParamDto.getOutTradeNo());
+        unifiedParamDto.setSpbillCreateIp(unifiedParamDto.getSpbillCreateIp());
+        unifiedParamDto.setTotalFee(unifiedParamDto.getTotalFee());
         unifiedParamDto.setDeviceInfo("WEB");
         unifiedParamDto.setSignType("MD5");
-        unifiedParamDto.setNotifyUrl(notifyUrl);
-        unifiedParamDto.setTradeType(WxTradeTypeEnum.NATIVE.getType());
+        unifiedParamDto.setTradeType(WxTradeTypeEnum.JSAPI.getType());
+        unifiedParamDto.setOpenId(unifiedParamDto.getOpenId());
 
-        UnifiedSuccessDto unifiedSuccessDto = wxService.wePayUnifiedOrder(URL.toString(), unifiedParamDto);
+        UnifiedSuccessDto unifiedSuccessDto = wxService.wePayUnifiedOrder(unifiedParamDto);
 
         return unifiedSuccessDto;
     }

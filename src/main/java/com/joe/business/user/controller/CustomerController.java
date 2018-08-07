@@ -3,7 +3,7 @@ package com.joe.business.user.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.joe.api.po.UserCustomer;
-import com.joe.business.common.base.BaseController;
+import com.joe.common.base.BaseController;
 import com.joe.business.user.service.CustomerWebService;
 import com.joe.util.mvc.ResponseEntity;
 import org.apache.commons.lang3.StringUtils;

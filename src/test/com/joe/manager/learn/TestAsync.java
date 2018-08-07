@@ -1,6 +1,6 @@
 package com.joe.manager.learn;
 
-import com.joe.business.learn.AsyncTask;
+import com.joe.learn.AsyncTask;
 import com.joe.manager.BaseTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

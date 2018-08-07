@@ -4,7 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.joe.api.dao.OrderMapper;
 import com.joe.api.enums.OrderStatusEnum;
 import com.joe.api.po.Order;
-import com.joe.business.common.constant.GlobalConstant;
+import com.joe.common.constant.GlobalConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

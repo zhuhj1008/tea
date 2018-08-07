@@ -3,7 +3,7 @@ package com.joe.manager.api.receive;
 import com.alibaba.fastjson.JSON;
 import com.joe.api.po.ReceiveAddress;
 import com.joe.api.service.ReceiveAddressService;
-import com.joe.business.common.base.BaseService;
+import com.joe.common.base.BaseService;
 import com.joe.manager.BaseTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
