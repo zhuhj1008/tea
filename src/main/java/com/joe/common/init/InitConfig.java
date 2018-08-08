@@ -46,6 +46,5 @@ public class InitConfig implements CommandLineRunner {
             redisService.putCache(config.getConfigKey(), config.getConfigValue());
         }
 
-
     }
 }

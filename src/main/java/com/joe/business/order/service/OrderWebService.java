@@ -129,15 +129,6 @@ public class OrderWebService {
      */
     public Object wePayUnifiedOrder(UnifiedParamDto unifiedParamDto) {
 
-//        unifiedParamDto.setBody("商品支付-促销商品");
-//        unifiedParamDto.setOutTradeNo("20");
-//        unifiedParamDto.setSpbillCreateIp("123.12.12.123");
-//        unifiedParamDto.setTotalFee(8880);
-//        unifiedParamDto.setDeviceInfo("WEB");
-//        unifiedParamDto.setSignType("MD5");
-//        unifiedParamDto.setTradeType(WxTradeTypeEnum.JSAPI.getType());
-//        unifiedParamDto.setOpenId("openId");
-
         unifiedParamDto.setBody(unifiedParamDto.getBody());
         unifiedParamDto.setOutTradeNo(unifiedParamDto.getOutTradeNo());
         unifiedParamDto.setSpbillCreateIp(unifiedParamDto.getSpbillCreateIp());

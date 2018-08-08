@@ -97,6 +97,15 @@ public class OrderController extends BaseController {
         return ResponseEntity.getSuccessEntity("订单发货成功", i);
     }
 
+    @RequestMapping("/test")
+    public void tese(HttpServletRequest request){
+        String ipAddress = request.getRemoteAddr();
+        String requestParam = getRequestParam(request);
+
+        System.out.println(ipAddress);
+        System.out.println(requestParam);
+    }
+
 
     /**
      * 订单微信支付

@@ -1,5 +1,6 @@
 package com.joe.common.qiniu;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @PropertySource("classpath:config/application.yml")
-@ConfigurationProperties(prefix="qiNiu")
+@ConfigurationProperties(prefix = "qiNiu")
 public class QiNiuConfig {
 
     private String accessKey;
@@ -75,5 +76,10 @@ public class QiNiuConfig {
 
     public void setEffective(Integer effective) {
         this.effective = effective;
+    }
+
+    @Override
+    public String toString() {
+        return ReflectionToStringBuilder.toString(this);
     }
 }

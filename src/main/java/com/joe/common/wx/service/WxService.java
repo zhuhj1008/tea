@@ -1,9 +1,11 @@
 package com.joe.common.wx.service;
 
+import com.joe.common.exception.BusinessException;
 import com.joe.common.redis.RedisService;
 import com.joe.common.wx.dto.AuthParamDto;
 import com.joe.common.wx.dto.UnifiedParamDto;
 import com.joe.common.wx.dto.UnifiedSuccessDto;
+import com.joe.common.wx.dto.WxConfig;
 import com.joe.common.wx.enums.WxTradeTypeEnum;
 import com.joe.common.wx.util.AuthX509TrustManager;
 import com.joe.common.wx.util.WxUtil;
@@ -13,6 +15,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.SortedMap;
@@ -26,31 +29,8 @@ public class WxService {
     @Autowired
     private RedisService redisService;
 
-    //appID
-    private static final String APP_ID_KEY = "";
-
-    //商户号
-    private static final String BUSINESS_CODE = "";
-
-    //授权Key
-    private static final String  SECRET_KEY = "";
-
-    //授权类型
-    private static final String  GRANT_TYPE = "";
-
-    //编码格式
-    private static final String  CHAR_SET = "";
-
-    //预支付key
-    private static final String WE_PAY_KEY = "";
-
-
-    //预支付API
-    private static final String UNIFIED_RUL = "";
-
-    //授权API
-    private static final String AUTH_RUL = "";
-
+    @Autowired
+    private WxConfig wxConfig;
 
 
     /**
@@ -63,13 +43,15 @@ public class WxService {
 
         logger.info("wxService-getOpenIdAndSessionKey, apply wx grant, code is {}.", code);
 
-        //todo 校验参数
+        Object url = redisService.getCache(wxConfig.getGrantUrl());
+        Object appId = redisService.getCache(wxConfig.getAppId());
+        Object secretKey = redisService.getCache(wxConfig.getSecretKey());
+        Object grantType = redisService.getCache(wxConfig.getGrantType());
+        Object charSet = redisService.getCache(wxConfig.getCharSet());
 
-        Object url = redisService.getCache(AUTH_RUL);
-        Object appId = redisService.getCache(APP_ID_KEY);
-        Object secretKey = redisService.getCache(SECRET_KEY);
-        Object grantType = redisService.getCache(GRANT_TYPE);
-        Object charSet = redisService.getCache(CHAR_SET);
+        if (url == null || appId == null || secretKey == null || grantType == null || charSet == null) {
+            throw new BusinessException("wx grant ,param error.");
+        }
 
         SortedMap<String, String> param = new TreeMap<>();
         param.put("appid", appId.toString());
@@ -97,22 +79,21 @@ public class WxService {
 
         SortedMap<Object, Object> param = new TreeMap<>();
 
-        Object appId = redisService.getCache(APP_ID_KEY);
-        Object businessCode = redisService.getCache(BUSINESS_CODE);
-        String notifyUrl = redisService.getCache("WX_NOTIFY_URL").toString();
-
+        Object appId = redisService.getCache(wxConfig.getAppId());
+        Object mchId = redisService.getCache(wxConfig.getMchId());
+        Object notifyUrl = redisService.getCache(wxConfig.getNotifyUrl());
 
         //组装请求参数-必须参数
         param.put("appid", appId.toString());
-        param.put("mch_id", businessCode);
+        param.put("mch_id", mchId);
         param.put("nonce_str", WxUtil.CreateNonceString());
         param.put("body", unifiedParam.getBody());
         param.put("out_trade_no", unifiedParam.getOutTradeNo());
         param.put("total_fee", unifiedParam.getTotalFee() + "");
         param.put("spbill_create_ip", unifiedParam.getSpbillCreateIp());
-        param.put("notify_url", notifyUrl);
+        param.put("notify_url", notifyUrl.toString());
         param.put("trade_type", WxTradeTypeEnum.JSAPI.getType());
-        param.put("openid", unifiedParam.getOpenId());
+//        param.put("openid", unifiedParam.getOpenId());
 
 
         //组装请求参数-非必须参数
@@ -150,13 +131,13 @@ public class WxService {
 //            param.put("openid", unifiedParam.getOpenId());
 //        }
 
-        Object unifiedKey = redisService.getCache(WE_PAY_KEY);
-        Object url = redisService.getCache(UNIFIED_RUL);
-
+        Object unifiedKey = redisService.getCache(wxConfig.getUnifiedKey());
+        Object url = redisService.getCache(wxConfig.getUnifiedOrderUrl());
 
         //获取签名
         String sign = WxUtil.getSign(param, unifiedKey.toString());
         param.put("sign", sign);
+        System.out.println(sign);
 
         //参数转XML
         String requestXml = WxUtil.getRequestXml(param);
