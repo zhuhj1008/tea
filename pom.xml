@@ -154,12 +154,11 @@
             <artifactId>httpmime</artifactId>
             <version>4.3.2</version>
         </dependency>
-        <!-- freemaeker -->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-starter-freemarker</artifactId>-->
-            <!--<version>1.5.9.RELEASE</version>-->
-        <!--</dependency>-->
+        <!-- freemarker -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
+        </dependency>
 
         <!--redis-->
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-redis -->
