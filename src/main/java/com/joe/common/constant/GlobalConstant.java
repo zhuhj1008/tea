@@ -6,8 +6,8 @@ package com.joe.common.constant;
  **/
 public class GlobalConstant {
 
-    public static class PageCinstant {
+    public static class PageConstant {
         public static final Integer DEFAULT_PAGE_NO = 1;
-        public static final Integer DEFAULT_PAAGE_SIZE = 5;
+        public static final Integer DEFAULT_PAGE_SIZE = 5;
     }
 }

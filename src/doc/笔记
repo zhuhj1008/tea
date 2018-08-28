@@ -65,3 +65,15 @@ SpringBoot的主Servlet为DispatcherServlet,其默认的url-pattern为"/".
       2.注意
             1). 异步方法不要写成static，注解会不生效
             2). 异步执行结果可以返回AsyncResult<>()对象来通知调用方。
+九. 拦截器
+      1.步骤
+            1). 新建自定义拦截器类实现HandlerInterceptor接口，参见ControllerInterceptor类
+            2). 重写preHandle()、postHandle()、afterCompletion()方法分别表示请求前处理，返回前处理，请求结束处理。
+            3). 新建拦截器注册类，注册拦截器，配置拦截规则，参见AuthConfigurerAdapter类
+十. 过滤器
+      1.步骤 https://www.cnblogs.com/begin2016/p/8947887.html
+            1).
+            2).
+            3).
+      2.注意
+            过滤器在拦截器之前执行，过滤器能做的拦截器都能做

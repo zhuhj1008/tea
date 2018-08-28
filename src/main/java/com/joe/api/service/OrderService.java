@@ -87,11 +87,11 @@ public class OrderService {
     public List<Order> queryOrderListByQueryDto(Order order, Integer pageNo, Integer pageSize) {
 
         if(pageNo == null || pageNo == 0){
-            pageNo = GlobalConstant.PageCinstant.DEFAULT_PAGE_NO;
+            pageNo = GlobalConstant.PageConstant.DEFAULT_PAGE_NO;
         }
 
         if(pageSize == null || pageSize == 0){
-            pageNo = GlobalConstant.PageCinstant.DEFAULT_PAAGE_SIZE;
+            pageNo = GlobalConstant.PageConstant.DEFAULT_PAGE_SIZE;
         }
 
         PageHelper.startPage(pageNo, pageSize);

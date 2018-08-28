@@ -14,6 +14,7 @@ import com.joe.util.mvc.ResponseEntity;
 import com.joe.util.mvc.ResponsePageEntity;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -76,6 +77,13 @@ public class OrderController extends BaseController {
         return ResponseEntity.getSuccessEntity("查询订单列表成功", pageEntity);
     }
 
+    @RequestMapping("/test")
+    public void testParam(@RequestBody Student student){
+
+        System.out.println(student);
+
+    }
+
 
     /**
      * 修改订单为发货状态
@@ -95,15 +103,6 @@ public class OrderController extends BaseController {
             return ResponseEntity.getFailEntity("订单发货失败");
         }
         return ResponseEntity.getSuccessEntity("订单发货成功", i);
-    }
-
-    @RequestMapping("/test")
-    public void tese(HttpServletRequest request){
-        String ipAddress = request.getRemoteAddr();
-        String requestParam = getRequestParam(request);
-
-        System.out.println(ipAddress);
-        System.out.println(requestParam);
     }
 
 
