@@ -1,11 +1,10 @@
-# 端口和https协议
+
 server:
   port: 443
   ssl:
     key-store: classpath:server.jks
     key-store-password: yvrvl08smap
 
-# 数据源连接
 spring:
     datasource:
         name: tea
@@ -28,7 +27,17 @@ spring:
         testOnReturn: false
         poolPreparedStatements: true
         maxOpenPreparedStatements: 20
-   #  freemarker 参数
+    redis:
+        database: 0
+        host: 140.143.242.80
+        port: 6379
+        password: joejoejoe
+        timeout: 0
+        pool:
+          max-active: 8
+          max-wait: -1
+          max-idle: 8
+          min-idle: 0
     freemarker:
       cache: true
       charset: UTF-8
@@ -41,7 +50,6 @@ spring:
       template-loader-path: /ftl
 
 
-#七牛上传文件参数
 qiNiu:
     accessKey: qFK5rkWh6ua5Z2WwXItC-bj1MAxklN284aZzGlpc
     secretKey: IQSsg6tKgT4-3IV2U7G_FKFMtVXOA14M7tm2prMJ
@@ -50,16 +58,5 @@ qiNiu:
     encoding: UTF-8
     effective: 3
 
-#redis
-  redis:
-    database: 0
-    host: 140.143.242.80
-    port: 6379
-    password: joejoejoe
-    timeout: 0
-    pool:
-      max-active: 8
-      max-wait: -1
-      max-idle: 8
-      min-idle: 0
+
 
