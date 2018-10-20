@@ -2,16 +2,17 @@ package com.joe.business.order.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.joe.common.base.BaseController;
-import com.joe.common.exception.ParameterIllegalityException;
-import com.joe.common.wx.dto.UnifiedParamDto;
 import com.joe.business.order.service.OrderDetailWebService;
 import com.joe.business.order.service.OrderWebService;
 import com.joe.business.order.vo.OrderDeliverDTO;
 import com.joe.business.order.vo.OrderQueryDTO;
 import com.joe.business.order.vo.OrderVo;
+import com.joe.common.base.BaseController;
+import com.joe.common.exception.ParameterIllegalityException;
+import com.joe.common.wx.dto.UnifiedParamDto;
 import com.joe.util.mvc.ResponseEntity;
 import com.joe.util.mvc.ResponsePageEntity;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,6 +28,7 @@ import java.util.List;
  **/
 @RestController
 @RequestMapping("/order")
+@Slf4j
 public class OrderController extends BaseController {
 
 
@@ -55,6 +57,12 @@ public class OrderController extends BaseController {
 
         return ResponseEntity.getSuccessEntity(null, null);
     }
+
+    @RequestMapping("/testLog")
+    public void testLog() {
+        log.info("joe....");
+    }
+
 
     /**
      * 条件查询订单

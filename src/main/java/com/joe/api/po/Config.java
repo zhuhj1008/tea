@@ -1,7 +1,10 @@
 package com.joe.api.po;
 
+import lombok.Data;
+
 import java.util.Date;
 
+@Data
 public class Config {
 
     /*主键*/
@@ -73,9 +76,9 @@ public class Config {
         this.createTime = createTime;
     }
 
-    public Boolean getEnable() {
-        return enable;
-    }
+//    public Boolean getEnable() {
+//        return enable;
+//    }
 
     public void setEnable(Boolean enable) {
         this.enable = enable;

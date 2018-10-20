@@ -41,3 +41,8 @@ wx:
     mchId: WEPAY_BUSINESS_CODE
     unifiedKey: WEPAY_UNIFIED_KEY
     notifyUrl: WX_NOTIFY_URL
+
+#logging:
+#  pattern:
+#    console: "%d - %msg%n"
+#  path: /var/log/tomcat/
