@@ -58,11 +58,6 @@ public class OrderController extends BaseController {
         return ResponseEntity.getSuccessEntity(null, null);
     }
 
-    @RequestMapping("/testLog")
-    public void testLog() {
-        log.info("joe....");
-    }
-
 
     /**
      * 条件查询订单

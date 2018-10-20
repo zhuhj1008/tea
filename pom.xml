@@ -183,6 +183,12 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.github.binarywang</groupId>
+            <artifactId>weixin-java-mp</artifactId>
+            <version>2.7.0</version>
+        </dependency>
+
 
     </dependencies>
 

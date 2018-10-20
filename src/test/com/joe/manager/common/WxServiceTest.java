@@ -32,15 +32,14 @@ public class WxServiceTest extends BaseTest {
     @Test
     public void testAA(){
         Map param = new HashedMap();
-        String code = "071rs8aG1dA9X00Gnb8G1RqY9G1rs8aI";
-        param.put("appid", "wx7787aa5b85cd4a58");
-        param.put("secret", "723f7eb41927cbd33106ac322be458c3");
+        String code = "0615RBY725zmsS0Xq1X725epY725RBYb";
+        param.put("appid", "wx163389ac6f473216");
+        param.put("secret", "b0dab0e3e2833d3e8bb20ebd059ca558");
         param.put("js_code", code);
         param.put("grant_type", "authorization_code");
         String url = "https://api.weixin.qq.com/sns/jscode2session";
         String s = HttpClientUtil.doPost(url, param, "UTF-8");
         System.out.println(s);
-
     }
 
     @Test

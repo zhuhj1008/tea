@@ -46,3 +46,7 @@ wx:
 #  pattern:
 #    console: "%d - %msg%n"
 #  path: /var/log/tomcat/
+
+weChat:
+  mpAppId: wx7787aa5b85cd4a58
+  secretKey: b0dab0e3e2833d3e8bb20ebd059ca558
