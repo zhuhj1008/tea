@@ -36,7 +36,7 @@ public class CommodityController {
     @RequestMapping("/addCommodity")
     public Object addCommodity(@RequestBody ApiParam apiParam) {
 
-        String requestParam = apiParam.getBody();
+        String requestParam = apiParam.getBody().toString();
         CommodityVo commodityVo = JSON.parseObject(requestParam, CommodityVo.class);
 
         log.info("request add commodity, commodity name is {}.", commodityVo.getpName());
@@ -53,7 +53,7 @@ public class CommodityController {
     @RequestMapping("/getCommodityListByItemId")
     public Object getCommodityListByItemId(@RequestBody ApiParam apiParam) {
 
-        String requestParam = apiParam.getBody();
+        String requestParam = apiParam.getBody().toString();
 
         JSONObject jsonObject = JSON.parseObject(requestParam);
         Integer itemId = Integer.valueOf(jsonObject.get("itemId").toString());
@@ -96,7 +96,7 @@ public class CommodityController {
     @RequestMapping("/switchCommodityRecommend")
     public Object switchCommodityRecommend(@RequestBody ApiParam apiParam) {
 
-        String requestParam = apiParam.getBody();
+        String requestParam = apiParam.getBody().toString();
 
         JSONObject jsonObject = JSON.parseObject(requestParam);
         Integer commodityId = Integer.valueOf(jsonObject.get("commodityId").toString());
@@ -117,7 +117,7 @@ public class CommodityController {
     @RequestMapping("/removeCommodity")
     public Object removeCommodity(@RequestBody ApiParam apiParam) {
 
-        String requestParam = apiParam.getBody();
+        String requestParam = apiParam.getBody().toString();
 
         JSONObject jsonObject = JSON.parseObject(requestParam);
         Integer commodityId = Integer.valueOf(jsonObject.get("commodityId").toString());
@@ -135,7 +135,7 @@ public class CommodityController {
     @RequestMapping("/updateCommodity")
     public Object updateCommodity(@RequestBody ApiParam apiParam) {
 
-        String requestParam = apiParam.getBody();
+        String requestParam = apiParam.getBody().toString();
         CommodityVo commodityVo = JSON.parseObject(requestParam, CommodityVo.class);
 
         log.info("request modify commodity, commodity id is {}", commodityVo.getpId());

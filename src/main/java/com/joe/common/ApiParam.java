@@ -9,5 +9,5 @@ public class ApiParam {
 
     private String signature;
 
-    private String body;
+    private Object body;
 }
