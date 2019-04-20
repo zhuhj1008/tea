@@ -3,11 +3,11 @@ package com.joe.common;
 import lombok.Data;
 
 @Data
-public class ApiParam {
+public class ApiParam<T> {
 
     private String timeStr;
 
     private String signature;
 
-    private Object body;
+    private T body;
 }

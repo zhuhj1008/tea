@@ -3,6 +3,7 @@ package com.joe.business.commodity.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.joe.api.po.Commodity;
+import com.joe.business.commodity.vo.CommodityParam;
 import com.joe.common.ApiParam;
 import com.joe.common.base.BaseController;
 import com.joe.business.commodity.service.CommodityWebService;
@@ -34,10 +35,9 @@ public class CommodityController {
 
 
     @RequestMapping("/addCommodity")
-    public Object addCommodity(@RequestBody ApiParam apiParam) {
+    public Object addCommodity(@RequestBody ApiParam<CommodityVo> apiParam) {
 
-        String requestParam = apiParam.getBody().toString();
-        CommodityVo commodityVo = JSON.parseObject(requestParam, CommodityVo.class);
+        CommodityVo commodityVo = apiParam.getBody();
 
         log.info("request add commodity, commodity name is {}.", commodityVo.getpName());
         int commodityId = commodityWebService.addCommodity(commodityVo);
@@ -51,14 +51,12 @@ public class CommodityController {
      * 根据类目id查询商品集合
      */
     @RequestMapping("/getCommodityListByItemId")
-    public Object getCommodityListByItemId(@RequestBody ApiParam apiParam) {
+    public Object getCommodityListByItemId(@RequestBody ApiParam<CommodityParam> apiParam) {
 
-        String requestParam = apiParam.getBody().toString();
-
-        JSONObject jsonObject = JSON.parseObject(requestParam);
-        Integer itemId = Integer.valueOf(jsonObject.get("itemId").toString());
-        Integer pageNo = Integer.valueOf(jsonObject.get("pageNo").toString());
-        Integer pageSize = Integer.valueOf(jsonObject.get("pageSize").toString());
+        CommodityParam param = apiParam.getBody();
+        Integer itemId = param.getItemId();
+        Integer pageNo = param.getPageNo();
+        Integer pageSize = param.getPageSize();
         log.info("request commodity list, param  item {}, pageNo {}, pagesSize{}.", itemId, pageNo, pageSize);
 
         int total = commodityWebService.queryCommodityCountByItemId(itemId);
@@ -91,15 +89,13 @@ public class CommodityController {
 
     /**
      * 切换商品推荐/不推荐
-     *
      */
     @RequestMapping("/switchCommodityRecommend")
-    public Object switchCommodityRecommend(@RequestBody ApiParam apiParam) {
+    public Object switchCommodityRecommend(@RequestBody ApiParam<CommodityParam> apiParam) {
 
-        String requestParam = apiParam.getBody().toString();
+        CommodityParam param = apiParam.getBody();
 
-        JSONObject jsonObject = JSON.parseObject(requestParam);
-        Integer commodityId = Integer.valueOf(jsonObject.get("commodityId").toString());
+        Integer commodityId = param.getCommodityId();
         log.info("request change commodity recommend status, commodity id is {}.", commodityId);
 
         int executeNum = commodityWebService.updateRecommendStatus(commodityId);
@@ -112,15 +108,12 @@ public class CommodityController {
 
     /**
      * 删除商品
-     *
      */
     @RequestMapping("/removeCommodity")
-    public Object removeCommodity(@RequestBody ApiParam apiParam) {
+    public Object removeCommodity(@RequestBody ApiParam<CommodityParam> apiParam) {
 
-        String requestParam = apiParam.getBody().toString();
-
-        JSONObject jsonObject = JSON.parseObject(requestParam);
-        Integer commodityId = Integer.valueOf(jsonObject.get("commodityId").toString());
+        CommodityParam param = apiParam.getBody();
+        Integer commodityId = param.getCommodityId();
         log.info("request remove commodity, commodity id is {}.", commodityId);
 
         int executeNum = commodityWebService.removeCommodity(commodityId);
@@ -130,13 +123,11 @@ public class CommodityController {
 
     /**
      * 修改商品
-     *
      */
     @RequestMapping("/updateCommodity")
-    public Object updateCommodity(@RequestBody ApiParam apiParam) {
+    public Object updateCommodity(@RequestBody ApiParam<CommodityVo> apiParam) {
 
-        String requestParam = apiParam.getBody().toString();
-        CommodityVo commodityVo = JSON.parseObject(requestParam, CommodityVo.class);
+        CommodityVo commodityVo = apiParam.getBody();
 
         log.info("request modify commodity, commodity id is {}", commodityVo.getpId());
         int executeNum = commodityWebService.updateCommodity(commodityVo);
