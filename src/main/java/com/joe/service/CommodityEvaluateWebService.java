@@ -32,7 +32,7 @@ public class CommodityEvaluateWebService {
         return commodityEvaluateService.updateCommodityEvaluate(commodityEvaluate);
     }
 
-    //查询某个商品的评价数量
+    //查询商品的评价数量
     public int queryEvaluateCountByCommodityId(Integer commodityId) {
 
         return commodityEvaluateService.queryEvaluateCountByCommodityId(commodityId);

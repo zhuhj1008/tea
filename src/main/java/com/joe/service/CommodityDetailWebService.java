@@ -4,16 +4,16 @@ import com.joe.api.po.Commodity;
 import com.joe.api.po.CommodityDetail;
 import com.joe.api.service.CommodityDetailService;
 import com.joe.api.service.CommodityService;
-import com.joe.common.base.BaseService;
 import com.joe.dto.commodity.CommodityDetailVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
+ * 商品明细Service
  * create by  on 2018-05-29 12:21
  **/
 @Service
-public class CommodityDetailWebService extends BaseService {
+public class CommodityDetailWebService {
 
     @Autowired
     private CommodityDetailService commodityDetailService;
@@ -22,7 +22,8 @@ public class CommodityDetailWebService extends BaseService {
     private CommodityService commodityService;
 
 
-    public CommodityDetailVO queryCommodityDetailByCommodityId(int commodityId) {
+    //查询商品明细
+    public CommodityDetailVO queryDetailByCommodityId(int commodityId) {
 
         CommodityDetailVO commodityDetailVO = new CommodityDetailVO();
 

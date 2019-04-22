@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * 商品Service
+ */
 @Service
 public class CommodityWebService {
 

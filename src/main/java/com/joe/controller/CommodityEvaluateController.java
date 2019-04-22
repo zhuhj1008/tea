@@ -1,25 +1,17 @@
 package com.joe.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.joe.api.po.CommodityEvaluate;
 import com.joe.common.ApiParam;
-import com.joe.common.base.BaseController;
-import com.joe.dto.commodity.CommodityParam;
-import com.joe.dto.commodity.CommodityVo;
-import com.joe.service.CommodityEvaluateWebService;
 import com.joe.common.ApiResult;
+import com.joe.dto.commodity.CommodityParam;
+import com.joe.service.CommodityEvaluateWebService;
 import com.joe.util.mvc.ResponsePageEntity;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**

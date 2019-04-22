@@ -1,23 +1,16 @@
 package com.joe.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.joe.api.po.UserCustomer;
 import com.joe.common.ApiParam;
-import com.joe.common.base.BaseController;
+import com.joe.common.ApiResult;
 import com.joe.dto.user.UserParam;
 import com.joe.service.CustomerWebService;
-import com.joe.common.ApiResult;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * 客户信息请求

@@ -22,8 +22,6 @@ public class QiNiuService {
 
     /**
      * 获取上传文件的Token
-     *
-     * @return
      */
     public String getUploadToken() {
 

@@ -3,7 +3,6 @@ package com.joe.manager.api.receive;
 import com.alibaba.fastjson.JSON;
 import com.joe.api.po.ReceiveAddress;
 import com.joe.api.service.ReceiveAddressService;
-import com.joe.common.base.BaseService;
 import com.joe.manager.BaseTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
  * 收货地址测试类
  * create by Joe on 2018-06-14 15:54
  **/
-public class ReceiveAddressServiceTest extends BaseTest{
+public class ReceiveAddressServiceTest extends BaseTest {
 
     @Autowired
     ReceiveAddressService receiveAddressService;
 
     @Test
-    public void addReceiveAddressTest(){
+    public void addReceiveAddressTest() {
 
         ReceiveAddress receiveAddress = new ReceiveAddress();
         receiveAddress.setCustomerId(2);
@@ -32,7 +31,7 @@ public class ReceiveAddressServiceTest extends BaseTest{
 
         logger.info("新增收货地址:{}", JSON.toJSONString(receiveAddress));
         int i = receiveAddressService.addReceiveAddress(receiveAddress);
-        logger.info("新增收货地址成功，编号:{}",i);
+        logger.info("新增收货地址成功，编号:{}", i);
     }
 
 }

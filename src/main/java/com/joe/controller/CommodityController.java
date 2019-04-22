@@ -145,7 +145,7 @@ public class CommodityController {
         Integer commodityId = param.getCommodityId();
 
         log.info("查询商品详情，商品编号：{}。", commodityId);
-        CommodityDetailVO commodityDetailVO = commodityDetailWebService.queryCommodityDetailByCommodityId(commodityId);
+        CommodityDetailVO commodityDetailVO = commodityDetailWebService.queryDetailByCommodityId(commodityId);
         if (commodityDetailVO == null) {
             log.error("查询商品详情，没有找到对应商品，商品编号：{}。", commodityId);
             return ApiResult.getFailEntity("商品信息缺失");

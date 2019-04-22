@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.joe.api.po.Commodity;
 import com.joe.api.po.CommodityDetail;
+import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
@@ -13,6 +14,7 @@ import java.util.List;
  * 商品详情VO
  * create by Joe on 2018-05-29 10:57
  **/
+@Data
 public class CommodityDetailVO {
 
     //商品名称
@@ -116,140 +118,4 @@ public class CommodityDetailVO {
 
     }
 
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getItemId() {
-        return itemId;
-    }
-
-    public void setItemId(Integer itemId) {
-        this.itemId = itemId;
-    }
-
-    public String getSmallPicture() {
-        return smallPicture;
-    }
-
-    public void setSmallPicture(String smallPicture) {
-        this.smallPicture = smallPicture;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    public Integer getDetailId() {
-        return detailId;
-    }
-
-    public void setDetailId(Integer detailId) {
-        this.detailId = detailId;
-    }
-
-    public Integer getCommodityId() {
-        return commodityId;
-    }
-
-    public void setCommodityId(Integer commodityId) {
-        this.commodityId = commodityId;
-    }
-
-    public BigDecimal getCost() {
-        return cost;
-    }
-
-    public void setCost(BigDecimal cost) {
-        this.cost = cost;
-    }
-
-    public BigDecimal getInitPrice() {
-        return initPrice;
-    }
-
-    public void setInitPrice(BigDecimal initPrice) {
-        this.initPrice = initPrice;
-    }
-
-    public Integer getStock() {
-        return stock;
-    }
-
-    public void setStock(Integer stock) {
-        this.stock = stock;
-    }
-
-    public List<String> getDetailPicture() {
-        return detailPicture;
-    }
-
-    public void setDetailPicture(List<String> detailPicture) {
-        this.detailPicture = detailPicture;
-    }
-
-    public List<String> getPictureInfo() {
-        return pictureInfo;
-    }
-
-    public void setPictureInfo(List<String> pictureInfo) {
-        this.pictureInfo = pictureInfo;
-    }
-
-    public String getOrigin() {
-        return origin;
-    }
-
-    public void setOrigin(String origin) {
-        this.origin = origin;
-    }
-
-    public Boolean getRecommend() {
-        return recommend;
-    }
-
-    public void setRecommend(Boolean recommend) {
-        this.recommend = recommend;
-    }
-
-    public String getFlavor() {
-        return flavor;
-    }
-
-    public void setFlavor(String flavor) {
-        this.flavor = flavor;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getSaveMethod() {
-        return saveMethod;
-    }
-
-    public void setSaveMethod(String saveMethod) {
-        this.saveMethod = saveMethod;
-    }
-
-    public String getSaveDate() {
-        return saveDate;
-    }
-
-    public void setSaveDate(String saveDate) {
-        this.saveDate = saveDate;
-    }
 }
