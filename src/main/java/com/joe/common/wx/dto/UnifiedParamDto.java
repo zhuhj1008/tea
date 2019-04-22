@@ -1,11 +1,13 @@
 package com.joe.common.wx.dto;
 
+import lombok.Data;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 /**
  * 统一支付请求参数
  * create by Joe on 2018-08-07 11:55
  **/
+@Data
 public class UnifiedParamDto {
 
     /*小程序id 1*/

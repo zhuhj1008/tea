@@ -1,6 +1,6 @@
 package com.joe.common.exception;
 
-import com.joe.util.mvc.ResponseEntity;
+import com.joe.common.ApiResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -18,19 +18,19 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     public Object defaultExceptionHandler(Exception e) {
         logger.info("系统异常：{}", e);
-        return ResponseEntity.getFailEntity("操作失败，请联系管理员。");
+        return ApiResult.getFailEntity("操作失败，请联系管理员。");
     }
 
     @ExceptionHandler(value = BusinessException.class)
     public Object businessExceptionHandler(BusinessException e) {
         logger.info("业务异常：{}", e);
-        return ResponseEntity.getFailEntity(e.getMessage());
+        return ApiResult.getFailEntity(e.getMessage());
     }
 
     @ExceptionHandler(value = ParameterIllegalityException.class)
     public Object paramException(ParameterIllegalityException e) {
         logger.info("请求参数异常：{}", e);
-        return ResponseEntity.getFailEntity(e.getMessage());
+        return ApiResult.getFailEntity(e.getMessage());
     }
 
 //    @ExceptionHandler(value = ParameterIllegalityException.class)

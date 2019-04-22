@@ -1,11 +1,13 @@
 package com.joe.controller;
 
 import com.joe.api.po.Commodity;
-import com.joe.dto.commodity.CommodityParam;
 import com.joe.common.ApiParam;
-import com.joe.service.CommodityWebService;
+import com.joe.common.ApiResult;
+import com.joe.dto.commodity.CommodityDetailVO;
+import com.joe.dto.commodity.CommodityParam;
 import com.joe.dto.commodity.CommodityVo;
-import com.joe.util.mvc.ResponseEntity;
+import com.joe.service.CommodityDetailWebService;
+import com.joe.service.CommodityWebService;
 import com.joe.util.mvc.ResponsePageEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,17 +28,20 @@ public class CommodityController {
     @Autowired
     private CommodityWebService commodityWebService;
 
+    @Autowired
+    private CommodityDetailWebService commodityDetailWebService;
+
 
     @RequestMapping("/addCommodity")
-    public Object addCommodity(@RequestBody ApiParam<CommodityVo> apiParam) {
+    public ApiResult addCommodity(@RequestBody ApiParam<CommodityVo> apiParam) {
 
         CommodityVo commodityVo = apiParam.getBody();
 
-        log.info("request add commodity, commodity name is {}.", commodityVo.getpName());
+        log.info("添加商品，商品名称：{}。", commodityVo.getPName());
         int commodityId = commodityWebService.addCommodity(commodityVo);
-        log.info("add commodity success, commodity id is {}.", commodityId);
+        log.info("添加商品成功，商品编号：{}。", commodityId);
 
-        return ResponseEntity.getSuccessEntity("新增商品成功", commodityId);
+        return ApiResult.getSuccessEntity(commodityId);
     }
 
 
@@ -44,39 +49,37 @@ public class CommodityController {
      * 根据类目id查询商品集合
      */
     @RequestMapping("/getCommodityListByItemId")
-    public Object getCommodityListByItemId(@RequestBody ApiParam<CommodityParam> apiParam) {
+    public ApiResult getCommodityListByItemId(@RequestBody ApiParam<CommodityParam> apiParam) {
 
         CommodityParam param = apiParam.getBody();
         Integer itemId = param.getItemId();
         Integer pageNo = param.getPageNo();
         Integer pageSize = param.getPageSize();
-        log.info("request commodity list, param  item {}, pageNo {}, pagesSize{}.", itemId, pageNo, pageSize);
+        log.info("查询商品列表，商品类目：{}，页码-大小：{}-{}。", itemId, pageNo, pageSize);
 
         int total = commodityWebService.queryCommodityCountByItemId(itemId);
         List<Commodity> commodityList = commodityWebService.queryCommodityByItemId(itemId, pageNo, pageSize);
-        log.info("request commodity list success.");
+        log.info("查询商品列表成功。");
 
         ResponsePageEntity pageEntity = new ResponsePageEntity();
         pageEntity.setTotal(total);
         pageEntity.setContents(commodityList);
 
-        return ResponseEntity.getSuccessEntity("查询商品列表成功", pageEntity);
+        return ApiResult.getSuccessEntity(pageEntity);
     }
 
 
     /**
      * 获取推荐商品
-     *
-     * @return
      */
     @RequestMapping("/getRecommendCommodity")
-    public Object getRecommendCommodity() {
+    public ApiResult getRecommendCommodity() {
 
-        log.info("request recommend commodity list");
+        log.info("查询推荐商品。");
         List<Commodity> commodities = commodityWebService.queryRecommendCommodity();
-        log.info("request recommend commodity list success, total {}", commodities.size());
+        log.info("查询推荐商品成功。");
 
-        return ResponseEntity.getSuccessEntity("查询推荐商品成功", commodities);
+        return ApiResult.getSuccessEntity(commodities);
     }
 
 
@@ -84,17 +87,17 @@ public class CommodityController {
      * 切换商品推荐/不推荐
      */
     @RequestMapping("/switchCommodityRecommend")
-    public Object switchCommodityRecommend(@RequestBody ApiParam<CommodityParam> apiParam) {
+    public ApiResult switchCommodityRecommend(@RequestBody ApiParam<CommodityParam> apiParam) {
 
         CommodityParam param = apiParam.getBody();
 
         Integer commodityId = param.getCommodityId();
-        log.info("request change commodity recommend status, commodity id is {}.", commodityId);
+        log.info("修改商品首页推荐状态，商品编号：{}。", commodityId);
 
         int executeNum = commodityWebService.updateRecommendStatus(commodityId);
 
-        log.info("change commodity recommend status success.");
-        return ResponseEntity.getSuccessEntity("修改推荐状态成功", executeNum);
+        log.info("修改商品首页推荐状态成功。");
+        return ApiResult.getSuccessEntity(executeNum);
 
     }
 
@@ -103,14 +106,14 @@ public class CommodityController {
      * 删除商品
      */
     @RequestMapping("/removeCommodity")
-    public Object removeCommodity(@RequestBody ApiParam<CommodityParam> apiParam) {
+    public ApiResult removeCommodity(@RequestBody ApiParam<CommodityParam> apiParam) {
 
         CommodityParam param = apiParam.getBody();
         Integer commodityId = param.getCommodityId();
-        log.info("request remove commodity, commodity id is {}.", commodityId);
+        log.info("删除商品，商品编号：{}。", commodityId);
 
         int executeNum = commodityWebService.removeCommodity(commodityId);
-        return ResponseEntity.getSuccessEntity("删除商品成功", executeNum);
+        return ApiResult.getSuccessEntity(executeNum);
     }
 
 
@@ -118,21 +121,37 @@ public class CommodityController {
      * 修改商品
      */
     @RequestMapping("/updateCommodity")
-    public Object updateCommodity(@RequestBody ApiParam<CommodityVo> apiParam) {
+    public ApiResult updateCommodity(@RequestBody ApiParam<CommodityVo> apiParam) {
 
         CommodityVo commodityVo = apiParam.getBody();
 
-        log.info("request modify commodity, commodity id is {}", commodityVo.getpId());
+        log.info("修改商品，商品编号：{}", commodityVo.getPId());
         int executeNum = commodityWebService.updateCommodity(commodityVo);
 
         if (executeNum == 0) {
             log.info("modify commodity fail");
-            return ResponseEntity.getFailEntity("修改商品失败");
+            return ApiResult.getFailEntity("修改商品失败");
         }
 
         log.info("modify commodity success");
-        return ResponseEntity.getSuccessEntity("商品修改成功", executeNum);
+        return ApiResult.getSuccessEntity("商品修改成功", executeNum);
     }
 
+
+    @RequestMapping("/getDetailById")
+    public ApiResult getCommodityDetailByCommodityId(@RequestBody ApiParam<CommodityParam> apiParam) {
+
+        CommodityParam param = apiParam.getBody();
+        Integer commodityId = param.getCommodityId();
+
+        log.info("查询商品详情，商品编号：{}。", commodityId);
+        CommodityDetailVO commodityDetailVO = commodityDetailWebService.queryCommodityDetailByCommodityId(commodityId);
+        if (commodityDetailVO == null) {
+            log.error("查询商品详情，没有找到对应商品，商品编号：{}。", commodityId);
+            return ApiResult.getFailEntity("商品信息缺失");
+        }
+
+        return ApiResult.getSuccessEntity(commodityDetailVO);
+    }
 
 }

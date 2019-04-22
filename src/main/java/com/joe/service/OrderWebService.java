@@ -15,6 +15,7 @@ import com.joe.dto.order.OrderQueryDTO;
 import com.joe.dto.order.OrderVo;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,7 +44,8 @@ public class OrderWebService {
      */
     public int addOrder(OrderVo orderVo) {
 
-        Order order = OrderVo.OrderVoConvert2Order(orderVo);
+        Order order = new Order();
+        BeanUtils.copyProperties(orderVo, order);
         int orderId = orderService.addOrder(order);
 
         return orderId;
@@ -82,7 +84,8 @@ public class OrderWebService {
 
         List<OrderVo> orderVoList = new ArrayList<>();
         for (Order tmpOrder : orders) {
-            OrderVo orderVo = OrderVo.OrderConvert2OrderVo(tmpOrder);
+            OrderVo orderVo = new OrderVo();
+            BeanUtils.copyProperties(tmpOrder, orderVo);
             orderVoList.add(orderVo);
         }
 

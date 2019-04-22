@@ -3,14 +3,19 @@ package com.joe.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.joe.api.po.UserCustomer;
+import com.joe.common.ApiParam;
 import com.joe.common.base.BaseController;
+import com.joe.dto.user.UserParam;
 import com.joe.service.CustomerWebService;
-import com.joe.util.mvc.ResponseEntity;
+import com.joe.common.ApiResult;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,35 +23,30 @@ import javax.servlet.http.HttpServletRequest;
  * 客户信息请求
  * create by Joe on 2018-06-22 11:52
  **/
-@Controller
+@Slf4j
+@RestController
 @RequestMapping("/customer")
-public class CustomerController extends BaseController{
+public class CustomerController {
 
     @Autowired
     private CustomerWebService customerWebService;
 
-
     @RequestMapping("/getCustomer")
-    @ResponseBody
-    public Object getCustomerOpenIdAndSessionKey(HttpServletRequest request){
+    public ApiResult getCustomerOpenIdAndSessionKey(@RequestBody ApiParam<UserParam> apiParam) {
 
-        String requestParam = getRequestParam(request);
-        if (StringUtils.isBlank(requestParam)) {
-            return ResponseEntity.getFailEntity("参数有误");
-        }
-        JSONObject jsonObject = JSON.parseObject(requestParam);
-        String code = jsonObject.get("code").toString();
-
-        if(StringUtils.isEmpty(code)){
-            return ResponseEntity.getFailEntity("code为空");
+        UserParam param = apiParam.getBody();
+        log.info("获取客户信息，请求code：{}。", param.getCode());
+        if (StringUtils.isEmpty(param.getCode())) {
+            log.error("获取客户信息失败，请求code为空。");
+            return ApiResult.getFailEntity();
         }
 
-        UserCustomer userCustomer = customerWebService.getUserCustomer(code);
-
-        if(userCustomer == null){
-            return ResponseEntity.getFailEntity("获取用户信息失败");
+        UserCustomer userCustomer = customerWebService.getUserCustomer(param.getCode());
+        if (userCustomer == null) {
+            return ApiResult.getFailEntity();
         }
 
-        return ResponseEntity.getSuccessEntity("请求成功",userCustomer);
+        log.info("获取客户信息成功。");
+        return ApiResult.getSuccessEntity(userCustomer);
     }
 }

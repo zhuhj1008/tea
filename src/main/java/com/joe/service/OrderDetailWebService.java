@@ -26,7 +26,7 @@ public class OrderDetailWebService {
      */
     public void addOrderDetail(OrderVo orderVo, int orderId) {
 
-        List<OrderDetailVo> orderDetailVoList = OrderVo.convertToOrderDetailVo(orderVo);
+        List<OrderDetailVo> orderDetailVoList = orderVo.getOrderDetailArr();
         List<OrderDetail> orderDetailList = new ArrayList<>();
         for (OrderDetailVo orderDetailVo : orderDetailVoList) {
             OrderDetail orderDetail = OrderDetailVo.convert2OrderDetail(orderDetailVo, orderId);

@@ -2,6 +2,9 @@ package com.joe.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.joe.api.po.OrderDetail;
+import com.joe.common.ApiParam;
+import com.joe.dto.order.OrderParam;
 import com.joe.service.OrderDetailWebService;
 import com.joe.service.OrderWebService;
 import com.joe.dto.order.OrderDeliverDTO;
@@ -10,11 +13,12 @@ import com.joe.dto.order.OrderVo;
 import com.joe.common.base.BaseController;
 import com.joe.common.exception.ParameterIllegalityException;
 import com.joe.common.wx.dto.UnifiedParamDto;
-import com.joe.util.mvc.ResponseEntity;
+import com.joe.common.ApiResult;
 import com.joe.util.mvc.ResponsePageEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,11 +29,10 @@ import java.util.List;
  * 订单请求
  * create by Joe on 2018-06-04 16:02
  **/
+@Slf4j
 @RestController
 @RequestMapping("/order")
-@Slf4j
-public class OrderController extends BaseController {
-
+public class OrderController {
 
     @Autowired
     private OrderWebService orderWebService;
@@ -42,94 +45,97 @@ public class OrderController extends BaseController {
      * 新增订单
      */
     @RequestMapping("/addOrder")
-    public Object addOrder(HttpServletRequest request) {
+    public ApiResult addOrder(@RequestBody ApiParam<OrderVo> apiParam) {
 
-        String requestParam = getRequestParam(request);
-        if (StringUtils.isBlank(requestParam)) {
-            return ResponseEntity.getFailEntity("参数错误");
-        }
-
-        OrderVo orderVo = JSON.parseObject(requestParam, OrderVo.class);
+        OrderVo orderVo = apiParam.getBody();
+        log.info("新增订单，客户姓名：{}。", orderVo.getCustomerName());
 
         int orderId = orderWebService.addOrder(orderVo);
-        orderDetailWebService.addOrderDetail(orderVo, orderId);
+        log.info("新增订单完成。订单编号：{}。", orderId);
 
-        return ResponseEntity.getSuccessEntity(null, null);
+        orderDetailWebService.addOrderDetail(orderVo, orderId);
+        log.info("新增订单明细完成，订单编号：{}。", orderId);
+
+        return ApiResult.getSuccessEntity(orderId);
     }
 
 
     /**
-     * 条件查询订单
+     * 查询订单
      */
     @RequestMapping("/getOrder")
-    public Object getOrderByParam(HttpServletRequest request) {
-        String requestParam = getRequestParam(request);
-        if (StringUtils.isBlank(requestParam)) {
-            throw new ParameterIllegalityException("请求参数有误");
-        }
+    public ApiResult getOrder(@RequestBody ApiParam<OrderQueryDTO> apiParam) {
 
-        OrderQueryDTO orderQueryDTO = JSON.parseObject(requestParam, OrderQueryDTO.class);
+        OrderQueryDTO orderQueryDTO = apiParam.getBody();
+        log.info("查询订单，查询参数：{}。", orderQueryDTO);
 
         List<OrderVo> orderList = orderWebService.getOrderList(orderQueryDTO);
         int total = orderWebService.getOrderCount(orderQueryDTO);
+        log.info("查询订单成功，订单数量：{}", total);
 
-        ResponsePageEntity pageEntity = new ResponsePageEntity();
-        pageEntity.setTotal(total);
-        pageEntity.setContents(orderList);
-        return ResponseEntity.getSuccessEntity("查询订单列表成功", pageEntity);
+        ResponsePageEntity pageEntity = new ResponsePageEntity(total, orderList);
+        return ApiResult.getSuccessEntity(pageEntity);
     }
 
 
     /**
-     * 修改订单为发货状态
+     * 查询订单详情
+     */
+    @RequestMapping("/getOrderDetail")
+    public ApiResult getOrderDetail(@RequestBody ApiParam<OrderParam> apiParam) {
+
+        OrderParam param = apiParam.getBody();
+        log.info("查询订单详情，订单编号：{}。", param.getOrderId());
+        if (param.getOrderId() == null) {
+            log.error("查询订单详情，订单编号为空。");
+            return ApiResult.getFailEntity();
+        }
+
+        List<OrderDetail> orderDetailList = orderDetailWebService.getOrderDetailByOrderId(param.getOrderId());
+        log.info("查询订单详情成功。");
+
+        return ApiResult.getSuccessEntity(orderDetailList);
+    }
+
+
+    /**
+     * 订单发货
      */
     @RequestMapping("/deliver")
-    public Object alterOrder(HttpServletRequest request) {
+    public ApiResult orderDeliver(@RequestBody ApiParam<OrderDeliverDTO> apiParam) {
 
-        String requestParam = getRequestParam(request);
-        if (StringUtils.isBlank(requestParam)) {
-            throw new ParameterIllegalityException("请求参数有误");
+        OrderDeliverDTO orderDeliverDTO = apiParam.getBody();
+        log.info("请求订单发货，请求参数：{}。", orderDeliverDTO);
+
+        int execNum = orderWebService.orderDeliver(orderDeliverDTO);
+        if (execNum <= 0) {
+            log.error("请求订单发货失败。");
+            return ApiResult.getFailEntity();
         }
-
-        OrderDeliverDTO orderDeliverDTO = JSON.parseObject(requestParam, OrderDeliverDTO.class);
-
-        int i = orderWebService.orderDeliver(orderDeliverDTO);
-        if (i <= 0) {
-            return ResponseEntity.getFailEntity("订单发货失败");
-        }
-        return ResponseEntity.getSuccessEntity("订单发货成功", i);
+        return ApiResult.getSuccessEntity(execNum);
     }
 
 
     /**
-     * 订单微信支付
-     * @return
+     * 微信支付
      */
     @RequestMapping("/wePayUnifiedOrder")
-    public Object wePayUnifiedOrder(HttpServletRequest request){
+    public ApiResult wePayUnifiedOrder(@RequestBody ApiParam<UnifiedParamDto> apiParam) {
 
-        String ipAddress = request.getRemoteAddr();
-        String requestParam = getRequestParam(request);
-        if (StringUtils.isBlank(requestParam)) {
-            throw new ParameterIllegalityException("参数为空");
-        }
-        JSONObject jsonObject = JSON.parseObject(requestParam);
-        if (jsonObject == null) {
-            return ResponseEntity.getFailEntity("参数错误");
-        }
+        UnifiedParamDto unifiedParamDto = apiParam.getBody();
+        log.info("微信支付-统一支付，请求参数：{}。", unifiedParamDto);
+        unifiedParamDto.setSpbillCreateIp("127.0.0.1");
 
-        UnifiedParamDto unifiedParamDto = JSON.parseObject(requestParam, UnifiedParamDto.class);
-        unifiedParamDto.setSpbillCreateIp(ipAddress);
-
-        return orderWebService.wePayUnifiedOrder(unifiedParamDto);
+        Object o = orderWebService.wePayUnifiedOrder(unifiedParamDto);
+        return ApiResult.getSuccessEntity(o);
     }
 
-
+    /**
+     * 微信回调接口
+     */
     @RequestMapping("/wxResend")
-    public void wxResend(HttpServletRequest request){
-        System.out.println("微信回调成功");
-        String requestParam = getRequestParam(request);
-        System.out.println(requestParam);
+    public void wxResend() {
+
     }
 
 }

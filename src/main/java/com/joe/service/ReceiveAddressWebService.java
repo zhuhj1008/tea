@@ -63,7 +63,7 @@ public class ReceiveAddressWebService {
         return receiveAddressService.queryReceiveAddressById(userCustomer.getReceivingAddressDefault());
     }
 
-    public int modifyCustomerDefaultReceiveAddress(Integer customerId, Integer addressId) {
+    public int modifyDefaultReceiveAddress(Integer customerId, Integer addressId) {
 
         if (customerId == null || customerId == 0) {
             logger.info("modify default customer receive address,  invalid customerId :{}", customerId);
