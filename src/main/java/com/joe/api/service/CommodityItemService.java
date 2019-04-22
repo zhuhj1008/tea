@@ -13,7 +13,7 @@ import java.util.List;
 public class CommodityItemService {
 
     @Autowired
-    CommodityItemMapper commodityItemMapper;
+    private CommodityItemMapper commodityItemMapper;
 
     /**
      * 新增商品类目
@@ -65,6 +65,7 @@ public class CommodityItemService {
 
     /**
      * 查询自己和下级商品ID类目集合
+     *
      * @param itemId
      * @return
      */

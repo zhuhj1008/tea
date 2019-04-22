@@ -12,8 +12,6 @@ public interface ReceiveAddressMapper {
 
     int updateByPrimaryKeySelective(ReceiveAddress record);
 
-    int updateByPrimaryKey(ReceiveAddress record);
-
     ReceiveAddress selectByPrimaryKey(Integer addressId);
 
     List<ReceiveAddress> selectByCustomerId(Integer customerId);

@@ -5,6 +5,7 @@ import com.joe.api.po.CommodityEvaluate;
 import java.util.List;
 
 public interface CommodityEvaluateMapper {
+
     int deleteByPrimaryKey(Integer evaluateId);
 
     int insertSelective(CommodityEvaluate record);

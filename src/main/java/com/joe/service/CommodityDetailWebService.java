@@ -13,28 +13,28 @@ import org.springframework.stereotype.Service;
  * create by  on 2018-05-29 12:21
  **/
 @Service
-public class CommodityDetailWebService extends BaseService{
+public class CommodityDetailWebService extends BaseService {
 
     @Autowired
-    CommodityDetailService commodityDetailService;
+    private CommodityDetailService commodityDetailService;
 
     @Autowired
-    CommodityService commodityService;
+    private CommodityService commodityService;
 
 
-    public CommodityDetailVO queryCommodityDetailByCommodityId(int commodityId){
+    public CommodityDetailVO queryCommodityDetailByCommodityId(int commodityId) {
 
         CommodityDetailVO commodityDetailVO = new CommodityDetailVO();
 
         CommodityDetail commodityDetail = commodityDetailService.queryCommodityDetailByCommodityId(commodityId);
         Commodity commodity = commodityService.queryCommodityById(commodityId);
 
-        if(commodityDetail == null || commodity == null){
+        if (commodityDetail == null || commodity == null) {
             return null;
         }
 
-        CommodityDetailVO.commodityDetail2DetailVo(commodityDetailVO,commodityDetail);
-        CommodityDetailVO.commodity2DetailVo(commodityDetailVO,commodity);
+        CommodityDetailVO.commodityDetail2DetailVo(commodityDetailVO, commodityDetail);
+        CommodityDetailVO.commodity2DetailVo(commodityDetailVO, commodity);
 
         return commodityDetailVO;
     }

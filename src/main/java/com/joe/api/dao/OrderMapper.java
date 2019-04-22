@@ -18,8 +18,4 @@ public interface OrderMapper {
 
     List<Order> selectByOrderSelective(Order order);
 
-//    List<Order> selectByOrderQueryDtoSelective(OrderQueryDTO orderQueryDTO);
-
-//    int selectCountByOrderQueryDtoSelective(OrderQueryDTO orderQueryDTO);
-
 }

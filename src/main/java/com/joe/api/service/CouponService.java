@@ -13,10 +13,10 @@ import java.util.Date;
 public class CouponService {
 
     @Autowired
-    CouponMapper couponMapper;
+    private CouponMapper couponMapper;
 
     @Autowired
-    CouponCustomerMapper couponCustomerMapper;
+    private CouponCustomerMapper couponCustomerMapper;
 
     /**
      * 添加优惠券

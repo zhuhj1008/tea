@@ -16,7 +16,7 @@ import java.util.List;
 public class CommodityEvaluateWebService {
 
     @Autowired
-    CommodityEvaluateService commodityEvaluateService;
+    private CommodityEvaluateService commodityEvaluateService;
 
 
     //新增商品评价

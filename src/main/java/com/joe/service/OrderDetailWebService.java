@@ -22,7 +22,7 @@ public class OrderDetailWebService {
 
 
     /**
-     *新增订单明细
+     * 新增订单明细
      */
     public void addOrderDetail(OrderVo orderVo, int orderId) {
 

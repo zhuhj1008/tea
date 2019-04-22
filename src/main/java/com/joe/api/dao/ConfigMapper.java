@@ -17,8 +17,6 @@ public interface ConfigMapper {
 
     int updateByPrimaryKeySelective(Config record);
 
-    int updateByPrimaryKey(Config record);
-
     List<Config> queryConfigByType(Integer configType);
 
     List<Config> queryConfigByTypeAndKey(@Param(value = "configKey") Integer configKey, @Param(value = "configKey") Integer configType);

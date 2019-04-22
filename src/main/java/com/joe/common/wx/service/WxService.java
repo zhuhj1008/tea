@@ -1,8 +1,7 @@
 package com.joe.common.wx.service;
 
 import com.joe.common.exception.BusinessException;
-import com.joe.common.redis.RedisService;
-import com.joe.common.wx.dto.AuthParamDto;
+import com.joe.service.RedisService;
 import com.joe.common.wx.dto.UnifiedParamDto;
 import com.joe.common.wx.dto.UnifiedSuccessDto;
 import com.joe.common.wx.dto.WxConfig;
@@ -15,7 +14,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.SortedMap;

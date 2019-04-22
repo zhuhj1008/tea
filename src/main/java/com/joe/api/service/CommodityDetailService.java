@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class CommodityDetailService {
 
     @Autowired
-    CommodityDetailMapper commodityDetailMapper;
+    private CommodityDetailMapper commodityDetailMapper;
 
     /**
      * 新增商品明细

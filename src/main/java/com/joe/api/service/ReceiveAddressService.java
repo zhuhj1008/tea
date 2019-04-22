@@ -2,7 +2,6 @@ package com.joe.api.service;
 
 import com.joe.api.dao.ReceiveAddressMapper;
 import com.joe.api.po.ReceiveAddress;
-import org.omg.CORBA.INTERNAL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,12 +50,13 @@ public class ReceiveAddressService {
 
     /**
      * 根据主键查询收货地址
+     *
      * @param addressId
      * @return
      */
-    public ReceiveAddress queryReceiveAddressById(Integer addressId){
+    public ReceiveAddress queryReceiveAddressById(Integer addressId) {
 
-        if(addressId == null || addressId == 0){
+        if (addressId == null || addressId == 0) {
             return null;
         }
         return receiveAddressMapper.selectByPrimaryKey(addressId);

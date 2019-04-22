@@ -15,7 +15,7 @@ import java.util.Date;
 public class UserManagerService {
 
     @Autowired
-    UserManagerMapper userManagerMapper;
+    private UserManagerMapper userManagerMapper;
 
 
     /**

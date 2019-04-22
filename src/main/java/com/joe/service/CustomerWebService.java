@@ -27,9 +27,6 @@ public class CustomerWebService {
     //根据用户请求code获取用户信息
     public UserCustomer getUserCustomer(String code) {
 
-        AuthParamDto param = new AuthParamDto();
-
-
         String response = wxService.getOpenIdAndSessionKey(code);
 
         WxLoginDto wxLoginDto = JSON.parseObject(response, WxLoginDto.class);

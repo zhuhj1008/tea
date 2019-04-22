@@ -66,9 +66,9 @@ public class CommodityDetailVO {
     //保质期
     private String saveDate;
 
-    public static CommodityDetailVO commodity2DetailVo(CommodityDetailVO vo,Commodity commodity){
+    public static CommodityDetailVO commodity2DetailVo(CommodityDetailVO vo, Commodity commodity) {
 
-        if(commodity == null){
+        if (commodity == null) {
             return vo;
         }
 
@@ -82,9 +82,9 @@ public class CommodityDetailVO {
 
     }
 
-    public static CommodityDetailVO commodityDetail2DetailVo(CommodityDetailVO vo,CommodityDetail commodityDetail){
+    public static CommodityDetailVO commodityDetail2DetailVo(CommodityDetailVO vo, CommodityDetail commodityDetail) {
 
-        if(commodityDetail == null){
+        if (commodityDetail == null) {
             return vo;
         }
 
@@ -105,8 +105,8 @@ public class CommodityDetailVO {
         vo.setPictureInfo(pictureInfoList);
         vo.setOrigin(commodityDetail.getOrigin());
 
-        if(StringUtils.isNotEmpty(commodityDetail.getProperty())){
-            JSONObject property =(JSONObject) JSON.parse(commodityDetail.getProperty());
+        if (StringUtils.isNotEmpty(commodityDetail.getProperty())) {
+            JSONObject property = (JSONObject) JSON.parse(commodityDetail.getProperty());
             vo.setFlavor(property.getString("pTaste"));
             vo.setSaveMethod(property.getString("pPreservation"));
             vo.setSaveDate(property.getString("pExpirationDate"));

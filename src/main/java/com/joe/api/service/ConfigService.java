@@ -22,6 +22,7 @@ public class ConfigService {
 
     /**
      * 根据配置类型查询
+     *
      * @param configTypeEnum
      * @return
      */
@@ -36,6 +37,7 @@ public class ConfigService {
 
     /**
      * 根据配置类型和key查询
+     *
      * @param key
      * @param configTypeEnum
      * @return

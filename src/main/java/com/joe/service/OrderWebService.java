@@ -6,7 +6,6 @@ import com.joe.api.enums.OrderStatusEnum;
 import com.joe.api.po.Order;
 import com.joe.api.service.OrderService;
 import com.joe.common.exception.BusinessException;
-import com.joe.common.redis.RedisService;
 import com.joe.common.wx.dto.UnifiedParamDto;
 import com.joe.common.wx.dto.UnifiedSuccessDto;
 import com.joe.common.wx.enums.WxTradeTypeEnum;

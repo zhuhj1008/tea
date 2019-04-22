@@ -1,5 +1,6 @@
-package com.joe.common.qiniu;
+package com.joe.controller;
 
+import com.joe.service.QiNiuService;
 import com.joe.util.mvc.ResponseEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

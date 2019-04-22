@@ -27,9 +27,9 @@ public class OrderDetailVo {
     private Integer unit;
 
 
-    public static OrderDetail convert2OrderDetail(OrderDetailVo orderDetailVo,int orderId){
+    public static OrderDetail convert2OrderDetail(OrderDetailVo orderDetailVo, int orderId) {
 
-        if(orderDetailVo == null){
+        if (orderDetailVo == null) {
             return null;
         }
 

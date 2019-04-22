@@ -1,6 +1,5 @@
 package com.joe.api.service;
 
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.joe.api.dao.CommodityDetailMapper;
 import com.joe.api.dao.CommodityItemMapper;
@@ -11,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.beans.Transient;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -20,13 +17,10 @@ import java.util.List;
 public class CommodityService {
 
     @Autowired
-    CommodityDetailMapper commodityDetailMapper;
+    private CommodityDetailMapper commodityDetailMapper;
 
     @Autowired
-    CommodityMapper commodityMapper;
-
-    @Autowired
-    CommodityItemMapper commodityItemMapper;
+    private CommodityMapper commodityMapper;
 
 
     /**
@@ -82,25 +76,25 @@ public class CommodityService {
 
     /**
      * 修改商品信息 （全部更新）
+     *
      * @param commodity
      * @return
      */
-    public int modifyCommodityById(Commodity commodity){
+    public int modifyCommodityById(Commodity commodity) {
 
         return commodityMapper.updateByPrimaryKey(commodity);
     }
 
     /**
      * 修改商品推荐状态（0改成1 1改成0）
+     *
      * @param commodityId
      * @return
      */
-    public int updateRecommendStatusById(int commodityId){
+    public int updateRecommendStatusById(int commodityId) {
 
         return commodityMapper.updateRecommendStatusById(commodityId);
     }
-
-
 
 
     /**
@@ -118,7 +112,7 @@ public class CommodityService {
      * 查询商品集合By 类目Id
      *
      * @param itemId
-     * @param pageNo 页数
+     * @param pageNo   页数
      * @param pageSize 每页记录数
      * @return
      */
@@ -132,10 +126,11 @@ public class CommodityService {
 
     /**
      * 查询商品个数
+     *
      * @param itemId
      * @return
      */
-    public int queryCommodityCountByItemId(int itemId){
+    public int queryCommodityCountByItemId(int itemId) {
 
         return commodityMapper.selectCommodityCountByItemId(itemId);
     }
@@ -143,15 +138,13 @@ public class CommodityService {
 
     /**
      * 查询推荐商品
+     *
      * @return
      */
-    public List<Commodity> queryRecommendCommodity(){
+    public List<Commodity> queryRecommendCommodity() {
 
         return commodityMapper.selectRecommendCommodity();
     }
-
-
-
 
 
 }

@@ -23,6 +23,7 @@ public class ReceiveAddressWebService {
     @Autowired
     private ReceiveAddressService receiveAddressService;
 
+    @Autowired
     private UserCustomerService userCustomerService;
 
 
@@ -56,7 +57,7 @@ public class ReceiveAddressWebService {
 
         UserCustomer userCustomer = userCustomerService.queryCustomerByCustomerId(userId);
         if (userCustomer == null) {
-            logger.info("query customer by id, no result was found, customerId is {}",userId);
+            logger.info("query customer by id, no result was found, customerId is {}", userId);
             return null;
         }
         return receiveAddressService.queryReceiveAddressById(userCustomer.getReceivingAddressDefault());
@@ -65,12 +66,12 @@ public class ReceiveAddressWebService {
     public int modifyCustomerDefaultReceiveAddress(Integer customerId, Integer addressId) {
 
         if (customerId == null || customerId == 0) {
-            logger.info("modify default customer receive address,  invalid customerId :{}",customerId);
+            logger.info("modify default customer receive address,  invalid customerId :{}", customerId);
             return 0;
         }
 
         if (addressId == null || addressId == 0) {
-            logger.info("modify default customer receive address,  invalid addressId :{}",addressId);
+            logger.info("modify default customer receive address,  invalid addressId :{}", addressId);
             return 0;
         }
 

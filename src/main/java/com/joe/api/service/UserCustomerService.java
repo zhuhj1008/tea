@@ -12,7 +12,7 @@ import java.util.Date;
 public class UserCustomerService {
 
     @Autowired
-    UserCustomerMapper userCustomerMapper;
+    private UserCustomerMapper userCustomerMapper;
 
     /**
      * 新增客户
@@ -65,12 +65,13 @@ public class UserCustomerService {
 
     /**
      * 查询客户 by 微信唯一标识
+     *
      * @param openId
      * @return
      */
-    public UserCustomer queryCustomerByOpenId(String openId){
+    public UserCustomer queryCustomerByOpenId(String openId) {
 
-        if(StringUtils.isEmpty(openId)){
+        if (StringUtils.isEmpty(openId)) {
             return null;
         }
         return userCustomerMapper.queryCustomerByOpenId(openId);
@@ -78,12 +79,13 @@ public class UserCustomerService {
 
     /**
      * 查询客户 by 小程序唯一标识
+     *
      * @param unionId
      * @return
      */
-    public UserCustomer queryCustomerByUnionId(String unionId){
+    public UserCustomer queryCustomerByUnionId(String unionId) {
 
-        if(StringUtils.isEmpty(unionId)){
+        if (StringUtils.isEmpty(unionId)) {
             return null;
         }
         return userCustomerMapper.queryCustomerByUnionId(unionId);

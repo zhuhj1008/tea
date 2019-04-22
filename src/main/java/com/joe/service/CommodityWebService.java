@@ -3,7 +3,6 @@ package com.joe.service;
 import com.joe.api.po.Commodity;
 import com.joe.api.po.CommodityDetail;
 import com.joe.api.service.CommodityDetailService;
-import com.joe.api.service.CommodityItemService;
 import com.joe.api.service.CommodityService;
 import com.joe.dto.commodity.CommodityVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +14,10 @@ import java.util.List;
 public class CommodityWebService {
 
     @Autowired
-    CommodityService commodityService;
+    private CommodityService commodityService;
 
     @Autowired
-    CommodityDetailService commodityDetailService;
-
-    @Autowired
-    CommodityItemService commodityItemService;
+    private CommodityDetailService commodityDetailService;
 
 
     //新增商品
@@ -55,7 +51,7 @@ public class CommodityWebService {
     //删除商品
     public int removeCommodity(int commodityId) {
 
-       return commodityService.dropCommodity(commodityId);
+        return commodityService.dropCommodity(commodityId);
     }
 
 
@@ -66,7 +62,6 @@ public class CommodityWebService {
         int j = commodityDetailService.modifyCommodityDetail(commodityVo.commodityVoToCommodityDetail(commodityVo));
         return i + j;
     }
-
 
 
     //获取推荐商品

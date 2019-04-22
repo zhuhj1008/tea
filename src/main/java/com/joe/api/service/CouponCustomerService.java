@@ -2,7 +2,6 @@ package com.joe.api.service;
 
 import com.joe.api.dao.CouponCustomerMapper;
 import com.joe.api.po.CouponCustomer;
-import org.omg.CORBA.INTERNAL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +32,7 @@ public class CouponCustomerService {
 
     /**
      * 删除By ID
+     *
      * @param couponCustomerId
      * @return
      */
@@ -46,10 +46,11 @@ public class CouponCustomerService {
 
     /**
      * 删除By 顾客ID
+     *
      * @param customerId
      * @return
      */
-    public int dropCustomerCouponByCustomerId(int customerId){
+    public int dropCustomerCouponByCustomerId(int customerId) {
 
         CouponCustomer couponCustomer = new CouponCustomer();
         couponCustomer.setCustomerId(customerId);
@@ -60,10 +61,11 @@ public class CouponCustomerService {
 
     /**
      * 删除By 优惠券ID
+     *
      * @param couponId
      * @return
      */
-    public int dropCustomerCouponByCouponId(int couponId){
+    public int dropCustomerCouponByCouponId(int couponId) {
 
         CouponCustomer couponCustomer = new CouponCustomer();
         couponCustomer.setCouponId(couponId);
@@ -74,21 +76,23 @@ public class CouponCustomerService {
 
     /**
      * 查询 By主键
+     *
      * @param couponCustomerId
      * @return
      */
-    public CouponCustomer queryCouponCustomerById(int couponCustomerId){
+    public CouponCustomer queryCouponCustomerById(int couponCustomerId) {
 
-        return  couponCustomerMapper.selectByPrimaryKey(couponCustomerId);
+        return couponCustomerMapper.selectByPrimaryKey(couponCustomerId);
     }
 
 
     /**
      * 查询By 顾客Id
-     * @param customerId  顾客ID
+     *
+     * @param customerId 顾客ID
      * @return
      */
-    public List<Integer> queryCouponIdByCustomerId(int customerId){
+    public List<Integer> queryCouponIdByCustomerId(int customerId) {
 
         return couponCustomerMapper.selectByCustomerId(customerId);
     }

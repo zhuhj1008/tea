@@ -13,5 +13,4 @@ public interface ExpressMapper {
 
     int updateByPrimaryKeySelective(Express record);
 
-    int updateByPrimaryKey(Express record);
 }

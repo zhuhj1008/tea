@@ -2,8 +2,6 @@ package com.joe.dto.order;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
-import java.net.Inet4Address;
-
 /**
  * 订单查询参数
  * create by Joe on 2018-07-10 11:46

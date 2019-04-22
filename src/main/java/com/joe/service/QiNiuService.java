@@ -1,6 +1,7 @@
-package com.joe.common.qiniu;
+package com.joe.service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.joe.config.QiNiuConfig;
 import com.qiniu.util.UrlSafeBase64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

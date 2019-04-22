@@ -1,4 +1,4 @@
-package com.joe.common.qiniu;
+package com.joe.config;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;

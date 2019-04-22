@@ -30,9 +30,10 @@ public class OrderDetailService {
 
     /**
      * 批量新增订单详情
+     *
      * @param orderDetailList
      */
-    public void addOrderDetailBatch(List<OrderDetail> orderDetailList){
+    public void addOrderDetailBatch(List<OrderDetail> orderDetailList) {
         orderDetailMapper.insertBatch(orderDetailList);
     }
 
@@ -81,17 +82,18 @@ public class OrderDetailService {
      * @return
      */
     public List<OrderDetail> queryShopCartDetail(int customerId) {
-        return orderDetailMapper.selectByCustomerIdAndStatus(customerId,OrderDetailEnum.SHOP_CAR.getValue());
+        return orderDetailMapper.selectByCustomerIdAndStatus(customerId, OrderDetailEnum.SHOP_CAR.getValue());
     }
 
     /**
      * 根据订单号查询订单列表
+     *
      * @param orderId
      * @return
      */
-    public List<OrderDetail> queryOrderDetailByOrderId(Integer orderId){
+    public List<OrderDetail> queryOrderDetailByOrderId(Integer orderId) {
 
-        if(orderId == null || orderId == 0){
+        if (orderId == null || orderId == 0) {
             return new ArrayList<>();
         }
 
