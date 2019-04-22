@@ -54,7 +54,14 @@ public class CommodityVo {
     private String[] pImgPresentation;
 
     //口感，保存方法，保质期
-    private String property;
+    private Property property;
+
+    @Data
+    private class Property {
+        private String pTaste;
+        private String pPreservation;
+        private String pExpirationDate;
+    }
 
     public Commodity commodityVoToCommodity(CommodityVo commodityVo) {
 
@@ -82,7 +89,7 @@ public class CommodityVo {
         detail.setCost(commodityVo.getPCost());
         detail.setInitPrice(commodityVo.getPOriginalPrice());
         detail.setStock(commodityVo.getPInventory());
-        detail.setProperty(commodityVo.getProperty());
+        detail.setProperty(JSON.toJSONString(commodityVo.getProperty()));
         detail.setDetailPicture(JSON.toJSONString(commodityVo.getPImgBanner()));
         detail.setPictureInfo(JSON.toJSONString(commodityVo.getPImgPresentation()));
         detail.setOrigin(commodityVo.getPPlace());
