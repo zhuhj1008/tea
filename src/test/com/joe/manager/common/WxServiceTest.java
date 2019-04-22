@@ -1,12 +1,11 @@
 package com.joe.manager.common;
 
-import com.joe.common.qiniu.QiNiuConfig;
-import com.joe.common.redis.RedisService;
 import com.joe.common.wx.dto.UnifiedParamDto;
 import com.joe.common.wx.dto.UnifiedSuccessDto;
 import com.joe.common.wx.dto.WxConfig;
 import com.joe.common.wx.service.WxService;
 import com.joe.manager.BaseTest;
+import com.joe.service.RedisService;
 import com.joe.util.http.HttpClientUtil;
 import org.apache.commons.collections.map.HashedMap;
 import org.junit.Test;

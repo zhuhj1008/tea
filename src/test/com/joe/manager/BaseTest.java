@@ -2,8 +2,9 @@ package com.joe.manager;
 
 import com.alibaba.fastjson.JSON;
 import com.joe.Application;
-import com.joe.common.qiniu.QiNiuConfig;
-import com.joe.common.qiniu.QiNiuService;
+
+import com.joe.config.QiNiuConfig;
+import com.joe.service.QiNiuService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
