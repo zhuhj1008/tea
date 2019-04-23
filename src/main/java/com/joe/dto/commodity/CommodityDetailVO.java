@@ -1,11 +1,6 @@
 package com.joe.dto.commodity;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.joe.api.po.Commodity;
-import com.joe.api.po.CommodityDetail;
 import lombok.Data;
-import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -23,7 +18,7 @@ public class CommodityDetailVO {
     //商品类目
     private Integer itemId;
 
-    //小图地址
+    //商品banner图
     private String smallPicture;
 
     //售价
@@ -50,12 +45,6 @@ public class CommodityDetailVO {
     //库存
     private Integer stock;
 
-    //细节图
-    private List<String> detailPicture;
-
-    //图信息
-    private List<String> pictureInfo;
-
     //产地
     private String origin;
 
@@ -68,54 +57,15 @@ public class CommodityDetailVO {
     //保质期
     private String saveDate;
 
-    public static CommodityDetailVO commodity2DetailVo(CommodityDetailVO vo, Commodity commodity) {
+    //商品详情图
+    private List<Picture> pictures;
 
-        if (commodity == null) {
-            return vo;
-        }
+    @Data
+    private class Picture{
 
-        vo.setName(commodity.getCommodityName());
-        vo.setSmallPicture(commodity.getPicture());
-        vo.setItemId(commodity.getItemId());
-        vo.setPrice(commodity.getPrice());
-        vo.setDescription(commodity.getDescription());
-        vo.setRecommend(commodity.getRecommend());
-        return vo;
+        private String pictureUrl;
 
-    }
-
-    public static CommodityDetailVO commodityDetail2DetailVo(CommodityDetailVO vo, CommodityDetail commodityDetail) {
-
-        if (commodityDetail == null) {
-            return vo;
-        }
-
-        vo.setDetailId(commodityDetail.getDetailId());
-        vo.setCommodityId(commodityDetail.getCommodityId());
-        vo.setCost(commodityDetail.getCost());
-        vo.setInitPrice(commodityDetail.getInitPrice());
-        vo.setStock(commodityDetail.getStock());
-
-        String detailPicture = commodityDetail.getDetailPicture();
-        List<String> detailPictureList = JSON.parseArray(detailPicture, String.class);
-        vo.setDetailPicture(detailPictureList);
-
-        String pictureInfo = commodityDetail.getPictureInfo();
-        List<String> pictureInfoList = JSON.parseArray(pictureInfo, String.class);
-        vo.setDetailPicture(detailPictureList);
-
-        vo.setPictureInfo(pictureInfoList);
-        vo.setOrigin(commodityDetail.getOrigin());
-
-        if (StringUtils.isNotEmpty(commodityDetail.getProperty())) {
-            JSONObject property = (JSONObject) JSON.parse(commodityDetail.getProperty());
-            vo.setFlavor(property.getString("pTaste"));
-            vo.setSaveMethod(property.getString("pPreservation"));
-            vo.setSaveDate(property.getString("pExpirationDate"));
-        }
-
-        return vo;
-
+        private String pictureDesc;
     }
 
 }

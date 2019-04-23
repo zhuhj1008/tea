@@ -1,8 +1,5 @@
 package com.joe.dto.commodity;
 
-import com.alibaba.fastjson.JSON;
-import com.joe.api.po.Commodity;
-import com.joe.api.po.CommodityDetail;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -14,89 +11,28 @@ import java.math.BigDecimal;
 @Data
 public class CommodityVo {
 
-    //商品id
-    private Integer pId;
+    //商品ID
+    private Integer commodityId;
 
-    //名称
-    private String pName;
+    //商品名称
+    private String commodityName;
 
-    //类目Id
-    private Integer pItem;
+    //商品价格
+    private BigDecimal price;
 
-    //是否首页推荐
-    private Boolean pRecommend;
+    //商品类目ID
+    private Integer itemId;
 
-    //成本
-    private BigDecimal pCost;
+    //商品小图地址
+    private String picture;
 
-    //售价
-    private BigDecimal pPrice;
+    //品牌
+    private Integer brand;
 
-    //原价
-    private BigDecimal pOriginalPrice;
-
-    //库存
-    private Integer pInventory;
-
-    //产地
-    private String pPlace;
+    //首页推荐
+    private Boolean recommend;
 
     //描述
-    private String pDescribe;
-
-    //小图地址
-    private String pImgSmall;
-
-    //滚动图地址
-    private String[] pImgBanner;
-
-    //详情图地址
-    private String[] pImgPresentation;
-
-    //口感，保存方法，保质期
-    private Property property;
-
-    @Data
-    private class Property {
-        private String pTaste;
-        private String pPreservation;
-        private String pExpirationDate;
-    }
-
-    public Commodity commodityVoToCommodity(CommodityVo commodityVo) {
-
-        Commodity commodity = new Commodity();
-        if (commodityVo.getPId() != null) {
-            commodity.setCommodityId(commodityVo.getPId());
-        }
-        commodity.setCommodityName(commodityVo.getPName());
-        commodity.setPrice(commodityVo.getPPrice());
-        commodity.setItemId(commodityVo.getPItem());
-        commodity.setRecommend(commodityVo.getPRecommend());
-        commodity.setPicture(commodityVo.getPImgSmall());
-        commodity.setDescription(commodityVo.getPDescribe());
-
-        return commodity;
-    }
-
-    public CommodityDetail commodityVoToCommodityDetail(CommodityVo commodityVo) {
-
-        CommodityDetail detail = new CommodityDetail();
-        if (commodityVo.getPId() != null) {
-            detail.setCommodityId(commodityVo.getPId());
-        }
-        detail.setUnit("100g");
-        detail.setCost(commodityVo.getPCost());
-        detail.setInitPrice(commodityVo.getPOriginalPrice());
-        detail.setStock(commodityVo.getPInventory());
-        detail.setProperty(JSON.toJSONString(commodityVo.getProperty()));
-        detail.setDetailPicture(JSON.toJSONString(commodityVo.getPImgBanner()));
-        detail.setPictureInfo(JSON.toJSONString(commodityVo.getPImgPresentation()));
-        detail.setOrigin(commodityVo.getPPlace());
-
-        return detail;
-
-    }
-
+    private String description;
 
 }

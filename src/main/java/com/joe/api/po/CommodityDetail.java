@@ -28,14 +28,14 @@ public class CommodityDetail {
     //库存
     private Integer stock;
 
-    //属性
-    private String property;
+    //口感
+    private String taste;
 
-    //细节图
-    private String detailPicture;
+    //保存方法
+    private String preservation;
 
-    //图信息
-    private String pictureInfo;
+    //保质期
+    private String expirationDate;
 
     //运费
     private BigDecimal freight;

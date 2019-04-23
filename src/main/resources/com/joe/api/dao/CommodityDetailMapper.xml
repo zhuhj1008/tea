@@ -8,18 +8,17 @@
         <result column="cost" property="cost" jdbcType="DECIMAL"/>
         <result column="init_price" property="initPrice" jdbcType="DECIMAL"/>
         <result column="stock" property="stock" jdbcType="INTEGER"/>
-        <result column="property" property="property" jdbcType="VARCHAR"/>
-        <result column="detail_picture" property="detailPicture" jdbcType="VARCHAR"/>
-        <result column="picture_info" property="pictureInfo" jdbcType="VARCHAR"/>
+        <result column="taste" property="taste" jdbcType="VARCHAR"/>
+        <result column="preservation" property="preservation" jdbcType="VARCHAR"/>
+        <result column="expirationDate" property="expirationDate" jdbcType="VARCHAR"/>
         <result column="freight" property="freight" jdbcType="DECIMAL"/>
         <result column="integral" property="integral" jdbcType="INTEGER"/>
         <result column="origin" property="origin" jdbcType="VARCHAR"/>
         <result column="enable" property="enable" jdbcType="BIT"/>
-
     </resultMap>
     <sql id="Base_Column_List">
-    detail_id, commodity_id, unit, cost, init_price, stock, property, detail_picture, picture_info, freight, integral, origin,enable
-  </sql>
+        detail_id, commodity_id, unit, cost, init_price, stock, taste, preservation, expirationDate, freight, integral, origin,enable
+    </sql>
 
 
     <!--insert区域-->
@@ -45,15 +44,16 @@
             <if test="stock != null">
                 stock,
             </if>
-            <if test="property != null">
-                property,
+            <if test="taste != null">
+                taste,
             </if>
-            <if test="detailPicture != null">
-                detail_picture,
+            <if test="preservation != null">
+                preservation,
             </if>
-            <if test="pictureInfo != null">
-                picture_info,
+            <if test="expirationDate != null">
+                expirationDate,
             </if>
+
             <if test="freight != null">
                 freight,
             </if>
@@ -86,14 +86,14 @@
             <if test="stock != null">
                 #{stock,jdbcType=INTEGER},
             </if>
-            <if test="property != null">
-                #{property,jdbcType=VARCHAR},
+            <if test="taste != null">
+                #{taste,jdbcType=VARCHAR},
             </if>
-            <if test="detailPicture != null">
-                #{detailPicture,jdbcType=VARCHAR},
+            <if test="preservation != null">
+                #{preservation,jdbcType=VARCHAR},
             </if>
-            <if test="pictureInfo != null">
-                #{pictureInfo,jdbcType=VARCHAR},
+            <if test="expirationDate != null">
+                #{expirationDate,jdbcType=VARCHAR},
             </if>
             <if test="freight != null">
                 #{freight,jdbcType=DECIMAL},
@@ -113,9 +113,9 @@
 
     <!--delete区域-->
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from tb_commodity_detail
-    where detail_id = #{detailId,jdbcType=INTEGER}
-  </delete>
+        delete from tb_commodity_detail
+        where detail_id = #{detailId,jdbcType=INTEGER}
+    </delete>
 
 
     <!-- update区域-->
@@ -137,14 +137,14 @@
             <if test="stock != null">
                 stock = #{stock,jdbcType=INTEGER},
             </if>
-            <if test="property != null">
-                property = #{property,jdbcType=VARCHAR},
+            <if test="taste != null">
+                taste = #{taste,jdbcType=VARCHAR},
             </if>
-            <if test="detailPicture != null">
-                detail_picture = #{detailPicture,jdbcType=VARCHAR},
+            <if test="preservation != null">
+                preservation = #{preservation,jdbcType=VARCHAR},
             </if>
-            <if test="pictureInfo != null">
-                picture_info = #{pictureInfo,jdbcType=VARCHAR},
+            <if test="expirationDate != null">
+                expirationDate = #{expirationDate,jdbcType=VARCHAR},
             </if>
             <if test="freight != null">
                 freight = #{freight,jdbcType=DECIMAL},
@@ -180,14 +180,14 @@
             <if test="stock != null">
                 stock = #{stock,jdbcType=INTEGER},
             </if>
-            <if test="property != null">
-                property = #{property,jdbcType=VARCHAR},
+            <if test="taste != null">
+                taste = #{taste,jdbcType=VARCHAR},
             </if>
-            <if test="detailPicture != null">
-                detail_picture = #{detailPicture,jdbcType=VARCHAR},
+            <if test="preservation != null">
+                preservation = #{preservation,jdbcType=VARCHAR},
             </if>
-            <if test="pictureInfo != null">
-                picture_info = #{pictureInfo,jdbcType=VARCHAR},
+            <if test="expirationDate != null">
+                expirationDate = #{expirationDate,jdbcType=VARCHAR},
             </if>
             <if test="freight != null">
                 freight = #{freight,jdbcType=DECIMAL},
@@ -208,8 +208,8 @@
     <update id="updateByCommodityId" parameterType="com.joe.api.po.CommodityDetail">
         update tb_commodity_detail
         SET unit = #{unit,jdbcType=VARCHAR}, cost = #{cost,jdbcType=DECIMAL}, init_price = #{initPrice,jdbcType=DECIMAL},
-        stock = #{stock,jdbcType=INTEGER}, property = #{property,jdbcType=VARCHAR}, detail_picture = #{detailPicture,jdbcType=VARCHAR},
-        picture_info = #{pictureInfo,jdbcType=VARCHAR}, freight = #{freight,jdbcType=DECIMAL},
+        stock = #{stock,jdbcType=INTEGER}, taste = #{taste,jdbcType=VARCHAR},preservation = #{preservation,jdbcType=VARCHAR},
+        expirationDate = #{expirationDate,jdbcType=VARCHAR}, freight = #{freight,jdbcType=DECIMAL},
         integral = #{integral,jdbcType=INTEGER}, origin = #{origin,jdbcType=VARCHAR}
         where commodity_id = #{commodityId,jdbcType=INTEGER}
     </update>

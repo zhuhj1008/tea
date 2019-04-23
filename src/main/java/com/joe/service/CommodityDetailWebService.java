@@ -34,8 +34,8 @@ public class CommodityDetailWebService {
             return null;
         }
 
-        CommodityDetailVO.commodityDetail2DetailVo(commodityDetailVO, commodityDetail);
-        CommodityDetailVO.commodity2DetailVo(commodityDetailVO, commodity);
+//        CommodityDetailVO.commodityDetail2DetailVo(commodityDetailVO, commodityDetail);
+//        CommodityDetailVO.commodity2DetailVo(commodityDetailVO, commodity);
 
         return commodityDetailVO;
     }

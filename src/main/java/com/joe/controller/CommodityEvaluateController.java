@@ -3,7 +3,7 @@ package com.joe.controller;
 import com.joe.api.po.CommodityEvaluate;
 import com.joe.common.ApiParam;
 import com.joe.common.ApiResult;
-import com.joe.dto.commodity.CommodityParam;
+import com.joe.dto.commodity.CommodityCommonParam;
 import com.joe.service.CommodityEvaluateWebService;
 import com.joe.util.mvc.ResponsePageEntity;
 import lombok.extern.slf4j.Slf4j;
@@ -66,9 +66,9 @@ public class CommodityEvaluateController {
      * 查看商品评价（分页）
      */
     @RequestMapping("/getEvaluate")
-    public ApiResult getEvaluateByCommodityId(@RequestBody ApiParam<CommodityParam> apiParam) {
+    public ApiResult getEvaluateByCommodityId(@RequestBody ApiParam<CommodityCommonParam> apiParam) {
 
-        CommodityParam param = apiParam.getBody();
+        CommodityCommonParam param = apiParam.getBody();
         Integer commodityId = param.getCommodityId();
         Integer pageNo = param.getPageNo();
         Integer pageSize = param.getPageSize();
