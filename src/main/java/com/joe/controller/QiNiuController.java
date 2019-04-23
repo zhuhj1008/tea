@@ -2,6 +2,7 @@ package com.joe.controller;
 
 import com.joe.common.ApiResult;
 import com.joe.service.QiNiuService;
+import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * create by Joe on 2018-05-28 12:51
  **/
 @Slf4j
+@Api(tags={"七牛"})
 @RestController
 @RequestMapping("/qiNiu")
 public class QiNiuController {

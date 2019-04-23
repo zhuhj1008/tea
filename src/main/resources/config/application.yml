@@ -3,7 +3,8 @@
 spring:
     profiles:
       active: dev
-
+server:
+  context-path: /
 #mybatis配置
 mybatis:
   mapper-locations: classpath:/*/*.xml
@@ -50,3 +51,4 @@ wx:
 weChat:
   mpAppId: wx7787aa5b85cd4a58
   secretKey: b0dab0e3e2833d3e8bb20ebd059ca558
+

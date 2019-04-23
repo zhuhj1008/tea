@@ -7,10 +7,10 @@ import com.joe.common.wx.service.WxService;
 import com.joe.manager.BaseTest;
 import com.joe.service.RedisService;
 import com.joe.util.http.HttpClientUtil;
-import org.apache.commons.collections.map.HashedMap;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -30,7 +30,7 @@ public class WxServiceTest extends BaseTest {
 
     @Test
     public void testAA(){
-        Map param = new HashedMap();
+        Map param = new HashMap();
         String code = "0615RBY725zmsS0Xq1X725epY725RBYb";
         param.put("appid", "wx163389ac6f473216");
         param.put("secret", "b0dab0e3e2833d3e8bb20ebd059ca558");

@@ -6,6 +6,7 @@ import com.joe.common.ApiResult;
 import com.joe.dto.commodity.CommodityCommonParam;
 import com.joe.service.CommodityEvaluateWebService;
 import com.joe.util.mvc.ResponsePageEntity;
+import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +20,7 @@ import java.util.List;
  * create by Joe on 2018-06-03 13:48
  **/
 @Slf4j
+@Api(tags={"评价"})
 @RestController
 @RequestMapping("/evaluate")
 public class CommodityEvaluateController {

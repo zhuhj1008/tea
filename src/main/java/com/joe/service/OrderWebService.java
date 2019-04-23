@@ -13,11 +13,11 @@ import com.joe.common.wx.service.WxService;
 import com.joe.dto.order.OrderDeliverDTO;
 import com.joe.dto.order.OrderQueryDTO;
 import com.joe.dto.order.OrderVo;
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -36,8 +36,6 @@ public class OrderWebService {
     @Autowired
     private WxService wxService;
 
-    @Autowired
-    private RedisService redisService;
 
     /**
      * 新增订单

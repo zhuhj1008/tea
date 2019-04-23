@@ -3,7 +3,6 @@ package com.joe.manager.learn;
 import com.joe.api.po.UserManager;
 import com.joe.api.service.UserManagerService;
 import com.joe.manager.BaseTest;
-import net.sf.ehcache.CacheManager;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;

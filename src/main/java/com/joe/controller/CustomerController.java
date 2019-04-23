@@ -5,6 +5,7 @@ import com.joe.common.ApiParam;
 import com.joe.common.ApiResult;
 import com.joe.dto.user.UserParam;
 import com.joe.service.CustomerWebService;
+import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
  * create by Joe on 2018-06-22 11:52
  **/
 @Slf4j
+@Api(tags={"客户"})
 @RestController
 @RequestMapping("/customer")
 public class CustomerController {

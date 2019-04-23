@@ -18,7 +18,7 @@ public class TestCommodityDetailService extends BaseTest {
         CommodityDetail commodityDetail = new CommodityDetail();
         commodityDetail.setCommodityId(6);
         commodityDetail.setUnit("50g");
-        commodityDetail.setProperty("");
+//        commodityDetail.setProperty("");
         commodityDetail.setFreight(new BigDecimal(9.00));
         commodityDetail.setIntegral(16);
         commodityDetail.setOrigin("北京");

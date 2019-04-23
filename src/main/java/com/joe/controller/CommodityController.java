@@ -9,8 +9,11 @@ import com.joe.dto.commodity.CommodityVo;
 import com.joe.service.CommodityDetailWebService;
 import com.joe.service.CommodityWebService;
 import com.joe.util.mvc.ResponsePageEntity;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +25,7 @@ import java.util.List;
  */
 @Slf4j
 @RestController
+@Api(tags={"商品"})
 @RequestMapping("/commodity")
 public class CommodityController {
 
@@ -32,7 +36,8 @@ public class CommodityController {
     private CommodityDetailWebService commodityDetailWebService;
 
 
-    @RequestMapping("/addCommodity")
+    @PostMapping("/addCommodity")
+    @ApiOperation(value="添加商品", notes="添加商品")
     public ApiResult addCommodity(@RequestBody ApiParam<CommodityParam> apiParam) {
 
         CommodityParam commodityParam = apiParam.getBody();

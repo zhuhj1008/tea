@@ -5,6 +5,7 @@ import com.joe.common.ApiParam;
 import com.joe.common.ApiResult;
 import com.joe.dto.order.AddressParam;
 import com.joe.service.ReceiveAddressWebService;
+import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +19,7 @@ import java.util.List;
  * create by Joe on 2018-06-14 14:41
  **/
 @Slf4j
+@Api(tags={"收货地址"})
 @RestController
 @RequestMapping("/receive")
 public class ReceiveAddressController {
