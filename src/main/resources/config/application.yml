@@ -5,6 +5,9 @@ spring:
       active: dev
 server:
   context-path: /
+security:
+  basic:
+    enabled: false
 #mybatis配置
 mybatis:
   mapper-locations: classpath:/*/*.xml
@@ -12,7 +15,6 @@ mybatis:
 #  开启mybatis日志打印
 #  configuration:
 #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-
 #分页插件
 pagehelper:
     helperDialect: mysql

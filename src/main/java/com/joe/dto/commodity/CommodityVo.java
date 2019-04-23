@@ -26,9 +26,6 @@ public class CommodityVo {
     //商品小图地址
     private String picture;
 
-    //品牌
-    private Integer brand;
-
     //首页推荐
     private Boolean recommend;
 

@@ -1,14 +1,17 @@
 package com.joe.controller;
 
 import com.joe.api.po.CommodityEvaluate;
-import com.joe.common.ApiParam;
+import com.joe.common.ApiParameter;
 import com.joe.common.ApiResult;
 import com.joe.dto.commodity.CommodityCommonParam;
+import com.joe.dto.commodity.CommodityPageParam;
 import com.joe.service.CommodityEvaluateWebService;
 import com.joe.util.mvc.ResponsePageEntity;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +23,7 @@ import java.util.List;
  * create by Joe on 2018-06-03 13:48
  **/
 @Slf4j
-@Api(tags={"评价"})
+@Api(tags={"商品评价接口"})
 @RestController
 @RequestMapping("/evaluate")
 public class CommodityEvaluateController {
@@ -31,10 +34,11 @@ public class CommodityEvaluateController {
     /**
      * 添加商品评价
      */
-    @RequestMapping("/addEvaluate")
-    public ApiResult addEvaluate(@RequestBody ApiParam<CommodityEvaluate> apiParam) {
+    @PostMapping("/addEvaluate")
+    @ApiOperation(value = "添加商品评价", notes = "添加商品评价")
+    public ApiResult addEvaluate(@RequestBody ApiParameter<CommodityEvaluate> apiParameter) {
 
-        CommodityEvaluate param = apiParam.getBody();
+        CommodityEvaluate param = apiParameter.getBody();
         log.info("添加商品评价，商品编号：{}。", param.getCommodityId());
 
         int evaluateId = commodityEvaluateWebService.addCommodityEvaluate(param);
@@ -47,10 +51,11 @@ public class CommodityEvaluateController {
     /**
      * 追加商品评价
      */
-    @RequestMapping("/appendEvaluate")
-    public ApiResult appendEvaluate(@RequestBody ApiParam<CommodityEvaluate> apiParam) {
+    @PostMapping("/appendEvaluate")
+    @ApiOperation(value = "追加商品评价", notes = "追加商品评价")
+    public ApiResult appendEvaluate(@RequestBody ApiParameter<CommodityEvaluate> apiParameter) {
 
-        CommodityEvaluate commodityEvaluate = apiParam.getBody();
+        CommodityEvaluate commodityEvaluate = apiParameter.getBody();
         log.info("追加商品评价，商品编号：{}。", commodityEvaluate.getEvaluateId());
 
         int executeNum = commodityEvaluateWebService.appendCommodityEvaluate(commodityEvaluate);
@@ -67,10 +72,11 @@ public class CommodityEvaluateController {
     /**
      * 查看商品评价（分页）
      */
-    @RequestMapping("/getEvaluate")
-    public ApiResult getEvaluateByCommodityId(@RequestBody ApiParam<CommodityCommonParam> apiParam) {
+    @PostMapping("/getEvaluate")
+    @ApiOperation(value = "查看商品评价", notes = "分页查看商品评价")
+    public ApiResult getEvaluateByCommodityId(@RequestBody ApiParameter<CommodityPageParam> apiParameter) {
 
-        CommodityCommonParam param = apiParam.getBody();
+        CommodityPageParam param = apiParameter.getBody();
         Integer commodityId = param.getCommodityId();
         Integer pageNo = param.getPageNo();
         Integer pageSize = param.getPageSize();

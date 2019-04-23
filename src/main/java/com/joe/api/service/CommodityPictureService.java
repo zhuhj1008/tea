@@ -45,4 +45,9 @@ public class CommodityPictureService {
 
         return commodityPictureMapper.deleteByCommodityId(commodityId);
     }
+
+
+    public List<CommodityPicture> findByCommodityId(Integer commodityId){
+        return commodityPictureMapper.findByCommodityId(commodityId);
+    }
 }

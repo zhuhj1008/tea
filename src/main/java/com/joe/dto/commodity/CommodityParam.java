@@ -1,77 +1,67 @@
 package com.joe.dto.commodity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 @Data
+@ApiModel
 public class CommodityParam {
 
-    //商品ID
+    @ApiModelProperty(value = "商品编号", example = "6", notes = "新增时传空")
     private Integer commodityId;
 
-    //商品名称
+    @ApiModelProperty(value = "商品名称", example = "茶")
     private String commodityName;
 
-    //商品价格
+    @ApiModelProperty(value = "商品价格", example = "66.66", notes = "不超过两位小数")
     private BigDecimal price;
 
-    //商品类目ID
+    @ApiModelProperty(value = "类目编号", example = "1")
     private Integer itemId;
 
-    //商品图片地址
+    @ApiModelProperty(value = "小图地址", example = "www.Joe.picture.com")
     private String picture;
 
-    //品牌
-    private Integer brand;
-
-    //首页推荐
+    @ApiModelProperty(value = "首页推荐", example = "false")
     private Boolean recommend;
 
-    //描述
+    @ApiModelProperty(value = "描述", example = "美滋滋")
     private String description;
 
-    //商品明细
-    //单位
+    //明细
+    @ApiModelProperty(value = "单位", example = "500g")
     private String unit;
 
-    //成本
+    @ApiModelProperty(value = "成本", example = "6.66", notes = "不超过两位小数")
     private BigDecimal cost;
 
-    //原价
+    @ApiModelProperty(value = "原价", example = "6.66", notes = "不超过两位小数")
     private BigDecimal initPrice;
 
-    //库存
+    @ApiModelProperty(value = "库存", example = "666")
     private Integer stock;
 
-    //口感
+    @ApiModelProperty(value = "口感", example = "贼好")
     private String taste;
 
-    //保存方法
+    @ApiModelProperty(value = "保存方法", example = "通风干燥")
     private String preservation;
 
-    //保质期
+    @ApiModelProperty(value = "保质期", example = "6年")
     private String expirationDate;
 
-    //运费
+    @ApiModelProperty(value = "运费", example = "6.6", notes = "不超过两位小数")
     private BigDecimal freight;
 
-    //积分
-    private Integer integral;
-
-    //产地
+    @ApiModelProperty(value = "产地", example = "北京")
     private String origin;
 
-    //商品详情图
-    private List<Picture> detailPictures;
+    @ApiModelProperty(value = "详情图")
+    private List<CommodityPictureVo> detailPictures;
 
-    @Data
-    public class Picture{
-        //图片地址
-        private String pictureUrl;
-        //图片描述
-        private String pictureDesc;
-    }
 
 }

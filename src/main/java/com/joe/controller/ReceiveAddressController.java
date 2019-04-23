@@ -1,13 +1,15 @@
 package com.joe.controller;
 
 import com.joe.api.po.ReceiveAddress;
-import com.joe.common.ApiParam;
+import com.joe.common.ApiParameter;
 import com.joe.common.ApiResult;
 import com.joe.dto.order.AddressParam;
 import com.joe.service.ReceiveAddressWebService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,7 +21,7 @@ import java.util.List;
  * create by Joe on 2018-06-14 14:41
  **/
 @Slf4j
-@Api(tags={"收货地址"})
+@Api(tags={"收货地址接口"})
 @RestController
 @RequestMapping("/receive")
 public class ReceiveAddressController {
@@ -30,10 +32,11 @@ public class ReceiveAddressController {
     /**
      * 添加收货地址
      */
-    @RequestMapping("/addReceiveAddress")
-    public ApiResult addReceiveAddress(@RequestBody ApiParam<ReceiveAddress> apiParam) {
+    @PostMapping("/addReceiveAddress")
+    @ApiOperation(value = "添加收货地址", notes = "添加收货地址，最多不能超过10个")
+    public ApiResult addReceiveAddress(@RequestBody ApiParameter<ReceiveAddress> apiParameter) {
 
-        ReceiveAddress receiveAddress = apiParam.getBody();
+        ReceiveAddress receiveAddress = apiParameter.getBody();
         log.info("添加收货地址，请求参数：{}。", receiveAddress);
 
         Integer addressCount = receiveAddressWebService.getReceiveAddressCountByCustomerId(receiveAddress.getCustomerId());
@@ -52,11 +55,12 @@ public class ReceiveAddressController {
     /**
      * 修改收货地址
      */
-    @RequestMapping("/updateReceiveAddress")
-    public ApiResult updateReceiveAddress(@RequestBody ApiParam<ReceiveAddress> apiParam) {
+    @PostMapping("/updateReceiveAddress")
+    @ApiOperation(value = "修改收货地址", notes = "修改收货地址")
+    public ApiResult updateReceiveAddress(@RequestBody ApiParameter<ReceiveAddress> apiParameter) {
 
 
-        ReceiveAddress receiveAddress = apiParam.getBody();
+        ReceiveAddress receiveAddress = apiParameter.getBody();
         log.info("修改收货地址，编号：{}。", receiveAddress.getAddressId());
 
         int addressId = receiveAddressWebService.updateReceiveAddress(receiveAddress);
@@ -71,10 +75,11 @@ public class ReceiveAddressController {
     /**
      * 删除收货地址
      */
-    @RequestMapping("/deleteReceiveAddress")
-    public Object deleteReceiveAddress(@RequestBody ApiParam<AddressParam> apiParam) {
+    @PostMapping("/deleteReceiveAddress")
+    @ApiOperation(value = "删除收货地址", notes = "逻辑删除收货地址")
+    public Object deleteReceiveAddress(@RequestBody ApiParameter<AddressParam> apiParameter) {
 
-        AddressParam param = apiParam.getBody();
+        AddressParam param = apiParameter.getBody();
         log.info("删除收货地址，请求参数：{}。", param);
 
         if (param.getAddressId() == null) {
@@ -92,13 +97,15 @@ public class ReceiveAddressController {
     /**
      * 查询收货地址
      */
-    @RequestMapping("/queryReceiveAddress")
-    public Object queryReceiveAddress(@RequestBody ApiParam<AddressParam> apiParam) {
+    @PostMapping("/queryReceiveAddress")
+    @ApiOperation(value = "查询收货地址列表", notes = "根据客户编号查询收货地址")
+    public Object queryReceiveAddress(@RequestBody ApiParameter<AddressParam> apiParameter) {
 
-        AddressParam param = apiParam.getBody();
+        AddressParam param = apiParameter.getBody();
         log.info("查询收货地址，请求参数：{}。", param);
         if (param.getCustomerId() == null) {
             log.error("查询收货地址，客户编号为空。");
+            return ApiResult.getFailEntity();
         }
 
         List<ReceiveAddress> addressList = receiveAddressWebService.getReceiveAddressByCustomerId(param.getCustomerId());
@@ -113,13 +120,15 @@ public class ReceiveAddressController {
      *
      * @return
      */
-    @RequestMapping("/queryDefaultAddress")
-    public Object queryCustomerDefaultReceiveAddress(@RequestBody ApiParam<AddressParam> apiParam) {
+    @PostMapping("/queryDefaultAddress")
+    @ApiOperation(value = "查询默认收货地址", notes = "根据客户编号查询默认收货地址")
+    public Object queryCustomerDefaultReceiveAddress(@RequestBody ApiParameter<AddressParam> apiParameter) {
 
-        AddressParam param = apiParam.getBody();
+        AddressParam param = apiParameter.getBody();
         log.info("查询默认收货地址，请求参数：{}。", param);
         if (param.getCustomerId() == null) {
             log.error("查询默认收货地址，客户编号为空。");
+            return ApiResult.getFailEntity();
         }
 
         ReceiveAddress address = receiveAddressWebService.getCustomerDefaultReceiveAddress(param.getCustomerId());
@@ -131,14 +140,16 @@ public class ReceiveAddressController {
     /**
      * 修改用户默认收货地址
      */
-    @RequestMapping("/modifyDefaultAddress")
-    public Object modifyCustomerDefaultReceiveAddress(@RequestBody ApiParam<AddressParam> apiParam) {
+    @PostMapping("/modifyDefaultAddress")
+    @ApiOperation(value = "指定默认收货地址", notes = "指定默认收货地址")
+    public Object modifyCustomerDefaultReceiveAddress(@RequestBody ApiParameter<AddressParam> apiParameter) {
 
-        AddressParam param = apiParam.getBody();
+        AddressParam param = apiParameter.getBody();
         log.info("修改默认收货地址，请求参数：{}。", param);
 
         if (param.getCustomerId() == null || param.getAddressId() == null) {
             log.error("修改默认收货地址失败。");
+            return ApiResult.getFailEntity();
         }
 
         int executeNum = receiveAddressWebService.modifyDefaultReceiveAddress(param.getCustomerId(), param.getAddressId());

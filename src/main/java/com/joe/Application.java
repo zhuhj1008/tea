@@ -16,6 +16,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.Date;
 import java.util.Properties;
@@ -32,6 +33,7 @@ import java.util.Properties;
 @EnableCaching//缓存支持
 @EnableScheduling//定时任务
 @EnableAsync//支持异步任务
+@EnableSwagger2
 public class Application extends WebMvcConfigurerAdapter implements CommandLineRunner {
 
     private Logger logger = LoggerFactory.getLogger(Application.class);

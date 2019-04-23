@@ -22,6 +22,9 @@ public class CommodityService {
     @Autowired
     private CommodityMapper commodityMapper;
 
+    @Autowired
+    private CommodityPictureService commodityPictureService;
+
 
     /**
      * 新增商品
@@ -57,9 +60,11 @@ public class CommodityService {
         CommodityDetail commodityDetail = new CommodityDetail();
         commodityDetail.setCommodityId(commodityId);
         commodityDetail.setEnable(false);
-        int i1 = commodityDetailMapper.updateByCommodityIdSelective(commodityDetail);
+        int j = commodityDetailMapper.updateByCommodityIdSelective(commodityDetail);
 
-        return i + i1;
+        Integer k = commodityPictureService.deleteByCommodityId(commodityId);
+
+        return i + j + k;
     }
 
 

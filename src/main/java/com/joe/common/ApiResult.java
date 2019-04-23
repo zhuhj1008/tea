@@ -1,26 +1,33 @@
 package com.joe.common;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * @Description: 接口返回信息
  * @author: joe.zhu
  * @since:2018-05-28 13:18:40
  * @version: 0.0.1
  */
+@ApiModel
 public class ApiResult {
 
     /**
      * 响应码 1=成功
      */
+    @ApiModelProperty("响应码")
     public int code;
 
     /**
      * 响应报文
      */
+    @ApiModelProperty("响应报文")
     public String message;
 
     /**
      * 响应体
      */
+    @ApiModelProperty("响应体")
     public Object data;
 
 

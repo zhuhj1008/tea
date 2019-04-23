@@ -1,15 +1,13 @@
 package com.joe.dto.commodity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 @Data
+@ApiModel
 public class CommodityCommonParam {
 
-    private Integer itemId;
-
-    private Integer pageNo;
-
-    private Integer pageSize;
-
+    @ApiModelProperty(value = "商品编号", example = "6")
     private Integer commodityId;
 }

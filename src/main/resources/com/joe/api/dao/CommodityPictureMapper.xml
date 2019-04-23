@@ -1,124 +1,135 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.joe.api.dao.CommodityPictureMapper" >
-  <resultMap id="BaseResultMap" type="com.joe.api.po.CommodityPicture" >
-    <id column="picture_id" property="pictureId" jdbcType="INTEGER" />
-    <result column="commodity_id" property="commodityId" jdbcType="INTEGER" />
-    <result column="picture_url" property="pictureUrl" jdbcType="VARCHAR" />
-    <result column="picture_desc" property="pictureDesc" jdbcType="VARCHAR" />
-    <result column="create_by" property="createBy" jdbcType="INTEGER" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-    <result column="enable" property="enable" jdbcType="BIT" />
-  </resultMap>
-  <sql id="Base_Column_List" >
+<mapper namespace="com.joe.api.dao.CommodityPictureMapper">
+    <resultMap id="BaseResultMap" type="com.joe.api.po.CommodityPicture">
+        <id column="picture_id" property="pictureId" jdbcType="INTEGER"/>
+        <result column="commodity_id" property="commodityId" jdbcType="INTEGER"/>
+        <result column="picture_url" property="pictureUrl" jdbcType="VARCHAR"/>
+        <result column="picture_desc" property="pictureDesc" jdbcType="VARCHAR"/>
+        <result column="create_by" property="createBy" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="enable" property="enable" jdbcType="BIT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     picture_id, commodity_id, picture_url, picture_desc, create_by, create_time, update_time, 
     enable
   </sql>
 
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from tb_commodity_picture
-    where picture_id = #{pictureId,jdbcType=INTEGER}
-  </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_commodity_picture
+        where picture_id = #{pictureId,jdbcType=INTEGER}
+    </select>
 
-  <insert id="addCommodityPicture" parameterType="com.joe.api.po.CommodityPicture" useGeneratedKeys="true" keyProperty="pictureId">
-    insert into tb_commodity_picture
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="pictureId != null" >
-        picture_id,
-      </if>
-      <if test="commodityId != null" >
-        commodity_id,
-      </if>
-      <if test="pictureUrl != null" >
-        picture_url,
-      </if>
-      <if test="pictureDesc != null" >
-        picture_desc,
-      </if>
-      <if test="createBy != null" >
-        create_by,
-      </if>
-      <if test="createTime != null" >
-        create_time,
-      </if>
-      <if test="updateTime != null" >
-        update_time,
-      </if>
-      <if test="enable != null" >
-        enable,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="pictureId != null" >
-        #{pictureId,jdbcType=INTEGER},
-      </if>
-      <if test="commodityId != null" >
-        #{commodityId,jdbcType=INTEGER},
-      </if>
-      <if test="pictureUrl != null" >
-        #{pictureUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="pictureDesc != null" >
-        #{pictureDesc,jdbcType=VARCHAR},
-      </if>
-      <if test="createBy != null" >
-        #{createBy,jdbcType=INTEGER},
-      </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="enable != null" >
-        #{enable,jdbcType=BIT},
-      </if>
-    </trim>
-  </insert>
+    <insert id="addCommodityPicture" parameterType="com.joe.api.po.CommodityPicture" useGeneratedKeys="true"
+            keyProperty="pictureId">
+        insert into tb_commodity_picture
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pictureId != null">
+                picture_id,
+            </if>
+            <if test="commodityId != null">
+                commodity_id,
+            </if>
+            <if test="pictureUrl != null">
+                picture_url,
+            </if>
+            <if test="pictureDesc != null">
+                picture_desc,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="enable != null">
+                enable,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="pictureId != null">
+                #{pictureId,jdbcType=INTEGER},
+            </if>
+            <if test="commodityId != null">
+                #{commodityId,jdbcType=INTEGER},
+            </if>
+            <if test="pictureUrl != null">
+                #{pictureUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="pictureDesc != null">
+                #{pictureDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="enable != null">
+                #{enable,jdbcType=BIT},
+            </if>
+        </trim>
+    </insert>
 
-  <insert id="insertByBatch" parameterType="java.util.List">
-    insert into attachment_table (commodity_id, picture_url, picture_desc, create_by, create_time, update_time,enable) values
-    <foreach collection="records" item="record" index="index" separator=",">
-      (#{record.commodityId,jdbcType=INTEGER}, #{record.pictureUrl,jdbcType=VARCHAR},#{record.pictureDesc,jdbcType=VARCHAR},
-      #{record.createBy,jdbcType=INTEGER}, #{record.createTime,jdbcType=TIMESTAMP},#{record.updateTime,jdbcType=TIMESTAMP},
-      #{record.enable,jdbcType=BIT})
-    </foreach>
-  </insert>
+    <insert id="addCommodityPictureBatch" parameterType="java.util.List">
+        insert into tb_commodity_picture (commodity_id, picture_url, picture_desc, create_by, create_time,
+        update_time,enable) values
+        <foreach collection="records" item="record" index="index" separator=",">
+            (#{record.commodityId,jdbcType=INTEGER},
+            #{record.pictureUrl,jdbcType=VARCHAR},#{record.pictureDesc,jdbcType=VARCHAR},
+            #{record.createBy,jdbcType=INTEGER},
+            #{record.createTime,jdbcType=TIMESTAMP},#{record.updateTime,jdbcType=TIMESTAMP},
+            #{record.enable,jdbcType=BIT})
+        </foreach>
+    </insert>
 
-  <update id="updateByPrimaryKeySelective" parameterType="com.joe.api.po.CommodityPicture" >
-    update tb_commodity_picture
-    <set >
-      <if test="commodityId != null" >
-        commodity_id = #{commodityId,jdbcType=INTEGER},
-      </if>
-      <if test="pictureUrl != null" >
-        picture_url = #{pictureUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="pictureDesc != null" >
-        picture_desc = #{pictureDesc,jdbcType=VARCHAR},
-      </if>
-      <if test="createBy != null" >
-        create_by = #{createBy,jdbcType=INTEGER},
-      </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="enable != null" >
-        enable = #{enable,jdbcType=BIT},
-      </if>
-    </set>
-    where picture_id = #{pictureId,jdbcType=INTEGER}
-  </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.joe.api.po.CommodityPicture">
+        update tb_commodity_picture
+        <set>
+            <if test="commodityId != null">
+                commodity_id = #{commodityId,jdbcType=INTEGER},
+            </if>
+            <if test="pictureUrl != null">
+                picture_url = #{pictureUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="pictureDesc != null">
+                picture_desc = #{pictureDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="enable != null">
+                enable = #{enable,jdbcType=BIT},
+            </if>
+        </set>
+        where picture_id = #{pictureId,jdbcType=INTEGER}
+    </update>
 
-  <update id="deleteByCommodityId" parameterType="java.lang.Integer">
+    <update id="deleteByCommodityId" parameterType="java.lang.Integer">
     update tb_commodity_picture set enable = 0
     where commodity_id =  #{commodityId,jdbcType=INTEGER}
   </update>
+
+    <select id="findByCommodityId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_commodity_picture
+        where commodity_id = #{commodityId,jdbcType=INTEGER}  and  enable  = 1
+    </select>
 
 </mapper>

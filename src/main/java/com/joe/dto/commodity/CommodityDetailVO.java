@@ -12,23 +12,20 @@ import java.util.List;
 @Data
 public class CommodityDetailVO {
 
+    //商品编号
+    private Integer commodityId;
+
     //商品名称
-    private String name;
+    private String commodityName;
 
     //商品类目
     private Integer itemId;
 
-    //商品banner图
-    private String smallPicture;
+    //商品图片地址
+    private String picture;
 
-    //售价
+    //商品价格
     private BigDecimal price;
-
-    //明细编号
-    private Integer detailId;
-
-    //商品编号
-    private Integer commodityId;
 
     //成本
     private BigDecimal cost;
@@ -49,23 +46,16 @@ public class CommodityDetailVO {
     private String origin;
 
     //口味
-    private String flavor;
+    private String taste;
 
     //保存方法
-    private String saveMethod;
+    private String preservation;
 
     //保质期
-    private String saveDate;
+    private String expirationDate;
 
     //商品详情图
-    private List<Picture> pictures;
+    private List<CommodityPictureVo> detailPictures;
 
-    @Data
-    private class Picture{
-
-        private String pictureUrl;
-
-        private String pictureDesc;
-    }
 
 }

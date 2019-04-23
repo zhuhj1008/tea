@@ -3,10 +3,11 @@ package com.joe.controller;
 import com.joe.common.ApiResult;
 import com.joe.service.QiNiuService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  * create by Joe on 2018-05-28 12:51
  **/
 @Slf4j
-@Api(tags={"七牛"})
+@Api(tags={"七牛接口"})
 @RestController
 @RequestMapping("/qiNiu")
 public class QiNiuController {
@@ -25,7 +26,8 @@ public class QiNiuController {
     /**
      * 获取七牛上传文件token（有效时间：三小时）
      */
-    @RequestMapping("/getUploadToken")
+    @PostMapping("/getUploadToken")
+    @ApiOperation(value = "获取七牛上传文件token", notes = "获取七牛上传文件token")
     public ApiResult getUploadToken() {
         String uploadToken;
         try {
