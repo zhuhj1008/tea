@@ -30,14 +30,6 @@ public class CommodityEvaluate {
 
     private Date appendEvaluateTime;
 
-    private Integer createBy;
-
-    private Date createTime;
-
-    private Integer updateBy;
-
-    private Date updateTime;
-
     private Boolean enable;
 
 }

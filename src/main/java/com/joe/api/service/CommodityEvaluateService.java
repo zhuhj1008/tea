@@ -24,8 +24,6 @@ public class CommodityEvaluateService {
     public int addCommodityEvaluate(CommodityEvaluate commodityEvaluate) {
 
         commodityEvaluate.setEvaluateTime(new Date());
-        commodityEvaluate.setCreateTime(new Date());
-        commodityEvaluate.setUpdateTime(new Date());
         commodityEvaluate.setEnable(true);
         commodityEvaluateMapper.insertSelective(commodityEvaluate);
 
@@ -40,7 +38,6 @@ public class CommodityEvaluateService {
      */
     public int updateCommodityEvaluate(CommodityEvaluate commodityEvaluate) {
 
-        commodityEvaluate.setUpdateTime(new Date());
         return commodityEvaluateMapper.updateByPrimaryKeySelective(commodityEvaluate);
 
     }

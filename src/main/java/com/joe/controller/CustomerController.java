@@ -7,6 +7,7 @@ import com.joe.dto.user.UserParam;
 import com.joe.service.CustomerWebService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class CustomerController {
 
     @PostMapping("/getCustomer")
     @ApiOperation(value = "查询客户信息", notes = "根据授权code查询用户信息")
-    public ApiResult getCustomerOpenIdAndSessionKey(@RequestBody ApiParameter<UserParam> apiParameter) {
+    public ApiResult getCustomerOpenIdAndSessionKey(@RequestBody @ApiParam ApiParameter<UserParam> apiParameter) {
 
         UserParam param = apiParameter.getBody();
         log.info("获取客户信息，请求code：{}。", param.getCode());

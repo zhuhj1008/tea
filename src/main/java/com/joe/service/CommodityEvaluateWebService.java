@@ -2,6 +2,8 @@ package com.joe.service;
 
 import com.joe.api.po.CommodityEvaluate;
 import com.joe.api.service.CommodityEvaluateService;
+import com.joe.dto.commodity.EvaluateParam;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,14 +22,21 @@ public class CommodityEvaluateWebService {
 
 
     //新增商品评价
-    public int addCommodityEvaluate(CommodityEvaluate commodityEvaluate) {
+    public int addCommodityEvaluate(EvaluateParam evaluateParam) {
+
+        CommodityEvaluate commodityEvaluate = new CommodityEvaluate();
+        BeanUtils.copyProperties(evaluateParam, commodityEvaluate);
+        commodityEvaluate.setEvaluateTime(new Date());
+        commodityEvaluate.setEnable(true);
 
         return commodityEvaluateService.addCommodityEvaluate(commodityEvaluate);
     }
 
     //追加商品评价
-    public int appendCommodityEvaluate(CommodityEvaluate commodityEvaluate) {
+    public int appendCommodityEvaluate(EvaluateParam evaluateParam) {
 
+        CommodityEvaluate commodityEvaluate = new CommodityEvaluate();
+        BeanUtils.copyProperties(evaluateParam, commodityEvaluate);
         commodityEvaluate.setAppendEvaluateTime(new Date());
         return commodityEvaluateService.updateCommodityEvaluate(commodityEvaluate);
     }

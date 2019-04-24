@@ -4,6 +4,8 @@ package com.joe.service;
 import com.alibaba.fastjson.JSON;
 import com.joe.api.enums.OrderStatusEnum;
 import com.joe.api.po.Order;
+import com.joe.api.po.OrderDetail;
+import com.joe.api.service.OrderDetailService;
 import com.joe.api.service.OrderService;
 import com.joe.common.exception.BusinessException;
 import com.joe.common.wx.dto.UnifiedParamDto;
@@ -11,7 +13,8 @@ import com.joe.common.wx.dto.UnifiedSuccessDto;
 import com.joe.common.wx.enums.WxTradeTypeEnum;
 import com.joe.common.wx.service.WxService;
 import com.joe.dto.order.OrderDeliverDTO;
-import com.joe.dto.order.OrderQueryDTO;
+import com.joe.dto.order.OrderDetailVo;
+import com.joe.dto.order.OrderQueryParam;
 import com.joe.dto.order.OrderVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -36,6 +39,9 @@ public class OrderWebService {
     @Autowired
     private WxService wxService;
 
+    @Autowired
+    private OrderDetailService orderDetailService;
+
 
     /**
      * 新增订单
@@ -52,7 +58,7 @@ public class OrderWebService {
     /**
      * 查询符合条件的订单数量
      */
-    public int getOrderCount(OrderQueryDTO dto) {
+    public int getOrderCount(OrderQueryParam dto) {
 
         Order order = JSON.parseObject(JSON.toJSONString(dto), Order.class);
         return orderService.queryOrderCount(order);
@@ -62,20 +68,20 @@ public class OrderWebService {
     /**
      * 分页条件查询订单列表
      */
-    public List<OrderVo> getOrderList(OrderQueryDTO orderQueryDTO) {
+    public List<OrderVo> getOrderList(OrderQueryParam orderQueryParam) {
 
         Order order = new Order();
-        if (StringUtils.isNotEmpty(orderQueryDTO.getCustomerName())) {
-            order.setCustomerName(orderQueryDTO.getCustomerName());
+        if (StringUtils.isNotEmpty(orderQueryParam.getCustomerName())) {
+            order.setCustomerName(orderQueryParam.getCustomerName());
         }
-        if (StringUtils.isNotEmpty(orderQueryDTO.getExpressCode())) {
-            order.setExpressCode(orderQueryDTO.getExpressCode());
+        if (StringUtils.isNotEmpty(orderQueryParam.getExpressCode())) {
+            order.setExpressCode(orderQueryParam.getExpressCode());
         }
-        if (orderQueryDTO.getExpressCode() != null) {
-            order.setOrderStatus(orderQueryDTO.getOrderStatus());
+        if (orderQueryParam.getExpressCode() != null) {
+            order.setOrderStatus(orderQueryParam.getOrderStatus());
         }
 
-        List<Order> orders = orderService.queryOrderListByQueryDto(order, orderQueryDTO.getPageNo(), orderQueryDTO.getPageSize());
+        List<Order> orders = orderService.queryOrderListByQueryDto(order, orderQueryParam.getPageNo(), orderQueryParam.getPageSize());
         if (CollectionUtils.isEmpty(orders)) {
             return new ArrayList<>();
         }
@@ -142,5 +148,32 @@ public class OrderWebService {
         return unifiedSuccessDto;
     }
 
+
+    /**
+     * 新增订单明细
+     */
+    public void addOrderDetail(OrderVo orderVo, int orderId) {
+
+        List<OrderDetailVo> orderDetailVoList = orderVo.getOrderDetailArr();
+        List<OrderDetail> orderDetailList = new ArrayList<>();
+        for (OrderDetailVo orderDetailVo : orderDetailVoList) {
+            OrderDetail orderDetail = OrderDetailVo.convert2OrderDetail(orderDetailVo, orderId);
+            orderDetailList.add(orderDetail);
+        }
+
+        orderDetailService.addOrderDetailBatch(orderDetailList);
+    }
+
+    /**
+     * 根据订单号查询订单明细
+     */
+    public List<OrderDetail> getOrderDetailByOrderId(Integer orderId) {
+
+        if (orderId == null || orderId == 0) {
+            return new ArrayList<>();
+        }
+
+        return orderDetailService.queryOrderDetailByOrderId(orderId);
+    }
 
 }

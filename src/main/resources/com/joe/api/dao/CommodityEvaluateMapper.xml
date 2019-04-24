@@ -12,16 +12,11 @@
     <result column="evaluate_time" property="evaluateTime" jdbcType="TIMESTAMP" />
     <result column="append_evaluate" property="appendEvaluate" jdbcType="VARCHAR" />
     <result column="append_evaluate_time" property="appendEvaluateTime" jdbcType="TIMESTAMP" />
-    <result column="create_by" property="createBy" jdbcType="INTEGER" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="update_by" property="updateBy" jdbcType="INTEGER" />
-    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="enable" property="enable" jdbcType="BIT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    evaluate_id, commodity_id, customer_id, customer_name, level, evaluate, evaluate_picture, 
-    evaluate_time, append_evaluate, append_evaluate_time, create_by, create_time, update_by, 
-    update_time, enable
+    evaluate_id, commodity_id, customer_id, customer_name, `level`, evaluate, evaluate_picture,
+    evaluate_time, append_evaluate, append_evaluate_time, enable
   </sql>
 
 
@@ -43,7 +38,7 @@
         customer_name,
       </if>
       <if test="level != null" >
-        level,
+        `level`,
       </if>
       <if test="evaluate != null" >
         evaluate,
@@ -59,18 +54,6 @@
       </if>
       <if test="appendEvaluateTime != null" >
         append_evaluate_time,
-      </if>
-      <if test="createBy != null" >
-        create_by,
-      </if>
-      <if test="createTime != null" >
-        create_time,
-      </if>
-      <if test="updateBy != null" >
-        update_by,
-      </if>
-      <if test="updateTime != null" >
-        update_time,
       </if>
       <if test="enable != null" >
         enable,
@@ -107,18 +90,6 @@
       <if test="appendEvaluateTime != null" >
         #{appendEvaluateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="createBy != null" >
-        #{createBy,jdbcType=INTEGER},
-      </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateBy != null" >
-        #{updateBy,jdbcType=INTEGER},
-      </if>
-      <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
       <if test="enable != null" >
         #{enable,jdbcType=BIT},
       </if>
@@ -149,7 +120,7 @@
         customer_name = #{customerName,jdbcType=VARCHAR},
       </if>
       <if test="level != null" >
-        level = #{level,jdbcType=INTEGER},
+        `level` = #{level,jdbcType=INTEGER},
       </if>
       <if test="evaluate != null" >
         evaluate = #{evaluate,jdbcType=VARCHAR},
@@ -165,18 +136,6 @@
       </if>
       <if test="appendEvaluateTime != null" >
         append_evaluate_time = #{appendEvaluateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createBy != null" >
-        create_by = #{createBy,jdbcType=INTEGER},
-      </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateBy != null" >
-        update_by = #{updateBy,jdbcType=INTEGER},
-      </if>
-      <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="enable != null" >
         enable = #{enable,jdbcType=BIT},

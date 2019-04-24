@@ -64,4 +64,6 @@ public class CommodityParam {
     private List<CommodityPictureVo> detailPictures;
 
 
+
+
 }

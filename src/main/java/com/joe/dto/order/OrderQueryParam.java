@@ -7,7 +7,7 @@ import lombok.Data;
  * create by Joe on 2018-07-10 11:46
  **/
 @Data
-public class OrderQueryDTO {
+public class OrderQueryParam {
 
     private String customerName;
 
