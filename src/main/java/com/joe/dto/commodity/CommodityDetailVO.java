@@ -57,5 +57,8 @@ public class CommodityDetailVO {
     //商品详情图
     private List<CommodityPictureVo> detailPictures;
 
+    //商品轮播图
+    private List<CommodityPictureVo> bannerPictures;
+
 
 }

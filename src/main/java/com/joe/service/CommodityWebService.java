@@ -1,5 +1,6 @@
 package com.joe.service;
 
+import com.joe.api.enums.PictureTypeEnum;
 import com.joe.api.po.Commodity;
 import com.joe.api.po.CommodityDetail;
 import com.joe.api.po.CommodityPicture;
@@ -17,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -51,17 +53,22 @@ public class CommodityWebService {
         commodityDetail.setCommodityId(commodityId);
         commodityDetailService.addCommodityDetail(commodityDetail);
 
-        List<CommodityPicture> commodityPictures = change2CommodityPictureList(commodityParam.getDetailPictures(), commodityId);
+        List<CommodityPicture> commodityPictures = new ArrayList<>();
+        List<CommodityPicture> detailPictures = change2CommodityPictureList(commodityParam.getDetailPictures(), commodityId,PictureTypeEnum.COMMODITY_DETAIL.getCode());
+        List<CommodityPicture> bannerPictures = change2CommodityPictureList(commodityParam.getBannerPictures(), commodityId,PictureTypeEnum.COMMODITY_BANNER.getCode());
+        commodityPictures.addAll(detailPictures);
+        commodityPictures.addAll(bannerPictures);
         commodityPictureService.addCommodityBatch(commodityPictures);
 
         return commodityId;
     }
 
-    private List<CommodityPicture> change2CommodityPictureList(List<CommodityPictureVo> detailPictures, Integer commodityId) {
+    private List<CommodityPicture> change2CommodityPictureList(List<CommodityPictureVo> detailPictures, Integer commodityId, Integer pictureType) {
         return detailPictures.stream().map(picture -> {
             CommodityPicture commodityPicture = new CommodityPicture();
             BeanUtils.copyProperties(picture, commodityPicture);
             commodityPicture.setCommodityId(commodityId);
+            commodityPicture.setPictureType(pictureType);
             commodityPicture.setCreateTime(new Date());
             commodityPicture.setUpdateTime(new Date());
             commodityPicture.setEnable(true);
@@ -108,8 +115,12 @@ public class CommodityWebService {
         int j = commodityDetailService.modifyCommodityDetail(commodityDetail);
 
         commodityPictureService.deleteByCommodityId(commodityParam.getCommodityId());
-        List<CommodityPicture> commodityPictures = change2CommodityPictureList(commodityParam.getDetailPictures(), commodityParam.getCommodityId());
-        Integer k = commodityPictureService.addCommodityBatch(commodityPictures);
+        List<CommodityPicture> pictureList = new ArrayList<>();
+        List<CommodityPicture> detailPictures = change2CommodityPictureList(commodityParam.getDetailPictures(), commodityParam.getCommodityId(),PictureTypeEnum.COMMODITY_DETAIL.getCode());
+        List<CommodityPicture> bannerPictures = change2CommodityPictureList(commodityParam.getBannerPictures(), commodityParam.getCommodityId(),PictureTypeEnum.COMMODITY_BANNER.getCode());
+        pictureList.addAll(detailPictures);
+        pictureList.addAll(bannerPictures);
+        Integer k = commodityPictureService.addCommodityBatch(pictureList);
 
         return i + j + k;
     }
@@ -150,12 +161,19 @@ public class CommodityWebService {
 
 
         List<CommodityPicture> pictureList = commodityPictureService.findByCommodityId(commodityId);
-        List<CommodityPictureVo> pictureVoList = pictureList.stream().map(picture -> {
+        List<CommodityPictureVo> detailPictures = new ArrayList<>();
+        List<CommodityPictureVo> bannerPictures = new ArrayList<>();
+        pictureList.stream().forEach(picture -> {
             CommodityPictureVo pictureVo = new CommodityPictureVo();
             BeanUtils.copyProperties(picture, pictureVo);
-            return pictureVo;
-        }).collect(Collectors.toList());
-        commodityDetailVO.setDetailPictures(pictureVoList);
+            if (PictureTypeEnum.COMMODITY_DETAIL.equals(picture.getPictureType())) {
+                detailPictures.add(pictureVo);
+            } else if (PictureTypeEnum.COMMODITY_BANNER.equals(picture.getPictureType())) {
+                bannerPictures.add(pictureVo);
+            }
+        });
+        commodityDetailVO.setDetailPictures(detailPictures);
+        commodityDetailVO.setBannerPictures(bannerPictures);
         log.info("查询商品图片表完成，商品图片信息：{}", pictureList);
 
         return commodityDetailVO;

@@ -22,6 +22,9 @@ public class CommodityPicture {
     //图片描述
     private String pictureDesc;
 
+    //图片类型
+    private Integer pictureType;
+
     //创建人
     private Integer createBy;
 

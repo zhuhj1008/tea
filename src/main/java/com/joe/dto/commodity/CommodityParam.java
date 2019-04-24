@@ -63,6 +63,9 @@ public class CommodityParam {
     @ApiModelProperty(value = "详情图")
     private List<CommodityPictureVo> detailPictures;
 
+    @ApiModelProperty(value = "详情图")
+    private List<CommodityPictureVo> bannerPictures;
+
 
 
 
