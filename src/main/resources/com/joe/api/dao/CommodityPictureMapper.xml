@@ -6,14 +6,15 @@
         <result column="commodity_id" property="commodityId" jdbcType="INTEGER"/>
         <result column="picture_url" property="pictureUrl" jdbcType="VARCHAR"/>
         <result column="picture_desc" property="pictureDesc" jdbcType="VARCHAR"/>
+        <result column="picture_type" property="pictureType" jdbcType="INTEGER"/>
         <result column="create_by" property="createBy" jdbcType="INTEGER"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
         <result column="enable" property="enable" jdbcType="BIT"/>
     </resultMap>
     <sql id="Base_Column_List">
-    picture_id, commodity_id, picture_url, picture_desc, create_by, create_time, update_time, 
-    enable
+    picture_id, commodity_id, picture_url, picture_desc, picture_type, create_by,
+    create_time, update_time, enable
   </sql>
 
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
@@ -38,6 +39,9 @@
             </if>
             <if test="pictureDesc != null">
                 picture_desc,
+            </if>
+            <if test="pictureType != null">
+                picture_type,
             </if>
             <if test="createBy != null">
                 create_by,
@@ -65,6 +69,9 @@
             <if test="pictureDesc != null">
                 #{pictureDesc,jdbcType=VARCHAR},
             </if>
+            <if test="pictureType != null">
+                #{pictureType,jdbcType=INTEGER},
+            </if>
             <if test="createBy != null">
                 #{createBy,jdbcType=INTEGER},
             </if>
@@ -81,12 +88,12 @@
     </insert>
 
     <insert id="addCommodityPictureBatch" parameterType="java.util.List">
-        insert into tb_commodity_picture (commodity_id, picture_url, picture_desc, create_by, create_time,
-        update_time,enable) values
+        insert into tb_commodity_picture (commodity_id, picture_url, picture_desc,
+        picture_type, create_by, create_time, update_time,enable) values
         <foreach collection="records" item="record" index="index" separator=",">
             (#{record.commodityId,jdbcType=INTEGER},
             #{record.pictureUrl,jdbcType=VARCHAR},#{record.pictureDesc,jdbcType=VARCHAR},
-            #{record.createBy,jdbcType=INTEGER},
+            #{record.pictureType,jdbcType=INTEGER},#{record.createBy,jdbcType=INTEGER},
             #{record.createTime,jdbcType=TIMESTAMP},#{record.updateTime,jdbcType=TIMESTAMP},
             #{record.enable,jdbcType=BIT})
         </foreach>
@@ -103,6 +110,9 @@
             </if>
             <if test="pictureDesc != null">
                 picture_desc = #{pictureDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="pictureType != null">
+                picture_type = #{pictureType,jdbcType=INTEGER},
             </if>
             <if test="createBy != null">
                 create_by = #{createBy,jdbcType=INTEGER},
