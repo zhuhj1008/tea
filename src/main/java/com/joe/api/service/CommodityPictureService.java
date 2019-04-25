@@ -14,17 +14,7 @@ public class CommodityPictureService {
     @Autowired
     private CommodityPictureMapper commodityPictureMapper;
 
-
-    public Integer addCommodity(CommodityPicture commodityPicture) {
-
-        if (commodityPicture == null) {
-            return null;
-        }
-        commodityPictureMapper.addCommodityPicture(commodityPicture);
-        return commodityPicture.getPictureId();
-    }
-
-
+    //批量保存图片
     public Integer addCommodityBatch(List<CommodityPicture> list) {
         if (CollectionUtils.isEmpty(list)) {
             return 0;
@@ -33,21 +23,14 @@ public class CommodityPictureService {
         return commodityPictureMapper.addCommodityPictureBatch(list);
     }
 
-    public Integer updateCommodityPicture(CommodityPicture commodityPicture){
-
-        if(commodityPicture == null || commodityPicture.getPictureId()==null){
-            return 0;
-        }
-        return commodityPictureMapper.updateByPrimaryKeySelective(commodityPicture);
-    }
-
-    public Integer deleteByCommodityId(Integer commodityId){
+    //根据商品编号删除图片
+    public Integer deleteByCommodityId(Integer commodityId) {
 
         return commodityPictureMapper.deleteByCommodityId(commodityId);
     }
 
-
-    public List<CommodityPicture> findByCommodityId(Integer commodityId){
+    //根据商品编号查询图片
+    public List<CommodityPicture> findByCommodityId(Integer commodityId) {
         return commodityPictureMapper.findByCommodityId(commodityId);
     }
 }

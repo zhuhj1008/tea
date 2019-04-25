@@ -1,6 +1,7 @@
 package com.joe.api.service;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.joe.api.dao.OrderMapper;
 import com.joe.api.enums.OrderStatusEnum;
 import com.joe.api.po.Order;
@@ -26,7 +27,7 @@ public class OrderService {
     public int addOrder(Order order) {
 
         order.setCreateTime(new Date());
-        order.setOrderStatus(OrderStatusEnum.NEW.getValue());
+        order.setOrderStatus(OrderStatusEnum.NEW.getCode());
         orderMapper.insertSelective(order);
         return order.getOrderId();
     }
@@ -52,7 +53,7 @@ public class OrderService {
 
         Order order = new Order();
         order.setOrderId(orderId);
-        order.setOrderStatus(OrderStatusEnum.CANCEL.getValue());
+        order.setOrderStatus(OrderStatusEnum.CANCEL.getCode());
         return orderMapper.updateByPrimaryKeySelective(order);
     }
 
@@ -84,7 +85,7 @@ public class OrderService {
      * @param order
      * @return
      */
-    public List<Order> queryOrderListByQueryDto(Order order, Integer pageNo, Integer pageSize) {
+    public PageInfo<Order> queryOrderListByQueryDto(Order order, Integer pageNo, Integer pageSize) {
 
         if (pageNo == null || pageNo == 0) {
             pageNo = GlobalConstant.PageConstant.DEFAULT_PAGE_NO;
@@ -96,7 +97,10 @@ public class OrderService {
 
         PageHelper.startPage(pageNo, pageSize);
 
-        return orderMapper.selectByOrderSelective(order);
+        List<Order> orderList = orderMapper.selectByOrderSelective(order);
+
+        return new PageInfo<>(orderList);
+
     }
 
 

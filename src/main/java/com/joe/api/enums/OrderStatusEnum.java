@@ -11,19 +11,18 @@ public enum OrderStatusEnum {
     RECEIVE(4, "已签收"),
     CANCEL(10, "已取消");
 
-    int value;
-    String text;
+    private int code;
+    private String text;
 
-    OrderStatusEnum(int value, String text) {
-        this.value = value;
+    OrderStatusEnum(int code, String text) {
+        this.code = code;
         this.text = text;
     }
 
-    public int getValue() {
-        return value;
+    public int getCode() {
+        return code;
     }
 
     public String getText() {
         return text;
-    }
-}
+    }}

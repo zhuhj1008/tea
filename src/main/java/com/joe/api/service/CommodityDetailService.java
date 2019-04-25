@@ -11,12 +11,7 @@ public class CommodityDetailService {
     @Autowired
     private CommodityDetailMapper commodityDetailMapper;
 
-    /**
-     * 新增商品明细
-     *
-     * @param commodityDetail 商品明细
-     * @return 自增主键
-     */
+    //新增商品明细
     public int addCommodityDetail(CommodityDetail commodityDetail) {
 
         commodityDetail.setEnable(true);
@@ -25,51 +20,17 @@ public class CommodityDetailService {
         return commodityDetail.getDetailId();
     }
 
-    /**
-     * 删除商品明细By 商品ID
-     *
-     * @return
-     */
-    public int dropCommodityDeatil(int commodityDetailId) {
 
-        CommodityDetail commodityDetail = new CommodityDetail();
-        commodityDetail.setDetailId(commodityDetailId);
-        commodityDetail.setEnable(false);
-
-        return commodityDetailMapper.updateByPrimaryKeySelective(commodityDetail);
-    }
-
-    /**
-     * 修改商品明细By 商品Id
-     *
-     * @param commodityDetail
-     * @return 修改记录数
-     */
-    public int modifyCommodityDetailSelective(CommodityDetail commodityDetail) {
-
-        return commodityDetailMapper.updateByCommodityIdSelective(commodityDetail);
-    }
-
-
-    /**
-     * 修改商品明细（全部修改）
-     *
-     * @param commodityDetail
-     * @return
-     */
+    //修改商品明细（全部修改）
     public int modifyCommodityDetail(CommodityDetail commodityDetail) {
 
         return commodityDetailMapper.updateByCommodityId(commodityDetail);
     }
 
 
-    /**
-     * 根据商品id查询商品明细
-     *
-     * @param commodityId
-     * @return
-     */
+    // 根据商品id查询商品明细
     public CommodityDetail queryCommodityDetailByCommodityId(Integer commodityId) {
+
         return commodityDetailMapper.selectByCommodityId(commodityId);
     }
 

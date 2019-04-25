@@ -28,21 +28,4 @@ public class OrderDetailVo {
     //规格
     private Integer unit;
 
-
-    public static OrderDetail convert2OrderDetail(OrderDetailVo orderDetailVo, int orderId) {
-
-        if (orderDetailVo == null) {
-            return null;
-        }
-        OrderDetail orderDetail = new OrderDetail();
-        orderDetail.setOrderId(orderId);
-        orderDetail.setCommodityId(orderDetailVo.getCommodityId());
-        orderDetail.setCommodityName(orderDetailVo.getCommodityName());
-        orderDetail.setPicture(orderDetailVo.getPicture());
-        orderDetail.setPrice(orderDetailVo.getPrice());
-        orderDetail.setAmount(orderDetailVo.getAmount());
-        orderDetail.setUnit(orderDetailVo.getUnit());
-        return orderDetail;
-    }
-
 }

@@ -1,7 +1,7 @@
 package com.joe.service;
 
 
-import com.alibaba.fastjson.JSON;
+import com.github.pagehelper.PageInfo;
 import com.joe.api.enums.OrderStatusEnum;
 import com.joe.api.po.Order;
 import com.joe.api.po.OrderDetail;
@@ -12,10 +12,9 @@ import com.joe.common.wx.dto.UnifiedParamDto;
 import com.joe.common.wx.dto.UnifiedSuccessDto;
 import com.joe.common.wx.enums.WxTradeTypeEnum;
 import com.joe.common.wx.service.WxService;
-import com.joe.dto.order.OrderDeliverDTO;
-import com.joe.dto.order.OrderDetailVo;
-import com.joe.dto.order.OrderQueryParam;
-import com.joe.dto.order.OrderVo;
+import com.joe.dto.order.*;
+import com.joe.util.mvc.ResponsePageEntity;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +24,13 @@ import org.springframework.util.CollectionUtils;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 订单业务
  * create by Joe on 2018-06-04 16:03
  **/
+@Slf4j
 @Service
 public class OrderWebService {
 
@@ -43,68 +44,69 @@ public class OrderWebService {
     private OrderDetailService orderDetailService;
 
 
-    /**
-     * 新增订单
-     */
-    public int addOrder(OrderVo orderVo) {
+    //新增订单
+    public int addOrder(OrderParam orderParam) {
+
+        log.info("新增订单，客户姓名：{}。", orderParam.getCustomerName());
 
         Order order = new Order();
-        BeanUtils.copyProperties(orderVo, order);
+        BeanUtils.copyProperties(orderParam, order);
+        order.setCreateTime(new Date());
+        order.setOrderStatus(OrderStatusEnum.NEW.getCode());
+        order.setEnable(true);
         int orderId = orderService.addOrder(order);
+        log.info("新增订单完成。订单编号：{}。", orderId);
+
+        List<OrderDetailParam> orderDetailVoList = orderParam.getOrderDetailArr();
+        List<OrderDetail> orderDetailList = orderDetailVoList.stream().map(orderDetailParam -> {
+            OrderDetail orderDetail = new OrderDetail();
+            BeanUtils.copyProperties(orderDetailParam, orderDetail);
+            return orderDetail;
+        }).collect(Collectors.toList());
+        orderDetailService.addOrderDetailBatch(orderDetailList);
+        log.info("新增订单明细完成，订单编号：{}。", orderId);
 
         return orderId;
     }
 
-    /**
-     * 查询符合条件的订单数量
-     */
-    public int getOrderCount(OrderQueryParam dto) {
 
-        Order order = JSON.parseObject(JSON.toJSONString(dto), Order.class);
-        return orderService.queryOrderCount(order);
-    }
+    //分页条件查询订单列表
+    public ResponsePageEntity getOrderList(OrderQueryParam orderQueryParam) {
 
-
-    /**
-     * 分页条件查询订单列表
-     */
-    public List<OrderVo> getOrderList(OrderQueryParam orderQueryParam) {
-
-        Order order = new Order();
+        log.info("查询订单，查询参数：{}。", orderQueryParam);
+        Order queryOrder = new Order();
         if (StringUtils.isNotEmpty(orderQueryParam.getCustomerName())) {
-            order.setCustomerName(orderQueryParam.getCustomerName());
+            queryOrder.setCustomerName(orderQueryParam.getCustomerName());
         }
         if (StringUtils.isNotEmpty(orderQueryParam.getExpressCode())) {
-            order.setExpressCode(orderQueryParam.getExpressCode());
+            queryOrder.setExpressCode(orderQueryParam.getExpressCode());
         }
         if (orderQueryParam.getExpressCode() != null) {
-            order.setOrderStatus(orderQueryParam.getOrderStatus());
+            queryOrder.setOrderStatus(orderQueryParam.getOrderStatus());
         }
 
-        List<Order> orders = orderService.queryOrderListByQueryDto(order, orderQueryParam.getPageNo(), orderQueryParam.getPageSize());
-        if (CollectionUtils.isEmpty(orders)) {
-            return new ArrayList<>();
+        PageInfo<Order> orderPageInfo = orderService.queryOrderListByQueryDto(queryOrder, orderQueryParam.getPageNo(), orderQueryParam.getPageSize());
+        if (CollectionUtils.isEmpty(orderPageInfo.getList())) {
+            return new ResponsePageEntity(0L, new ArrayList<>());
         }
 
-        List<OrderVo> orderVoList = new ArrayList<>();
-        for (Order tmpOrder : orders) {
+        List<OrderVo> orderVoList = orderPageInfo.getList().stream().map(order -> {
             OrderVo orderVo = new OrderVo();
-            BeanUtils.copyProperties(tmpOrder, orderVo);
-            orderVoList.add(orderVo);
-        }
+            BeanUtils.copyProperties(order, orderVo);
+            return orderVo;
+        }).collect(Collectors.toList());
+        log.info("查询订单成功。");
 
-        return orderVoList;
+        return new ResponsePageEntity(orderPageInfo.getTotal(), orderVoList);
     }
 
 
-    /**
-     * @param orderDeliverDTO 订单发货参数
-     * @return
-     */
+    //订单发货
     public int orderDeliver(OrderDeliverDTO orderDeliverDTO) {
 
-        Integer orderId = orderDeliverDTO.getOrderId();
+        log.info("请求订单发货，请求参数：{}。", orderDeliverDTO);
 
+        Integer orderId = orderDeliverDTO.getOrderId();
         if (orderId == null || orderId == 0) {
             throw new BusinessException("此订单不存在");
         }
@@ -115,14 +117,14 @@ public class OrderWebService {
         }
 
         //如果订单状态不是已支付，不允许修改成发货状态
-        if (order.getOrderStatus() == null || order.getOrderStatus() != OrderStatusEnum.PAYMENT.getValue()) {
+        if (order.getOrderStatus() == null || order.getOrderStatus() != OrderStatusEnum.PAYMENT.getCode()) {
             throw new BusinessException("此订单未支付");
         }
 
         order.setExpressId(orderDeliverDTO.getExpressId());
         order.setExpressCode(orderDeliverDTO.getExpressCode());
         order.setExpressMoney(orderDeliverDTO.getExpressMoney());
-        order.setOrderStatus(OrderStatusEnum.DELIVER.getValue());
+        order.setOrderStatus(OrderStatusEnum.DELIVER.getCode());
         order.setDeliveryTime(new Date());
 
         return orderService.modifyOrder(order);
@@ -149,31 +151,24 @@ public class OrderWebService {
     }
 
 
-    /**
-     * 新增订单明细
-     */
-    public void addOrderDetail(OrderVo orderVo, int orderId) {
+    //根据订单号查询订单明细
+    public List<OrderDetailVo> getOrderDetailByOrderId(Integer orderId) {
 
-        List<OrderDetailVo> orderDetailVoList = orderVo.getOrderDetailArr();
-        List<OrderDetail> orderDetailList = new ArrayList<>();
-        for (OrderDetailVo orderDetailVo : orderDetailVoList) {
-            OrderDetail orderDetail = OrderDetailVo.convert2OrderDetail(orderDetailVo, orderId);
-            orderDetailList.add(orderDetail);
-        }
-
-        orderDetailService.addOrderDetailBatch(orderDetailList);
-    }
-
-    /**
-     * 根据订单号查询订单明细
-     */
-    public List<OrderDetail> getOrderDetailByOrderId(Integer orderId) {
-
+        log.info("查询订单详细信息，订单编号：{}", orderId);
         if (orderId == null || orderId == 0) {
             return new ArrayList<>();
         }
 
-        return orderDetailService.queryOrderDetailByOrderId(orderId);
+        List<OrderDetail> orderDetails = orderDetailService.queryOrderDetailByOrderId(orderId);
+
+        List<OrderDetailVo> result = orderDetails.stream().map(orderDetail -> {
+            OrderDetailVo orderDetailVo = new OrderDetailVo();
+            BeanUtils.copyProperties(orderDetail, orderDetailVo);
+            return orderDetailVo;
+        }).collect(Collectors.toList());
+        log.info("查询订单详情成功。");
+
+        return result;
     }
 
 }

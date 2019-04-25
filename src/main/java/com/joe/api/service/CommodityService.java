@@ -1,6 +1,7 @@
 package com.joe.api.service;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.joe.api.dao.CommodityDetailMapper;
 import com.joe.api.dao.CommodityItemMapper;
 import com.joe.api.dao.CommodityMapper;
@@ -26,12 +27,7 @@ public class CommodityService {
     private CommodityPictureService commodityPictureService;
 
 
-    /**
-     * 新增商品
-     *
-     * @param commodity
-     * @return commodityId （主键）
-     */
+    // 新增商品
     public int addCommodity(Commodity commodity) {
 
         commodity.setCreateTime(new Date());
@@ -43,12 +39,7 @@ public class CommodityService {
 
     }
 
-    /**
-     * 删除商品（逻辑删除）
-     *
-     * @param commodityId 商品编号
-     * @return 删除个数
-     */
+    //删除商品（逻辑删除）
     @Transactional
     public int dropCommodity(int commodityId) {
 
@@ -68,76 +59,32 @@ public class CommodityService {
     }
 
 
-    /**
-     * 修改商品信息（选择更新）
-     *
-     * @param commodity
-     * @return 修改的个数
-     */
-    public int modifyCommoditySelective(Commodity commodity) {
-
-        return commodityMapper.updateByPrimaryKeySelective(commodity);
-    }
-
-    /**
-     * 修改商品信息 （全部更新）
-     *
-     * @param commodity
-     * @return
-     */
+    //修改商品信息 （全部更新）
     public int modifyCommodityById(Commodity commodity) {
 
         return commodityMapper.updateByPrimaryKey(commodity);
     }
 
-    /**
-     * 修改商品推荐状态（0改成1 1改成0）
-     *
-     * @param commodityId
-     * @return
-     */
+    //修改商品推荐状态（0改成1 1改成0）
     public int updateRecommendStatusById(int commodityId) {
 
         return commodityMapper.updateRecommendStatusById(commodityId);
     }
 
 
-    /**
-     * 查询单个商品By商品Id
-     *
-     * @param commodityId
-     * @return
-     */
+    //查询商品
     public Commodity queryCommodityById(int commodityId) {
 
         return commodityMapper.selectByPrimaryKey(commodityId);
     }
 
-    /**
-     * 查询商品集合By 类目Id
-     *
-     * @param itemId
-     * @param pageNo   页数
-     * @param pageSize 每页记录数
-     * @return
-     */
-    public List<Commodity> queryCommodityByItemId(int itemId, int pageNo, int pageSize) {
+    //分页查询商品集合By 类目Id
+    public PageInfo<Commodity> queryCommodityByItemId(int itemId, int pageNo, int pageSize) {
 
         PageHelper.startPage(pageNo, pageSize);
+        List<Commodity> commodities = commodityMapper.selectByItemId(itemId);
+        return new PageInfo<>(commodities);
 
-        return commodityMapper.selectByItemId(itemId);
-
-    }
-
-    /**
-     * 查询商品个数
-     *
-     * @param itemId
-     * @return
-     */
-    public int queryCommodityCountByItemId(int itemId) {
-
-        return commodityMapper.selectCommodityCountByItemId(itemId);
     }
 
 

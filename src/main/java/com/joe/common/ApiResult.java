@@ -47,6 +47,10 @@ public class ApiResult {
         this.data = data;
     }
 
+    public static ApiResult getSuccessEntity() {
+        return new ApiResult(SUCCESS_CODE, SUCCESS_MSG, "");
+    }
+
     public static ApiResult getSuccessEntity(Object data) {
         return new ApiResult(SUCCESS_CODE, SUCCESS_MSG, data);
     }

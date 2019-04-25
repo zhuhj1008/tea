@@ -60,5 +60,5 @@ public class OrderParam {
     private String remake;
 
     //订单详情
-    private List<OrderDetailParam> orderDetails;
+    private List<OrderDetailParam> orderDetailArr;
 }

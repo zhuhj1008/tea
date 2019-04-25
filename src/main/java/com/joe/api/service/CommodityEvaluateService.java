@@ -15,12 +15,7 @@ public class CommodityEvaluateService {
     @Autowired
     private CommodityEvaluateMapper commodityEvaluateMapper;
 
-    /**
-     * 新增评价
-     *
-     * @param commodityEvaluate 评价
-     * @return 自增主键
-     */
+   //新增评价
     public int addCommodityEvaluate(CommodityEvaluate commodityEvaluate) {
 
         commodityEvaluate.setEvaluateTime(new Date());
@@ -30,39 +25,22 @@ public class CommodityEvaluateService {
         return commodityEvaluate.getEvaluateId();
     }
 
-    /**
-     * 修改评价（追评）
-     *
-     * @param commodityEvaluate 评价
-     * @return 修改记录数
-     */
+   //修改评价
     public int updateCommodityEvaluate(CommodityEvaluate commodityEvaluate) {
 
         return commodityEvaluateMapper.updateByPrimaryKeySelective(commodityEvaluate);
-
     }
 
-    /**
-     * 查询商品评价数量
-     *
-     * @param commodityId 商品编号
-     * @return
-     */
+    //查询商品评价数量
     public int queryEvaluateCountByCommodityId(Integer commodityId) {
 
         return commodityEvaluateMapper.selectEvaluateCountByCommodityId(commodityId);
     }
 
-    /**
-     * 查询商品评价列表 （分页）
-     *
-     * @param commodityId
-     * @return
-     */
+    //查询商品评价数量
     public List<CommodityEvaluate> queryEvaluateByCommodityId(Integer commodityId, int pageNo, int pageSize) {
 
         PageHelper.startPage(pageNo, pageSize);
-
         return commodityEvaluateMapper.selectEvaluateByCommodityId(commodityId);
     }
 

@@ -61,7 +61,7 @@ public class OrderDetailService {
             return 0;
         }
 
-        return orderDetailMapper.updateStatusByOrderId(orderId, orderDetailEnum.getValue());
+        return orderDetailMapper.updateStatusByOrderId(orderId, orderDetailEnum.getCode());
     }
 
 
@@ -82,7 +82,7 @@ public class OrderDetailService {
      * @return
      */
     public List<OrderDetail> queryShopCartDetail(int customerId) {
-        return orderDetailMapper.selectByCustomerIdAndStatus(customerId, OrderDetailEnum.SHOP_CAR.getValue());
+        return orderDetailMapper.selectByCustomerIdAndStatus(customerId, OrderDetailEnum.SHOP_CAR.getCode());
     }
 
     /**

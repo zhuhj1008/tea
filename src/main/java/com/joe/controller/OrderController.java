@@ -1,13 +1,9 @@
 package com.joe.controller;
 
-import com.joe.api.po.OrderDetail;
 import com.joe.common.ApiParameter;
 import com.joe.common.ApiResult;
 import com.joe.common.wx.dto.UnifiedParamDto;
-import com.joe.dto.order.OrderDeliverDTO;
-import com.joe.dto.order.OrderCommonParam;
-import com.joe.dto.order.OrderQueryParam;
-import com.joe.dto.order.OrderVo;
+import com.joe.dto.order.*;
 import com.joe.service.OrderWebService;
 import com.joe.util.mvc.ResponsePageEntity;
 import io.swagger.annotations.Api;
@@ -39,16 +35,9 @@ public class OrderController {
     //新增订单
     @PostMapping("/addOrder")
     @ApiOperation(value = "新增订单", notes = "新增订单")
-    public ApiResult addOrder(@RequestBody @ApiParam ApiParameter<OrderVo> apiParameter) {
+    public ApiResult addOrder(@RequestBody @ApiParam ApiParameter<OrderParam> apiParameter) {
 
-        OrderVo orderVo = apiParameter.getBody();
-        log.info("新增订单，客户姓名：{}。", orderVo.getCustomerName());
-
-        int orderId = orderWebService.addOrder(orderVo);
-        log.info("新增订单完成。订单编号：{}。", orderId);
-
-        orderWebService.addOrderDetail(orderVo, orderId);
-        log.info("新增订单明细完成，订单编号：{}。", orderId);
+        int orderId = orderWebService.addOrder(apiParameter.getBody());
 
         return ApiResult.getSuccessEntity(orderId);
     }
@@ -59,16 +48,10 @@ public class OrderController {
      */
     @PostMapping("/getOrder")
     @ApiOperation(value = "查询订单", notes = "条件查询订单")
-    public ApiResult getOrder(@RequestBody ApiParameter<OrderQueryParam> apiParameter) {
+    public ApiResult getOrder(@RequestBody @ApiParam ApiParameter<OrderQueryParam> apiParameter) {
 
-        OrderQueryParam orderQueryParam = apiParameter.getBody();
-        log.info("查询订单，查询参数：{}。", orderQueryParam);
+        ResponsePageEntity pageEntity = orderWebService.getOrderList(apiParameter.getBody());
 
-        List<OrderVo> orderList = orderWebService.getOrderList(orderQueryParam);
-        int total = orderWebService.getOrderCount(orderQueryParam);
-        log.info("查询订单成功，订单数量：{}", total);
-
-        ResponsePageEntity pageEntity = new ResponsePageEntity(total, orderList);
         return ApiResult.getSuccessEntity(pageEntity);
     }
 
@@ -78,17 +61,9 @@ public class OrderController {
      */
     @PostMapping("/getOrderDetail")
     @ApiOperation(value = "查询订单详情", notes = "查询订单详情")
-    public ApiResult getOrderDetail(@RequestBody ApiParameter<OrderCommonParam> apiParameter) {
+    public ApiResult getOrderDetail(@RequestBody @ApiParam ApiParameter<OrderCommonParam> apiParameter) {
 
-        OrderCommonParam param = apiParameter.getBody();
-        log.info("查询订单详情，订单编号：{}。", param.getOrderId());
-        if (param.getOrderId() == null) {
-            log.error("查询订单详情，订单编号为空。");
-            return ApiResult.getFailEntity();
-        }
-
-        List<OrderDetail> orderDetailList = orderWebService.getOrderDetailByOrderId(param.getOrderId());
-        log.info("查询订单详情成功。");
+        List<OrderDetailVo> orderDetailList = orderWebService.getOrderDetailByOrderId(apiParameter.getBody().getOrderId());
 
         return ApiResult.getSuccessEntity(orderDetailList);
     }
@@ -99,17 +74,11 @@ public class OrderController {
      */
     @PostMapping("/deliver")
     @ApiOperation(value = "订单发货", notes = "修改订单状态为发货状态")
-    public ApiResult orderDeliver(@RequestBody ApiParameter<OrderDeliverDTO> apiParameter) {
+    public ApiResult orderDeliver(@RequestBody @ApiParam ApiParameter<OrderDeliverDTO> apiParameter) {
 
-        OrderDeliverDTO orderDeliverDTO = apiParameter.getBody();
-        log.info("请求订单发货，请求参数：{}。", orderDeliverDTO);
+        orderWebService.orderDeliver(apiParameter.getBody());
 
-        int execNum = orderWebService.orderDeliver(orderDeliverDTO);
-        if (execNum <= 0) {
-            log.error("请求订单发货失败。");
-            return ApiResult.getFailEntity();
-        }
-        return ApiResult.getSuccessEntity(execNum);
+        return ApiResult.getSuccessEntity();
     }
 
 

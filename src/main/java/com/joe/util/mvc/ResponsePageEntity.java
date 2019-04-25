@@ -17,7 +17,7 @@ public class ResponsePageEntity {
     /**
      * 记录总条数
      */
-    private int total;
+    private long total;
 
     /**
      * 数据

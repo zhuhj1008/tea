@@ -57,13 +57,8 @@ public class CommodityController {
         Integer pageSize = param.getPageSize();
         log.info("查询商品列表，商品类目：{}，页码-大小：{}-{}。", itemId, pageNo, pageSize);
 
-        int total = commodityWebService.queryCommodityCountByItemId(itemId);
-        List<CommodityVo> commodityVoList = commodityWebService.queryCommodityByItemId(itemId, pageNo, pageSize);
+        ResponsePageEntity pageEntity = commodityWebService.queryCommodityByItemId(itemId, pageNo, pageSize);
         log.info("查询商品列表成功。");
-
-        ResponsePageEntity pageEntity = new ResponsePageEntity();
-        pageEntity.setTotal(total);
-        pageEntity.setContents(commodityVoList);
 
         return ApiResult.getSuccessEntity(pageEntity);
     }

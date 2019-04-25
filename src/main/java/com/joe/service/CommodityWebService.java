@@ -1,5 +1,6 @@
 package com.joe.service;
 
+import com.github.pagehelper.PageInfo;
 import com.joe.api.enums.PictureTypeEnum;
 import com.joe.api.po.Commodity;
 import com.joe.api.po.CommodityDetail;
@@ -11,12 +12,14 @@ import com.joe.dto.commodity.CommodityDetailVO;
 import com.joe.dto.commodity.CommodityParam;
 import com.joe.dto.commodity.CommodityPictureVo;
 import com.joe.dto.commodity.CommodityVo;
+import com.joe.util.mvc.ResponsePageEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.omg.PortableInterceptor.INACTIVE;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -54,8 +57,8 @@ public class CommodityWebService {
         commodityDetailService.addCommodityDetail(commodityDetail);
 
         List<CommodityPicture> commodityPictures = new ArrayList<>();
-        List<CommodityPicture> detailPictures = change2CommodityPictureList(commodityParam.getDetailPictures(), commodityId,PictureTypeEnum.COMMODITY_DETAIL.getCode());
-        List<CommodityPicture> bannerPictures = change2CommodityPictureList(commodityParam.getBannerPictures(), commodityId,PictureTypeEnum.COMMODITY_BANNER.getCode());
+        List<CommodityPicture> detailPictures = change2CommodityPictureList(commodityParam.getDetailPictures(), commodityId, PictureTypeEnum.COMMODITY_DETAIL.getCode());
+        List<CommodityPicture> bannerPictures = change2CommodityPictureList(commodityParam.getBannerPictures(), commodityId, PictureTypeEnum.COMMODITY_BANNER.getCode());
         commodityPictures.addAll(detailPictures);
         commodityPictures.addAll(bannerPictures);
         commodityPictureService.addCommodityBatch(commodityPictures);
@@ -78,23 +81,22 @@ public class CommodityWebService {
 
 
     //查询某个类目下商品 分页
-    public List<CommodityVo> queryCommodityByItemId(int itemId, int pageNo, int pageSize) {
+    public ResponsePageEntity queryCommodityByItemId(int itemId, int pageNo, int pageSize) {
 
-        List<Commodity> commodities = commodityService.queryCommodityByItemId(itemId, pageNo, pageSize);
-        return commodities.stream().map(commodity -> {
+        PageInfo<Commodity> pageInfo = commodityService.queryCommodityByItemId(itemId, pageNo, pageSize);
+
+        if (CollectionUtils.isEmpty(pageInfo.getList())) {
+            return new ResponsePageEntity(0L, new ArrayList<>());
+        }
+
+        List<CommodityVo> commodityVos = pageInfo.getList().stream().map(commodity -> {
             CommodityVo commodityVo = new CommodityVo();
             BeanUtils.copyProperties(commodity, commodityVo);
             return commodityVo;
         }).collect(Collectors.toList());
+
+        return new ResponsePageEntity(pageInfo.getTotal(), commodityVos);
     }
-
-
-    //查询某个类目下商品数量
-    public int queryCommodityCountByItemId(int itemId) {
-
-        return commodityService.queryCommodityCountByItemId(itemId);
-    }
-
 
     //删除商品
     public int removeCommodity(int commodityId) {
@@ -116,8 +118,8 @@ public class CommodityWebService {
 
         commodityPictureService.deleteByCommodityId(commodityParam.getCommodityId());
         List<CommodityPicture> pictureList = new ArrayList<>();
-        List<CommodityPicture> detailPictures = change2CommodityPictureList(commodityParam.getDetailPictures(), commodityParam.getCommodityId(),PictureTypeEnum.COMMODITY_DETAIL.getCode());
-        List<CommodityPicture> bannerPictures = change2CommodityPictureList(commodityParam.getBannerPictures(), commodityParam.getCommodityId(),PictureTypeEnum.COMMODITY_BANNER.getCode());
+        List<CommodityPicture> detailPictures = change2CommodityPictureList(commodityParam.getDetailPictures(), commodityParam.getCommodityId(), PictureTypeEnum.COMMODITY_DETAIL.getCode());
+        List<CommodityPicture> bannerPictures = change2CommodityPictureList(commodityParam.getBannerPictures(), commodityParam.getCommodityId(), PictureTypeEnum.COMMODITY_BANNER.getCode());
         pictureList.addAll(detailPictures);
         pictureList.addAll(bannerPictures);
         Integer k = commodityPictureService.addCommodityBatch(pictureList);

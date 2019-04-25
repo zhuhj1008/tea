@@ -8,16 +8,16 @@ public enum OrderDetailEnum {
     EVALUATE(7, "已评价"),
     APPEND(8, "已追评");
 
-    int value;
-    String text;
+    private int code;
+    private String text;
 
-    OrderDetailEnum(int value, String text) {
-        this.value = value;
+    OrderDetailEnum(int code, String text) {
+        this.code = code;
         this.text = text;
     }
 
-    public int getValue() {
-        return value;
+    public int getCode() {
+        return code;
     }
 
     public String getText() {
