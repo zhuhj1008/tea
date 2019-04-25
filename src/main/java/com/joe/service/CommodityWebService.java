@@ -166,9 +166,9 @@ public class CommodityWebService {
         pictureList.stream().forEach(picture -> {
             CommodityPictureVo pictureVo = new CommodityPictureVo();
             BeanUtils.copyProperties(picture, pictureVo);
-            if (PictureTypeEnum.COMMODITY_DETAIL.equals(picture.getPictureType())) {
+            if (PictureTypeEnum.COMMODITY_DETAIL.getCode().equals(picture.getPictureType())) {
                 detailPictures.add(pictureVo);
-            } else if (PictureTypeEnum.COMMODITY_BANNER.equals(picture.getPictureType())) {
+            } else if (PictureTypeEnum.COMMODITY_BANNER.getCode().equals(picture.getPictureType())) {
                 bannerPictures.add(pictureVo);
             }
         });

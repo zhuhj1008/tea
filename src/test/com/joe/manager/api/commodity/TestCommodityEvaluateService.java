@@ -22,7 +22,6 @@ public class TestCommodityEvaluateService extends BaseTest {
         commodityEvaluate.setCustomerName("dom");
         commodityEvaluate.setLevel(1);
         commodityEvaluate.setEvaluate("差评");
-        commodityEvaluate.setCreateBy(1);
 
         commodityEvaluateService.addCommodityEvaluate(commodityEvaluate);
     }
