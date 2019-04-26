@@ -130,27 +130,6 @@ public class OrderWebService {
         return orderService.modifyOrder(order);
     }
 
-
-    /**
-     * 订单申请微信支付
-     */
-    public Object wePayUnifiedOrder(UnifiedParamDto unifiedParamDto) {
-
-        unifiedParamDto.setBody(unifiedParamDto.getBody());
-        unifiedParamDto.setOutTradeNo(unifiedParamDto.getOutTradeNo());
-        unifiedParamDto.setSpbillCreateIp(unifiedParamDto.getSpbillCreateIp());
-        unifiedParamDto.setTotalFee(unifiedParamDto.getTotalFee());
-        unifiedParamDto.setDeviceInfo("WEB");
-        unifiedParamDto.setSignType("MD5");
-        unifiedParamDto.setTradeType(WxTradeTypeEnum.JSAPI.getType());
-        unifiedParamDto.setOpenId(unifiedParamDto.getOpenId());
-
-        UnifiedSuccessDto unifiedSuccessDto = wxService.wePayUnifiedOrder(unifiedParamDto);
-
-        return unifiedSuccessDto;
-    }
-
-
     //根据订单号查询订单明细
     public List<OrderDetailVo> getOrderDetailByOrderId(Integer orderId) {
 

@@ -1,6 +1,5 @@
 package com.joe.config;
 
-import com.joe.config.WeChatAccountConfig;
 import me.chanjar.weixin.mp.api.WxMpConfigStorage;
 import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage;
 import me.chanjar.weixin.mp.api.WxMpService;
@@ -16,14 +15,14 @@ public class WeChatMpConfig {
     private WeChatAccountConfig weChatAccountConfig;
 
     @Bean
-    public WxMpService wxMpService(){
-        WxMpService wxMpService =new WxMpServiceImpl();
+    public WxMpService wxMpService() {
+        WxMpService wxMpService = new WxMpServiceImpl();
         wxMpService.setWxMpConfigStorage(wxMpConfigStorage());
         return wxMpService;
     }
 
     @Bean
-    public WxMpConfigStorage wxMpConfigStorage(){
+    public WxMpConfigStorage wxMpConfigStorage() {
         WxMpInMemoryConfigStorage config = new WxMpInMemoryConfigStorage();
         config.setAppId(weChatAccountConfig.getMpAppId());
         config.setSecret(weChatAccountConfig.getSecretKey());

@@ -31,8 +31,6 @@ qiNiu:
     encoding: UTF-8
     effective: 3
 
-
-
 wx:
     appId: WX_APP_ID
     secretKey: WX_SECRET_KEY

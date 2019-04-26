@@ -23,10 +23,10 @@ public class RedisService {
         return isHasKey;
     }
 
-    public <T> T getCache(Object cacheKey){
+    public String getCache(String cacheKey){
         if(isHasKey(cacheKey)){
             ValueOperations valueOperations = redisTemplate.opsForValue();
-            return (T)valueOperations.get(cacheKey);
+            return valueOperations.get(cacheKey).toString();
         }
         return null;
     }
@@ -55,7 +55,6 @@ public class RedisService {
     public void putCache(Object cacheKey,Object data){
         putCache(cacheKey,data,-1);
     }
-
 
 
     public void expireCache(Object cacheKey,long timeOutMillSeconds){

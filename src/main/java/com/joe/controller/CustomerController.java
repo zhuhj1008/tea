@@ -3,7 +3,7 @@ package com.joe.controller;
 import com.joe.api.po.UserCustomer;
 import com.joe.common.ApiParameter;
 import com.joe.common.ApiResult;
-import com.joe.dto.user.UserParam;
+import com.joe.dto.wx.WxAuthParam;
 import com.joe.service.CustomerWebService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
  * create by Joe on 2018-06-22 11:52
  **/
 @Slf4j
-@Api(tags={"客户接口"})
+@Api(tags = {"客户接口"})
 @RestController
 @RequestMapping("/customer")
 public class CustomerController {
@@ -31,9 +31,9 @@ public class CustomerController {
 
     @PostMapping("/getCustomer")
     @ApiOperation(value = "查询客户信息", notes = "根据授权code查询用户信息")
-    public ApiResult getCustomerOpenIdAndSessionKey(@RequestBody @ApiParam ApiParameter<UserParam> apiParameter) {
+    public ApiResult getCustomerOpenIdAndSessionKey(@RequestBody @ApiParam ApiParameter<WxAuthParam> apiParameter) {
 
-        UserParam param = apiParameter.getBody();
+        WxAuthParam param = apiParameter.getBody();
         log.info("获取客户信息，请求code：{}。", param.getCode());
         if (StringUtils.isEmpty(param.getCode())) {
             log.error("获取客户信息失败，请求code为空。");

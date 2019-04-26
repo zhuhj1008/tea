@@ -82,28 +82,6 @@ public class OrderController {
     }
 
 
-    /**
-     * 微信支付
-     */
-    @PostMapping("/wePayUnifiedOrder")
-    @ApiOperation(value = "订单微信支付", notes = "微信统一支付")
-    public ApiResult wePayUnifiedOrder(@RequestBody ApiParameter<UnifiedParamDto> apiParameter) {
 
-        UnifiedParamDto unifiedParamDto = apiParameter.getBody();
-        log.info("微信支付-统一支付，请求参数：{}。", unifiedParamDto);
-        unifiedParamDto.setSpbillCreateIp("127.0.0.1");
-
-        Object o = orderWebService.wePayUnifiedOrder(unifiedParamDto);
-        return ApiResult.getSuccessEntity(o);
-    }
-
-    /**
-     * 微信回调接口
-     */
-    @PostMapping("/wxResend")
-    @ApiOperation(value = "微信回调接口", notes = "微信回调通知")
-    public void wxResend() {
-
-    }
 
 }
