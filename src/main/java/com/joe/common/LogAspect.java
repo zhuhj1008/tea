@@ -21,6 +21,7 @@ public class LogAspect {
 
     @Pointcut("execution(* com.joe.controller.CommodityController..*(..))")
     public void controllerPoint() {
+        //controller切入点
     }
 
     @Around("controllerPoint()")
@@ -36,7 +37,7 @@ public class LogAspect {
             log.info("响应:{}-{},响应结果:{}", packageName, method, result.toString());
             log.info("响应时间:{}", new Date());
         } catch (Throwable throwable) {
-            throwable.printStackTrace();
+            log.error(throwable.getMessage());
         }
     }
 

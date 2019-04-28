@@ -1,5 +1,7 @@
 package com.joe.common;
 
+import lombok.extern.slf4j.Slf4j;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -12,9 +14,13 @@ import java.io.StringWriter;
  * Bean和XML转换工具类
  * create by Joe on 2018-08-07 16:19
  **/
+@Slf4j
 public class XmlUtil {
 
-    public static String ENCODING = "UTF-8";
+    private XmlUtil() {
+    }
+
+    private static final String ENCODING = "UTF-8";
 
     /**
      * java对象转换为xml文件
@@ -43,7 +49,7 @@ public class XmlUtil {
      * @throws IOException
      */
     @SuppressWarnings("unchecked")
-    public static <T> T xmlToBean(String xmlPath, Class<T> load) throws JAXBException, IOException {
+    public static <T> T xmlToBean(String xmlPath, Class<T> load) throws JAXBException {
         JAXBContext context = JAXBContext.newInstance(load);
         Unmarshaller unmarshaller = context.createUnmarshaller();
         return (T) unmarshaller.unmarshal(new StringReader(xmlPath));
@@ -57,8 +63,7 @@ public class XmlUtil {
      * @return
      */
     public static String convertToXml(Object obj) {
-        //       return convertToXml(obj, "UTF-8");
-        return convertToXml(obj, "UTF-8");
+        return convertToXml(obj, ENCODING);
     }
 
     /**
@@ -80,7 +85,7 @@ public class XmlUtil {
             marshaller.marshal(obj, writer);
             result = writer.toString();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("bean转XML失败，", e);
         }
 
         return result;
@@ -105,7 +110,7 @@ public class XmlUtil {
             marshaller.marshal(obj, writer);
             result = writer.toString();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("解析XML失败，", e);
         }
 
         return result;
@@ -120,14 +125,14 @@ public class XmlUtil {
      * @return
      */
     @SuppressWarnings("unchecked")
-    public static <T> T converyToJavaBean(String xml, Class<T> c) {
+    public static <T> T convertToJavaBean(String xml, Class<T> c) {
         T t = null;
         try {
             JAXBContext context = JAXBContext.newInstance(c);
             Unmarshaller unmarshaller = context.createUnmarshaller();
             t = (T) unmarshaller.unmarshal(new StringReader(xml));
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("XML转bean失败，", e);
         }
 
         return t;

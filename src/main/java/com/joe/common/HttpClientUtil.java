@@ -30,6 +30,9 @@ import java.util.Map;
 @Slf4j
 public class HttpClientUtil {
 
+    private HttpClientUtil() {
+    }
+
     private static final int TIMEOUT = 60000;
 
     private static final String CHARSET = "UTF-8";

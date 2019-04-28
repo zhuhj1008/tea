@@ -1,8 +1,6 @@
 package com.joe.dto.order;
 
-import com.joe.api.po.OrderDetail;
 import lombok.Data;
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 import java.math.BigDecimal;
 

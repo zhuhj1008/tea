@@ -57,7 +57,7 @@ public class WXController {
     @PostMapping("/wxResend")
     @ApiOperation(value = "微信回调接口", notes = "微信回调通知")
     public void wxResend() {
-
+        //待完成
     }
 
 

@@ -1,12 +1,18 @@
 package com.joe;
 
 import com.github.pagehelper.PageHelper;
+import org.apache.catalina.Context;
+import org.apache.catalina.connector.Connector;
+import org.apache.tomcat.util.descriptor.web.SecurityCollection;
+import org.apache.tomcat.util.descriptor.web.SecurityConstraint;
 import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
+import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
@@ -39,60 +45,58 @@ public class Application extends WebMvcConfigurerAdapter implements CommandLineR
     private Logger logger = LoggerFactory.getLogger(Application.class);
 
     public static void main(String[] args) {
-        SpringApplication springApplication = new SpringApplication();
-//        springApplication.setAddCommandLineProperties(false); -- 设置启动命令参数不生效
-        springApplication.run(Application.class, args);
+        SpringApplication.run(Application.class, args);
     }
 
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         logger.info("服务启动完成!");
     }
 
     @RequestMapping("/date")
     String home() {
-        return "当前时间"+new Date();
+        return "当前时间" + new Date();
     }
 
     @Bean
-    public PageHelper pageHelper(){
+    public PageHelper pageHelper() {
         PageHelper pageHelper = new PageHelper();
         Properties properties = new Properties();
-        properties.setProperty("offsetAsPageNum","true");
-        properties.setProperty("rowBoundsWithCount","true");
-        properties.setProperty("reasonable","true");
-        properties.setProperty("dialect","mysql");
+        properties.setProperty("offsetAsPageNum", "true");
+        properties.setProperty("rowBoundsWithCount", "true");
+        properties.setProperty("reasonable", "true");
+        properties.setProperty("dialect", "mysql");
         pageHelper.setProperties(properties);
         return pageHelper;
     }
 
 
-//    @Bean
-//    public EmbeddedServletContainerFactory servletContainer() {
-//
-//        TomcatEmbeddedServletContainerFactory tomcat = new TomcatEmbeddedServletContainerFactory() {
-//
-//            @Override
-//            protected void postProcessContext(Context context) {
-//
-//                SecurityConstraint securityConstraint = new SecurityConstraint();
-//                securityConstraint.setUserConstraint("CONFIDENTIAL");
-//                SecurityCollection collection = new SecurityCollection();
-//                collection.addPattern("/*");
-//                securityConstraint.addCollection(collection);
-//                context.addConstraint(securityConstraint);
-//            }
-//        };
-//        tomcat.addAdditionalTomcatConnectors(initiateHttpConnector());
-//        return tomcat;
-//    }
-//
-//    private Connector initiateHttpConnector() {
-//        Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
-//        connector.setScheme("http");
-//        connector.setPort(8088);
-//        connector.setRedirectPort(8080);
-//        connector.setSecure(false);
-//        return connector;
-//    }
+    @Bean
+    public EmbeddedServletContainerFactory servletContainer() {
+
+        TomcatEmbeddedServletContainerFactory tomcat = new TomcatEmbeddedServletContainerFactory() {
+
+            @Override
+            protected void postProcessContext(Context context) {
+
+                SecurityConstraint securityConstraint = new SecurityConstraint();
+                securityConstraint.setUserConstraint("CONFIDENTIAL");
+                SecurityCollection collection = new SecurityCollection();
+                collection.addPattern("/*");
+                securityConstraint.addCollection(collection);
+                context.addConstraint(securityConstraint);
+            }
+        };
+        tomcat.addAdditionalTomcatConnectors(initiateHttpConnector());
+        return tomcat;
+    }
+
+    private Connector initiateHttpConnector() {
+        Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
+        connector.setScheme("http");
+        connector.setPort(8088);
+        connector.setRedirectPort(8080);
+        connector.setSecure(false);
+        return connector;
+    }
 
 }

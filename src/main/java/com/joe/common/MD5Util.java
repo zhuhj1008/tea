@@ -1,17 +1,23 @@
 package com.joe.common;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.security.MessageDigest;
 
+@Slf4j
 public class MD5Util {
 
+    private MD5Util() {
+    }
 
     /**
      * MD5加密
+     *
      * @param b
      * @return
      */
-    private static String byteArrayToHexString(byte b[]) {
-        StringBuffer resultSb = new StringBuffer();
+    private static String byteArrayToHexString(byte[] b) {
+        StringBuilder resultSb = new StringBuilder();
         for (int i = 0; i < b.length; i++)
             resultSb.append(byteToHexString(b[i]));
 
@@ -27,22 +33,23 @@ public class MD5Util {
         return hexDigits[d1] + hexDigits[d2];
     }
 
-    public static String MD5Encode(String origin, String charsetname) {
+    public static String md5Encode(String origin, String charSet) {
         String resultString = null;
         try {
-            resultString = new String(origin);
+            resultString = origin;
             MessageDigest md = MessageDigest.getInstance("MD5");
-            if (charsetname == null || "".equals(charsetname))
+            if (charSet == null || "".equals(charSet))
                 resultString = byteArrayToHexString(md.digest(resultString
                         .getBytes()));
             else
                 resultString = byteArrayToHexString(md.digest(resultString
-                        .getBytes(charsetname)));
+                        .getBytes(charSet)));
         } catch (Exception exception) {
+            log.error("md5Encode error");
         }
         return resultString;
     }
 
-    private static final String hexDigits[] = { "0", "1", "2", "3", "4", "5",
-            "6", "7", "8", "9", "a", "b", "c", "d", "e", "f" };
+    private static final String[] hexDigits = {"0", "1", "2", "3", "4", "5",
+            "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"};
 }

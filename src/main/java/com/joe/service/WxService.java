@@ -64,7 +64,7 @@ public class WxService {
 
         param.put("appid", appId);
         param.put("mch_id", mchId);
-        param.put("nonce_str", WxUtil.CreateNonceString());
+        param.put("nonce_str", WxUtil.createNonceString());
         param.put("body", unifiedParam.getBody());
         param.put("out_trade_no", unifiedParam.getOrderNo());
         param.put("total_fee", unifiedParam.getTotalFee());
@@ -87,7 +87,7 @@ public class WxService {
         String result = HttpsClientUtil.httpsRequest(url, "POST", requestXml);
 
         //解析响应体
-        return XmlUtil.converyToJavaBean(result, UnifiedSuccessDto.class);
+        return XmlUtil.convertToJavaBean(result, UnifiedSuccessDto.class);
     }
 
 }

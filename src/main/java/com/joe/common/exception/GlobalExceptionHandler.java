@@ -3,7 +3,9 @@ package com.joe.common.exception;
 import com.joe.dto.ApiResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
@@ -33,11 +35,11 @@ public class GlobalExceptionHandler {
         return ApiResult.getFailEntity(e.getMessage());
     }
 
-//    @ExceptionHandler(value = ParameterIllegalityException.class)
-//    @ResponseStatus(code = HttpStatus.BAD_REQUEST, value = HttpStatus.BAD_REQUEST, reason = "参数缺失")
-//    public void paramIllegalityException() {
-//
-//    }
+    @ExceptionHandler(value = ParameterIllegalityException.class)
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST, value = HttpStatus.BAD_REQUEST, reason = "参数缺失")
+    public void paramIllegalityException() {
+        //返回自定义http响应码
+    }
 
 
 }

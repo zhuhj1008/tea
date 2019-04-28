@@ -4,6 +4,9 @@ import java.util.*;
 
 public class WxUtil {
 
+    private WxUtil() {
+    }
+
     /**
      * 获取微信签名sign
      *
@@ -11,7 +14,7 @@ public class WxUtil {
      * @return 微信请求签名串
      */
     public static String getSign(SortedMap<Object, Object> map, String key) {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         Set set = map.entrySet();
         Iterator iterator = set.iterator();
         while (iterator.hasNext()) {
@@ -24,8 +27,7 @@ public class WxUtil {
             }
         }
         sb.append("key=" + key);
-        String sign = MD5Util.MD5Encode(sb.toString(), "UTF-8").toUpperCase();
-        return sign;
+        return MD5Util.md5Encode(sb.toString(), "UTF-8").toUpperCase();
     }
 
     /**
@@ -33,18 +35,18 @@ public class WxUtil {
      *
      * @return
      */
-    public static String CreateNonceString() {
+    public static String createNonceString() {
         String chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        String res = "";
+        StringBuilder res = new StringBuilder();
+        Random rd = new Random();
         for (int i = 0; i < 16; i++) {
-            Random rd = new Random();
-            res += chars.charAt(rd.nextInt(chars.length() - 1));
+            res.append(chars.charAt(rd.nextInt(chars.length() - 1)));
         }
-        return res;
+        return res.toString();
     }
 
     public static String getRequestXml(SortedMap<Object, Object> parameters) {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         sb.append("<xml>");
         Set es = parameters.entrySet();
         Iterator it = es.iterator();

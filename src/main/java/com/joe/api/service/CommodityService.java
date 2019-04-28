@@ -3,7 +3,6 @@ package com.joe.api.service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.joe.api.dao.CommodityDetailMapper;
-import com.joe.api.dao.CommodityItemMapper;
 import com.joe.api.dao.CommodityMapper;
 import com.joe.api.po.Commodity;
 import com.joe.api.po.CommodityDetail;

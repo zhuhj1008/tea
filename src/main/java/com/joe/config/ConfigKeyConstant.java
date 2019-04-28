@@ -3,6 +3,9 @@ package com.joe.config;
 
 public class ConfigKeyConstant {
 
+    private ConfigKeyConstant() {
+    }
+
     //微信公众号appId
     public static final String WX_APP_ID = "WX_APP_ID";
 
@@ -23,9 +26,6 @@ public class ConfigKeyConstant {
 
     //微信支付回调地址
     public static final String WX_NOTIFY_URL = "WX_NOTIFY_URL";
-
-
-
 
 
 }

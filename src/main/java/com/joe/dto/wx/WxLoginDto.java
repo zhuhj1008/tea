@@ -2,7 +2,6 @@ package com.joe.dto.wx;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 /**
  * 微信登录返回结果

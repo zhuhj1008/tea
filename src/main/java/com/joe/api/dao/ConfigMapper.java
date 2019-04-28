@@ -1,7 +1,6 @@
 package com.joe.api.dao;
 
 import com.joe.api.po.Config;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
