@@ -1,6 +1,5 @@
-package com.joe.common.init;
+package com.joe.common;
 
-import com.joe.api.enums.ConfigTypeEnum;
 import com.joe.api.po.Config;
 import com.joe.api.service.ConfigService;
 import com.joe.service.RedisService;
@@ -29,22 +28,11 @@ public class InitConfig implements CommandLineRunner {
 
     @Override
     public void run(String... strings) {
-        logger.info("初始化配置信息");
-
-        List<Config> wxConfigList = configService.queryConfigByType(ConfigTypeEnum.WX_CONFIG);
-        for (Config config : wxConfigList) {
+        logger.info("初始化-配置信息加载缓存");
+        List<Config> configList = configService.queryAll();
+        for (Config config : configList) {
             redisService.putCache(config.getConfigKey(), config.getConfigValue());
         }
-
-        List<Config> wxPayConfigList = configService.queryConfigByType(ConfigTypeEnum.WX_PAY_CONFIG);
-        for (Config config : wxPayConfigList) {
-            redisService.putCache(config.getConfigKey(), config.getConfigValue());
-        }
-
-        List<Config> wxUrlConfigList = configService.queryConfigByType(ConfigTypeEnum.WX_API_RUL_CONFIG);
-        for (Config config : wxUrlConfigList) {
-            redisService.putCache(config.getConfigKey(), config.getConfigValue());
-        }
-
+        logger.info("初始化-配置信息缓存完成");
     }
 }

@@ -8,12 +8,8 @@ import com.joe.api.po.OrderDetail;
 import com.joe.api.service.OrderDetailService;
 import com.joe.api.service.OrderService;
 import com.joe.common.exception.BusinessException;
-import com.joe.common.wx.dto.UnifiedParamDto;
-import com.joe.common.wx.dto.UnifiedSuccessDto;
-import com.joe.common.wx.enums.WxTradeTypeEnum;
-import com.joe.common.wx.service.WxService;
 import com.joe.dto.order.*;
-import com.joe.util.mvc.ResponsePageEntity;
+import com.joe.dto.ApiPageResult;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -71,7 +67,7 @@ public class OrderWebService {
 
 
     //分页条件查询订单列表
-    public ResponsePageEntity getOrderList(OrderQueryParam orderQueryParam) {
+    public ApiPageResult getOrderList(OrderQueryParam orderQueryParam) {
 
         log.info("查询订单，查询参数：{}。", orderQueryParam);
         Order queryOrder = new Order();
@@ -87,7 +83,7 @@ public class OrderWebService {
 
         PageInfo<Order> orderPageInfo = orderService.queryOrderListByQueryDto(queryOrder, orderQueryParam.getPageNo(), orderQueryParam.getPageSize());
         if (CollectionUtils.isEmpty(orderPageInfo.getList())) {
-            return new ResponsePageEntity(0L, new ArrayList<>());
+            return new ApiPageResult(0L, new ArrayList<>());
         }
 
         List<OrderVo> orderVoList = orderPageInfo.getList().stream().map(order -> {
@@ -97,7 +93,7 @@ public class OrderWebService {
         }).collect(Collectors.toList());
         log.info("查询订单成功。");
 
-        return new ResponsePageEntity(orderPageInfo.getTotal(), orderVoList);
+        return new ApiPageResult(orderPageInfo.getTotal(), orderVoList);
     }
 
 

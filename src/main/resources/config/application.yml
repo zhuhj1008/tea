@@ -31,18 +31,6 @@ qiNiu:
     encoding: UTF-8
     effective: 3
 
-wx:
-    appId: WX_APP_ID
-    secretKey: WX_SECRET_KEY
-    grantType: WX_GRANT_TYPE
-    charSet: WX_CHAR_SET
-    grantUrl: WX_GRANT_URL
-    unifiedOrderUrl: WX_UNIFIED_ORDER_API
-    reFundUrl: WX_REFUND_URL
-    mchId: WEPAY_BUSINESS_CODE
-    unifiedKey: WEPAY_UNIFIED_KEY
-    notifyUrl: WX_NOTIFY_URL
-
 #logging:
 #  pattern:
 #    console: "%d - %msg%n"

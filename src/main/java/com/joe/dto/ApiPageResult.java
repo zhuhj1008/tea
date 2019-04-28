@@ -1,4 +1,4 @@
-package com.joe.util.mvc;
+package com.joe.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,7 +12,7 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResponsePageEntity {
+public class ApiPageResult {
 
     /**
      * 记录总条数

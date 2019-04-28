@@ -1,17 +1,15 @@
-package com.joe.common.wx.service;
+package com.joe.service;
 
 import com.alibaba.fastjson.JSON;
 import com.joe.common.exception.BusinessException;
-import com.joe.common.wx.dto.UnifiedSuccessDto;
-import com.joe.common.wx.enums.WxTradeTypeEnum;
-import com.joe.common.wx.util.AuthX509TrustManager;
-import com.joe.common.wx.util.WxUtil;
+import com.joe.dto.wx.UnifiedSuccessDto;
+import com.joe.common.HttpsClientUtil;
+import com.joe.common.WxUtil;
 import com.joe.config.ConfigKeyConstant;
 import com.joe.dto.wx.WxLoginDto;
 import com.joe.dto.wx.UnifiedParam;
-import com.joe.service.RedisService;
-import com.joe.util.JaxbUtil;
-import com.joe.util.http.HttpClientUtil;
+import com.joe.common.XmlUtil;
+import com.joe.common.HttpClientUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +44,7 @@ public class WxService {
         }
 
         String requestUrl = url + "?appid=" + appId + "&secret="
-                + secretKey + "&js_code" + code + "&grant_type=authorization_code";
+                + secretKey + "&js_code=" + code + "&grant_type=authorization_code";
 
         String result = HttpClientUtil.sendGet(requestUrl);
         WxLoginDto wxLoginDto = JSON.parseObject(result, WxLoginDto.class);
@@ -55,6 +53,7 @@ public class WxService {
 
     /**
      * 微信统一支付
+     * https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=9_1
      */
     public UnifiedSuccessDto wePayUnifiedOrder(UnifiedParam unifiedParam) {
 
@@ -71,7 +70,7 @@ public class WxService {
         param.put("total_fee", unifiedParam.getTotalFee());
         param.put("spbill_create_ip", unifiedParam.getIp());
         param.put("notify_url", notifyUrl);
-        param.put("trade_type", WxTradeTypeEnum.JSAPI.getType());
+        param.put("trade_type", "JSAPI");
         param.put("openid", unifiedParam.getOpenId());
 
         String unifiedKey = redisService.getCache(ConfigKeyConstant.WEPAY_UNIFIED_KEY);
@@ -85,10 +84,10 @@ public class WxService {
         String requestXml = WxUtil.getRequestXml(param);
 
         //请求API
-        String result = AuthX509TrustManager.httpsRequest(url, "POST", requestXml);
+        String result = HttpsClientUtil.httpsRequest(url, "POST", requestXml);
 
         //解析响应体
-        return JaxbUtil.converyToJavaBean(result, UnifiedSuccessDto.class);
+        return XmlUtil.converyToJavaBean(result, UnifiedSuccessDto.class);
     }
 
 }

@@ -12,9 +12,8 @@ import com.joe.dto.commodity.CommodityDetailVO;
 import com.joe.dto.commodity.CommodityParam;
 import com.joe.dto.commodity.CommodityPictureVo;
 import com.joe.dto.commodity.CommodityVo;
-import com.joe.util.mvc.ResponsePageEntity;
+import com.joe.dto.ApiPageResult;
 import lombok.extern.slf4j.Slf4j;
-import org.omg.PortableInterceptor.INACTIVE;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -81,12 +80,12 @@ public class CommodityWebService {
 
 
     //查询某个类目下商品 分页
-    public ResponsePageEntity queryCommodityByItemId(int itemId, int pageNo, int pageSize) {
+    public ApiPageResult queryCommodityByItemId(int itemId, int pageNo, int pageSize) {
 
         PageInfo<Commodity> pageInfo = commodityService.queryCommodityByItemId(itemId, pageNo, pageSize);
 
         if (CollectionUtils.isEmpty(pageInfo.getList())) {
-            return new ResponsePageEntity(0L, new ArrayList<>());
+            return new ApiPageResult(0L, new ArrayList<>());
         }
 
         List<CommodityVo> commodityVos = pageInfo.getList().stream().map(commodity -> {
@@ -95,7 +94,7 @@ public class CommodityWebService {
             return commodityVo;
         }).collect(Collectors.toList());
 
-        return new ResponsePageEntity(pageInfo.getTotal(), commodityVos);
+        return new ApiPageResult(pageInfo.getTotal(), commodityVos);
     }
 
     //删除商品

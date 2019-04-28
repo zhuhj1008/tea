@@ -1,11 +1,10 @@
 package com.joe.controller;
 
-import com.joe.common.ApiParameter;
-import com.joe.common.ApiResult;
-import com.joe.common.wx.dto.UnifiedParamDto;
+import com.joe.dto.ApiParameter;
+import com.joe.dto.ApiResult;
 import com.joe.dto.order.*;
 import com.joe.service.OrderWebService;
-import com.joe.util.mvc.ResponsePageEntity;
+import com.joe.dto.ApiPageResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -50,7 +49,7 @@ public class OrderController {
     @ApiOperation(value = "查询订单", notes = "条件查询订单")
     public ApiResult getOrder(@RequestBody @ApiParam ApiParameter<OrderQueryParam> apiParameter) {
 
-        ResponsePageEntity pageEntity = orderWebService.getOrderList(apiParameter.getBody());
+        ApiPageResult pageEntity = orderWebService.getOrderList(apiParameter.getBody());
 
         return ApiResult.getSuccessEntity(pageEntity);
     }

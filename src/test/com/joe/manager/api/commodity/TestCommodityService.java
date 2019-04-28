@@ -17,8 +17,8 @@ public class TestCommodityService extends BaseTest {
     CommodityService commodityService;
 
     @Test
-    public void testAdd(){
-        List<String>  nameList = new ArrayList<>();
+    public void testAdd() {
+        List<String> nameList = new ArrayList<>();
 //        nameList.add("祁门红茶"); nameList.add("大吉岭红茶"); nameList.add("阿萨姆红茶");
         nameList.add("吴裕泰");
 //        nameList.add("天福茗茶");
@@ -40,46 +40,39 @@ public class TestCommodityService extends BaseTest {
 
 
     @Test
-    public void testUpdate(){
-        Commodity commodity = new Commodity();
-        commodity.setCommodityId(1);
-        commodity.setPrice(new BigDecimal(100.2));
-        int i = commodityService.modifyCommoditySelective(commodity);
-        logger.info("修改条数：{}",i);
-
+    public void testUpdate() {
 
 
     }
 
     @Test
-    public void testSelect(){
+    public void testSelect() {
         Commodity commodity = commodityService.queryCommodityById(1);
-        logger.info("id为1的商品是：{}",commodity);
+        logger.info("id为1的商品是：{}", commodity);
 
 //        List<Commodity> commodities = commodityService.queryCommodityByItemIds(4);
 //        logger.info("所有的绿茶商品：{}",commodities);
     }
 
     @Test
-    public void testDrop(){
+    public void testDrop() {
         int i = commodityService.dropCommodity(1);
-        logger.info("删除记录数：{}",i);
+        logger.info("删除记录数：{}", i);
     }
 
     @Test
-    public void testPageHelper(){
-        List<Commodity> commodities = commodityService.queryCommodityByItemId(1, 1, 3);
-        logger.info(JSON.toJSONString(commodities));
+    public void testPageHelper() {
+
     }
 
     @Test
-    public void updateRecommendStatusByIdTest(){
+    public void updateRecommendStatusByIdTest() {
         int i = commodityService.updateRecommendStatusById(1);
-        logger.info("{}",i);
+        logger.info("{}", i);
     }
 
     @Test
-    public void queryRecommendCommodityTest(){
+    public void queryRecommendCommodityTest() {
         List<Commodity> commodities = commodityService.queryRecommendCommodity();
         logger.info(JSON.toJSONString(commodities));
     }

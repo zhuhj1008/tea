@@ -1,4 +1,4 @@
-package com.joe.common.wx.dto;
+package com.joe.dto.wx;
 
 import lombok.Data;
 

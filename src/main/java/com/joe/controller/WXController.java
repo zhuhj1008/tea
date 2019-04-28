@@ -1,9 +1,9 @@
 package com.joe.controller;
 
 
-import com.joe.common.ApiParameter;
-import com.joe.common.ApiResult;
-import com.joe.common.wx.service.WxService;
+import com.joe.dto.ApiParameter;
+import com.joe.dto.ApiResult;
+import com.joe.service.WxService;
 import com.joe.dto.wx.UnifiedParam;
 import com.joe.dto.wx.WxAuthParam;
 import com.joe.dto.wx.WxLoginDto;
@@ -29,7 +29,7 @@ public class WXController {
     /**
      * 微信授权
      */
-    @PostMapping("/wePayUnified")
+    @PostMapping("/wxAuthorization")
     @ApiOperation(value = "订单微信支付", notes = "微信统一支付")
     public ApiResult wxLoginAuthorization(@RequestBody ApiParameter<WxAuthParam> authParam) {
 

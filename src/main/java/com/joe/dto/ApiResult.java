@@ -1,7 +1,8 @@
-package com.joe.common;
+package com.joe.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 /**
  * @Description: 接口返回信息
@@ -9,6 +10,7 @@ import io.swagger.annotations.ApiModelProperty;
  * @since:2018-05-28 13:18:40
  * @version: 0.0.1
  */
+@Data
 @ApiModel
 public class ApiResult {
 

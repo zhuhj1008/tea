@@ -1,4 +1,4 @@
-package com.joe.common.wx.util;
+package com.joe.common;
 
 import javax.net.ssl.*;
 import java.io.BufferedReader;
@@ -9,7 +9,7 @@ import java.net.URL;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 
-public class AuthX509TrustManager implements X509TrustManager {
+public class HttpsClientUtil implements X509TrustManager {
     @Override
     public void checkClientTrusted(X509Certificate[] x509Certificates, String s) throws CertificateException {
 
@@ -30,7 +30,7 @@ public class AuthX509TrustManager implements X509TrustManager {
         try {
             //创建SSLContext
             SSLContext sslContext = SSLContext.getInstance("SSL");
-            TrustManager[] tm = {new AuthX509TrustManager()};
+            TrustManager[] tm = {new HttpsClientUtil()};
             //初始化
             sslContext.init(null, tm, new java.security.SecureRandom());
             ;

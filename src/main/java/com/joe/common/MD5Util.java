@@ -1,4 +1,4 @@
-package com.joe.util.encryption;
+package com.joe.common;
 
 import java.security.MessageDigest;
 

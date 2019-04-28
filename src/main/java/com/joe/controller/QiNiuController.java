@@ -1,6 +1,6 @@
 package com.joe.controller;
 
-import com.joe.common.ApiResult;
+import com.joe.dto.ApiResult;
 import com.joe.service.QiNiuService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

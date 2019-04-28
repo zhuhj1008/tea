@@ -1,4 +1,4 @@
-package com.joe.learn;
+package com.joe.demo;
 
 import org.springframework.stereotype.Component;
 

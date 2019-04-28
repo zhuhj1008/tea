@@ -1,4 +1,4 @@
-package com.joe.util.http;
+package com.joe.common;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

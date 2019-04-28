@@ -1,4 +1,4 @@
-package com.joe.common;
+package com.joe.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

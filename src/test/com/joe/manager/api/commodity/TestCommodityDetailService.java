@@ -14,7 +14,7 @@ public class TestCommodityDetailService extends BaseTest {
     CommodityDetailService commodityDetailService;
 
     @Test
-    public void testAdd(){
+    public void testAdd() {
         CommodityDetail commodityDetail = new CommodityDetail();
         commodityDetail.setCommodityId(6);
         commodityDetail.setUnit("50g");
@@ -26,15 +26,12 @@ public class TestCommodityDetailService extends BaseTest {
     }
 
     @Test
-    public void testModify(){
-        CommodityDetail commodityDetail = new CommodityDetail();
-        commodityDetail.setCommodityId(1);
-        commodityDetail.setEnable(true);
-        commodityDetailService.modifyCommodityDetailSelective(commodityDetail);
+    public void testModify() {
+
     }
 
     @Test
-    public void queryCommodityDetailByCommodityIdTest(){
+    public void queryCommodityDetailByCommodityIdTest() {
         CommodityDetail commodityDetail = commodityDetailService.queryCommodityDetailByCommodityId(66);
 
         System.out.println(commodityDetail);

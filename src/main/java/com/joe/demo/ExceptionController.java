@@ -1,4 +1,4 @@
-package com.joe.learn;
+package com.joe.demo;
 
 import com.joe.common.exception.ParameterIllegalityException;
 import org.springframework.web.bind.annotation.RequestMapping;

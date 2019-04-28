@@ -1,8 +1,8 @@
 package com.joe.controller;
 
 import com.joe.api.po.UserCustomer;
-import com.joe.common.ApiParameter;
-import com.joe.common.ApiResult;
+import com.joe.dto.ApiParameter;
+import com.joe.dto.ApiResult;
 import com.joe.dto.wx.WxAuthParam;
 import com.joe.service.CustomerWebService;
 import io.swagger.annotations.Api;

@@ -19,6 +19,11 @@ public class ConfigService {
     @Autowired
     private ConfigMapper configMapper;
 
+    //查询所有配置
+    public List<Config> queryAll() {
+
+        return configMapper.queryAll();
+    }
 
     /**
      * 根据配置类型查询
@@ -31,23 +36,7 @@ public class ConfigService {
         if (configTypeEnum == null) {
             return new ArrayList<>();
         }
-
         return configMapper.queryConfigByType(configTypeEnum.getKey());
     }
 
-    /**
-     * 根据配置类型和key查询
-     *
-     * @param key
-     * @param configTypeEnum
-     * @return
-     */
-    public List<Config> queryConfigByTypeAndKey(Integer key, ConfigTypeEnum configTypeEnum) {
-
-        if (key == null || configTypeEnum == null) {
-            return new ArrayList<>();
-        }
-
-        return configMapper.queryConfigByTypeAndKey(key, configTypeEnum.getKey());
-    }
 }

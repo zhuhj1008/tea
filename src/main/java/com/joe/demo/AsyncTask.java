@@ -1,4 +1,4 @@
-package com.joe.learn;
+package com.joe.demo;
 
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;

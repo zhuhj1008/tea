@@ -1,6 +1,4 @@
-package com.joe.common.wx.util;
-
-import com.joe.util.encryption.MD5Util;
+package com.joe.common;
 
 import java.util.*;
 

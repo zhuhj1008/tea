@@ -1,10 +1,10 @@
 package com.joe.controller;
 
-import com.joe.common.ApiParameter;
-import com.joe.common.ApiResult;
+import com.joe.dto.ApiParameter;
+import com.joe.dto.ApiResult;
 import com.joe.dto.commodity.*;
 import com.joe.service.CommodityWebService;
-import com.joe.util.mvc.ResponsePageEntity;
+import com.joe.dto.ApiPageResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -57,7 +57,7 @@ public class CommodityController {
         Integer pageSize = param.getPageSize();
         log.info("查询商品列表，商品类目：{}，页码-大小：{}-{}。", itemId, pageNo, pageSize);
 
-        ResponsePageEntity pageEntity = commodityWebService.queryCommodityByItemId(itemId, pageNo, pageSize);
+        ApiPageResult pageEntity = commodityWebService.queryCommodityByItemId(itemId, pageNo, pageSize);
         log.info("查询商品列表成功。");
 
         return ApiResult.getSuccessEntity(pageEntity);

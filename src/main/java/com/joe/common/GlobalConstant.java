@@ -1,4 +1,4 @@
-package com.joe.common.constant;
+package com.joe.common;
 
 /**
  * 全局常量

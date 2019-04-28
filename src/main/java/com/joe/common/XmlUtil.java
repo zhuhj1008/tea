@@ -1,4 +1,4 @@
-package com.joe.util;
+package com.joe.common;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -12,15 +12,15 @@ import java.io.StringWriter;
  * Bean和XML转换工具类
  * create by Joe on 2018-08-07 16:19
  **/
-public class JaxbUtil {
+public class XmlUtil {
 
     public static String ENCODING = "UTF-8";
 
     /**
      * java对象转换为xml文件
-     * @param xmlPath  xml文件路径
-     * @param load    java对象.Class
-     * @return    xml文件的String
+     *
+     * @param load java对象.Class
+     * @return xml文件的String
      * @throws JAXBException
      */
     public static String beanToXml(Object obj, Class<?> load) throws JAXBException {
@@ -35,9 +35,10 @@ public class JaxbUtil {
 
     /**
      * xml文件配置转换为对象
-     * @param xmlPath  xml文件路径
+     *
+     * @param xmlPath xml文件路径
      * @param load    java对象.Class
-     * @return    java对象
+     * @return java对象
      * @throws JAXBException
      * @throws IOException
      */
@@ -51,8 +52,8 @@ public class JaxbUtil {
     /**
      * JavaBean转换成xml
      * 默认编码UTF-8
+     *
      * @param obj
-     * @param writer
      * @return
      */
     public static String convertToXml(Object obj) {
@@ -62,6 +63,7 @@ public class JaxbUtil {
 
     /**
      * JavaBean转换成xml
+     *
      * @param obj
      * @param encoding
      * @return
@@ -86,6 +88,7 @@ public class JaxbUtil {
 
     /**
      * JavaBean转换成xml去除xml声明部分
+     *
      * @param obj
      * @param encoding
      * @return
@@ -111,6 +114,7 @@ public class JaxbUtil {
 
     /**
      * xml转换成JavaBean
+     *
      * @param xml
      * @param c
      * @return

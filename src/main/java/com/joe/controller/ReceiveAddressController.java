@@ -1,8 +1,8 @@
 package com.joe.controller;
 
 import com.joe.api.po.ReceiveAddress;
-import com.joe.common.ApiParameter;
-import com.joe.common.ApiResult;
+import com.joe.dto.ApiParameter;
+import com.joe.dto.ApiResult;
 import com.joe.dto.order.AddressParam;
 import com.joe.service.ReceiveAddressWebService;
 import io.swagger.annotations.Api;

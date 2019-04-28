@@ -1,12 +1,12 @@
 package com.joe.controller;
 
 import com.joe.api.po.CommodityEvaluate;
-import com.joe.common.ApiParameter;
-import com.joe.common.ApiResult;
+import com.joe.dto.ApiParameter;
+import com.joe.dto.ApiResult;
 import com.joe.dto.commodity.CommodityPageParam;
 import com.joe.dto.commodity.EvaluateParam;
 import com.joe.service.CommodityEvaluateWebService;
-import com.joe.util.mvc.ResponsePageEntity;
+import com.joe.dto.ApiPageResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -87,7 +87,7 @@ public class CommodityEvaluateController {
         List<CommodityEvaluate> commodityEvaluates = commodityEvaluateWebService.queryEvaluateByCommodityId(commodityId, pageNo, pageSize);
         log.info("查询商品评价成功。");
 
-        ResponsePageEntity pageEntity = new ResponsePageEntity();
+        ApiPageResult pageEntity = new ApiPageResult();
         pageEntity.setTotal(total);
         pageEntity.setContents(commodityEvaluates);
 

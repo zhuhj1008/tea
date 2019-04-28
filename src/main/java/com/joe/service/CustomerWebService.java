@@ -2,7 +2,6 @@ package com.joe.service;
 
 import com.joe.api.po.UserCustomer;
 import com.joe.api.service.UserCustomerService;
-import com.joe.common.wx.service.WxService;
 import com.joe.dto.wx.WxLoginDto;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,15 +1,9 @@
 package com.joe.manager.common;
 
-import com.joe.common.wx.dto.UnifiedParamDto;
-import com.joe.common.wx.dto.UnifiedSuccessDto;
-import com.joe.common.wx.service.WxService;
+import com.joe.service.WxService;
 import com.joe.manager.BaseTest;
-import com.joe.util.http.HttpClientUtil;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * 微信服务测试类
@@ -22,36 +16,13 @@ public class WxServiceTest extends BaseTest {
 
 
     @Test
-    public void testAA() {
-        Map param = new HashMap();
-        String code = "0615RBY725zmsS0Xq1X725epY725RBYb";
-        param.put("appid", "wx163389ac6f473216");
-        param.put("secret", "b0dab0e3e2833d3e8bb20ebd059ca558");
-        param.put("js_code", code);
-        param.put("grant_type", "authorization_code");
-        String url = "https://api.weixin.qq.com/sns/jscode2session";
-        String s = HttpClientUtil.doPost(url, param, "UTF-8");
-        System.out.println(s);
-    }
-
-
-    @Test
     public void testAuth() {
-        String code = "021ouLNC0e8eHd24PlNC0HUGNC0ouLNC";
+        String code = "061X7Jj82KSTKJ0zqAj82arAj82X7JjY";
         wxService.wxLoginAuthorization(code);
     }
 
     @Test
     public void testUnifiedOrder() {
 
-//        UnifiedParamDto param = new UnifiedParamDto();
-//        param.setBody("商品支付");
-//        param.setOutTradeNo(22 + "");
-//        param.setTotalFee(8890);
-//        param.setSpbillCreateIp("1.2.3.5");
-//        param.setOpenId("");
-//
-//        UnifiedSuccessDto unifiedSuccessDto = wxService.wePayUnifiedOrder(param);
-//        System.out.println(unifiedSuccessDto);
     }
 }

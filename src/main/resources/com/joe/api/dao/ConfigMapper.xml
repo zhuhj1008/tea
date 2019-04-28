@@ -11,26 +11,15 @@
         <result column="enable" property="enable" jdbcType="BIT"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, config_key, config_value, config_type, remake, create_time, enable
-  </sql>
+      id, config_key, config_value, config_type, remake, create_time, enable
+    </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
         from tb_config
         where id = #{id,jdbcType=INTEGER}
     </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from tb_config
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-    <insert id="insert" parameterType="com.joe.api.po.Config">
-    insert into tb_config (id, config_key, config_value, 
-      config_type, remake, create_time, 
-      enable)
-    values (#{id,jdbcType=INTEGER}, #{configKey,jdbcType=VARCHAR}, #{configValue,jdbcType=VARCHAR}, 
-      #{configType,jdbcType=INTEGER}, #{remake,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{enable,jdbcType=BIT})
-  </insert>
+
     <insert id="insertSelective" parameterType="com.joe.api.po.Config">
         insert into tb_config
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -80,6 +69,7 @@
             </if>
         </trim>
     </insert>
+
     <update id="updateByPrimaryKeySelective" parameterType="com.joe.api.po.Config">
         update tb_config
         <set>
@@ -104,16 +94,12 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.joe.api.po.Config">
-    update tb_config
-    set config_key = #{configKey,jdbcType=VARCHAR},
-      config_value = #{configValue,jdbcType=VARCHAR},
-      config_type = #{configType,jdbcType=INTEGER},
-      remake = #{remake,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      enable = #{enable,jdbcType=BIT}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_config where enable = 1
+    </select>
 
     <select id="queryConfigByType" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
@@ -122,12 +108,4 @@
         where config_type = #{configType,jdbcType=INTEGER} and enable = 1
     </select>
 
-    <select id="queryConfigByTypeAndKey" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from tb_config
-        where config_key = #{configKey,jdbcType=INTEGER}
-        and config_type = #{configType,jdbcType=INTEGER}
-        and enable = 1
-    </select>
 </mapper>
