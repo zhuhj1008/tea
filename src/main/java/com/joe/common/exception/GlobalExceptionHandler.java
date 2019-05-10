@@ -29,7 +29,7 @@ public class GlobalExceptionHandler {
         return ApiResult.getFailEntity(e.getMessage());
     }
 
-    @ExceptionHandler(value = ParameterIllegalityException.class)
+    /*@ExceptionHandler(value = ParameterIllegalityException.class)
     public Object paramException(ParameterIllegalityException e) {
         logger.info("请求参数异常：{}", e);
         return ApiResult.getFailEntity(e.getMessage());
@@ -39,7 +39,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(code = HttpStatus.BAD_REQUEST, value = HttpStatus.BAD_REQUEST, reason = "参数缺失")
     public void paramIllegalityException() {
         //返回自定义http响应码
-    }
+    }*/
 
 
 }
