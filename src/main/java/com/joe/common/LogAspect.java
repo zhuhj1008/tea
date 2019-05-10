@@ -25,7 +25,7 @@ public class LogAspect {
     }
 
     @Around("controllerPoint()")
-    public void controller(ProceedingJoinPoint joinPoint) {
+    public Object controller(ProceedingJoinPoint joinPoint) {
         String packageName = joinPoint.getSignature().getDeclaringTypeName();
         String method = joinPoint.getSignature().getName();
         Object[] args = joinPoint.getArgs();
@@ -36,9 +36,11 @@ public class LogAspect {
             Object result = joinPoint.proceed();
             log.info("响应:{}-{},响应结果:{}", packageName, method, result.toString());
             log.info("响应时间:{}", new Date());
+            return result;
         } catch (Throwable throwable) {
             log.error(throwable.getMessage());
         }
+        return null;
     }
 
 }
