@@ -1,10 +1,10 @@
 package com.joe.controller;
 
+import com.joe.dto.ApiPageResult;
 import com.joe.dto.ApiParameter;
 import com.joe.dto.ApiResult;
 import com.joe.dto.order.*;
 import com.joe.service.OrderWebService;
-import com.joe.dto.ApiPageResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -67,20 +67,17 @@ public class OrderController {
         return ApiResult.getSuccessEntity(orderDetailList);
     }
 
-
     /**
-     * 订单发货
+     * 修改订单发货状态
      */
     @PostMapping("/deliver")
-    @ApiOperation(value = "订单发货", notes = "修改订单状态为发货状态")
+    @ApiOperation(value = "修改发货状态", notes = "修改订单状态为发货状态")
     public ApiResult orderDeliver(@RequestBody @ApiParam ApiParameter<OrderDeliverDTO> apiParameter) {
 
         orderWebService.orderDeliver(apiParameter.getBody());
 
         return ApiResult.getSuccessEntity();
     }
-
-
 
 
 }

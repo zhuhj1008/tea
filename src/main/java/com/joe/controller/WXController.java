@@ -30,7 +30,7 @@ public class WXController {
      * 微信授权
      */
     @PostMapping("/wxAuthorization")
-    @ApiOperation(value = "订单微信支付", notes = "微信统一支付")
+    @ApiOperation(value = "微信授权", notes = "微信授权")
     public ApiResult wxLoginAuthorization(@RequestBody ApiParameter<WxAuthParam> authParam) {
 
         WxLoginDto wxLoginDto = wxService.wxLoginAuthorization(authParam.getBody().getCode());

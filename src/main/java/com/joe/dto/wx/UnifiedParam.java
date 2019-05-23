@@ -2,6 +2,8 @@ package com.joe.dto.wx;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 @Data
 public class UnifiedParam {
 
@@ -12,7 +14,7 @@ public class UnifiedParam {
 
     private String orderNo;
 
-    private String totalFee;
+    private BigDecimal totalFee;
 
     private String body;
 
