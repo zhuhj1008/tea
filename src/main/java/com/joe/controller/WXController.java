@@ -1,12 +1,14 @@
 package com.joe.controller;
 
 
+import com.alibaba.fastjson.JSON;
 import com.joe.dto.ApiParameter;
 import com.joe.dto.ApiResult;
-import com.joe.service.WxService;
 import com.joe.dto.wx.UnifiedParam;
+import com.joe.dto.wx.WePayResult;
 import com.joe.dto.wx.WxAuthParam;
 import com.joe.dto.wx.WxLoginDto;
+import com.joe.service.WxService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -54,10 +56,10 @@ public class WXController {
     /**
      * 微信回调接口
      */
-    @PostMapping("/wxResend")
+    @RequestMapping("/wxResend")
     @ApiOperation(value = "微信回调接口", notes = "微信回调通知")
-    public void wxResend() {
-        //待完成
+    public void wxResend(@RequestBody WePayResult wePayResult) {
+        log.info("微信回调,请求参数:" + JSON.toJSONString(wePayResult));
     }
 
 
