@@ -19,7 +19,7 @@ import java.util.Date;
 public class LogAspect {
 
 
-    @Pointcut("execution(* com.joe.controller.CommodityController..*(..))")
+    @Pointcut("execution(* com.joe.controller.*..*(..))")
     public void controllerPoint() {
         //controller切入点
     }
