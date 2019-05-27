@@ -78,7 +78,7 @@ public class WXController {
      */
     @RequestMapping("/wxResend")
     @ApiOperation(value = "微信回调接口", notes = "微信回调通知")
-    public void wxResend(WePayResult wePayResult) {
+    public void wxResend(@RequestBody WePayResult wePayResult) {
 
         log.info("微信回调,请求参数:" + wePayResult.toString());
     }
