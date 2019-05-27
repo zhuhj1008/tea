@@ -1,10 +1,10 @@
 package com.joe.controller;
 
 
-import com.alibaba.fastjson.JSON;
 import com.joe.dto.ApiParameter;
 import com.joe.dto.ApiResult;
 import com.joe.dto.wx.UnifiedParam;
+import com.joe.dto.wx.WePayResult;
 import com.joe.dto.wx.WxAuthParam;
 import com.joe.dto.wx.WxLoginDto;
 import com.joe.service.WxService;
@@ -16,12 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.http.HttpServletRequest;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 
 @Slf4j
 @Api(tags = {"微信接口"})
@@ -58,24 +52,35 @@ public class WXController {
         return ApiResult.getSuccessEntity(o);
     }
 
+//    /**
+//     * 微信回调接口
+//     */
+//    @RequestMapping("/wxResend")
+//    @ApiOperation(value = "微信回调接口", notes = "微信回调通知")
+//    public void wxResend(HttpServletRequest request) throws IOException {
+//        InputStream inputStream;
+//        StringBuffer sb = new StringBuffer();
+//        inputStream = request.getInputStream();
+//        String s;
+//        BufferedReader in = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+//        while ((s = in.readLine()) != null) {
+//            sb.append(s);
+//        }
+//        in.close();
+//        inputStream.close();
+//
+//        log.info("微信回调,请求参数:" + sb);
+//    }
+
+
     /**
      * 微信回调接口
      */
     @RequestMapping("/wxResend")
     @ApiOperation(value = "微信回调接口", notes = "微信回调通知")
-    public void wxResend(HttpServletRequest request) throws IOException {
-        InputStream inputStream;
-        StringBuffer sb = new StringBuffer();
-        inputStream = request.getInputStream();
-        String s;
-        BufferedReader in = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
-        while ((s = in.readLine()) != null) {
-            sb.append(s);
-        }
-        in.close();
-        inputStream.close();
+    public void wxResend(WePayResult wePayResult) {
 
-        log.info("微信回调,请求参数:" + sb);
+        log.info("微信回调,请求参数:" + wePayResult.toString());
     }
 
 
