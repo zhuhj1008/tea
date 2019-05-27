@@ -4,7 +4,7 @@
     <resultMap id="BaseResultMap" type="com.joe.api.po.PaymentTrade">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="out_trade_no" property="outTradeNo" jdbcType="VARCHAR"/>
-        <result column="openid" property="openid" jdbcType="VARCHAR"/>
+        <result column="openid" property="openId" jdbcType="VARCHAR"/>
         <result column="return_code" property="returnCode" jdbcType="VARCHAR"/>
         <result column="return_msg" property="returnMsg" jdbcType="VARCHAR"/>
         <result column="result_code" property="resultCode" jdbcType="VARCHAR"/>
@@ -31,7 +31,7 @@
             <if test="outTradeNo != null">
                 out_trade_no,
             </if>
-            <if test="openid != null">
+            <if test="openId != null">
                 openid,
             </if>
             <if test="returnCode != null">
@@ -75,8 +75,8 @@
             <if test="outTradeNo != null">
                 #{outTradeNo,jdbcType=VARCHAR},
             </if>
-            <if test="openid != null">
-                #{openid,jdbcType=VARCHAR},
+            <if test="openId != null">
+                #{openId,jdbcType=VARCHAR},
             </if>
             <if test="returnCode != null">
                 #{returnCode,jdbcType=VARCHAR},

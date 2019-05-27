@@ -88,7 +88,7 @@ public class WePayResult {
 
     /*支付完成时间*/
     @XmlElement(name = "time_end")
-    private String time_end;
+    private String timeEnd;
 
 
 }

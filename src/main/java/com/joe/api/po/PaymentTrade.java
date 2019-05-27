@@ -11,7 +11,7 @@ public class PaymentTrade {
 
     private String outTradeNo;
 
-    private String openid;
+    private String openId;
 
     private String returnCode;
 

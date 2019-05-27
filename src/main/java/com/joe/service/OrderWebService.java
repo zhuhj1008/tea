@@ -57,6 +57,7 @@ public class OrderWebService {
         List<OrderDetail> orderDetailList = orderDetailVoList.stream().map(orderDetailParam -> {
             OrderDetail orderDetail = new OrderDetail();
             BeanUtils.copyProperties(orderDetailParam, orderDetail);
+            orderDetail.setOrderId(orderId);
             return orderDetail;
         }).collect(Collectors.toList());
         orderDetailService.addOrderDetailBatch(orderDetailList);

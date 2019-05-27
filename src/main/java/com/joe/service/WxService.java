@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -124,6 +125,8 @@ public class WxService {
 
         PaymentTrade paymentTrade = new PaymentTrade();
         BeanUtils.copyProperties(wePayResult, paymentTrade);
+        paymentTrade.setCreateTime(new Date());
+        paymentTrade.setEnable(true);
         int id = paymentTradeService.save(paymentTrade);
         log.info("保存交易记录成功，编号：{}。", id);
 
@@ -135,6 +138,7 @@ public class WxService {
             } else {
                 order.setOrderStatus(OrderStatusEnum.PAYMENT_FAIL.getCode());
             }
+            order.setPaymentTime(new Date());
             orderService.modifyOrder(order);
             log.info("更新订单信息完成，订单号：{}", wePayResult.getOutTradeNo());
         }
