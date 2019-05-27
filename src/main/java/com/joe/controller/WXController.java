@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
+
 @Slf4j
 @Api(tags = {"微信接口"})
 @RestController
@@ -58,8 +61,10 @@ public class WXController {
      */
     @RequestMapping("/wxResend")
     @ApiOperation(value = "微信回调接口", notes = "微信回调通知")
-    public void wxResend(@RequestBody WePayResult wePayResult) {
-        log.info("微信回调,请求参数:" + JSON.toJSONString(wePayResult));
+    public void wxResend(HttpServletRequest request) {
+
+        Map<String, String[]> parameterMap = request.getParameterMap();
+        log.info("微信回调,请求参数:" + JSON.toJSONString(parameterMap));
     }
 
 
