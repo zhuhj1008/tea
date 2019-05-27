@@ -2,12 +2,15 @@ package com.joe.dto.wx;
 
 import lombok.Data;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 //https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=9_7
 @Data
 @XmlRootElement(name = "xml")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class WePayResult {
 
 
