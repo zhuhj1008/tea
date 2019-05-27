@@ -113,7 +113,7 @@ public class OrderWebService {
         }
 
         //如果订单状态不是已支付，不允许修改成发货状态
-        if (order.getOrderStatus() == null || order.getOrderStatus() != OrderStatusEnum.PAYMENT.getCode()) {
+        if (order.getOrderStatus() == null || order.getOrderStatus() != OrderStatusEnum.PAYMENT_SUCCESS.getCode()) {
             throw new BusinessException("此订单未支付");
         }
 
