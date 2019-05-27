@@ -79,5 +79,16 @@ public class OrderController {
         return ApiResult.getSuccessEntity();
     }
 
+    /**
+     * 根据客户编号查询订单列表
+     */
+    @PostMapping("/queryByCustomerId")
+    @ApiOperation(value = "查询客户订单列表", notes = "根据客户编号查询订单列表")
+    public ApiResult queryByCustomerId(@RequestBody @ApiParam ApiParameter<CustomerOrderParam> apiParameter) {
+
+        ApiPageResult pageData = orderWebService.getOrderListByCustomerId(apiParameter.getBody());
+
+        return ApiResult.getSuccessEntity(pageData);
+    }
 
 }

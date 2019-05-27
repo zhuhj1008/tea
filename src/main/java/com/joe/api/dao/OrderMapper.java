@@ -18,4 +18,6 @@ public interface OrderMapper {
 
     List<Order> selectByOrderSelective(Order order);
 
+    List<Order> selectByCustomerId(Integer customerId);
+
 }

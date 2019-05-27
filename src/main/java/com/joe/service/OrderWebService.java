@@ -8,8 +8,8 @@ import com.joe.api.po.OrderDetail;
 import com.joe.api.service.OrderDetailService;
 import com.joe.api.service.OrderService;
 import com.joe.common.exception.BusinessException;
-import com.joe.dto.order.*;
 import com.joe.dto.ApiPageResult;
+import com.joe.dto.order.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -83,18 +83,11 @@ public class OrderWebService {
         }
 
         PageInfo<Order> orderPageInfo = orderService.queryOrderListByQueryDto(queryOrder, orderQueryParam.getPageNo(), orderQueryParam.getPageSize());
-        if (CollectionUtils.isEmpty(orderPageInfo.getList())) {
-            return new ApiPageResult(0L, new ArrayList<>());
-        }
 
-        List<OrderVo> orderVoList = orderPageInfo.getList().stream().map(order -> {
-            OrderVo orderVo = new OrderVo();
-            BeanUtils.copyProperties(order, orderVo);
-            return orderVo;
-        }).collect(Collectors.toList());
+        List<OrderVo> orderVos = order2OrderVoList(orderPageInfo.getList());
         log.info("查询订单成功。");
 
-        return new ApiPageResult(orderPageInfo.getTotal(), orderVoList);
+        return new ApiPageResult(orderPageInfo.getTotal(), orderVos);
     }
 
 
@@ -145,6 +138,31 @@ public class OrderWebService {
         log.info("查询订单详情成功。");
 
         return result;
+    }
+
+    //根据客户编号查询订单列表
+    public ApiPageResult getOrderListByCustomerId(CustomerOrderParam param) {
+
+        Integer orderId = param.getCustomerId();
+        Integer pageNo = param.getPageNo();
+        Integer pageSize = param.getPageSize();
+        PageInfo<Order> orderPage = orderService.queryByCustomerId(orderId, pageNo, pageSize);
+
+        List<OrderVo> orderVos = order2OrderVoList(orderPage.getList());
+        log.info("查询订单成功。");
+        return new ApiPageResult(orderPage.getTotal(), orderVos);
+    }
+
+    private List<OrderVo> order2OrderVoList(List<Order> orderList) {
+
+        if (CollectionUtils.isEmpty(orderList)) {
+            return new ArrayList<>();
+        }
+        return orderList.stream().map(order -> {
+            OrderVo orderVo = new OrderVo();
+            BeanUtils.copyProperties(order, orderVo);
+            return orderVo;
+        }).collect(Collectors.toList());
     }
 
 }

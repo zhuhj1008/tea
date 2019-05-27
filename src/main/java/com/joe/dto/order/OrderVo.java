@@ -50,7 +50,10 @@ public class OrderVo {
     private String remake;
 
     //订单创建时间
-    private String crateTime;
+    private String createTime;
+
+    //支付时间
+    private Date paymentTime;
 
     //发货时间
     private Date deliveryTime;

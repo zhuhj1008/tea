@@ -9,6 +9,7 @@ import com.joe.common.GlobalConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -101,6 +102,26 @@ public class OrderService {
 
         return new PageInfo<>(orderList);
 
+    }
+
+
+    /**
+     * 根据客户编号查询订单
+     *
+     * @param customerId
+     * @param pageNo
+     * @param pageSize
+     * @return
+     */
+    public PageInfo<Order> queryByCustomerId(Integer customerId, Integer pageNo, Integer pageSize) {
+
+        if (customerId == null) {
+            return new PageInfo<>(new ArrayList<>());
+        }
+        PageHelper.startPage(pageNo, pageSize);
+
+        List<Order> orders = orderMapper.selectByCustomerId(customerId);
+        return new PageInfo<>(orders);
     }
 
 
