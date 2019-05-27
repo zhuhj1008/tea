@@ -33,5 +33,6 @@ public class PaymentTrade {
 
     private Date createTime;
 
+    private Boolean enable;
 
 }
