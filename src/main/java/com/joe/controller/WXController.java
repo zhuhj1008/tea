@@ -52,35 +52,16 @@ public class WXController {
         return ApiResult.getSuccessEntity(o);
     }
 
-//    /**
-//     * 微信回调接口
-//     */
-//    @RequestMapping("/wxResend")
-//    @ApiOperation(value = "微信回调接口", notes = "微信回调通知")
-//    public void wxResend(HttpServletRequest request) throws IOException {
-//        InputStream inputStream;
-//        StringBuffer sb = new StringBuffer();
-//        inputStream = request.getInputStream();
-//        String s;
-//        BufferedReader in = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
-//        while ((s = in.readLine()) != null) {
-//            sb.append(s);
-//        }
-//        in.close();
-//        inputStream.close();
-//
-//        log.info("微信回调,请求参数:" + sb);
-//    }
-
 
     /**
      * 微信回调接口
      */
     @RequestMapping("/wxResend")
     @ApiOperation(value = "微信回调接口", notes = "微信回调通知")
-    public void wxResend(@RequestBody WePayResult wePayResult) {
+    public String wxResend(@RequestBody WePayResult wePayResult) {
 
-        log.info("微信回调,请求参数:" + wePayResult.toString());
+        log.info("微信支付回调，回调报文：{}", wePayResult);
+        return wxService.wePayCallBack(wePayResult);
     }
 
 

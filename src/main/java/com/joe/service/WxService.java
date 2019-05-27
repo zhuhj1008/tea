@@ -1,17 +1,21 @@
 package com.joe.service;
 
 import com.alibaba.fastjson.JSON;
+import com.joe.api.enums.OrderStatusEnum;
+import com.joe.api.po.Order;
+import com.joe.api.po.PaymentTrade;
+import com.joe.api.service.OrderService;
+import com.joe.api.service.PaymentTradeService;
 import com.joe.common.HttpClientUtil;
 import com.joe.common.HttpsClientUtil;
 import com.joe.common.WxUtil;
 import com.joe.common.XmlUtil;
 import com.joe.common.exception.BusinessException;
 import com.joe.config.ConfigKeyConstant;
-import com.joe.dto.wx.UnifiedParam;
-import com.joe.dto.wx.UnifiedSuccessDto;
-import com.joe.dto.wx.WxLoginDto;
+import com.joe.dto.wx.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +31,12 @@ public class WxService {
 
     @Autowired
     private RedisService redisService;
+
+    @Autowired
+    private PaymentTradeService paymentTradeService;
+
+    @Autowired
+    private OrderService orderService;
 
     /**
      * 小程序授权
@@ -63,14 +73,12 @@ public class WxService {
         String mchId = redisService.getCache(ConfigKeyConstant.WEPAY_BUSINESS_CODE);
         String notifyUrl = redisService.getCache(ConfigKeyConstant.WX_NOTIFY_URL);
 
-
         //订单金额转换为分,四舍五入不要小数
         BigDecimal totalFee = unifiedParam.getTotalFee();
         if (totalFee == null) {
             throw new BusinessException("订单金额不能为空");
         }
         BigDecimal totalFeeCent = totalFee.multiply(new BigDecimal("100")).setScale(0, BigDecimal.ROUND_HALF_UP);
-
 
         SortedMap<Object, Object> param = new TreeMap<>();
         param.put("appid", appId);
@@ -104,5 +112,38 @@ public class WxService {
         log.info("微信统一支付，请求结果：{}", JSON.toJSON(unifiedSuccessDto));
         return unifiedSuccessDto;
     }
+
+
+    /**
+     * 微信支付完成回调
+     *
+     * @param wePayResult 回调报文
+     * @return 成功接收的xml报文
+     */
+    public String wePayCallBack(WePayResult wePayResult) {
+
+        PaymentTrade paymentTrade = new PaymentTrade();
+        BeanUtils.copyProperties(wePayResult, paymentTrade);
+        int id = paymentTradeService.save(paymentTrade);
+        log.info("保存交易记录成功，编号：{}。", id);
+
+        if ("SUCCESS".equals(wePayResult.getReturnCode())) {
+            Order order = new Order();
+            order.setOrderId(Integer.valueOf(wePayResult.getOutTradeNo()));
+            if ("SUCCESS".equals(wePayResult.getResultCode())) {
+                order.setOrderStatus(OrderStatusEnum.PAYMENT_SUCCESS.getCode());
+            } else {
+                order.setOrderStatus(OrderStatusEnum.PAYMENT_FAIL.getCode());
+            }
+            orderService.modifyOrder(order);
+            log.info("更新订单信息完成，订单号：{}", wePayResult.getOutTradeNo());
+        }
+
+        WxPayReturn wxPayReturn = new WxPayReturn();
+        wxPayReturn.setReturnCode("SUCCESS");
+        wxPayReturn.setReturnMsg("OK");
+        return XmlUtil.convertToXmlIgnoreXmlHead(wxPayReturn, "UTF-8");
+    }
+
 
 }

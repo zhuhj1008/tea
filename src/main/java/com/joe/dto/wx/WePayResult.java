@@ -13,6 +13,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class WePayResult {
 
+    /*请求结果  SUCCESS/FAIL*/
+    @XmlElement(name = "return_code")
+    private String returnCode;
+
+    /*请求信息 */
+    @XmlElement(name = "return_msg")
+    private String returnMsg;
 
     /*业务结果  SUCCESS/FAIL*/
     @XmlElement(name = "result_code")
