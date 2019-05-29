@@ -134,9 +134,9 @@ public class WxService {
             Order order = new Order();
             order.setOrderId(Integer.valueOf(wePayResult.getOutTradeNo()));
             if ("SUCCESS".equals(wePayResult.getResultCode())) {
-                order.setOrderStatus(OrderStatusEnum.PAYMENT_SUCCESS.getCode());
+                order.setOrderStatus(OrderStatusEnum.PAY_SUCCESS.getCode());
             } else {
-                order.setOrderStatus(OrderStatusEnum.PAYMENT_FAIL.getCode());
+                order.setOrderStatus(OrderStatusEnum.PAY_FAIL.getCode());
             }
             order.setPaymentTime(new Date());
             orderService.modifyOrder(order);

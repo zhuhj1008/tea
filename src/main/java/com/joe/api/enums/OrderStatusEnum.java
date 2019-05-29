@@ -5,12 +5,14 @@ package com.joe.api.enums;
  */
 public enum OrderStatusEnum {
 
-    NEW(1, "新订单"),
-    PAYMENT_SUCCESS(2, "支付完成"),
-    PAYMENT_FAIL(12, "支付失败"),
+    NEW(1, "未支付"),
+    PAY_SUCCESS(2, "已支付"),
     DELIVER(3, "已发货"),
     RECEIVE(4, "已签收"),
-    CANCEL(10, "已取消");
+
+    CANCEL(10, "已取消"),
+    PAY_FAIL(12, "支付失败");
+
 
     private int code;
     private String text;
