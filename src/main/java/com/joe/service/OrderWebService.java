@@ -161,6 +161,7 @@ public class OrderWebService {
         return orderList.stream().map(order -> {
             OrderVo orderVo = new OrderVo();
             BeanUtils.copyProperties(order, orderVo);
+            orderVo.setOrderStatus(OrderStatusEnum.getTextByCode(order.getOrderStatus()));
             return orderVo;
         }).collect(Collectors.toList());
     }

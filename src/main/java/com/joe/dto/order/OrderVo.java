@@ -26,7 +26,7 @@ public class OrderVo {
     private BigDecimal orderMoney;
 
     //订单状态
-    private Integer orderStatus;
+    private String orderStatus;
 
     //快递商家
     private Integer expressId;

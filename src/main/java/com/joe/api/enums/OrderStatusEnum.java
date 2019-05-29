@@ -28,4 +28,16 @@ public enum OrderStatusEnum {
         return text;
     }
 
+    public static String getTextByCode(Integer code) {
+        if (code == null) {
+            return null;
+        }
+        for (OrderStatusEnum orderStatusEnum : OrderStatusEnum.values()) {
+            if (orderStatusEnum.code == code) {
+                return orderStatusEnum.text;
+            }
+        }
+        return null;
+    }
+
 }
