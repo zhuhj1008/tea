@@ -2,8 +2,8 @@
 server:
   port: 443
   ssl:
-    key-store: classpath:server.jks
-    key-store-password: yvrvl08smap
+    key-store: classpath:2525450_www.qiaoyuntea.xyz.pfx
+    key-store-password: X8fmUk9v
 
 spring:
     datasource:
