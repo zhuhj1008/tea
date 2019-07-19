@@ -2,8 +2,8 @@
 server:
   port: 443
   ssl:
-    key-store: classpath:2525450_www.qiaoyuntea.xyz.pfx
-    key-store-password: X8fmUk9v
+    key-store: classpath:qiaoyuntea.xyz.jks
+    key-store-password: 0b0ea541gl3168t
 
 spring:
     datasource:
