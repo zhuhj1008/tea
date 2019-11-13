@@ -30,9 +30,8 @@ spring:
   #redis
   redis:
       database: 0
-      host: 140.143.242.80
+      host: 39.105.2.84
       port: 6379
-      password: joejoejoe
       timeout: 0
       pool:
         max-active: 8
