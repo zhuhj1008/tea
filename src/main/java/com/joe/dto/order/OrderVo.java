@@ -50,7 +50,7 @@ public class OrderVo {
     private String remake;
 
     //订单创建时间
-    private String createTime;
+    private Date createTime;
 
     //支付时间
     private Date paymentTime;
