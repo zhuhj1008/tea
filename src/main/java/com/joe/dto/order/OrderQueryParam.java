@@ -9,6 +9,8 @@ import lombok.Data;
 @Data
 public class OrderQueryParam {
 
+    private String orderNo;
+
     private String customerName;
 
     private Integer orderStatus;

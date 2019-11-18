@@ -45,14 +45,15 @@ public class OrderWebService {
 
         log.info("新增订单，客户姓名：{}。", orderParam.getCustomerName());
 
+        String orderNo = orderService.getOrderNo(orderParam.getCustomerId());
         Order order = new Order();
+        order.setOrderNo(orderNo);
         BeanUtils.copyProperties(orderParam, order);
-        order.setOrderNo("");
         order.setCreateTime(new Date());
         order.setOrderStatus(OrderStatusEnum.NEW.getCode());
         order.setEnable(true);
         int orderId = orderService.addOrder(order);
-        log.info("新增订单完成。订单编号：{}。", orderId);
+        log.info("新增订单完成。订单编号：{}，订单号：{}。", orderId, orderNo);
 
         List<OrderDetailParam> orderDetailVoList = orderParam.getOrderDetailArr();
         List<OrderDetail> orderDetailList = orderDetailVoList.stream().map(orderDetailParam -> {

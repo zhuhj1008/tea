@@ -16,6 +16,9 @@ public class OrderVo {
     //订单编号
     private Integer orderId;
 
+    //订单号
+    private Integer orderNo;
+
     //客户编号
     private Integer customerId;
 

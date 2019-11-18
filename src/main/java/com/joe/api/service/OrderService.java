@@ -9,7 +9,6 @@ import com.joe.common.GlobalConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,13 +20,21 @@ public class OrderService {
     private OrderMapper orderMapper;
 
 
+    /* 订单号（时间戳+客户号+随机数） */
+    public String getOrderNo(Integer customerId) {
 
-    /*public String getOrderNo(){
+        //时间戳，精确到秒 10位
+        long time = System.currentTimeMillis() / 1000;
 
-        String dateStr = new SimpleDateFormat("yyyyMMdd").format(new Date());
+        //客户号，4位，不足前边补0
+        String customerIdStr = String.format("%04d", customerId);
 
+        //随机数，4位，不足前边补0
+        int random = (int) (Math.random() * 10000);
+        String randomStr = String.format("%04d", random);
 
-    }*/
+        return time + customerIdStr + randomStr;
+    }
 
     /**
      * 创建新订单
