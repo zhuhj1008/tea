@@ -9,6 +9,7 @@ import com.joe.common.GlobalConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,6 +19,15 @@ public class OrderService {
 
     @Autowired
     private OrderMapper orderMapper;
+
+
+
+    /*public String getOrderNo(){
+
+        String dateStr = new SimpleDateFormat("yyyyMMdd").format(new Date());
+
+
+    }*/
 
     /**
      * 创建新订单

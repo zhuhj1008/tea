@@ -14,6 +14,9 @@ public class Order {
     //订单编号
     private Integer orderId;
 
+    //订单号
+    private String orderNo;
+
     //顾客编号
     private Integer customerId;
 

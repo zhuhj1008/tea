@@ -27,9 +27,7 @@ public class WXController {
     private WxService wxService;
 
 
-    /**
-     * 微信授权
-     */
+    /* 微信授权 */
     @PostMapping("/wxAuthorization")
     @ApiOperation(value = "微信授权", notes = "微信授权")
     public ApiResult wxLoginAuthorization(@RequestBody ApiParameter<WxAuthParam> authParam) {
@@ -38,9 +36,7 @@ public class WXController {
         return ApiResult.getSuccessEntity(wxLoginDto);
     }
 
-    /**
-     * 微信统一支付
-     */
+    /* 微信统一支付 */
     @PostMapping("/wePayUnified")
     @ApiOperation(value = "订单微信支付", notes = "微信统一支付")
     public ApiResult wePayUnifiedOrder(@RequestBody ApiParameter<UnifiedParam> apiParameter) {
@@ -53,9 +49,7 @@ public class WXController {
     }
 
 
-    /**
-     * 微信回调接口
-     */
+    /* 微信支付回调 */
     @RequestMapping("/wxResend")
     @ApiOperation(value = "微信回调接口", notes = "微信回调通知")
     public String wxResend(@RequestBody WePayResult wePayResult) {

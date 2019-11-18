@@ -23,9 +23,7 @@ public class QiNiuController {
     @Autowired
     private QiNiuService qiNiuService;
 
-    /**
-     * 获取七牛上传文件token（有效时间：三小时）
-     */
+    /* 获取七牛上传文件token（有效时间：三小时） */
     @PostMapping("/getUploadToken")
     @ApiOperation(value = "获取七牛上传文件token", notes = "获取七牛上传文件token")
     public ApiResult getUploadToken() {

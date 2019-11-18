@@ -47,6 +47,7 @@ public class OrderWebService {
 
         Order order = new Order();
         BeanUtils.copyProperties(orderParam, order);
+        order.setOrderNo("");
         order.setCreateTime(new Date());
         order.setOrderStatus(OrderStatusEnum.NEW.getCode());
         order.setEnable(true);

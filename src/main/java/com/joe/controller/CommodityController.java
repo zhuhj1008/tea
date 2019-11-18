@@ -1,10 +1,10 @@
 package com.joe.controller;
 
+import com.joe.dto.ApiPageResult;
 import com.joe.dto.ApiParameter;
 import com.joe.dto.ApiResult;
 import com.joe.dto.commodity.*;
 import com.joe.service.CommodityWebService;
-import com.joe.dto.ApiPageResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -26,10 +26,12 @@ import java.util.List;
 @RequestMapping("/commodity")
 public class CommodityController {
 
+
     @Autowired
     private CommodityWebService commodityWebService;
 
 
+    /* 添加商品 */
     @PostMapping("/addCommodity")
     @ApiOperation(value = "添加商品", notes = "添加商品")
     public ApiResult addCommodity(@RequestBody @ApiParam ApiParameter<CommodityParam> apiParameter) {
@@ -44,9 +46,7 @@ public class CommodityController {
     }
 
 
-    /**
-     * 根据类目id查询商品集合
-     */
+    /* 根据类目id查询商品集合 */
     @PostMapping("/getCommodityListByItemId")
     @ApiOperation(value = "查询商品列表", notes = "根据类目编号分页查询商品列表")
     public ApiResult getCommodityListByItemId(@RequestBody @ApiParam ApiParameter<CommodityPageParam> apiParameter) {
@@ -64,9 +64,7 @@ public class CommodityController {
     }
 
 
-    /**
-     * 获取推荐商品
-     */
+    /* 获取推荐商品 */
     @PostMapping("/getRecommendCommodity")
     @ApiOperation(value = "查询推荐商品", notes = "查询首页推荐商品")
     public ApiResult getRecommendCommodity() {
@@ -79,9 +77,7 @@ public class CommodityController {
     }
 
 
-    /**
-     * 切换商品推荐/不推荐
-     */
+    /* 切换商品推荐/不推荐 */
     @PostMapping("/switchCommodityRecommend")
     @ApiOperation(value = "切换商品推荐状态", notes = "切换商品推荐状态，推荐->不推荐  不推荐->推荐")
     public ApiResult switchCommodityRecommend(@RequestBody ApiParameter<CommodityCommonParam> apiParameter) {
@@ -95,13 +91,10 @@ public class CommodityController {
 
         log.info("修改商品首页推荐状态成功。");
         return ApiResult.getSuccessEntity(executeNum);
-
     }
 
 
-    /**
-     * 删除商品
-     */
+    /* 删除商品 */
     @PostMapping("/removeCommodity")
     @ApiOperation(value = "删除商品", notes = "逻辑删除商品和商品详情")
     public ApiResult removeCommodity(@RequestBody ApiParameter<CommodityCommonParam> apiParameter) {
@@ -115,9 +108,7 @@ public class CommodityController {
     }
 
 
-    /**
-     * 修改商品
-     */
+    /* 修改商品 */
     @PostMapping("/updateCommodity")
     @ApiOperation(value = "修改商品信息", notes = "修改商品信息")
     public ApiResult updateCommodity(@RequestBody ApiParameter<CommodityParam> apiParameter) {
@@ -136,6 +127,7 @@ public class CommodityController {
     }
 
 
+    /* 查询商品详细信息 */
     @PostMapping("/getDetailById")
     @ApiOperation(value = "查询商品详细信息", notes = "根据商品编号查询商品详细信息")
     public ApiResult getCommodityDetailByCommodityId(@RequestBody ApiParameter<CommodityCommonParam> apiParameter) {

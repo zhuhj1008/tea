@@ -1,42 +1,30 @@
-
-#默认打包环境
 spring:
-    profiles:
-      active: dev
-server:
-  context-path: /
+  profiles:
+    active: dev
+
 security:
   basic:
     enabled: false
-#mybatis配置
+
 mybatis:
   mapper-locations: classpath:/*/*.xml
   type-aliases-package: com.joe.api.*.po
 #  开启mybatis日志打印
 #  configuration:
 #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-#分页插件
+
+
 pagehelper:
-    helperDialect: mysql
-    reasonable: true
-    supportMethodsArguments: true
-    params: count=countSql
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
 
-#七牛配置
+
 qiNiu:
-    accessKey: qFK5rkWh6ua5Z2WwXItC-bj1MAxklN284aZzGlpc
-    secretKey: IQSsg6tKgT4-3IV2U7G_FKFMtVXOA14M7tm2prMJ
-    bucketName: mywebt
-    macName: HmacSHA1
-    encoding: UTF-8
-    effective: 3
-
-#logging:
-#  pattern:
-#    console: "%d - %msg%n"
-#  path: /var/log/tomcat/
-
-weChat:
-  mpAppId: wx7787aa5b85cd4a58
-  secretKey: b0dab0e3e2833d3e8bb20ebd059ca558
-
+  accessKey: qFK5rkWh6ua5Z2WwXItC-bj1MAxklN284aZzGlpc
+  secretKey: IQSsg6tKgT4-3IV2U7G_FKFMtVXOA14M7tm2prMJ
+  bucketName: mywebt
+  macName: HmacSHA1
+  encoding: UTF-8
+  effective: 3

@@ -28,6 +28,7 @@ public class ReceiveAddressWebService {
 
 
     public int addReceiveAddress(ReceiveAddress receiveAddress) {
+
         return receiveAddressService.addReceiveAddress(receiveAddress);
     }
 
@@ -63,6 +64,7 @@ public class ReceiveAddressWebService {
         return receiveAddressService.queryReceiveAddressById(userCustomer.getReceivingAddressDefault());
     }
 
+
     public int modifyDefaultReceiveAddress(Integer customerId, Integer addressId) {
 
         if (customerId == null || customerId == 0) {
@@ -83,12 +85,7 @@ public class ReceiveAddressWebService {
     }
 
 
-    /**
-     * 查询用户收货地址个数
-     *
-     * @param customerId
-     * @return
-     */
+    /* 查询用户收货地址个数 */
     public Integer getReceiveAddressCountByCustomerId(int customerId) {
 
         return receiveAddressService.queryUserReceiveAddressCount(customerId);

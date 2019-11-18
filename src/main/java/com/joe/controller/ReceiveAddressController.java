@@ -21,17 +21,17 @@ import java.util.List;
  * create by Joe on 2018-06-14 14:41
  **/
 @Slf4j
-@Api(tags={"收货地址接口"})
+@Api(tags = {"收货地址接口"})
 @RestController
 @RequestMapping("/receive")
 public class ReceiveAddressController {
 
+
     @Autowired
     private ReceiveAddressWebService receiveAddressWebService;
 
-    /**
-     * 添加收货地址
-     */
+
+    /* 添加收货地址 */
     @PostMapping("/addReceiveAddress")
     @ApiOperation(value = "添加收货地址", notes = "添加收货地址，最多不能超过10个")
     public ApiResult addReceiveAddress(@RequestBody ApiParameter<ReceiveAddress> apiParameter) {
@@ -52,9 +52,7 @@ public class ReceiveAddressController {
         return ApiResult.getSuccessEntity(addressId);
     }
 
-    /**
-     * 修改收货地址
-     */
+    /* 修改收货地址 */
     @PostMapping("/updateReceiveAddress")
     @ApiOperation(value = "修改收货地址", notes = "修改收货地址")
     public ApiResult updateReceiveAddress(@RequestBody ApiParameter<ReceiveAddress> apiParameter) {
@@ -72,9 +70,7 @@ public class ReceiveAddressController {
         return ApiResult.getSuccessEntity(addressId);
     }
 
-    /**
-     * 删除收货地址
-     */
+    /* 删除收货地址 */
     @PostMapping("/deleteReceiveAddress")
     @ApiOperation(value = "删除收货地址", notes = "逻辑删除收货地址")
     public Object deleteReceiveAddress(@RequestBody ApiParameter<AddressParam> apiParameter) {
@@ -94,9 +90,7 @@ public class ReceiveAddressController {
         return ApiResult.getSuccessEntity(execNum);
     }
 
-    /**
-     * 查询收货地址
-     */
+    /* 查询收货地址 */
     @PostMapping("/queryReceiveAddress")
     @ApiOperation(value = "查询收货地址列表", notes = "根据客户编号查询收货地址")
     public Object queryReceiveAddress(@RequestBody ApiParameter<AddressParam> apiParameter) {
@@ -115,11 +109,7 @@ public class ReceiveAddressController {
     }
 
 
-    /**
-     * 查询默认收货地址
-     *
-     * @return
-     */
+    /* 查询默认收货地址 */
     @PostMapping("/queryDefaultAddress")
     @ApiOperation(value = "查询默认收货地址", notes = "根据客户编号查询默认收货地址")
     public Object queryCustomerDefaultReceiveAddress(@RequestBody ApiParameter<AddressParam> apiParameter) {

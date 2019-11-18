@@ -26,9 +26,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/customer")
 public class CustomerController {
 
+
     @Autowired
     private CustomerWebService customerWebService;
 
+
+    /* 查询客户信息 */
     @PostMapping("/getCustomer")
     @ApiOperation(value = "查询客户信息", notes = "根据授权code查询用户信息")
     public ApiResult getCustomerOpenIdAndSessionKey(@RequestBody @ApiParam ApiParameter<WxAuthParam> apiParameter) {

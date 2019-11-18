@@ -1,12 +1,12 @@
 package com.joe.controller;
 
 import com.joe.api.po.CommodityEvaluate;
+import com.joe.dto.ApiPageResult;
 import com.joe.dto.ApiParameter;
 import com.joe.dto.ApiResult;
 import com.joe.dto.commodity.CommodityPageParam;
 import com.joe.dto.commodity.EvaluateParam;
 import com.joe.service.CommodityEvaluateWebService;
-import com.joe.dto.ApiPageResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -29,12 +29,12 @@ import java.util.List;
 @RequestMapping("/evaluate")
 public class CommodityEvaluateController {
 
+
     @Autowired
     private CommodityEvaluateWebService commodityEvaluateWebService;
 
-    /**
-     * 添加商品评价
-     */
+
+    /* 添加商品评价 */
     @PostMapping("/addEvaluate")
     @ApiOperation(value = "添加商品评价", notes = "添加商品评价")
     public ApiResult addEvaluate(@RequestBody @ApiParam ApiParameter<EvaluateParam> apiParameter) {
@@ -49,9 +49,7 @@ public class CommodityEvaluateController {
     }
 
 
-    /**
-     * 追加商品评价
-     */
+    /* 追加商品评价 */
     @PostMapping("/appendEvaluate")
     @ApiOperation(value = "追加商品评价", notes = "追加商品评价")
     public ApiResult appendEvaluate(@RequestBody @ApiParam ApiParameter<EvaluateParam> apiParameter) {
@@ -70,9 +68,7 @@ public class CommodityEvaluateController {
     }
 
 
-    /**
-     * 查看商品评价（分页）
-     */
+    /* 查看商品评价（分页） */
     @PostMapping("/getEvaluate")
     @ApiOperation(value = "查看商品评价", notes = "分页查看商品评价")
     public ApiResult getEvaluateByCommodityId(@RequestBody @ApiParam ApiParameter<CommodityPageParam> apiParameter) {

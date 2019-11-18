@@ -3,6 +3,7 @@
 <mapper namespace="com.joe.api.dao.OrderMapper">
     <resultMap id="BaseResultMap" type="com.joe.api.po.Order">
         <id column="order_id" property="orderId" jdbcType="INTEGER"/>
+        <id column="order_no" property="orderNo" jdbcType="VARCHAR"/>
         <result column="customer_id" property="customerId" jdbcType="INTEGER"/>
         <result column="customer_name" property="customerName" jdbcType="VARCHAR"/>
         <result column="order_money" property="orderMoney" jdbcType="DECIMAL"/>
@@ -23,7 +24,7 @@
         <result column="enable" property="enable" jdbcType="BIT"/>
     </resultMap>
     <sql id="Base_Column_List">
-    order_id, customer_id, customer_name, order_money, order_status, payment_time, post_code, express_id,
+    order_id, order_no, customer_id, customer_name, order_money, order_status, payment_time, post_code, express_id,
     express_code, express_money, receive_address, receive_phone, remake, create_by, create_time, update_by,
     delivery_time, receive_time, enable
   </sql>
@@ -34,6 +35,9 @@
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="orderId != null">
                 order_id,
+            </if>
+            <if test="orderNo != null">
+                order_no,
             </if>
             <if test="customerId != null">
                 customer_id,
@@ -93,6 +97,9 @@
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="orderId != null">
                 #{orderId,jdbcType=INTEGER},
+            </if>
+            <if test="orderNo != null">
+                #{orderNo,jdbcType=VARCHAR},
             </if>
             <if test="customerId != null">
                 #{customerId,jdbcType=INTEGER},
@@ -235,6 +242,9 @@
         <include refid="Base_Column_List"/>
         from tb_order
         where enable = 1
+        <if test="orderNo != null">
+            and order_no like CONCAT('%', #{orderNo,jdbcType=VARCHAR}, '%')
+        </if>
         <if test="customerName != null">
             and customer_name like CONCAT('%', #{customerName,jdbcType=VARCHAR}, '%')
         </if>
@@ -251,6 +261,9 @@
         count(*)
         from tb_order
         where enable = 1
+        <if test="orderNo != null">
+            and order_no like CONCAT('%', #{orderNo,jdbcType=VARCHAR}, '%')
+        </if>
         <if test="customerName != null">
             and customer_name like CONCAT('%', #{customerName,jdbcType=VARCHAR}, '%')
         </if>
