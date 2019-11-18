@@ -41,7 +41,7 @@ public class OrderWebService {
 
 
     //新增订单
-    public int addOrder(OrderParam orderParam) {
+    public String addOrder(OrderParam orderParam) {
 
         log.info("新增订单，客户姓名：{}。", orderParam.getCustomerName());
 
@@ -65,7 +65,7 @@ public class OrderWebService {
         orderDetailService.addOrderDetailBatch(orderDetailList);
         log.info("新增订单明细完成，订单编号：{}。", orderId);
 
-        return orderId;
+        return orderNo;
     }
 
 

@@ -36,9 +36,9 @@ public class OrderController {
     @ApiOperation(value = "新增订单", notes = "新增订单")
     public ApiResult addOrder(@RequestBody @ApiParam ApiParameter<OrderParam> apiParameter) {
 
-        int orderId = orderWebService.addOrder(apiParameter.getBody());
+        String orderNo = orderWebService.addOrder(apiParameter.getBody());
 
-        return ApiResult.getSuccessEntity(orderId);
+        return ApiResult.getSuccessEntity(orderNo);
     }
 
 
