@@ -237,6 +237,13 @@
         where order_id = #{orderId,jdbcType=INTEGER}
     </select>
 
+    <select id="selectByOrderNo" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_order
+        where order_no = #{orderNo,jdbcType=INTEGER}
+    </select>
+
     <select id="selectByOrderSelective" resultMap="BaseResultMap" parameterType="com.joe.api.po.Order">
         select
         <include refid="Base_Column_List"/>
@@ -280,6 +287,7 @@
         <include refid="Base_Column_List"/>
         from tb_order
         where enable = 1 and customer_id = #{customerId,jdbcType=INTEGER}
+        order by create_time desc
     </select>
 
 

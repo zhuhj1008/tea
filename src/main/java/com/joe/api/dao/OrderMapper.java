@@ -12,6 +12,8 @@ public interface OrderMapper {
 
     int updateByPrimaryKeySelective(Order record);
 
+    Order selectByOrderNo(Integer orderId);
+
     Order selectByPrimaryKey(Integer orderId);
 
     Integer selectCountByOrderSelective(Order order);

@@ -76,13 +76,18 @@ public class OrderService {
     }
 
     /**
-     * 查询订单By 订单号
+     * 查询订单By 订单编号
      *
-     * @param orderId 订单号
+     * @param orderId 订单编号
      * @return 订单
      */
     public Order queryOrder(int orderId) {
         return orderMapper.selectByPrimaryKey(orderId);
+    }
+
+    /* 根据订单号查询订单 */
+    public Order queryByOrderNo(int orderNo) {
+        return orderMapper.selectByOrderNo(orderNo);
     }
 
 
