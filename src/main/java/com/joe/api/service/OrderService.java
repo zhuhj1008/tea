@@ -86,7 +86,7 @@ public class OrderService {
     }
 
     /* 根据订单号查询订单 */
-    public Order queryByOrderNo(int orderNo) {
+    public Order queryByOrderNo(String orderNo) {
         return orderMapper.selectByOrderNo(orderNo);
     }
 

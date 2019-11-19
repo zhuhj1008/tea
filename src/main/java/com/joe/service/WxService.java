@@ -131,7 +131,7 @@ public class WxService {
         log.info("保存交易记录成功，编号：{}。", id);
 
         if ("SUCCESS".equals(wePayResult.getReturnCode())) {
-            Order order = orderService.queryByOrderNo(Integer.valueOf(wePayResult.getOutTradeNo()));
+            Order order = orderService.queryByOrderNo(wePayResult.getOutTradeNo());
             if ("SUCCESS".equals(wePayResult.getResultCode())) {
                 order.setOrderStatus(OrderStatusEnum.PAY_SUCCESS.getCode());
             } else {
