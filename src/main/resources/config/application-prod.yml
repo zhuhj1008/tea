@@ -26,6 +26,7 @@ spring:
     database: 0
     host: 192.144.179.13
     port: 6379
+    password: PQU9BpYg
     timeout: 0
     pool:
       max-active: 8
