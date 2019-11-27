@@ -24,7 +24,7 @@ spring:
     maxOpenPreparedStatements: 20
   redis:
     database: 0
-    host: 192.144.179.13
+    host: localhost
     port: 6379
     password: PQU9BpYg
     timeout: 0
