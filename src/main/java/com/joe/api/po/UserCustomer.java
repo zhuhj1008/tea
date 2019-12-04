@@ -28,9 +28,6 @@ public class UserCustomer {
     //手机号
     private String mobile;
 
-    //邮箱
-    private String email;
-
     //用户类型（UserTypeEnum）
     private Integer userType;
 
@@ -39,6 +36,9 @@ public class UserCustomer {
 
     //默认收货地址
     private Integer receivingAddressDefault;
+
+    //备注
+    private String remark;
 
     //创建人
     private Integer createBy;

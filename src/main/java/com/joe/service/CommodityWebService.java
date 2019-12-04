@@ -130,13 +130,7 @@ public class CommodityWebService {
     //获取推荐商品
     public List<CommodityVo> queryRecommendCommodity() {
 
-        List<Commodity> commodities = commodityService.queryRecommendCommodity();
-
-        return commodities.stream().map(commodity -> {
-            CommodityVo commodityVo = new CommodityVo();
-            BeanUtils.copyProperties(commodity, commodityVo);
-            return commodityVo;
-        }).collect(Collectors.toList());
+        return commodityService.queryRecommendCommodity();
     }
 
 

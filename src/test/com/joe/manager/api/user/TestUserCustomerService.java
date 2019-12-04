@@ -16,7 +16,6 @@ public class TestUserCustomerService extends BaseTest {
     public void testAdd(){
         UserCustomer userCustomer = new UserCustomer();
         userCustomer.setCustomerName("朱鸿钧");
-        userCustomer.setEmail("1916931393@qq.com");
         userCustomer.setHeadPortrait("a8a5f6g4h2j3.jpg");
         userCustomer.setMobile("15175225612");
         userCustomer.setIntegral(52);

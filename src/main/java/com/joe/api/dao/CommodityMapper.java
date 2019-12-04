@@ -1,6 +1,7 @@
 package com.joe.api.dao;
 
 import com.joe.api.po.Commodity;
+import com.joe.dto.commodity.CommodityVo;
 
 import java.util.List;
 
@@ -22,6 +23,6 @@ public interface CommodityMapper {
 
     int selectCommodityCountByItemId(Integer itemId);
 
-    List<Commodity> selectRecommendCommodity();
+    List<CommodityVo> selectRecommendCommodity();
 
 }

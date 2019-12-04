@@ -17,6 +17,18 @@
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
         <result column="enable" property="enable" jdbcType="BIT"/>
     </resultMap>
+
+    <resultMap id="recommendCommodityMap" type="com.joe.dto.commodity.CommodityVo">
+        <result column="commodity_id" property="commodityId" jdbcType="INTEGER"/>
+        <result column="commodity_name" property="commodityName" jdbcType="VARCHAR"/>
+        <result column="price" property="price" jdbcType="DECIMAL"/>
+        <result column="init_price" property="initPrice" jdbcType="DECIMAL"/>
+        <result column="item_id" property="itemId" jdbcType="INTEGER"/>
+        <result column="picture" property="picture" jdbcType="VARCHAR"/>
+        <result column="recommend" property="recommend" jdbcType="BIT"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+    </resultMap>
+
     <sql id="Base_Column_List">
     commodity_id, commodity_name, price, item_id, picture, brand, recommend, description, extends2
     create_by, update_by, create_time, update_time, enable
@@ -222,11 +234,12 @@
     where enable = 1 and  item_id = #{itemId,jdbcType=INTEGER}
     </select>
 
-    <select id="selectRecommendCommodity" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"></include>
-        from tb_commodity
-        where enable = 1 and recommend = 1;
+    <select id="selectRecommendCommodity" resultMap="recommendCommodityMap">
+      select a.commodity_id,a.commodity_name,a.price,b.init_price,
+        a.item_id,a.picture,a.recommend,a.description from tb_commodity a
+        left join tb_commodity_detail b
+        on a.commodity_id = b.commodity_id
+      where a.enable = 1 and a.recommend = 1;
     </select>
 
 

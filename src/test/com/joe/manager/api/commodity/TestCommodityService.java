@@ -3,6 +3,7 @@ package com.joe.manager.api.commodity;
 import com.alibaba.fastjson.JSON;
 import com.joe.api.po.Commodity;
 import com.joe.api.service.CommodityService;
+import com.joe.dto.commodity.CommodityVo;
 import com.joe.manager.BaseTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,7 +74,7 @@ public class TestCommodityService extends BaseTest {
 
     @Test
     public void queryRecommendCommodityTest() {
-        List<Commodity> commodities = commodityService.queryRecommendCommodity();
+        List<CommodityVo> commodities = commodityService.queryRecommendCommodity();
         logger.info(JSON.toJSONString(commodities));
     }
 }

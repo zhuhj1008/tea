@@ -6,6 +6,7 @@ import com.joe.api.dao.CommodityDetailMapper;
 import com.joe.api.dao.CommodityMapper;
 import com.joe.api.po.Commodity;
 import com.joe.api.po.CommodityDetail;
+import com.joe.dto.commodity.CommodityVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -92,7 +93,7 @@ public class CommodityService {
      *
      * @return
      */
-    public List<Commodity> queryRecommendCommodity() {
+    public List<CommodityVo> queryRecommendCommodity() {
 
         return commodityMapper.selectRecommendCommodity();
     }

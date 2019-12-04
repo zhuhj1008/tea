@@ -17,6 +17,9 @@ public class CommodityVo {
     //商品名称
     private String commodityName;
 
+    //商品原价
+    private BigDecimal initPrice;
+
     //商品价格
     private BigDecimal price;
 
