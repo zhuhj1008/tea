@@ -10,7 +10,7 @@
     <result column="city" property="city" jdbcType="VARCHAR" />
     <result column="area" property="area" jdbcType="VARCHAR" />
     <result column="street" property="street" jdbcType="VARCHAR" />
-    <result column="post_code" property="postCode" jdbcType="CHAR" />
+    <result column="post_code" property="postCode" jdbcType="VARCHAR" />
     <result column="address_detail" property="addressDetail" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />

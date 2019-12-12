@@ -3,7 +3,7 @@
 <mapper namespace="com.joe.api.dao.OrderMapper">
     <resultMap id="BaseResultMap" type="com.joe.api.po.Order">
         <id column="order_id" property="orderId" jdbcType="INTEGER"/>
-        <id column="order_no" property="orderNo" jdbcType="VARCHAR"/>
+        <result column="order_no" property="orderNo" jdbcType="VARCHAR"/>
         <result column="customer_id" property="customerId" jdbcType="INTEGER"/>
         <result column="customer_name" property="customerName" jdbcType="VARCHAR"/>
         <result column="order_money" property="orderMoney" jdbcType="DECIMAL"/>
